@@ -1,8 +1,9 @@
 
 # Fusio Go SDK
 
-This is the official Fusio Go SDK, it helps to talk to the Fusio (https://www.fusio-project.org/)
-open source API management system.
+This is the official Fusio Go SDK, it helps to talk to the Fusio REST API.
+Fusio is an open source API management system, more information at:
+https://www.fusio-project.org
 
 ## Usage
 
