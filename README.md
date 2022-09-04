@@ -14,7 +14,7 @@ func main() {
 	var store = &sdkgen.MemoryTokenStore{}
 	var scopes = []string{"backend"}
 
-	var client = NewClient("", "", "", store, scopes)
+	var client = NewClient("https://demo.fusio-project.org", "test", "FRsNh1zKCXlB", store, scopes)
 
 	var config = backend.ActionConfig{}
 	config["event"] = "my_custom_event"
