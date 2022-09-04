@@ -18,6 +18,7 @@ func NewClient(baseUrl string, clientId string, clientSecret string, tokenStore 
 	var credentials = sdkgen.ClientCredentials{
 		ClientId:     clientId,
 		ClientSecret: clientSecret,
+		TokenUrl:     baseUrl + "/authorization/token",
 	}
 
 	return &Client{
