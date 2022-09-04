@@ -3,4 +3,4 @@
 
 package consumer
 
-type EventSubscriptionCollection = Collection
+type EventSubscriptionCollection = Collection[EventSubscription]

@@ -3,4 +3,4 @@
 
 package backend
 
-type PageCollection = Collection
+type PageCollection = Collection[Page]

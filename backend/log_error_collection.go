@@ -3,4 +3,4 @@
 
 package backend
 
-type LogErrorCollection = Collection
+type LogErrorCollection = Collection[LogError]

@@ -3,4 +3,4 @@
 
 package backend
 
-type CategoryCollection = Collection
+type CategoryCollection = Collection[Category]

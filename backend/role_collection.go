@@ -3,4 +3,4 @@
 
 package backend
 
-type RoleCollection = Collection
+type RoleCollection = Collection[Role]

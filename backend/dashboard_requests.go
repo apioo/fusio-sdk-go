@@ -3,4 +3,4 @@
 
 package backend
 
-type DashboardRequests = Collection
+type DashboardRequests = Collection[DashboardRequest]

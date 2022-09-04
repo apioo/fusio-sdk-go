@@ -3,4 +3,4 @@
 
 package consumer
 
-type TransactionCollection = Collection
+type TransactionCollection = Collection[Transaction]

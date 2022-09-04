@@ -3,4 +3,4 @@
 
 package backend
 
-type DashboardUsers = Collection
+type DashboardUsers = Collection[DashboardUser]

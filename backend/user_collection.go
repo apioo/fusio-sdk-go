@@ -3,4 +3,4 @@
 
 package backend
 
-type UserCollection = Collection
+type UserCollection = Collection[User]

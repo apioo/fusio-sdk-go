@@ -3,4 +3,4 @@
 
 package backend
 
-type AppTokenCollection = Collection
+type AppTokenCollection = Collection[AppToken]

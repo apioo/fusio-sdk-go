@@ -3,4 +3,4 @@
 
 package consumer
 
-type ScopeCollection = Collection
+type ScopeCollection = Collection[Scope]

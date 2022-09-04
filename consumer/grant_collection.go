@@ -3,4 +3,4 @@
 
 package consumer
 
-type GrantCollection = Collection
+type GrantCollection = Collection[Grant]

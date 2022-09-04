@@ -3,4 +3,4 @@
 
 package backend
 
-type TransactionCollection = Collection
+type TransactionCollection = Collection[Transaction]

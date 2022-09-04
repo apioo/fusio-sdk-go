@@ -3,4 +3,4 @@
 
 package backend
 
-type DashboardApps = Collection
+type DashboardApps = Collection[DashboardApp]

@@ -3,4 +3,4 @@
 
 package backend
 
-type AuditCollection = Collection
+type AuditCollection = Collection[Audit]

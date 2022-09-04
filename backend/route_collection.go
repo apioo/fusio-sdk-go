@@ -3,4 +3,4 @@
 
 package backend
 
-type RouteCollection = Collection
+type RouteCollection = Collection[Route]

@@ -3,4 +3,4 @@
 
 package backend
 
-type RateCollection = Collection
+type RateCollection = Collection[Rate]

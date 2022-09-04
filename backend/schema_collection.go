@@ -3,4 +3,4 @@
 
 package backend
 
-type SchemaCollection = Collection
+type SchemaCollection = Collection[Schema]

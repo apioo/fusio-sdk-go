@@ -3,4 +3,4 @@
 
 package backend
 
-type PlanCollection = Collection
+type PlanCollection = Collection[Plan]

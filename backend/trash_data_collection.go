@@ -3,4 +3,4 @@
 
 package backend
 
-type TrashDataCollection = Collection
+type TrashDataCollection = Collection[TrashData]

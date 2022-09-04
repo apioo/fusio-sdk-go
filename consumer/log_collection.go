@@ -3,4 +3,4 @@
 
 package consumer
 
-type LogCollection = Collection
+type LogCollection = Collection[Log]

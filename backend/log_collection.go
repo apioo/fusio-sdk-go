@@ -3,4 +3,4 @@
 
 package backend
 
-type LogCollection = Collection
+type LogCollection = Collection[Log]

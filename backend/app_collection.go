@@ -3,4 +3,4 @@
 
 package backend
 
-type AppCollection = Collection
+type AppCollection = Collection[App]

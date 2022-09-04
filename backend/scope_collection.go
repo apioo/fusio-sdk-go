@@ -3,4 +3,4 @@
 
 package backend
 
-type ScopeCollection = Collection
+type ScopeCollection = Collection[Scope]

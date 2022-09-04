@@ -3,4 +3,4 @@
 
 package consumer
 
-type PageCollection = Collection
+type PageCollection = Collection[Page]

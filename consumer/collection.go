@@ -3,7 +3,7 @@
 
 package consumer
 
-type Collection struct {
+type Collection[T any] struct {
 	TotalResults int `json:"totalResults"`
 	StartIndex   int `json:"startIndex"`
 	ItemsPerPage int `json:"itemsPerPage"`

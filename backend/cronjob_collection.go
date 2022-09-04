@@ -3,4 +3,4 @@
 
 package backend
 
-type CronjobCollection = Collection
+type CronjobCollection = Collection[Cronjob]

@@ -3,4 +3,4 @@
 
 package backend
 
-type DashboardTransactions = Collection
+type DashboardTransactions = Collection[DashboardTransaction]

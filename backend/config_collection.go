@@ -3,4 +3,4 @@
 
 package backend
 
-type ConfigCollection = Collection
+type ConfigCollection = Collection[Config]

@@ -3,4 +3,4 @@
 
 package backend
 
-type EventSubscriptionCollection = Collection
+type EventSubscriptionCollection = Collection[EventSubscription]

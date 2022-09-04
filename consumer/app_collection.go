@@ -3,4 +3,4 @@
 
 package consumer
 
-type AppCollection = Collection
+type AppCollection = Collection[App]
