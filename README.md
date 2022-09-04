@@ -1,13 +1,13 @@
 
-# Fusio SDK
+# Fusio Go SDK
 
-This Go library helps to talk to the Fusio (https://www.fusio-project.org/)
-API. It uses the automatically generated definition of the Fusio backend.
+This is the official Fusio Go SDK, it helps to talk to the Fusio (https://www.fusio-project.org/)
+open source API management system.
 
 ## Usage
 
-The following example shows how you can get a client for the backend to list
-all routes at the backend. You can also checkout our sample go CLI [repository](https://github.com/apioo/fusio-sample-gocli).
+The following example shows how you can get all registered routes at the backend.
+A working example is also available at: https://github.com/apioo/fusio-sample-go-cli
 
 ```go
 package main
@@ -32,8 +32,9 @@ func main() {
 		log.Panic(error)
 	}
 
+	fmt.Println("Routes:")
 	for _, v := range collection.Entry {
-		fmt.Println("Route: " + v.Path)
+		fmt.Println("* " + v.Path)
 	}
 }
 
