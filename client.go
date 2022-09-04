@@ -28,21 +28,3 @@ func NewClient(baseUrl string, clientId string, clientSecret string, tokenStore 
 		Consumer:   consumer.NewClient(baseUrl, credentials, tokenStore, scopes),
 	}
 }
-
-func main() {
-
-	var store = &sdkgen.MemoryTokenStore{}
-	var scopes = []string{"foo", "bar"}
-
-	var foo = NewClient("", "", "", store, scopes)
-
-	var data = backend.ActionCreate{
-		Status: 1,
-		Async:  false,
-		Name:   "foo",
-		Class:  "",
-	}
-
-	foo.Backend.BackendAction().GetBackendAction().BackendActionActionCreate(data)
-
-}
