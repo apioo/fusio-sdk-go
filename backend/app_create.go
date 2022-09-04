@@ -3,6 +3,8 @@
 
 package backend
 
+import "time"
+
 type AppCreate struct {
 	Id         int        `json:"id"`
 	UserId     int        `json:"userId"`

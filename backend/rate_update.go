@@ -3,6 +3,8 @@
 
 package backend
 
+import "time"
+
 type RateUpdate struct {
 	Id         int              `json:"id"`
 	Priority   int              `json:"priority"`
