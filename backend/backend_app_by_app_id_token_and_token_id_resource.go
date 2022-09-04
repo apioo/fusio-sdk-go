@@ -4,7 +4,6 @@
 package backend
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
 	"github.com/apioo/sdkgen-go"

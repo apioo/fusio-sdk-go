@@ -4,8 +4,6 @@
 package consumer
 
 import (
-	"bytes"
-
 	"errors"
 	"github.com/apioo/sdkgen-go"
 
