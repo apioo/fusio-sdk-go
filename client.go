@@ -1,4 +1,4 @@
-package main
+package fusio
 
 import (
 	"github.com/apioo/fusio-sdk-go/backend"
