@@ -11,129 +11,374 @@ type Client struct {
 	internal *sdkgen.Client
 }
 
-// BackendUser Tag: backend.user
-func (client Client) BackendUser() *BackendUserGroup {
-	return NewBackendUserGroup(client.internal.GetResource())
+// Endpoint: /backend/user/$user_id<[0-9]+> -
+func (client Client) GetBackendUserByUserId(userId string) *BackendUserByUserIdResource {
+	return NewBackendUserByUserIdResource(userId, client.internal.GetResource())
 }
 
-// BackendTrash Tag: backend.trash
-func (client Client) BackendTrash() *BackendTrashGroup {
-	return NewBackendTrashGroup(client.internal.GetResource())
+// Endpoint: /backend/user -
+func (client Client) GetBackendUser() *BackendUserResource {
+	return NewBackendUserResource(client.internal.GetResource())
 }
 
-// BackendTransaction Tag: backend.transaction
-func (client Client) BackendTransaction() *BackendTransactionGroup {
-	return NewBackendTransactionGroup(client.internal.GetResource())
+// Endpoint: /backend/trash/:type -
+func (client Client) GetBackendTrashByType(_type string) *BackendTrashByTypeResource {
+	return NewBackendTrashByTypeResource(_type, client.internal.GetResource())
 }
 
-// BackendStatistic Tag: backend.statistic
-func (client Client) BackendStatistic() *BackendStatisticGroup {
-	return NewBackendStatisticGroup(client.internal.GetResource())
+// Endpoint: /backend/trash -
+func (client Client) GetBackendTrash() *BackendTrashResource {
+	return NewBackendTrashResource(client.internal.GetResource())
 }
 
-// BackendSdk Tag: backend.sdk
-func (client Client) BackendSdk() *BackendSdkGroup {
-	return NewBackendSdkGroup(client.internal.GetResource())
+// Endpoint: /backend/transaction/$transaction_id<[0-9]+> -
+func (client Client) GetBackendTransactionByTransactionId(transactionId string) *BackendTransactionByTransactionIdResource {
+	return NewBackendTransactionByTransactionIdResource(transactionId, client.internal.GetResource())
 }
 
-// BackendScope Tag: backend.scope
-func (client Client) BackendScope() *BackendScopeGroup {
-	return NewBackendScopeGroup(client.internal.GetResource())
+// Endpoint: /backend/transaction -
+func (client Client) GetBackendTransaction() *BackendTransactionResource {
+	return NewBackendTransactionResource(client.internal.GetResource())
 }
 
-// BackendSchema Tag: backend.schema
-func (client Client) BackendSchema() *BackendSchemaGroup {
-	return NewBackendSchemaGroup(client.internal.GetResource())
+// Endpoint: /backend/statistic/used_points -
+func (client Client) GetBackendStatisticUsedPoints() *BackendStatisticUsedPointsResource {
+	return NewBackendStatisticUsedPointsResource(client.internal.GetResource())
 }
 
-// BackendRoute Tag: backend.route
-func (client Client) BackendRoute() *BackendRouteGroup {
-	return NewBackendRouteGroup(client.internal.GetResource())
+// Endpoint: /backend/statistic/time_per_route -
+func (client Client) GetBackendStatisticTimePerRoute() *BackendStatisticTimePerRouteResource {
+	return NewBackendStatisticTimePerRouteResource(client.internal.GetResource())
 }
 
-// BackendRole Tag: backend.role
-func (client Client) BackendRole() *BackendRoleGroup {
-	return NewBackendRoleGroup(client.internal.GetResource())
+// Endpoint: /backend/statistic/time_average -
+func (client Client) GetBackendStatisticTimeAverage() *BackendStatisticTimeAverageResource {
+	return NewBackendStatisticTimeAverageResource(client.internal.GetResource())
 }
 
-// BackendRate Tag: backend.rate
-func (client Client) BackendRate() *BackendRateGroup {
-	return NewBackendRateGroup(client.internal.GetResource())
+// Endpoint: /backend/statistic/most_used_routes -
+func (client Client) GetBackendStatisticMostUsedRoutes() *BackendStatisticMostUsedRoutesResource {
+	return NewBackendStatisticMostUsedRoutesResource(client.internal.GetResource())
 }
 
-// BackendPlan Tag: backend.plan
-func (client Client) BackendPlan() *BackendPlanGroup {
-	return NewBackendPlanGroup(client.internal.GetResource())
+// Endpoint: /backend/statistic/most_used_apps -
+func (client Client) GetBackendStatisticMostUsedApps() *BackendStatisticMostUsedAppsResource {
+	return NewBackendStatisticMostUsedAppsResource(client.internal.GetResource())
 }
 
-// BackendPage Tag: backend.page
-func (client Client) BackendPage() *BackendPageGroup {
-	return NewBackendPageGroup(client.internal.GetResource())
+// Endpoint: /backend/statistic/issued_tokens -
+func (client Client) GetBackendStatisticIssuedTokens() *BackendStatisticIssuedTokensResource {
+	return NewBackendStatisticIssuedTokensResource(client.internal.GetResource())
 }
 
-// BackendMarketplace Tag: backend.marketplace
-func (client Client) BackendMarketplace() *BackendMarketplaceGroup {
-	return NewBackendMarketplaceGroup(client.internal.GetResource())
+// Endpoint: /backend/statistic/incoming_transactions -
+func (client Client) GetBackendStatisticIncomingTransactions() *BackendStatisticIncomingTransactionsResource {
+	return NewBackendStatisticIncomingTransactionsResource(client.internal.GetResource())
 }
 
-// BackendLog Tag: backend.log
-func (client Client) BackendLog() *BackendLogGroup {
-	return NewBackendLogGroup(client.internal.GetResource())
+// Endpoint: /backend/statistic/incoming_requests -
+func (client Client) GetBackendStatisticIncomingRequests() *BackendStatisticIncomingRequestsResource {
+	return NewBackendStatisticIncomingRequestsResource(client.internal.GetResource())
 }
 
-// BackendGenerator Tag: backend.generator
-func (client Client) BackendGenerator() *BackendGeneratorGroup {
-	return NewBackendGeneratorGroup(client.internal.GetResource())
+// Endpoint: /backend/statistic/errors_per_route -
+func (client Client) GetBackendStatisticErrorsPerRoute() *BackendStatisticErrorsPerRouteResource {
+	return NewBackendStatisticErrorsPerRouteResource(client.internal.GetResource())
 }
 
-// BackendEvent Tag: backend.event
-func (client Client) BackendEvent() *BackendEventGroup {
-	return NewBackendEventGroup(client.internal.GetResource())
+// Endpoint: /backend/statistic/count_requests -
+func (client Client) GetBackendStatisticCountRequests() *BackendStatisticCountRequestsResource {
+	return NewBackendStatisticCountRequestsResource(client.internal.GetResource())
 }
 
-// BackendDashboard Tag: backend.dashboard
-func (client Client) BackendDashboard() *BackendDashboardGroup {
-	return NewBackendDashboardGroup(client.internal.GetResource())
+// Endpoint: /backend/sdk -
+func (client Client) GetBackendSdk() *BackendSdkResource {
+	return NewBackendSdkResource(client.internal.GetResource())
 }
 
-// BackendCronjob Tag: backend.cronjob
-func (client Client) BackendCronjob() *BackendCronjobGroup {
-	return NewBackendCronjobGroup(client.internal.GetResource())
+// Endpoint: /backend/scope/$scope_id<[0-9]+|^~> -
+func (client Client) GetBackendScopeByScopeId(scopeId string) *BackendScopeByScopeIdResource {
+	return NewBackendScopeByScopeIdResource(scopeId, client.internal.GetResource())
 }
 
-// BackendConnection Tag: backend.connection
-func (client Client) BackendConnection() *BackendConnectionGroup {
-	return NewBackendConnectionGroup(client.internal.GetResource())
+// Endpoint: /backend/scope/categories -
+func (client Client) GetBackendScopeCategories() *BackendScopeCategoriesResource {
+	return NewBackendScopeCategoriesResource(client.internal.GetResource())
 }
 
-// BackendConfig Tag: backend.config
-func (client Client) BackendConfig() *BackendConfigGroup {
-	return NewBackendConfigGroup(client.internal.GetResource())
+// Endpoint: /backend/scope -
+func (client Client) GetBackendScope() *BackendScopeResource {
+	return NewBackendScopeResource(client.internal.GetResource())
 }
 
-// BackendCategory Tag: backend.category
-func (client Client) BackendCategory() *BackendCategoryGroup {
-	return NewBackendCategoryGroup(client.internal.GetResource())
+// Endpoint: /backend/schema/$schema_id<[0-9]+|^~> -
+func (client Client) GetBackendSchemaBySchemaId(schemaId string) *BackendSchemaBySchemaIdResource {
+	return NewBackendSchemaBySchemaIdResource(schemaId, client.internal.GetResource())
 }
 
-// BackendAudit Tag: backend.audit
-func (client Client) BackendAudit() *BackendAuditGroup {
-	return NewBackendAuditGroup(client.internal.GetResource())
+// Endpoint: /backend/schema/form/$schema_id<[0-9]+> -
+func (client Client) GetBackendSchemaFormBySchemaId(schemaId string) *BackendSchemaFormBySchemaIdResource {
+	return NewBackendSchemaFormBySchemaIdResource(schemaId, client.internal.GetResource())
 }
 
-// BackendApp Tag: backend.app
-func (client Client) BackendApp() *BackendAppGroup {
-	return NewBackendAppGroup(client.internal.GetResource())
+// Endpoint: /backend/schema/preview/:schema_id -
+func (client Client) GetBackendSchemaPreviewBySchemaId(schemaId string) *BackendSchemaPreviewBySchemaIdResource {
+	return NewBackendSchemaPreviewBySchemaIdResource(schemaId, client.internal.GetResource())
 }
 
-// BackendAction Tag: backend.action
-func (client Client) BackendAction() *BackendActionGroup {
-	return NewBackendActionGroup(client.internal.GetResource())
+// Endpoint: /backend/schema -
+func (client Client) GetBackendSchema() *BackendSchemaResource {
+	return NewBackendSchemaResource(client.internal.GetResource())
 }
 
-// BackendAccount Tag: backend.account
-func (client Client) BackendAccount() *BackendAccountGroup {
-	return NewBackendAccountGroup(client.internal.GetResource())
+// Endpoint: /backend/routes/$route_id<[0-9]+> -
+func (client Client) GetBackendRoutesByRouteId(routeId string) *BackendRoutesByRouteIdResource {
+	return NewBackendRoutesByRouteIdResource(routeId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/routes -
+func (client Client) GetBackendRoutes() *BackendRoutesResource {
+	return NewBackendRoutesResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/role/$role_id<[0-9]+|^~> -
+func (client Client) GetBackendRoleByRoleId(roleId string) *BackendRoleByRoleIdResource {
+	return NewBackendRoleByRoleIdResource(roleId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/role -
+func (client Client) GetBackendRole() *BackendRoleResource {
+	return NewBackendRoleResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/rate/$rate_id<[0-9]+|^~> -
+func (client Client) GetBackendRateByRateId(rateId string) *BackendRateByRateIdResource {
+	return NewBackendRateByRateIdResource(rateId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/rate -
+func (client Client) GetBackendRate() *BackendRateResource {
+	return NewBackendRateResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/plan/$plan_id<[0-9]+|^~> -
+func (client Client) GetBackendPlanByPlanId(planId string) *BackendPlanByPlanIdResource {
+	return NewBackendPlanByPlanIdResource(planId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/plan -
+func (client Client) GetBackendPlan() *BackendPlanResource {
+	return NewBackendPlanResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/page/$page_id<[0-9]+|^~> -
+func (client Client) GetBackendPageByPageId(pageId string) *BackendPageByPageIdResource {
+	return NewBackendPageByPageIdResource(pageId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/page -
+func (client Client) GetBackendPage() *BackendPageResource {
+	return NewBackendPageResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/marketplace/:app_name -
+func (client Client) GetBackendMarketplaceByAppName(appName string) *BackendMarketplaceByAppNameResource {
+	return NewBackendMarketplaceByAppNameResource(appName, client.internal.GetResource())
+}
+
+// Endpoint: /backend/marketplace -
+func (client Client) GetBackendMarketplace() *BackendMarketplaceResource {
+	return NewBackendMarketplaceResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/log/$log_id<[0-9]+> -
+func (client Client) GetBackendLogByLogId(logId string) *BackendLogByLogIdResource {
+	return NewBackendLogByLogIdResource(logId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/log -
+func (client Client) GetBackendLog() *BackendLogResource {
+	return NewBackendLogResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/log/error/$error_id<[0-9]+> -
+func (client Client) GetBackendLogErrorByErrorId(errorId string) *BackendLogErrorByErrorIdResource {
+	return NewBackendLogErrorByErrorIdResource(errorId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/log/error -
+func (client Client) GetBackendLogError() *BackendLogErrorResource {
+	return NewBackendLogErrorResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/generator/:provider -
+func (client Client) GetBackendGeneratorByProvider(provider string) *BackendGeneratorByProviderResource {
+	return NewBackendGeneratorByProviderResource(provider, client.internal.GetResource())
+}
+
+// Endpoint: /backend/generator -
+func (client Client) GetBackendGenerator() *BackendGeneratorResource {
+	return NewBackendGeneratorResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/event/$event_id<[0-9]+|^~> -
+func (client Client) GetBackendEventByEventId(eventId string) *BackendEventByEventIdResource {
+	return NewBackendEventByEventIdResource(eventId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/event -
+func (client Client) GetBackendEvent() *BackendEventResource {
+	return NewBackendEventResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/event/subscription/$subscription_id<[0-9]+> -
+func (client Client) GetBackendEventSubscriptionBySubscriptionId(subscriptionId string) *BackendEventSubscriptionBySubscriptionIdResource {
+	return NewBackendEventSubscriptionBySubscriptionIdResource(subscriptionId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/event/subscription -
+func (client Client) GetBackendEventSubscription() *BackendEventSubscriptionResource {
+	return NewBackendEventSubscriptionResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/dashboard -
+func (client Client) GetBackendDashboard() *BackendDashboardResource {
+	return NewBackendDashboardResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/cronjob/$cronjob_id<[0-9]+|^~> -
+func (client Client) GetBackendCronjobByCronjobId(cronjobId string) *BackendCronjobByCronjobIdResource {
+	return NewBackendCronjobByCronjobIdResource(cronjobId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/cronjob -
+func (client Client) GetBackendCronjob() *BackendCronjobResource {
+	return NewBackendCronjobResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/connection/$connection_id<[0-9]+|^~>/introspection/:entity -
+func (client Client) GetBackendConnectionByConnectionIdIntrospectionAndEntity(connectionId string, entity string) *BackendConnectionByConnectionIdIntrospectionAndEntityResource {
+	return NewBackendConnectionByConnectionIdIntrospectionAndEntityResource(connectionId, entity, client.internal.GetResource())
+}
+
+// Endpoint: /backend/connection/$connection_id<[0-9]+|^~>/introspection -
+func (client Client) GetBackendConnectionByConnectionIdIntrospection(connectionId string) *BackendConnectionByConnectionIdIntrospectionResource {
+	return NewBackendConnectionByConnectionIdIntrospectionResource(connectionId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/connection/$connection_id<[0-9]+|^~>/redirect -
+func (client Client) GetBackendConnectionByConnectionIdRedirect(connectionId string) *BackendConnectionByConnectionIdRedirectResource {
+	return NewBackendConnectionByConnectionIdRedirectResource(connectionId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/connection/$connection_id<[0-9]+|^~> -
+func (client Client) GetBackendConnectionByConnectionId(connectionId string) *BackendConnectionByConnectionIdResource {
+	return NewBackendConnectionByConnectionIdResource(connectionId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/connection/form -
+func (client Client) GetBackendConnectionForm() *BackendConnectionFormResource {
+	return NewBackendConnectionFormResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/connection/list -
+func (client Client) GetBackendConnectionList() *BackendConnectionListResource {
+	return NewBackendConnectionListResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/connection -
+func (client Client) GetBackendConnection() *BackendConnectionResource {
+	return NewBackendConnectionResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/config/$config_id<[0-9]+|^~> -
+func (client Client) GetBackendConfigByConfigId(configId string) *BackendConfigByConfigIdResource {
+	return NewBackendConfigByConfigIdResource(configId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/config -
+func (client Client) GetBackendConfig() *BackendConfigResource {
+	return NewBackendConfigResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/category/$category_id<[0-9]+|^~> -
+func (client Client) GetBackendCategoryByCategoryId(categoryId string) *BackendCategoryByCategoryIdResource {
+	return NewBackendCategoryByCategoryIdResource(categoryId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/category -
+func (client Client) GetBackendCategory() *BackendCategoryResource {
+	return NewBackendCategoryResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/audit/$audit_id<[0-9]+> -
+func (client Client) GetBackendAuditByAuditId(auditId string) *BackendAuditByAuditIdResource {
+	return NewBackendAuditByAuditIdResource(auditId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/audit -
+func (client Client) GetBackendAudit() *BackendAuditResource {
+	return NewBackendAuditResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/app/$app_id<[0-9]+>/token/:token_id -
+func (client Client) GetBackendAppByAppIdTokenAndTokenId(appId string, tokenId string) *BackendAppByAppIdTokenAndTokenIdResource {
+	return NewBackendAppByAppIdTokenAndTokenIdResource(appId, tokenId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/app/$app_id<[0-9]+> -
+func (client Client) GetBackendAppByAppId(appId string) *BackendAppByAppIdResource {
+	return NewBackendAppByAppIdResource(appId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/app -
+func (client Client) GetBackendApp() *BackendAppResource {
+	return NewBackendAppResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/app/token/$token_id<[0-9]+> -
+func (client Client) GetBackendAppTokenByTokenId(tokenId string) *BackendAppTokenByTokenIdResource {
+	return NewBackendAppTokenByTokenIdResource(tokenId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/app/token -
+func (client Client) GetBackendAppToken() *BackendAppTokenResource {
+	return NewBackendAppTokenResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/action/$action_id<[0-9]+|^~> -
+func (client Client) GetBackendActionByActionId(actionId string) *BackendActionByActionIdResource {
+	return NewBackendActionByActionIdResource(actionId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/action/execute/:action_id -
+func (client Client) GetBackendActionExecuteByActionId(actionId string) *BackendActionExecuteByActionIdResource {
+	return NewBackendActionExecuteByActionIdResource(actionId, client.internal.GetResource())
+}
+
+// Endpoint: /backend/action/form -
+func (client Client) GetBackendActionForm() *BackendActionFormResource {
+	return NewBackendActionFormResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/action/list -
+func (client Client) GetBackendActionList() *BackendActionListResource {
+	return NewBackendActionListResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/action -
+func (client Client) GetBackendAction() *BackendActionResource {
+	return NewBackendActionResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/account/change_password -
+func (client Client) GetBackendAccountChangePassword() *BackendAccountChangePasswordResource {
+	return NewBackendAccountChangePasswordResource(client.internal.GetResource())
+}
+
+// Endpoint: /backend/account -
+func (client Client) GetBackendAccount() *BackendAccountResource {
+	return NewBackendAccountResource(client.internal.GetResource())
 }
 
 func NewClient(baseUrl string, credentials sdkgen.CredentialsInterface, tokenStore sdkgen.TokenStoreInterface, scopes []string) *Client {

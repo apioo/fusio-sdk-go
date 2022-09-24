@@ -4,6 +4,7 @@
 package consumer
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"github.com/apioo/sdkgen-go"
@@ -18,13 +19,20 @@ type ConsumerPaymentByProviderPortalResource struct {
 }
 
 // ConsumerActionPaymentPortal
-func (resource ConsumerPaymentByProviderPortalResource) ConsumerActionPaymentPortal() (PaymentPortalResponse, error) {
+func (resource ConsumerPaymentByProviderPortalResource) ConsumerActionPaymentPortal(data PaymentPortalRequest) (PaymentPortalResponse, error) {
 	url, err := url.Parse(resource.url)
 	if err != nil {
 		return PaymentPortalResponse{}, errors.New("could not parse url")
 	}
 
-	req, err := http.NewRequest("POST", url.String(), nil)
+	raw, err := json.Marshal(data)
+	if err != nil {
+		return PaymentPortalResponse{}, errors.New("could not marshal provided JSON data")
+	}
+
+	var reqBody = bytes.NewReader(raw)
+
+	req, err := http.NewRequest("POST", url.String(), reqBody)
 	if err != nil {
 		return PaymentPortalResponse{}, errors.New("could not create request")
 	}
