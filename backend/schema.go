@@ -4,9 +4,10 @@
 package backend
 
 type Schema struct {
-	Id     int          `json:"id"`
-	Status int          `json:"status"`
-	Name   string       `json:"name"`
-	Source SchemaSource `json:"source"`
-	Form   SchemaForm   `json:"form"`
+	Id       int          `json:"id"`
+	Status   int          `json:"status"`
+	Name     string       `json:"name"`
+	Source   SchemaSource `json:"source"`
+	Form     SchemaForm   `json:"form"`
+	Metadata Metadata     `json:"metadata"`
 }

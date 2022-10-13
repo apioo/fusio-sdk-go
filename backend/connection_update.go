@@ -4,8 +4,9 @@
 package backend
 
 type ConnectionUpdate struct {
-	Id     int              `json:"id"`
-	Name   string           `json:"name"`
-	Class  string           `json:"class"`
-	Config ConnectionConfig `json:"config"`
+	Id       int              `json:"id"`
+	Name     string           `json:"name"`
+	Class    string           `json:"class"`
+	Config   ConnectionConfig `json:"config"`
+	Metadata Metadata         `json:"metadata"`
 }

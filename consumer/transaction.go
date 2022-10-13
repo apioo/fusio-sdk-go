@@ -3,11 +3,17 @@
 
 package consumer
 
+import "time"
+
 type Transaction struct {
-	Id            int     `json:"id"`
-	Status        int     `json:"status"`
-	TransactionId string  `json:"transactionId"`
-	Amount        float64 `json:"amount"`
-	UpdateDate    int     `json:"updateDate"`
-	InsertDate    int     `json:"insertDate"`
+	Id            int       `json:"id"`
+	UserId        int       `json:"userId"`
+	PlanId        int       `json:"planId"`
+	Plan          Plan      `json:"plan"`
+	TransactionId string    `json:"transactionId"`
+	Amount        float64   `json:"amount"`
+	Points        float64   `json:"points"`
+	PeriodStart   time.Time `json:"periodStart"`
+	PeriodEnd     time.Time `json:"periodEnd"`
+	InsertDate    time.Time `json:"insertDate"`
 }

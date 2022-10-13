@@ -4,9 +4,10 @@
 package backend
 
 type Page struct {
-	Id      int    `json:"id"`
-	Status  int    `json:"status"`
-	Title   string `json:"title"`
-	Slug    string `json:"slug"`
-	Content string `json:"content"`
+	Id       int      `json:"id"`
+	Status   int      `json:"status"`
+	Title    string   `json:"title"`
+	Slug     string   `json:"slug"`
+	Content  string   `json:"content"`
+	Metadata Metadata `json:"metadata"`
 }

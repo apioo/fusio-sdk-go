@@ -12,4 +12,5 @@ type PlanUpdate struct {
 	Period      int      `json:"period"`
 	ExternalId  string   `json:"externalId"`
 	Scopes      []string `json:"scopes"`
+	Metadata    Metadata `json:"metadata"`
 }

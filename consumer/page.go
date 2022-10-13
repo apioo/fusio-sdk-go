@@ -4,8 +4,9 @@
 package consumer
 
 type Page struct {
-	Id      int    `json:"id"`
-	Title   string `json:"title"`
-	Slug    string `json:"slug"`
-	Content string `json:"content"`
+	Id       int      `json:"id"`
+	Title    string   `json:"title"`
+	Slug     string   `json:"slug"`
+	Content  string   `json:"content"`
+	Metadata Metadata `json:"metadata"`
 }

@@ -6,16 +6,16 @@ package backend
 import "time"
 
 type UserCreate struct {
-	Id         int            `json:"id"`
-	RoleId     int            `json:"roleId"`
-	PlanId     int            `json:"planId"`
-	Status     int            `json:"status"`
-	Name       string         `json:"name"`
-	Email      string         `json:"email"`
-	Points     int            `json:"points"`
-	Scopes     []string       `json:"scopes"`
-	Apps       []App          `json:"apps"`
-	Attributes UserAttributes `json:"attributes"`
-	Date       time.Time      `json:"date"`
-	Password   string         `json:"password"`
+	Id       int       `json:"id"`
+	RoleId   int       `json:"roleId"`
+	PlanId   int       `json:"planId"`
+	Status   int       `json:"status"`
+	Name     string    `json:"name"`
+	Email    string    `json:"email"`
+	Points   int       `json:"points"`
+	Scopes   []string  `json:"scopes"`
+	Apps     []App     `json:"apps"`
+	Metadata Metadata  `json:"metadata"`
+	Date     time.Time `json:"date"`
+	Password string    `json:"password"`
 }

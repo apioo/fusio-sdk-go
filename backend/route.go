@@ -11,4 +11,5 @@ type Route struct {
 	Controller string         `json:"controller"`
 	Scopes     []string       `json:"scopes"`
 	Config     []RouteVersion `json:"config"`
+	Metadata   Metadata       `json:"metadata"`
 }

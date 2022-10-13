@@ -4,8 +4,9 @@
 package backend
 
 type Event struct {
-	Id          int    `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Schema      string `json:"schema"`
+	Id          int      `json:"id"`
+	Name        string   `json:"name"`
+	Description string   `json:"description"`
+	Schema      string   `json:"schema"`
+	Metadata    Metadata `json:"metadata"`
 }

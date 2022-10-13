@@ -12,4 +12,5 @@ type Rate struct {
 	RateLimit  int              `json:"rateLimit"`
 	Timespan   time.Duration    `json:"timespan"`
 	Allocation []RateAllocation `json:"allocation"`
+	Metadata   Metadata         `json:"metadata"`
 }

@@ -12,5 +12,6 @@ type CronjobCreate struct {
 	Action      string         `json:"action"`
 	ExecuteDate time.Time      `json:"executeDate"`
 	ExitCode    int            `json:"exitCode"`
+	Metadata    Metadata       `json:"metadata"`
 	Errors      []CronjobError `json:"errors"`
 }

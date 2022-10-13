@@ -8,4 +8,5 @@ type Scope struct {
 	Name        string       `json:"name"`
 	Description string       `json:"description"`
 	Routes      []ScopeRoute `json:"routes"`
+	Metadata    Metadata     `json:"metadata"`
 }

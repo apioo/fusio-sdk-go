@@ -14,6 +14,7 @@ type App struct {
 	Parameters string     `json:"parameters"`
 	AppKey     string     `json:"appKey"`
 	AppSecret  string     `json:"appSecret"`
+	Metadata   Metadata   `json:"metadata"`
 	Date       time.Time  `json:"date"`
 	Scopes     []string   `json:"scopes"`
 	Tokens     []AppToken `json:"tokens"`

@@ -13,4 +13,5 @@ type App struct {
 	AppSecret string   `json:"appSecret"`
 	Date      string   `json:"date"`
 	Scopes    []string `json:"scopes"`
+	Metadata  Metadata `json:"metadata"`
 }

@@ -4,9 +4,10 @@
 package consumer
 
 type Plan struct {
-	Id          int     `json:"id"`
-	Name        string  `json:"name"`
-	Description string  `json:"description"`
-	Price       float64 `json:"price"`
-	Points      int     `json:"points"`
+	Id          int      `json:"id"`
+	Name        string   `json:"name"`
+	Description string   `json:"description"`
+	Price       float64  `json:"price"`
+	Points      int      `json:"points"`
+	Metadata    Metadata `json:"metadata"`
 }

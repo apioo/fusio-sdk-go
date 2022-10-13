@@ -12,5 +12,7 @@ type Transaction struct {
 	TransactionId string    `json:"transactionId"`
 	Amount        float64   `json:"amount"`
 	Points        float64   `json:"points"`
+	PeriodStart   time.Time `json:"periodStart"`
+	PeriodEnd     time.Time `json:"periodEnd"`
 	InsertDate    time.Time `json:"insertDate"`
 }
