@@ -6,13 +6,14 @@ package consumer
 import "time"
 
 type UserAccount struct {
-	Id       int       `json:"id"`
-	PlanId   int       `json:"planId"`
-	Status   int       `json:"status"`
-	Name     string    `json:"name"`
-	Email    string    `json:"email"`
-	Points   int       `json:"points"`
-	Scopes   []string  `json:"scopes"`
-	Metadata Metadata  `json:"metadata"`
-	Date     time.Time `json:"date"`
+	Id       int        `json:"id"`
+	PlanId   int        `json:"planId"`
+	Status   int        `json:"status"`
+	Name     string     `json:"name"`
+	Email    string     `json:"email"`
+	Points   int        `json:"points"`
+	Scopes   []string   `json:"scopes"`
+	Plans    []UserPlan `json:"plans"`
+	Metadata Metadata   `json:"metadata"`
+	Date     time.Time  `json:"date"`
 }

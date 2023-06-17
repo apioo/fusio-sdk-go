@@ -5,7 +5,7 @@ package backend
 
 type RateAllocation struct {
 	Id            int  `json:"id"`
-	RouteId       int  `json:"routeId"`
+	OperationId   int  `json:"operationId"`
 	UserId        int  `json:"userId"`
 	PlanId        int  `json:"planId"`
 	AppId         int  `json:"appId"`

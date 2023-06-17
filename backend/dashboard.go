@@ -4,11 +4,11 @@
 package backend
 
 type Dashboard struct {
-	ErrorsPerRoute       StatisticChart        `json:"errorsPerRoute"`
+	ErrorsPerOperation   StatisticChart        `json:"errorsPerOperation"`
 	IncomingRequests     StatisticChart        `json:"incomingRequests"`
 	IncomingTransactions StatisticChart        `json:"incomingTransactions"`
-	MostUsedRoutes       StatisticChart        `json:"mostUsedRoutes"`
-	TimePerRoute         StatisticChart        `json:"timePerRoute"`
+	MostUsedOperations   StatisticChart        `json:"mostUsedOperations"`
+	TimePerOperation     StatisticChart        `json:"timePerOperation"`
 	LatestApps           DashboardApps         `json:"latestApps"`
 	LatestRequests       DashboardRequests     `json:"latestRequests"`
 	LatestUsers          DashboardUsers        `json:"latestUsers"`

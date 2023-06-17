@@ -10,5 +10,6 @@ type MarketplaceRemoteApp struct {
 	Website     string         `json:"website"`
 	DownloadUrl string         `json:"downloadUrl"`
 	ShaHash     string         `json:"sha1Hash"`
+	StartUrl    string         `json:"startUrl"`
 	Local       MarketplaceApp `json:"local"`
 }

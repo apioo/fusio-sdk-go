@@ -4,9 +4,9 @@
 package backend
 
 type Scope struct {
-	Id          int          `json:"id"`
-	Name        string       `json:"name"`
-	Description string       `json:"description"`
-	Routes      []ScopeRoute `json:"routes"`
-	Metadata    Metadata     `json:"metadata"`
+	Id          int              `json:"id"`
+	Name        string           `json:"name"`
+	Description string           `json:"description"`
+	Operations  []ScopeOperation `json:"operations"`
+	Metadata    Metadata         `json:"metadata"`
 }

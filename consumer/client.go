@@ -8,142 +8,60 @@ import (
 )
 
 type Client struct {
-	internal *sdkgen.Client
+	internal *sdkgen.ClientAbstract
 }
 
-// Endpoint: /consumer/password_reset -
-func (client Client) GetConsumerPasswordReset() *ConsumerPasswordResetResource {
-	return NewConsumerPasswordResetResource(client.internal.GetResource())
+func (client *Client) Account() *AccountTag {
+	return NewAccountTag(client.internal.HttpClient, client.internal.Parser)
 }
 
-// Endpoint: /consumer/register -
-func (client Client) GetConsumerRegister() *ConsumerRegisterResource {
-	return NewConsumerRegisterResource(client.internal.GetResource())
+func (client *Client) Transaction() *TransactionTag {
+	return NewTransactionTag(client.internal.HttpClient, client.internal.Parser)
 }
 
-// Endpoint: /consumer/provider/:provider -
-func (client Client) GetConsumerProviderByProvider(provider string) *ConsumerProviderByProviderResource {
-	return NewConsumerProviderByProviderResource(provider, client.internal.GetResource())
+func (client *Client) Subscription() *SubscriptionTag {
+	return NewSubscriptionTag(client.internal.HttpClient, client.internal.Parser)
 }
 
-// Endpoint: /consumer/login -
-func (client Client) GetConsumerLogin() *ConsumerLoginResource {
-	return NewConsumerLoginResource(client.internal.GetResource())
+func (client *Client) Scope() *ScopeTag {
+	return NewScopeTag(client.internal.HttpClient, client.internal.Parser)
 }
 
-// Endpoint: /consumer/authorize -
-func (client Client) GetConsumerAuthorize() *ConsumerAuthorizeResource {
-	return NewConsumerAuthorizeResource(client.internal.GetResource())
+func (client *Client) Plan() *PlanTag {
+	return NewPlanTag(client.internal.HttpClient, client.internal.Parser)
 }
 
-// Endpoint: /consumer/activate -
-func (client Client) GetConsumerActivate() *ConsumerActivateResource {
-	return NewConsumerActivateResource(client.internal.GetResource())
+func (client *Client) Payment() *PaymentTag {
+	return NewPaymentTag(client.internal.HttpClient, client.internal.Parser)
 }
 
-// Endpoint: /consumer/account/change_password -
-func (client Client) GetConsumerAccountChangePassword() *ConsumerAccountChangePasswordResource {
-	return NewConsumerAccountChangePasswordResource(client.internal.GetResource())
+func (client *Client) Page() *PageTag {
+	return NewPageTag(client.internal.HttpClient, client.internal.Parser)
 }
 
-// Endpoint: /consumer/account -
-func (client Client) GetConsumerAccount() *ConsumerAccountResource {
-	return NewConsumerAccountResource(client.internal.GetResource())
+func (client *Client) Log() *LogTag {
+	return NewLogTag(client.internal.HttpClient, client.internal.Parser)
 }
 
-// Endpoint: /consumer/transaction/$transaction_id<[0-9]+> -
-func (client Client) GetConsumerTransactionByTransactionId(transactionId string) *ConsumerTransactionByTransactionIdResource {
-	return NewConsumerTransactionByTransactionIdResource(transactionId, client.internal.GetResource())
+func (client *Client) Grant() *GrantTag {
+	return NewGrantTag(client.internal.HttpClient, client.internal.Parser)
 }
 
-// Endpoint: /consumer/transaction -
-func (client Client) GetConsumerTransaction() *ConsumerTransactionResource {
-	return NewConsumerTransactionResource(client.internal.GetResource())
+func (client *Client) Event() *EventTag {
+	return NewEventTag(client.internal.HttpClient, client.internal.Parser)
 }
 
-// Endpoint: /consumer/subscription/$subscription_id<[0-9]+> -
-func (client Client) GetConsumerSubscriptionBySubscriptionId(subscriptionId string) *ConsumerSubscriptionBySubscriptionIdResource {
-	return NewConsumerSubscriptionBySubscriptionIdResource(subscriptionId, client.internal.GetResource())
+func (client *Client) App() *AppTag {
+	return NewAppTag(client.internal.HttpClient, client.internal.Parser)
 }
 
-// Endpoint: /consumer/subscription -
-func (client Client) GetConsumerSubscription() *ConsumerSubscriptionResource {
-	return NewConsumerSubscriptionResource(client.internal.GetResource())
-}
-
-// Endpoint: /consumer/scope -
-func (client Client) GetConsumerScope() *ConsumerScopeResource {
-	return NewConsumerScopeResource(client.internal.GetResource())
-}
-
-// Endpoint: /consumer/plan/$plan_id<[0-9]+> -
-func (client Client) GetConsumerPlanByPlanId(planId string) *ConsumerPlanByPlanIdResource {
-	return NewConsumerPlanByPlanIdResource(planId, client.internal.GetResource())
-}
-
-// Endpoint: /consumer/plan -
-func (client Client) GetConsumerPlan() *ConsumerPlanResource {
-	return NewConsumerPlanResource(client.internal.GetResource())
-}
-
-// Endpoint: /consumer/payment/:provider/checkout -
-func (client Client) GetConsumerPaymentByProviderCheckout(provider string) *ConsumerPaymentByProviderCheckoutResource {
-	return NewConsumerPaymentByProviderCheckoutResource(provider, client.internal.GetResource())
-}
-
-// Endpoint: /consumer/payment/:provider/portal -
-func (client Client) GetConsumerPaymentByProviderPortal(provider string) *ConsumerPaymentByProviderPortalResource {
-	return NewConsumerPaymentByProviderPortalResource(provider, client.internal.GetResource())
-}
-
-// Endpoint: /consumer/page/:page_id -
-func (client Client) GetConsumerPageByPageId(pageId string) *ConsumerPageByPageIdResource {
-	return NewConsumerPageByPageIdResource(pageId, client.internal.GetResource())
-}
-
-// Endpoint: /consumer/page -
-func (client Client) GetConsumerPage() *ConsumerPageResource {
-	return NewConsumerPageResource(client.internal.GetResource())
-}
-
-// Endpoint: /consumer/log/$log_id<[0-9]+> -
-func (client Client) GetConsumerLogByLogId(logId string) *ConsumerLogByLogIdResource {
-	return NewConsumerLogByLogIdResource(logId, client.internal.GetResource())
-}
-
-// Endpoint: /consumer/log -
-func (client Client) GetConsumerLog() *ConsumerLogResource {
-	return NewConsumerLogResource(client.internal.GetResource())
-}
-
-// Endpoint: /consumer/grant/$grant_id<[0-9]+> -
-func (client Client) GetConsumerGrantByGrantId(grantId string) *ConsumerGrantByGrantIdResource {
-	return NewConsumerGrantByGrantIdResource(grantId, client.internal.GetResource())
-}
-
-// Endpoint: /consumer/grant -
-func (client Client) GetConsumerGrant() *ConsumerGrantResource {
-	return NewConsumerGrantResource(client.internal.GetResource())
-}
-
-// Endpoint: /consumer/event -
-func (client Client) GetConsumerEvent() *ConsumerEventResource {
-	return NewConsumerEventResource(client.internal.GetResource())
-}
-
-// Endpoint: /consumer/app/$app_id<[0-9]+> -
-func (client Client) GetConsumerAppByAppId(appId string) *ConsumerAppByAppIdResource {
-	return NewConsumerAppByAppIdResource(appId, client.internal.GetResource())
-}
-
-// Endpoint: /consumer/app -
-func (client Client) GetConsumerApp() *ConsumerAppResource {
-	return NewConsumerAppResource(client.internal.GetResource())
-}
-
-func NewClient(baseUrl string, credentials sdkgen.CredentialsInterface, tokenStore sdkgen.TokenStoreInterface, scopes []string) *Client {
+func NewClient(baseUrl string, credentials sdkgen.CredentialsInterface) (*Client, error) {
+	var client, err = sdkgen.NewClient(baseUrl, credentials)
+	if err != nil {
+		return &Client{}, err
+	}
 
 	return &Client{
-		internal: sdkgen.NewClient(baseUrl, credentials, tokenStore, scopes),
-	}
+		internal: client,
+	}, nil
 }

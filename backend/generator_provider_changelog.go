@@ -4,7 +4,7 @@
 package backend
 
 type GeneratorProviderChangelog struct {
-	Schemas []Schema `json:"schemas"`
-	Actions []Action `json:"actions"`
-	Routes  []Route  `json:"routes"`
+	Schemas    []Schema    `json:"schemas"`
+	Actions    []Action    `json:"actions"`
+	Operations []Operation `json:"operations"`
 }
