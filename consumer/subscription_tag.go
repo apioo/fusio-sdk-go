@@ -4,7 +4,13 @@
 package consumer
 
 import (
+	"bytes"
+	"encoding/json"
+	"errors"
 	"github.com/apioo/sdkgen-go"
+	"io"
+	"net/http"
+	"net/url"
 )
 
 type SubscriptionTag struct {
