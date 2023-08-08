@@ -10,6 +10,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"time"
 )
 
 type AuditTag struct {
@@ -23,7 +24,7 @@ func (client *AuditTag) Get(auditId string) (Audit, error) {
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/audit/$audit_id&lt;[0-9]+&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/audit/$audit_id<[0-9]+>", pathParams))
 	if err != nil {
 		return Audit{}, errors.New("could not parse url")
 	}
@@ -42,12 +43,12 @@ func (client *AuditTag) Get(auditId string) (Audit, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Audit{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Audit{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Audit
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -58,16 +59,66 @@ func (client *AuditTag) Get(auditId string) (Audit, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Audit{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Audit{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Audit{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Audit{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Audit{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Audit{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Audit{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Audit{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Audit{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetAll
-func (client *AuditTag) GetAll() (AuditCollection, error) {
+func (client *AuditTag) GetAll(startIndex int, count int, search string, from time.Time, to time.Time, appId int, userId int, event string, ip string, message string) (AuditCollection, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
+	queryParams["from"] = from
+	queryParams["to"] = to
+	queryParams["appId"] = appId
+	queryParams["userId"] = userId
+	queryParams["event"] = event
+	queryParams["ip"] = ip
+	queryParams["message"] = message
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/audit", pathParams))
 	if err != nil {
@@ -88,12 +139,12 @@ func (client *AuditTag) GetAll() (AuditCollection, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return AuditCollection{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return AuditCollection{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response AuditCollection
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -104,6 +155,26 @@ func (client *AuditTag) GetAll() (AuditCollection, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return AuditCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return AuditCollection{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return AuditCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return AuditCollection{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return AuditCollection{}, errors.New("the server returned an unknown status code")
 	}

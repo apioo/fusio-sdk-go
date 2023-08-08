@@ -52,12 +52,12 @@ func (client *TrashTag) Restore(_type string, payload TrashRestore) (Message, er
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -68,17 +68,50 @@ func (client *TrashTag) Restore(_type string, payload TrashRestore) (Message, er
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetAllByType
-func (client *TrashTag) GetAllByType(_type string) (TrashDataCollection, error) {
+func (client *TrashTag) GetAllByType(_type string, startIndex int, count int, search string) (TrashDataCollection, error) {
 	pathParams := make(map[string]interface{})
 	pathParams["type"] = _type
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/trash/:type", pathParams))
 	if err != nil {
@@ -99,12 +132,12 @@ func (client *TrashTag) GetAllByType(_type string) (TrashDataCollection, error) 
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return TrashDataCollection{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return TrashDataCollection{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response TrashDataCollection
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -115,6 +148,26 @@ func (client *TrashTag) GetAllByType(_type string) (TrashDataCollection, error) 
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return TrashDataCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return TrashDataCollection{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return TrashDataCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return TrashDataCollection{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return TrashDataCollection{}, errors.New("the server returned an unknown status code")
 	}
@@ -145,12 +198,12 @@ func (client *TrashTag) GetTypes() (TrashTypes, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return TrashTypes{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return TrashTypes{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response TrashTypes
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -161,6 +214,26 @@ func (client *TrashTag) GetTypes() (TrashTypes, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return TrashTypes{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return TrashTypes{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return TrashTypes{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return TrashTypes{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return TrashTypes{}, errors.New("the server returned an unknown status code")
 	}

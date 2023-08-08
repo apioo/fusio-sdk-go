@@ -24,7 +24,7 @@ func (client *OperationTag) Delete(operationId string) (Message, error) {
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/operation/$operation_id&lt;[0-9]+|^~&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/operation/$operation_id<[0-9]+|^~>", pathParams))
 	if err != nil {
 		return Message{}, errors.New("could not parse url")
 	}
@@ -43,12 +43,12 @@ func (client *OperationTag) Delete(operationId string) (Message, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -59,6 +59,46 @@ func (client *OperationTag) Delete(operationId string) (Message, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -71,7 +111,7 @@ func (client *OperationTag) Update(operationId string, payload OperationUpdate) 
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/operation/$operation_id&lt;[0-9]+|^~&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/operation/$operation_id<[0-9]+|^~>", pathParams))
 	if err != nil {
 		return Message{}, errors.New("could not parse url")
 	}
@@ -99,12 +139,12 @@ func (client *OperationTag) Update(operationId string, payload OperationUpdate) 
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -115,6 +155,56 @@ func (client *OperationTag) Update(operationId string, payload OperationUpdate) 
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -127,7 +217,7 @@ func (client *OperationTag) Get(operationId string) (Operation, error) {
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/operation/$operation_id&lt;[0-9]+|^~&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/operation/$operation_id<[0-9]+|^~>", pathParams))
 	if err != nil {
 		return Operation{}, errors.New("could not parse url")
 	}
@@ -146,12 +236,12 @@ func (client *OperationTag) Get(operationId string) (Operation, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Operation{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Operation{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Operation
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -162,6 +252,46 @@ func (client *OperationTag) Get(operationId string) (Operation, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Operation{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Operation{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Operation{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Operation{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Operation{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Operation{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Operation{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Operation{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Operation{}, errors.New("the server returned an unknown status code")
 	}
@@ -201,12 +331,12 @@ func (client *OperationTag) Create(payload OperationCreate) (Message, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -217,16 +347,49 @@ func (client *OperationTag) Create(payload OperationCreate) (Message, error) {
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetAll
-func (client *OperationTag) GetAll() (OperationCollection, error) {
+func (client *OperationTag) GetAll(startIndex int, count int, search string) (OperationCollection, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/operation", pathParams))
 	if err != nil {
@@ -247,12 +410,12 @@ func (client *OperationTag) GetAll() (OperationCollection, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return OperationCollection{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return OperationCollection{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response OperationCollection
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -263,6 +426,26 @@ func (client *OperationTag) GetAll() (OperationCollection, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return OperationCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return OperationCollection{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return OperationCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return OperationCollection{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return OperationCollection{}, errors.New("the server returned an unknown status code")
 	}

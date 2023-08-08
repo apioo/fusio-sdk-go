@@ -51,12 +51,12 @@ func (client *AccountTag) ExecutePasswordReset(payload UserPasswordReset) (Messa
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -67,6 +67,36 @@ func (client *AccountTag) ExecutePasswordReset(payload UserPasswordReset) (Messa
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -106,12 +136,12 @@ func (client *AccountTag) RequestPasswordReset(payload UserEmail) (Message, erro
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -122,6 +152,36 @@ func (client *AccountTag) RequestPasswordReset(payload UserEmail) (Message, erro
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -161,12 +221,12 @@ func (client *AccountTag) Register(payload UserRegister) (Message, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -177,64 +237,28 @@ func (client *AccountTag) Register(payload UserRegister) (Message, error) {
 	}
 
 	switch resp.StatusCode {
-	default:
-		return Message{}, errors.New("the server returned an unknown status code")
-	}
-}
-
-// Provider
-func (client *AccountTag) Provider(provider string, payload UserProvider) (UserJWT, error) {
-	pathParams := make(map[string]interface{})
-	pathParams["provider"] = provider
-
-	queryParams := make(map[string]interface{})
-
-	u, err := url.Parse(client.internal.Parser.Url("/consumer/provider/:provider", pathParams))
-	if err != nil {
-		return UserJWT{}, errors.New("could not parse url")
-	}
-
-	u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
-
-	raw, err := json.Marshal(payload)
-	if err != nil {
-		return UserJWT{}, errors.New("could not marshal provided JSON data")
-	}
-
-	var reqBody = bytes.NewReader(raw)
-
-	req, err := http.NewRequest("POST", u.String(), reqBody)
-	if err != nil {
-		return UserJWT{}, errors.New("could not create request")
-	}
-
-	req.Header.Set("Content-Type", "application/json")
-
-	resp, err := client.internal.HttpClient.Do(req)
-	if err != nil {
-		return UserJWT{}, errors.New("could not send request")
-	}
-
-	defer resp.Body.Close()
-
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return UserJWT{}, errors.New("could not read response body")
-		}
-
-		var response UserJWT
+	case 400:
+		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
-			return UserJWT{}, errors.New("could not unmarshal JSON response")
+			return Message{}, errors.New("could not unmarshal JSON response")
 		}
 
-		return response, nil
-	}
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
 
-	switch resp.StatusCode {
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
-		return UserJWT{}, errors.New("the server returned an unknown status code")
+		return Message{}, errors.New("the server returned an unknown status code")
 	}
 }
 
@@ -272,12 +296,12 @@ func (client *AccountTag) Refresh(payload UserRefresh) (UserJWT, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return UserJWT{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return UserJWT{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response UserJWT
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -288,6 +312,26 @@ func (client *AccountTag) Refresh(payload UserRefresh) (UserJWT, error) {
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return UserJWT{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return UserJWT{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return UserJWT{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return UserJWT{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return UserJWT{}, errors.New("the server returned an unknown status code")
 	}
@@ -327,12 +371,12 @@ func (client *AccountTag) Login(payload UserLogin) (UserJWT, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return UserJWT{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return UserJWT{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response UserJWT
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -343,6 +387,36 @@ func (client *AccountTag) Login(payload UserLogin) (UserJWT, error) {
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return UserJWT{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return UserJWT{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return UserJWT{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return UserJWT{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return UserJWT{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return UserJWT{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return UserJWT{}, errors.New("the server returned an unknown status code")
 	}
@@ -382,12 +456,12 @@ func (client *AccountTag) Authorize(payload AuthorizeRequest) (AuthorizeResponse
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return AuthorizeResponse{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return AuthorizeResponse{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response AuthorizeResponse
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -398,6 +472,36 @@ func (client *AccountTag) Authorize(payload AuthorizeRequest) (AuthorizeResponse
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return AuthorizeResponse{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return AuthorizeResponse{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return AuthorizeResponse{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return AuthorizeResponse{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return AuthorizeResponse{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return AuthorizeResponse{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return AuthorizeResponse{}, errors.New("the server returned an unknown status code")
 	}
@@ -428,12 +532,12 @@ func (client *AccountTag) GetApp() (AuthorizeMeta, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return AuthorizeMeta{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return AuthorizeMeta{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response AuthorizeMeta
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -444,6 +548,36 @@ func (client *AccountTag) GetApp() (AuthorizeMeta, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return AuthorizeMeta{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return AuthorizeMeta{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return AuthorizeMeta{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return AuthorizeMeta{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return AuthorizeMeta{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return AuthorizeMeta{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return AuthorizeMeta{}, errors.New("the server returned an unknown status code")
 	}
@@ -483,12 +617,12 @@ func (client *AccountTag) Activate(payload UserActivate) (Message, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -499,6 +633,26 @@ func (client *AccountTag) Activate(payload UserActivate) (Message, error) {
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -538,12 +692,12 @@ func (client *AccountTag) ChangePassword(payload AccountChangePassword) (Message
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -554,6 +708,36 @@ func (client *AccountTag) ChangePassword(payload AccountChangePassword) (Message
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -593,12 +777,12 @@ func (client *AccountTag) Update(payload UserAccount) (Message, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -609,6 +793,56 @@ func (client *AccountTag) Update(payload UserAccount) (Message, error) {
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -639,12 +873,12 @@ func (client *AccountTag) Get() (UserAccount, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return UserAccount{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return UserAccount{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response UserAccount
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -655,6 +889,46 @@ func (client *AccountTag) Get() (UserAccount, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return UserAccount{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return UserAccount{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return UserAccount{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return UserAccount{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return UserAccount{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return UserAccount{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return UserAccount{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return UserAccount{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return UserAccount{}, errors.New("the server returned an unknown status code")
 	}

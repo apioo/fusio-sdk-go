@@ -52,12 +52,12 @@ func (client *GeneratorTag) GetChangelog(provider string, payload GeneratorProvi
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return GeneratorProviderChangelog{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return GeneratorProviderChangelog{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response GeneratorProviderChangelog
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -68,6 +68,26 @@ func (client *GeneratorTag) GetChangelog(provider string, payload GeneratorProvi
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return GeneratorProviderChangelog{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return GeneratorProviderChangelog{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return GeneratorProviderChangelog{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return GeneratorProviderChangelog{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return GeneratorProviderChangelog{}, errors.New("the server returned an unknown status code")
 	}
@@ -108,12 +128,12 @@ func (client *GeneratorTag) ExecuteProvider(provider string, payload GeneratorPr
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -124,13 +144,33 @@ func (client *GeneratorTag) ExecuteProvider(provider string, payload GeneratorPr
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
 }
 
-// GetProviderForm
-func (client *GeneratorTag) GetProviderForm(provider string) (FormContainer, error) {
+// GetForm
+func (client *GeneratorTag) GetForm(provider string) (FormContainer, error) {
 	pathParams := make(map[string]interface{})
 	pathParams["provider"] = provider
 
@@ -155,12 +195,12 @@ func (client *GeneratorTag) GetProviderForm(provider string) (FormContainer, err
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return FormContainer{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return FormContainer{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response FormContainer
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -171,13 +211,33 @@ func (client *GeneratorTag) GetProviderForm(provider string) (FormContainer, err
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return FormContainer{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return FormContainer{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return FormContainer{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return FormContainer{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return FormContainer{}, errors.New("the server returned an unknown status code")
 	}
 }
 
-// GetProviders
-func (client *GeneratorTag) GetProviders() (GeneratorIndexProviders, error) {
+// GetClasses
+func (client *GeneratorTag) GetClasses() (GeneratorIndexProviders, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
@@ -201,12 +261,12 @@ func (client *GeneratorTag) GetProviders() (GeneratorIndexProviders, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return GeneratorIndexProviders{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return GeneratorIndexProviders{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response GeneratorIndexProviders
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -217,6 +277,26 @@ func (client *GeneratorTag) GetProviders() (GeneratorIndexProviders, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return GeneratorIndexProviders{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return GeneratorIndexProviders{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return GeneratorIndexProviders{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return GeneratorIndexProviders{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return GeneratorIndexProviders{}, errors.New("the server returned an unknown status code")
 	}

@@ -25,7 +25,7 @@ func (client *ConnectionTag) GetIntrospectionForEntity(connectionId string, enti
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id&lt;[0-9]+|^~&gt;/introspection/:entity", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id<[0-9]+|^~>/introspection/:entity", pathParams))
 	if err != nil {
 		return ConnectionIntrospectionEntity{}, errors.New("could not parse url")
 	}
@@ -44,12 +44,12 @@ func (client *ConnectionTag) GetIntrospectionForEntity(connectionId string, enti
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return ConnectionIntrospectionEntity{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return ConnectionIntrospectionEntity{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response ConnectionIntrospectionEntity
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -60,6 +60,36 @@ func (client *ConnectionTag) GetIntrospectionForEntity(connectionId string, enti
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return ConnectionIntrospectionEntity{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return ConnectionIntrospectionEntity{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return ConnectionIntrospectionEntity{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return ConnectionIntrospectionEntity{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return ConnectionIntrospectionEntity{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return ConnectionIntrospectionEntity{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return ConnectionIntrospectionEntity{}, errors.New("the server returned an unknown status code")
 	}
@@ -72,7 +102,7 @@ func (client *ConnectionTag) GetIntrospection(connectionId string) (ConnectionIn
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id&lt;[0-9]+|^~&gt;/introspection", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id<[0-9]+|^~>/introspection", pathParams))
 	if err != nil {
 		return ConnectionIntrospectionEntities{}, errors.New("could not parse url")
 	}
@@ -91,12 +121,12 @@ func (client *ConnectionTag) GetIntrospection(connectionId string) (ConnectionIn
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return ConnectionIntrospectionEntities{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return ConnectionIntrospectionEntities{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response ConnectionIntrospectionEntities
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -107,6 +137,36 @@ func (client *ConnectionTag) GetIntrospection(connectionId string) (ConnectionIn
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return ConnectionIntrospectionEntities{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return ConnectionIntrospectionEntities{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return ConnectionIntrospectionEntities{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return ConnectionIntrospectionEntities{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return ConnectionIntrospectionEntities{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return ConnectionIntrospectionEntities{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return ConnectionIntrospectionEntities{}, errors.New("the server returned an unknown status code")
 	}
@@ -119,7 +179,7 @@ func (client *ConnectionTag) GetRedirect(connectionId string) (Message, error) {
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id&lt;[0-9]+|^~&gt;/redirect", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id<[0-9]+|^~>/redirect", pathParams))
 	if err != nil {
 		return Message{}, errors.New("could not parse url")
 	}
@@ -138,12 +198,12 @@ func (client *ConnectionTag) GetRedirect(connectionId string) (Message, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -154,6 +214,26 @@ func (client *ConnectionTag) GetRedirect(connectionId string) (Message, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -166,7 +246,7 @@ func (client *ConnectionTag) Delete(connectionId string) (Message, error) {
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id&lt;[0-9]+|^~&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id<[0-9]+|^~>", pathParams))
 	if err != nil {
 		return Message{}, errors.New("could not parse url")
 	}
@@ -185,12 +265,12 @@ func (client *ConnectionTag) Delete(connectionId string) (Message, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -201,6 +281,46 @@ func (client *ConnectionTag) Delete(connectionId string) (Message, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -213,7 +333,7 @@ func (client *ConnectionTag) Update(connectionId string, payload ConnectionUpdat
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id&lt;[0-9]+|^~&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id<[0-9]+|^~>", pathParams))
 	if err != nil {
 		return Message{}, errors.New("could not parse url")
 	}
@@ -241,12 +361,12 @@ func (client *ConnectionTag) Update(connectionId string, payload ConnectionUpdat
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -257,6 +377,56 @@ func (client *ConnectionTag) Update(connectionId string, payload ConnectionUpdat
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -269,7 +439,7 @@ func (client *ConnectionTag) Get(connectionId string) (Connection, error) {
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id&lt;[0-9]+|^~&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id<[0-9]+|^~>", pathParams))
 	if err != nil {
 		return Connection{}, errors.New("could not parse url")
 	}
@@ -288,12 +458,12 @@ func (client *ConnectionTag) Get(connectionId string) (Connection, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Connection{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Connection{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Connection
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -304,16 +474,57 @@ func (client *ConnectionTag) Get(connectionId string) (Connection, error) {
 	}
 
 	switch resp.StatusCode {
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Connection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Connection{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Connection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Connection{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Connection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Connection{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Connection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Connection{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Connection{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetForm
-func (client *ConnectionTag) GetForm() (FormContainer, error) {
+func (client *ConnectionTag) GetForm(class string) (FormContainer, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["class"] = class
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/connection/form", pathParams))
 	if err != nil {
@@ -334,12 +545,12 @@ func (client *ConnectionTag) GetForm() (FormContainer, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return FormContainer{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return FormContainer{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response FormContainer
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -350,6 +561,26 @@ func (client *ConnectionTag) GetForm() (FormContainer, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return FormContainer{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return FormContainer{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return FormContainer{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return FormContainer{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return FormContainer{}, errors.New("the server returned an unknown status code")
 	}
@@ -380,12 +611,12 @@ func (client *ConnectionTag) GetClasses() (ConnectionIndex, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return ConnectionIndex{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return ConnectionIndex{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response ConnectionIndex
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -396,71 +627,124 @@ func (client *ConnectionTag) GetClasses() (ConnectionIndex, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return ConnectionIndex{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return ConnectionIndex{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return ConnectionIndex{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return ConnectionIndex{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return ConnectionIndex{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // Create
-func (client *ConnectionTag) Create(payload ConnectionCreate) (ConnectionCollection, error) {
+func (client *ConnectionTag) Create(payload ConnectionCreate) (Message, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/connection", pathParams))
 	if err != nil {
-		return ConnectionCollection{}, errors.New("could not parse url")
+		return Message{}, errors.New("could not parse url")
 	}
 
 	u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
 
 	raw, err := json.Marshal(payload)
 	if err != nil {
-		return ConnectionCollection{}, errors.New("could not marshal provided JSON data")
+		return Message{}, errors.New("could not marshal provided JSON data")
 	}
 
 	var reqBody = bytes.NewReader(raw)
 
 	req, err := http.NewRequest("POST", u.String(), reqBody)
 	if err != nil {
-		return ConnectionCollection{}, errors.New("could not create request")
+		return Message{}, errors.New("could not create request")
 	}
 
 	req.Header.Set("Content-Type", "application/json")
 
 	resp, err := client.internal.HttpClient.Do(req)
 	if err != nil {
-		return ConnectionCollection{}, errors.New("could not send request")
+		return Message{}, errors.New("could not send request")
 	}
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return ConnectionCollection{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
-		var response ConnectionCollection
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
-			return ConnectionCollection{}, errors.New("could not unmarshal JSON response")
+			return Message{}, errors.New("could not unmarshal JSON response")
 		}
 
 		return response, nil
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
-		return ConnectionCollection{}, errors.New("the server returned an unknown status code")
+		return Message{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetAll
-func (client *ConnectionTag) GetAll() (ConnectionCollection, error) {
+func (client *ConnectionTag) GetAll(startIndex int, count int, search string) (ConnectionCollection, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/connection", pathParams))
 	if err != nil {
@@ -481,12 +765,12 @@ func (client *ConnectionTag) GetAll() (ConnectionCollection, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return ConnectionCollection{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return ConnectionCollection{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response ConnectionCollection
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -497,6 +781,26 @@ func (client *ConnectionTag) GetAll() (ConnectionCollection, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return ConnectionCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return ConnectionCollection{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return ConnectionCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return ConnectionCollection{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return ConnectionCollection{}, errors.New("the server returned an unknown status code")
 	}

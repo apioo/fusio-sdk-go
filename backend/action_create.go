@@ -9,7 +9,6 @@ type ActionCreate struct {
 	Name     string       `json:"name"`
 	Class    string       `json:"class"`
 	Async    bool         `json:"async"`
-	Engine   string       `json:"engine"`
 	Config   ActionConfig `json:"config"`
 	Metadata Metadata     `json:"metadata"`
 }

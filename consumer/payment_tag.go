@@ -52,12 +52,12 @@ func (client *PaymentTag) Checkout(provider string, payload PaymentCheckoutReque
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return PaymentCheckoutResponse{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return PaymentCheckoutResponse{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response PaymentCheckoutResponse
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -68,6 +68,26 @@ func (client *PaymentTag) Checkout(provider string, payload PaymentCheckoutReque
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return PaymentCheckoutResponse{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return PaymentCheckoutResponse{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return PaymentCheckoutResponse{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return PaymentCheckoutResponse{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return PaymentCheckoutResponse{}, errors.New("the server returned an unknown status code")
 	}
@@ -108,12 +128,12 @@ func (client *PaymentTag) Portal(provider string, payload PaymentPortalRequest) 
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return PaymentPortalResponse{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return PaymentPortalResponse{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response PaymentPortalResponse
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -124,6 +144,26 @@ func (client *PaymentTag) Portal(provider string, payload PaymentPortalRequest) 
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return PaymentPortalResponse{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return PaymentPortalResponse{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return PaymentPortalResponse{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return PaymentPortalResponse{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return PaymentPortalResponse{}, errors.New("the server returned an unknown status code")
 	}

@@ -24,7 +24,7 @@ func (client *PageTag) Delete(pageId string) (Message, error) {
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/page/$page_id&lt;[0-9]+|^~&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/page/$page_id<[0-9]+|^~>", pathParams))
 	if err != nil {
 		return Message{}, errors.New("could not parse url")
 	}
@@ -43,12 +43,12 @@ func (client *PageTag) Delete(pageId string) (Message, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -59,6 +59,46 @@ func (client *PageTag) Delete(pageId string) (Message, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -71,7 +111,7 @@ func (client *PageTag) Update(pageId string, payload PageUpdate) (Message, error
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/page/$page_id&lt;[0-9]+|^~&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/page/$page_id<[0-9]+|^~>", pathParams))
 	if err != nil {
 		return Message{}, errors.New("could not parse url")
 	}
@@ -99,12 +139,12 @@ func (client *PageTag) Update(pageId string, payload PageUpdate) (Message, error
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -115,6 +155,56 @@ func (client *PageTag) Update(pageId string, payload PageUpdate) (Message, error
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -127,7 +217,7 @@ func (client *PageTag) Get(pageId string) (Page, error) {
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/page/$page_id&lt;[0-9]+|^~&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/page/$page_id<[0-9]+|^~>", pathParams))
 	if err != nil {
 		return Page{}, errors.New("could not parse url")
 	}
@@ -146,12 +236,12 @@ func (client *PageTag) Get(pageId string) (Page, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Page{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Page{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Page
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -162,6 +252,46 @@ func (client *PageTag) Get(pageId string) (Page, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Page{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Page{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Page{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Page{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Page{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Page{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Page{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Page{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Page{}, errors.New("the server returned an unknown status code")
 	}
@@ -201,12 +331,12 @@ func (client *PageTag) Create(payload PageCreate) (Message, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -217,16 +347,49 @@ func (client *PageTag) Create(payload PageCreate) (Message, error) {
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetAll
-func (client *PageTag) GetAll() (PageCollection, error) {
+func (client *PageTag) GetAll(startIndex int, count int, search string) (PageCollection, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/page", pathParams))
 	if err != nil {
@@ -247,12 +410,12 @@ func (client *PageTag) GetAll() (PageCollection, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return PageCollection{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return PageCollection{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response PageCollection
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -263,6 +426,26 @@ func (client *PageTag) GetAll() (PageCollection, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return PageCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return PageCollection{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return PageCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return PageCollection{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return PageCollection{}, errors.New("the server returned an unknown status code")
 	}

@@ -11,6 +11,10 @@ type Client struct {
 	internal *sdkgen.ClientAbstract
 }
 
+func (client *Client) Identity() *IdentityTag {
+	return NewIdentityTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *Client) Account() *AccountTag {
 	return NewAccountTag(client.internal.HttpClient, client.internal.Parser)
 }

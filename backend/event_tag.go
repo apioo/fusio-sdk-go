@@ -24,7 +24,7 @@ func (client *EventTag) Delete(eventId string) (Message, error) {
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/event/$event_id&lt;[0-9]+|^~&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/event/$event_id<[0-9]+|^~>", pathParams))
 	if err != nil {
 		return Message{}, errors.New("could not parse url")
 	}
@@ -43,12 +43,12 @@ func (client *EventTag) Delete(eventId string) (Message, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -59,6 +59,46 @@ func (client *EventTag) Delete(eventId string) (Message, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -71,7 +111,7 @@ func (client *EventTag) Update(eventId string, payload EventUpdate) (Message, er
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/event/$event_id&lt;[0-9]+|^~&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/event/$event_id<[0-9]+|^~>", pathParams))
 	if err != nil {
 		return Message{}, errors.New("could not parse url")
 	}
@@ -99,12 +139,12 @@ func (client *EventTag) Update(eventId string, payload EventUpdate) (Message, er
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -115,6 +155,56 @@ func (client *EventTag) Update(eventId string, payload EventUpdate) (Message, er
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -127,7 +217,7 @@ func (client *EventTag) Get(eventId string) (Event, error) {
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/event/$event_id&lt;[0-9]+|^~&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/event/$event_id<[0-9]+|^~>", pathParams))
 	if err != nil {
 		return Event{}, errors.New("could not parse url")
 	}
@@ -146,12 +236,12 @@ func (client *EventTag) Get(eventId string) (Event, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Event{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Event{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Event
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -162,6 +252,46 @@ func (client *EventTag) Get(eventId string) (Event, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Event{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Event{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Event{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Event{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Event{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Event{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Event{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Event{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Event{}, errors.New("the server returned an unknown status code")
 	}
@@ -201,12 +331,12 @@ func (client *EventTag) Create(payload EventCreate) (Message, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -217,16 +347,49 @@ func (client *EventTag) Create(payload EventCreate) (Message, error) {
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetAll
-func (client *EventTag) GetAll() (EventCollection, error) {
+func (client *EventTag) GetAll(startIndex int, count int, search string) (EventCollection, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/event", pathParams))
 	if err != nil {
@@ -247,12 +410,12 @@ func (client *EventTag) GetAll() (EventCollection, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return EventCollection{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return EventCollection{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response EventCollection
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -263,6 +426,26 @@ func (client *EventTag) GetAll() (EventCollection, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return EventCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return EventCollection{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return EventCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return EventCollection{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return EventCollection{}, errors.New("the server returned an unknown status code")
 	}
@@ -275,7 +458,7 @@ func (client *EventTag) DeleteSubscription(subscriptionId string) (Message, erro
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/event/subscription/$subscription_id&lt;[0-9]+&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/event/subscription/$subscription_id<[0-9]+>", pathParams))
 	if err != nil {
 		return Message{}, errors.New("could not parse url")
 	}
@@ -294,12 +477,12 @@ func (client *EventTag) DeleteSubscription(subscriptionId string) (Message, erro
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -310,6 +493,46 @@ func (client *EventTag) DeleteSubscription(subscriptionId string) (Message, erro
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -322,7 +545,7 @@ func (client *EventTag) UpdateSubscription(subscriptionId string, payload EventS
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/event/subscription/$subscription_id&lt;[0-9]+&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/event/subscription/$subscription_id<[0-9]+>", pathParams))
 	if err != nil {
 		return Message{}, errors.New("could not parse url")
 	}
@@ -350,12 +573,12 @@ func (client *EventTag) UpdateSubscription(subscriptionId string, payload EventS
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -366,6 +589,56 @@ func (client *EventTag) UpdateSubscription(subscriptionId string, payload EventS
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -378,7 +651,7 @@ func (client *EventTag) GetSubscription(subscriptionId string) (EventSubscriptio
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/event/subscription/$subscription_id&lt;[0-9]+&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/event/subscription/$subscription_id<[0-9]+>", pathParams))
 	if err != nil {
 		return EventSubscription{}, errors.New("could not parse url")
 	}
@@ -397,12 +670,12 @@ func (client *EventTag) GetSubscription(subscriptionId string) (EventSubscriptio
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return EventSubscription{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return EventSubscription{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response EventSubscription
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -413,6 +686,36 @@ func (client *EventTag) GetSubscription(subscriptionId string) (EventSubscriptio
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return EventSubscription{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return EventSubscription{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return EventSubscription{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return EventSubscription{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return EventSubscription{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return EventSubscription{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return EventSubscription{}, errors.New("the server returned an unknown status code")
 	}
@@ -452,12 +755,12 @@ func (client *EventTag) CreateSubscription(payload EventSubscriptionCreate) (Mes
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -468,16 +771,49 @@ func (client *EventTag) CreateSubscription(payload EventSubscriptionCreate) (Mes
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetAllSubscriptions
-func (client *EventTag) GetAllSubscriptions() (EventSubscriptionCollection, error) {
+func (client *EventTag) GetAllSubscriptions(startIndex int, count int, search string) (EventSubscriptionCollection, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/event/subscription", pathParams))
 	if err != nil {
@@ -498,12 +834,12 @@ func (client *EventTag) GetAllSubscriptions() (EventSubscriptionCollection, erro
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return EventSubscriptionCollection{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return EventSubscriptionCollection{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response EventSubscriptionCollection
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -514,6 +850,26 @@ func (client *EventTag) GetAllSubscriptions() (EventSubscriptionCollection, erro
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return EventSubscriptionCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return EventSubscriptionCollection{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return EventSubscriptionCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return EventSubscriptionCollection{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return EventSubscriptionCollection{}, errors.New("the server returned an unknown status code")
 	}

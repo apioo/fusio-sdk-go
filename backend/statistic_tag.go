@@ -10,6 +10,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"time"
 )
 
 type StatisticTag struct {
@@ -17,10 +18,24 @@ type StatisticTag struct {
 }
 
 // GetUsedPoints
-func (client *StatisticTag) GetUsedPoints() (StatisticChart, error) {
+func (client *StatisticTag) GetUsedPoints(startIndex int, count int, search string, from time.Time, to time.Time, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (StatisticChart, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
+	queryParams["from"] = from
+	queryParams["to"] = to
+	queryParams["operationId"] = operationId
+	queryParams["appId"] = appId
+	queryParams["userId"] = userId
+	queryParams["ip"] = ip
+	queryParams["userAgent"] = userAgent
+	queryParams["method"] = method
+	queryParams["path"] = path
+	queryParams["header"] = header
+	queryParams["body"] = body
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/used_points", pathParams))
 	if err != nil {
@@ -41,12 +56,12 @@ func (client *StatisticTag) GetUsedPoints() (StatisticChart, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return StatisticChart{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return StatisticChart{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response StatisticChart
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -57,18 +72,52 @@ func (client *StatisticTag) GetUsedPoints() (StatisticChart, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return StatisticChart{}, errors.New("the server returned an unknown status code")
 	}
 }
 
-// GetTimePerRoute
-func (client *StatisticTag) GetTimePerRoute() (StatisticChart, error) {
+// GetTimePerOperation
+func (client *StatisticTag) GetTimePerOperation(startIndex int, count int, search string, from time.Time, to time.Time, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (StatisticChart, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
+	queryParams["from"] = from
+	queryParams["to"] = to
+	queryParams["operationId"] = operationId
+	queryParams["appId"] = appId
+	queryParams["userId"] = userId
+	queryParams["ip"] = ip
+	queryParams["userAgent"] = userAgent
+	queryParams["method"] = method
+	queryParams["path"] = path
+	queryParams["header"] = header
+	queryParams["body"] = body
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/time_per_route", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/time_per_operation", pathParams))
 	if err != nil {
 		return StatisticChart{}, errors.New("could not parse url")
 	}
@@ -87,12 +136,12 @@ func (client *StatisticTag) GetTimePerRoute() (StatisticChart, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return StatisticChart{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return StatisticChart{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response StatisticChart
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -103,16 +152,50 @@ func (client *StatisticTag) GetTimePerRoute() (StatisticChart, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return StatisticChart{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetTimeAverage
-func (client *StatisticTag) GetTimeAverage() (StatisticChart, error) {
+func (client *StatisticTag) GetTimeAverage(startIndex int, count int, search string, from time.Time, to time.Time, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (StatisticChart, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
+	queryParams["from"] = from
+	queryParams["to"] = to
+	queryParams["operationId"] = operationId
+	queryParams["appId"] = appId
+	queryParams["userId"] = userId
+	queryParams["ip"] = ip
+	queryParams["userAgent"] = userAgent
+	queryParams["method"] = method
+	queryParams["path"] = path
+	queryParams["header"] = header
+	queryParams["body"] = body
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/time_average", pathParams))
 	if err != nil {
@@ -133,12 +216,12 @@ func (client *StatisticTag) GetTimeAverage() (StatisticChart, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return StatisticChart{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return StatisticChart{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response StatisticChart
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -149,18 +232,52 @@ func (client *StatisticTag) GetTimeAverage() (StatisticChart, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return StatisticChart{}, errors.New("the server returned an unknown status code")
 	}
 }
 
-// GetMostUsedRoutes
-func (client *StatisticTag) GetMostUsedRoutes() (StatisticChart, error) {
+// GetMostUsedOperations
+func (client *StatisticTag) GetMostUsedOperations(startIndex int, count int, search string, from time.Time, to time.Time, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (StatisticChart, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
+	queryParams["from"] = from
+	queryParams["to"] = to
+	queryParams["operationId"] = operationId
+	queryParams["appId"] = appId
+	queryParams["userId"] = userId
+	queryParams["ip"] = ip
+	queryParams["userAgent"] = userAgent
+	queryParams["method"] = method
+	queryParams["path"] = path
+	queryParams["header"] = header
+	queryParams["body"] = body
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/most_used_routes", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/most_used_operations", pathParams))
 	if err != nil {
 		return StatisticChart{}, errors.New("could not parse url")
 	}
@@ -179,12 +296,12 @@ func (client *StatisticTag) GetMostUsedRoutes() (StatisticChart, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return StatisticChart{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return StatisticChart{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response StatisticChart
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -195,16 +312,50 @@ func (client *StatisticTag) GetMostUsedRoutes() (StatisticChart, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return StatisticChart{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetMostUsedApps
-func (client *StatisticTag) GetMostUsedApps() (StatisticChart, error) {
+func (client *StatisticTag) GetMostUsedApps(startIndex int, count int, search string, from time.Time, to time.Time, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (StatisticChart, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
+	queryParams["from"] = from
+	queryParams["to"] = to
+	queryParams["operationId"] = operationId
+	queryParams["appId"] = appId
+	queryParams["userId"] = userId
+	queryParams["ip"] = ip
+	queryParams["userAgent"] = userAgent
+	queryParams["method"] = method
+	queryParams["path"] = path
+	queryParams["header"] = header
+	queryParams["body"] = body
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/most_used_apps", pathParams))
 	if err != nil {
@@ -225,12 +376,12 @@ func (client *StatisticTag) GetMostUsedApps() (StatisticChart, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return StatisticChart{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return StatisticChart{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response StatisticChart
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -241,16 +392,50 @@ func (client *StatisticTag) GetMostUsedApps() (StatisticChart, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return StatisticChart{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetIssuedTokens
-func (client *StatisticTag) GetIssuedTokens() (StatisticChart, error) {
+func (client *StatisticTag) GetIssuedTokens(startIndex int, count int, search string, from time.Time, to time.Time, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (StatisticChart, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
+	queryParams["from"] = from
+	queryParams["to"] = to
+	queryParams["operationId"] = operationId
+	queryParams["appId"] = appId
+	queryParams["userId"] = userId
+	queryParams["ip"] = ip
+	queryParams["userAgent"] = userAgent
+	queryParams["method"] = method
+	queryParams["path"] = path
+	queryParams["header"] = header
+	queryParams["body"] = body
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/issued_tokens", pathParams))
 	if err != nil {
@@ -271,12 +456,12 @@ func (client *StatisticTag) GetIssuedTokens() (StatisticChart, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return StatisticChart{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return StatisticChart{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response StatisticChart
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -287,16 +472,50 @@ func (client *StatisticTag) GetIssuedTokens() (StatisticChart, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return StatisticChart{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetIncomingTransactions
-func (client *StatisticTag) GetIncomingTransactions() (StatisticChart, error) {
+func (client *StatisticTag) GetIncomingTransactions(startIndex int, count int, search string, from time.Time, to time.Time, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (StatisticChart, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
+	queryParams["from"] = from
+	queryParams["to"] = to
+	queryParams["operationId"] = operationId
+	queryParams["appId"] = appId
+	queryParams["userId"] = userId
+	queryParams["ip"] = ip
+	queryParams["userAgent"] = userAgent
+	queryParams["method"] = method
+	queryParams["path"] = path
+	queryParams["header"] = header
+	queryParams["body"] = body
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/incoming_transactions", pathParams))
 	if err != nil {
@@ -317,12 +536,12 @@ func (client *StatisticTag) GetIncomingTransactions() (StatisticChart, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return StatisticChart{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return StatisticChart{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response StatisticChart
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -333,16 +552,50 @@ func (client *StatisticTag) GetIncomingTransactions() (StatisticChart, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return StatisticChart{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetIncomingRequests
-func (client *StatisticTag) GetIncomingRequests() (StatisticChart, error) {
+func (client *StatisticTag) GetIncomingRequests(startIndex int, count int, search string, from time.Time, to time.Time, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (StatisticChart, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
+	queryParams["from"] = from
+	queryParams["to"] = to
+	queryParams["operationId"] = operationId
+	queryParams["appId"] = appId
+	queryParams["userId"] = userId
+	queryParams["ip"] = ip
+	queryParams["userAgent"] = userAgent
+	queryParams["method"] = method
+	queryParams["path"] = path
+	queryParams["header"] = header
+	queryParams["body"] = body
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/incoming_requests", pathParams))
 	if err != nil {
@@ -363,12 +616,12 @@ func (client *StatisticTag) GetIncomingRequests() (StatisticChart, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return StatisticChart{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return StatisticChart{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response StatisticChart
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -379,18 +632,52 @@ func (client *StatisticTag) GetIncomingRequests() (StatisticChart, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return StatisticChart{}, errors.New("the server returned an unknown status code")
 	}
 }
 
-// GetErrorsPerRoute
-func (client *StatisticTag) GetErrorsPerRoute() (StatisticChart, error) {
+// GetErrorsPerOperation
+func (client *StatisticTag) GetErrorsPerOperation(startIndex int, count int, search string, from time.Time, to time.Time, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (StatisticChart, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
+	queryParams["from"] = from
+	queryParams["to"] = to
+	queryParams["operationId"] = operationId
+	queryParams["appId"] = appId
+	queryParams["userId"] = userId
+	queryParams["ip"] = ip
+	queryParams["userAgent"] = userAgent
+	queryParams["method"] = method
+	queryParams["path"] = path
+	queryParams["header"] = header
+	queryParams["body"] = body
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/errors_per_route", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/errors_per_operation", pathParams))
 	if err != nil {
 		return StatisticChart{}, errors.New("could not parse url")
 	}
@@ -409,12 +696,12 @@ func (client *StatisticTag) GetErrorsPerRoute() (StatisticChart, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return StatisticChart{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return StatisticChart{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response StatisticChart
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -425,16 +712,50 @@ func (client *StatisticTag) GetErrorsPerRoute() (StatisticChart, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticChart{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticChart{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return StatisticChart{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetCountRequests
-func (client *StatisticTag) GetCountRequests() (StatisticCount, error) {
+func (client *StatisticTag) GetCountRequests(startIndex int, count int, search string, from time.Time, to time.Time, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (StatisticCount, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
+	queryParams["from"] = from
+	queryParams["to"] = to
+	queryParams["operationId"] = operationId
+	queryParams["appId"] = appId
+	queryParams["userId"] = userId
+	queryParams["ip"] = ip
+	queryParams["userAgent"] = userAgent
+	queryParams["method"] = method
+	queryParams["path"] = path
+	queryParams["header"] = header
+	queryParams["body"] = body
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/count_requests", pathParams))
 	if err != nil {
@@ -455,12 +776,12 @@ func (client *StatisticTag) GetCountRequests() (StatisticCount, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return StatisticCount{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return StatisticCount{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response StatisticCount
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -471,6 +792,26 @@ func (client *StatisticTag) GetCountRequests() (StatisticCount, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticCount{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticCount{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return StatisticCount{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return StatisticCount{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return StatisticCount{}, errors.New("the server returned an unknown status code")
 	}

@@ -10,6 +10,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"time"
 )
 
 type LogTag struct {
@@ -23,7 +24,7 @@ func (client *LogTag) Get(logId string) (Log, error) {
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/log/$log_id&lt;[0-9]+&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/log/$log_id<[0-9]+>", pathParams))
 	if err != nil {
 		return Log{}, errors.New("could not parse url")
 	}
@@ -42,12 +43,12 @@ func (client *LogTag) Get(logId string) (Log, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Log{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Log{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Log
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -58,16 +59,70 @@ func (client *LogTag) Get(logId string) (Log, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Log{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Log{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Log{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Log{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Log{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Log{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Log{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Log{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Log{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetAll
-func (client *LogTag) GetAll() (LogCollection, error) {
+func (client *LogTag) GetAll(startIndex int, count int, search string, from time.Time, to time.Time, routeId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (LogCollection, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
+	queryParams["from"] = from
+	queryParams["to"] = to
+	queryParams["routeId"] = routeId
+	queryParams["appId"] = appId
+	queryParams["userId"] = userId
+	queryParams["ip"] = ip
+	queryParams["userAgent"] = userAgent
+	queryParams["method"] = method
+	queryParams["path"] = path
+	queryParams["header"] = header
+	queryParams["body"] = body
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/log", pathParams))
 	if err != nil {
@@ -88,12 +143,12 @@ func (client *LogTag) GetAll() (LogCollection, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return LogCollection{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return LogCollection{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response LogCollection
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -104,6 +159,26 @@ func (client *LogTag) GetAll() (LogCollection, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return LogCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return LogCollection{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return LogCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return LogCollection{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return LogCollection{}, errors.New("the server returned an unknown status code")
 	}
@@ -116,7 +191,7 @@ func (client *LogTag) GetError(errorId string) (LogError, error) {
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/log/error/$error_id&lt;[0-9]+&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/log/error/$error_id<[0-9]+>", pathParams))
 	if err != nil {
 		return LogError{}, errors.New("could not parse url")
 	}
@@ -135,12 +210,12 @@ func (client *LogTag) GetError(errorId string) (LogError, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return LogError{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return LogError{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response LogError
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -151,16 +226,39 @@ func (client *LogTag) GetError(errorId string) (LogError, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return LogError{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return LogError{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return LogError{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return LogError{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return LogError{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetAllErrors
-func (client *LogTag) GetAllErrors() (LogErrorCollection, error) {
+func (client *LogTag) GetAllErrors(startIndex int, count int, search string) (LogErrorCollection, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/log/error", pathParams))
 	if err != nil {
@@ -181,12 +279,12 @@ func (client *LogTag) GetAllErrors() (LogErrorCollection, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return LogErrorCollection{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return LogErrorCollection{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response LogErrorCollection
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -197,6 +295,26 @@ func (client *LogTag) GetAllErrors() (LogErrorCollection, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return LogErrorCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return LogErrorCollection{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return LogErrorCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return LogErrorCollection{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return LogErrorCollection{}, errors.New("the server returned an unknown status code")
 	}

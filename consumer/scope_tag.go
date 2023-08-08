@@ -17,10 +17,13 @@ type ScopeTag struct {
 }
 
 // GetAll
-func (client *ScopeTag) GetAll() (ScopeCollection, error) {
+func (client *ScopeTag) GetAll(startIndex int, count int, search string) (ScopeCollection, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
 
 	u, err := url.Parse(client.internal.Parser.Url("/consumer/scope", pathParams))
 	if err != nil {
@@ -41,12 +44,12 @@ func (client *ScopeTag) GetAll() (ScopeCollection, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return ScopeCollection{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return ScopeCollection{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response ScopeCollection
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -57,6 +60,26 @@ func (client *ScopeTag) GetAll() (ScopeCollection, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return ScopeCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return ScopeCollection{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return ScopeCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return ScopeCollection{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return ScopeCollection{}, errors.New("the server returned an unknown status code")
 	}

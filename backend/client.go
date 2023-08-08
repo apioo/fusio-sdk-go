@@ -67,6 +67,10 @@ func (client *Client) Log() *LogTag {
 	return NewLogTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *Client) Identity() *IdentityTag {
+	return NewIdentityTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *Client) Generator() *GeneratorTag {
 	return NewGeneratorTag(client.internal.HttpClient, client.internal.Parser)
 }

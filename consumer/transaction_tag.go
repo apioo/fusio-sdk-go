@@ -23,7 +23,7 @@ func (client *TransactionTag) Get(transactionId string) (Transaction, error) {
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/consumer/transaction/$transaction_id&lt;[0-9]+&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/consumer/transaction/$transaction_id<[0-9]+>", pathParams))
 	if err != nil {
 		return Transaction{}, errors.New("could not parse url")
 	}
@@ -42,12 +42,12 @@ func (client *TransactionTag) Get(transactionId string) (Transaction, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Transaction{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Transaction{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Transaction
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -58,16 +58,59 @@ func (client *TransactionTag) Get(transactionId string) (Transaction, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Transaction{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Transaction{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Transaction{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Transaction{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Transaction{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Transaction{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Transaction{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Transaction{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Transaction{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetAll
-func (client *TransactionTag) GetAll() (TransactionCollection, error) {
+func (client *TransactionTag) GetAll(startIndex int, count int, search string) (TransactionCollection, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
 
 	u, err := url.Parse(client.internal.Parser.Url("/consumer/transaction", pathParams))
 	if err != nil {
@@ -88,12 +131,12 @@ func (client *TransactionTag) GetAll() (TransactionCollection, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return TransactionCollection{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return TransactionCollection{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response TransactionCollection
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -104,6 +147,26 @@ func (client *TransactionTag) GetAll() (TransactionCollection, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return TransactionCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return TransactionCollection{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return TransactionCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return TransactionCollection{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return TransactionCollection{}, errors.New("the server returned an unknown status code")
 	}

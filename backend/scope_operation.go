@@ -4,7 +4,6 @@
 package backend
 
 type ScopeOperation struct {
-	OperationId int    `json:"operationId"`
-	Allow       bool   `json:"allow"`
-	Methods     string `json:"methods"`
+	OperationId int  `json:"operationId"`
+	Allow       bool `json:"allow"`
 }

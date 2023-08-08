@@ -41,12 +41,12 @@ func (client *DashboardTag) GetAll() (Dashboard, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Dashboard{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Dashboard{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Dashboard
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -57,6 +57,26 @@ func (client *DashboardTag) GetAll() (Dashboard, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Dashboard{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Dashboard{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Dashboard{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Dashboard{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Dashboard{}, errors.New("the server returned an unknown status code")
 	}

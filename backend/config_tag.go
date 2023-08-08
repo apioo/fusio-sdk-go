@@ -24,7 +24,7 @@ func (client *ConfigTag) Update(configId string, payload ConfigUpdate) (Message,
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/config/$config_id&lt;[0-9]+|^~&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/config/$config_id<[0-9]+|^~>", pathParams))
 	if err != nil {
 		return Message{}, errors.New("could not parse url")
 	}
@@ -52,12 +52,12 @@ func (client *ConfigTag) Update(configId string, payload ConfigUpdate) (Message,
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Message{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Message{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Message
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -68,6 +68,56 @@ func (client *ConfigTag) Update(configId string, payload ConfigUpdate) (Message,
 	}
 
 	switch resp.StatusCode {
+	case 400:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Message{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Message{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Message{}, errors.New("the server returned an unknown status code")
 	}
@@ -80,7 +130,7 @@ func (client *ConfigTag) Get(configId string) (Config, error) {
 
 	queryParams := make(map[string]interface{})
 
-	u, err := url.Parse(client.internal.Parser.Url("/backend/config/$config_id&lt;[0-9]+|^~&gt;", pathParams))
+	u, err := url.Parse(client.internal.Parser.Url("/backend/config/$config_id<[0-9]+|^~>", pathParams))
 	if err != nil {
 		return Config{}, errors.New("could not parse url")
 	}
@@ -99,12 +149,12 @@ func (client *ConfigTag) Get(configId string) (Config, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return Config{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return Config{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response Config
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -115,16 +165,59 @@ func (client *ConfigTag) Get(configId string) (Config, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Config{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Config{}, &MessageException{
+			Payload: response,
+		}
+	case 404:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Config{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Config{}, &MessageException{
+			Payload: response,
+		}
+	case 410:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Config{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Config{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return Config{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return Config{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return Config{}, errors.New("the server returned an unknown status code")
 	}
 }
 
 // GetAll
-func (client *ConfigTag) GetAll() (ConfigCollection, error) {
+func (client *ConfigTag) GetAll(startIndex int, count int, search string) (ConfigCollection, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
 
 	u, err := url.Parse(client.internal.Parser.Url("/backend/config", pathParams))
 	if err != nil {
@@ -145,12 +238,12 @@ func (client *ConfigTag) GetAll() (ConfigCollection, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return ConfigCollection{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return ConfigCollection{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response ConfigCollection
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -161,6 +254,26 @@ func (client *ConfigTag) GetAll() (ConfigCollection, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return ConfigCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return ConfigCollection{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return ConfigCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return ConfigCollection{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return ConfigCollection{}, errors.New("the server returned an unknown status code")
 	}

@@ -17,10 +17,13 @@ type EventTag struct {
 }
 
 // GetAll
-func (client *EventTag) GetAll() (EventCollection, error) {
+func (client *EventTag) GetAll(startIndex int, count int, search string) (EventCollection, error) {
 	pathParams := make(map[string]interface{})
 
 	queryParams := make(map[string]interface{})
+	queryParams["startIndex"] = startIndex
+	queryParams["count"] = count
+	queryParams["search"] = search
 
 	u, err := url.Parse(client.internal.Parser.Url("/consumer/event", pathParams))
 	if err != nil {
@@ -41,12 +44,12 @@ func (client *EventTag) GetAll() (EventCollection, error) {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		respBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return EventCollection{}, errors.New("could not read response body")
-		}
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return EventCollection{}, errors.New("could not read response body")
+	}
 
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var response EventCollection
 		err = json.Unmarshal(respBody, &response)
 		if err != nil {
@@ -57,6 +60,26 @@ func (client *EventTag) GetAll() (EventCollection, error) {
 	}
 
 	switch resp.StatusCode {
+	case 401:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return EventCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return EventCollection{}, &MessageException{
+			Payload: response,
+		}
+	case 500:
+		var response Message
+		err = json.Unmarshal(respBody, &response)
+		if err != nil {
+			return EventCollection{}, errors.New("could not unmarshal JSON response")
+		}
+
+		return EventCollection{}, &MessageException{
+			Payload: response,
+		}
 	default:
 		return EventCollection{}, errors.New("the server returned an unknown status code")
 	}
