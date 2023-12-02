@@ -1,0 +1,9 @@
+{
+  "type": "client-go",
+  "require": {
+    "fusio/sdk": {
+      "target": "./sdk",
+      "namespace": "sdk"
+    }
+  }
+}
