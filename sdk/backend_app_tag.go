@@ -30,12 +30,14 @@ func (client *BackendAppTag) DeleteToken(appId string, tokenId string) (CommonMe
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+>/token/:token_id", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("DELETE", u.String(), nil)
@@ -119,12 +121,14 @@ func (client *BackendAppTag) Delete(appId string) (CommonMessage, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+>", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("DELETE", u.String(), nil)
@@ -208,12 +212,14 @@ func (client *BackendAppTag) Update(appId string, payload BackendAppUpdate) (Com
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+>", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -314,12 +320,14 @@ func (client *BackendAppTag) Get(appId string) (BackendApp, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+>", pathParams))
     if err != nil {
         return BackendApp{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -402,12 +410,14 @@ func (client *BackendAppTag) Create(payload BackendAppCreate) (CommonMessage, er
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/app", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -490,12 +500,14 @@ func (client *BackendAppTag) GetAll(startIndex int, count int, search string) (B
     queryParams["count"] = count
     queryParams["search"] = search
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/app", pathParams))
     if err != nil {
         return BackendAppCollection{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -559,12 +571,14 @@ func (client *BackendAppTag) GetToken(tokenId string) (BackendAppToken, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/app/token/$token_id<[0-9]+>", pathParams))
     if err != nil {
         return BackendAppToken{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -647,12 +661,14 @@ func (client *BackendAppTag) GetAllTokens(startIndex int, count int, search stri
     queryParams["scope"] = scope
     queryParams["ip"] = ip
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/app/token", pathParams))
     if err != nil {
         return BackendAppTokenCollection{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)

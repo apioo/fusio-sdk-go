@@ -29,12 +29,14 @@ func (client *BackendTrashTag) Restore(_type string, payload BackendTrashRestore
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/trash/:type", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -118,12 +120,14 @@ func (client *BackendTrashTag) GetAllByType(_type string, startIndex int, count 
     queryParams["count"] = count
     queryParams["search"] = search
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/trash/:type", pathParams))
     if err != nil {
         return BackendTrashDataCollection{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -186,12 +190,14 @@ func (client *BackendTrashTag) GetTypes() (BackendTrashTypes, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/trash", pathParams))
     if err != nil {
         return BackendTrashTypes{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)

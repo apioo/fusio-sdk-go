@@ -29,12 +29,14 @@ func (client *BackendRoleTag) Delete(roleId string) (CommonMessage, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/role/$role_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("DELETE", u.String(), nil)
@@ -118,12 +120,14 @@ func (client *BackendRoleTag) Update(roleId string, payload BackendRoleUpdate) (
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/role/$role_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -224,12 +228,14 @@ func (client *BackendRoleTag) Get(roleId string) (BackendRole, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/role/$role_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return BackendRole{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -312,12 +318,14 @@ func (client *BackendRoleTag) Create(payload BackendRoleCreate) (CommonMessage, 
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/role", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -400,12 +408,14 @@ func (client *BackendRoleTag) GetAll(startIndex int, count int, search string) (
     queryParams["count"] = count
     queryParams["search"] = search
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/role", pathParams))
     if err != nil {
         return BackendRoleCollection{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)

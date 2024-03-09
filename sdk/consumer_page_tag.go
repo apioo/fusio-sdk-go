@@ -29,12 +29,14 @@ func (client *ConsumerPageTag) Get(pageId string) (ConsumerPage, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/page/:page_id", pathParams))
     if err != nil {
         return ConsumerPage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -120,12 +122,14 @@ func (client *ConsumerPageTag) GetAll(startIndex int, count int, search string) 
     queryParams["count"] = count
     queryParams["search"] = search
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/page", pathParams))
     if err != nil {
         return ConsumerPageCollection{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)

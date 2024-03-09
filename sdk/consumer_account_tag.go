@@ -28,12 +28,14 @@ func (client *ConsumerAccountTag) ExecutePasswordReset(payload ConsumerUserPassw
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/password_reset", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -113,12 +115,14 @@ func (client *ConsumerAccountTag) RequestPasswordReset(payload ConsumerUserEmail
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/password_reset", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -198,12 +202,14 @@ func (client *ConsumerAccountTag) Register(payload ConsumerUserRegister) (Common
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/register", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -273,12 +279,14 @@ func (client *ConsumerAccountTag) Refresh(payload ConsumerUserRefresh) (Consumer
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/login", pathParams))
     if err != nil {
         return ConsumerUserJWT{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -348,12 +356,14 @@ func (client *ConsumerAccountTag) Login(payload ConsumerUserLogin) (ConsumerUser
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/login", pathParams))
     if err != nil {
         return ConsumerUserJWT{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -433,12 +443,14 @@ func (client *ConsumerAccountTag) Authorize(payload ConsumerAuthorizeRequest) (C
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/authorize", pathParams))
     if err != nil {
         return ConsumerAuthorizeResponse{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -518,12 +530,14 @@ func (client *ConsumerAccountTag) GetApp() (ConsumerAuthorizeMeta, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/authorize", pathParams))
     if err != nil {
         return ConsumerAuthorizeMeta{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -596,12 +610,14 @@ func (client *ConsumerAccountTag) Activate(payload ConsumerUserActivate) (Common
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/activate", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -671,12 +687,14 @@ func (client *ConsumerAccountTag) ChangePassword(payload BackendAccountChangePas
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/account/change_password", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -756,12 +774,14 @@ func (client *ConsumerAccountTag) Update(payload ConsumerUserAccount) (CommonMes
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/account", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -861,12 +881,14 @@ func (client *ConsumerAccountTag) Get() (ConsumerUserAccount, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/account", pathParams))
     if err != nil {
         return ConsumerUserAccount{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)

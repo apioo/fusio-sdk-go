@@ -29,12 +29,14 @@ func (client *BackendSchemaTag) Delete(schemaId string) (CommonMessage, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/schema/$schema_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("DELETE", u.String(), nil)
@@ -118,12 +120,14 @@ func (client *BackendSchemaTag) Update(schemaId string, payload BackendSchemaUpd
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/schema/$schema_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -224,12 +228,14 @@ func (client *BackendSchemaTag) Get(schemaId string) (BackendSchema, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/schema/$schema_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return BackendSchema{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -313,12 +319,14 @@ func (client *BackendSchemaTag) UpdateForm(schemaId string, payload BackendSchem
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/schema/form/$schema_id<[0-9]+>", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -419,12 +427,14 @@ func (client *BackendSchemaTag) GetPreview(schemaId string) (BackendSchemaPrevie
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/schema/preview/:schema_id", pathParams))
     if err != nil {
         return BackendSchemaPreviewResponse{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("POST", u.String(), nil)
@@ -487,12 +497,14 @@ func (client *BackendSchemaTag) Create(payload BackendSchemaCreate) (CommonMessa
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/schema", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -575,12 +587,14 @@ func (client *BackendSchemaTag) GetAll(startIndex int, count int, search string)
     queryParams["count"] = count
     queryParams["search"] = search
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/schema", pathParams))
     if err != nil {
         return BackendSchemaCollection{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)

@@ -29,12 +29,14 @@ func (client *BackendAuditTag) Get(auditId string) (BackendAudit, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/audit/$audit_id<[0-9]+>", pathParams))
     if err != nil {
         return BackendAudit{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -127,12 +129,14 @@ func (client *BackendAuditTag) GetAll(startIndex int, count int, search string, 
     queryParams["ip"] = ip
     queryParams["message"] = message
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/audit", pathParams))
     if err != nil {
         return BackendAuditCollection{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)

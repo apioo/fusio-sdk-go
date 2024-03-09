@@ -29,12 +29,14 @@ func (client *ConsumerIdentityTag) Redirect(identity string) (Passthru, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/identity/:identity/redirect", pathParams))
     if err != nil {
         return Passthru{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -98,12 +100,14 @@ func (client *ConsumerIdentityTag) Exchange(identity string) (Passthru, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/identity/:identity/exchange", pathParams))
     if err != nil {
         return Passthru{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -167,12 +171,14 @@ func (client *ConsumerIdentityTag) GetAll(appId int) (ConsumerIdentityCollection
     queryParams := make(map[string]interface{})
     queryParams["appId"] = appId
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/identity", pathParams))
     if err != nil {
         return ConsumerIdentityCollection{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)

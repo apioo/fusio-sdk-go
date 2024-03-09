@@ -29,12 +29,14 @@ func (client *ConsumerTransactionTag) Get(transactionId string) (ConsumerTransac
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/transaction/$transaction_id<[0-9]+>", pathParams))
     if err != nil {
         return ConsumerTransaction{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -120,12 +122,14 @@ func (client *ConsumerTransactionTag) GetAll(startIndex int, count int, search s
     queryParams["count"] = count
     queryParams["search"] = search
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/transaction", pathParams))
     if err != nil {
         return ConsumerTransactionCollection{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)

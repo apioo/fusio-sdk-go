@@ -29,12 +29,14 @@ func (client *ConsumerPaymentTag) Checkout(provider string, payload ConsumerPaym
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/payment/:provider/checkout", pathParams))
     if err != nil {
         return ConsumerPaymentCheckoutResponse{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
@@ -105,12 +107,14 @@ func (client *ConsumerPaymentTag) Portal(provider string, payload ConsumerPaymen
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/consumer/payment/:provider/portal", pathParams))
     if err != nil {
         return ConsumerPaymentPortalResponse{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {

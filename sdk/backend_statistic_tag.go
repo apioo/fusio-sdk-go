@@ -42,12 +42,14 @@ func (client *BackendStatisticTag) GetUsedPoints(startIndex int, count int, sear
     queryParams["header"] = header
     queryParams["body"] = body
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/used_points", pathParams))
     if err != nil {
         return BackendStatisticChart{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -124,12 +126,14 @@ func (client *BackendStatisticTag) GetTimePerOperation(startIndex int, count int
     queryParams["header"] = header
     queryParams["body"] = body
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/time_per_operation", pathParams))
     if err != nil {
         return BackendStatisticChart{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -206,12 +210,14 @@ func (client *BackendStatisticTag) GetTimeAverage(startIndex int, count int, sea
     queryParams["header"] = header
     queryParams["body"] = body
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/time_average", pathParams))
     if err != nil {
         return BackendStatisticChart{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -288,12 +294,14 @@ func (client *BackendStatisticTag) GetMostUsedOperations(startIndex int, count i
     queryParams["header"] = header
     queryParams["body"] = body
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/most_used_operations", pathParams))
     if err != nil {
         return BackendStatisticChart{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -370,12 +378,14 @@ func (client *BackendStatisticTag) GetMostUsedApps(startIndex int, count int, se
     queryParams["header"] = header
     queryParams["body"] = body
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/most_used_apps", pathParams))
     if err != nil {
         return BackendStatisticChart{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -452,12 +462,14 @@ func (client *BackendStatisticTag) GetIssuedTokens(startIndex int, count int, se
     queryParams["header"] = header
     queryParams["body"] = body
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/issued_tokens", pathParams))
     if err != nil {
         return BackendStatisticChart{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -534,12 +546,14 @@ func (client *BackendStatisticTag) GetIncomingTransactions(startIndex int, count
     queryParams["header"] = header
     queryParams["body"] = body
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/incoming_transactions", pathParams))
     if err != nil {
         return BackendStatisticChart{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -616,12 +630,14 @@ func (client *BackendStatisticTag) GetIncomingRequests(startIndex int, count int
     queryParams["header"] = header
     queryParams["body"] = body
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/incoming_requests", pathParams))
     if err != nil {
         return BackendStatisticChart{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -698,12 +714,14 @@ func (client *BackendStatisticTag) GetErrorsPerOperation(startIndex int, count i
     queryParams["header"] = header
     queryParams["body"] = body
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/errors_per_operation", pathParams))
     if err != nil {
         return BackendStatisticChart{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -780,12 +798,14 @@ func (client *BackendStatisticTag) GetCountRequests(startIndex int, count int, s
     queryParams["header"] = header
     queryParams["body"] = body
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/count_requests", pathParams))
     if err != nil {
         return BackendStatisticCount{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)

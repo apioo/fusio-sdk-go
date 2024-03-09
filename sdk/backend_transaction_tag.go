@@ -29,12 +29,14 @@ func (client *BackendTransactionTag) Get(transactionId string) (BackendTransacti
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/transaction/$transaction_id<[0-9]+>", pathParams))
     if err != nil {
         return BackendTransaction{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -127,12 +129,14 @@ func (client *BackendTransactionTag) GetAll(startIndex int, count int, search st
     queryParams["status"] = status
     queryParams["provider"] = provider
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/transaction", pathParams))
     if err != nil {
         return BackendTransactionCollection{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)

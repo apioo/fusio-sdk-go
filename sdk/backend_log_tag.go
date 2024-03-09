@@ -29,12 +29,14 @@ func (client *BackendLogTag) Get(logId string) (BackendLog, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/log/$log_id<[0-9]+>", pathParams))
     if err != nil {
         return BackendLog{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -131,12 +133,14 @@ func (client *BackendLogTag) GetAll(startIndex int, count int, search string, fr
     queryParams["header"] = header
     queryParams["body"] = body
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/log", pathParams))
     if err != nil {
         return BackendLogCollection{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -200,12 +204,14 @@ func (client *BackendLogTag) GetError(errorId string) (BackendLogError, error) {
 
     queryParams := make(map[string]interface{})
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/log/error/$error_id<[0-9]+>", pathParams))
     if err != nil {
         return BackendLogError{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
@@ -271,12 +277,14 @@ func (client *BackendLogTag) GetAllErrors(startIndex int, count int, search stri
     queryParams["count"] = count
     queryParams["search"] = search
 
+    var queryStructNames []string
+
     u, err := url.Parse(client.internal.Parser.Url("/backend/log/error", pathParams))
     if err != nil {
         return BackendLogErrorCollection{}, err
     }
 
-    u.RawQuery = client.internal.Parser.Query(queryParams).Encode()
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
     req, err := http.NewRequest("GET", u.String(), nil)
