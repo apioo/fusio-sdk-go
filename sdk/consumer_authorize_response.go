@@ -6,7 +6,7 @@
 package sdk
 type ConsumerAuthorizeResponse struct {
     Type string `json:"type"`
-    Token ConsumerAuthorizeResponseToken `json:"token"`
+    Token *ConsumerAuthorizeResponseToken `json:"token"`
     Code string `json:"code"`
     RedirectUri string `json:"redirectUri"`
 }

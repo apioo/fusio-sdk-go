@@ -15,7 +15,7 @@ type BackendApp struct {
     Parameters string `json:"parameters"`
     AppKey string `json:"appKey"`
     AppSecret string `json:"appSecret"`
-    Metadata CommonMetadata `json:"metadata"`
+    Metadata *CommonMetadata `json:"metadata"`
     Date time.Time `json:"date"`
     Scopes []string `json:"scopes"`
     Tokens []BackendAppToken `json:"tokens"`

@@ -13,6 +13,6 @@ type BackendCronjob struct {
     Action string `json:"action"`
     ExecuteDate time.Time `json:"executeDate"`
     ExitCode int `json:"exitCode"`
-    Metadata CommonMetadata `json:"metadata"`
+    Metadata *CommonMetadata `json:"metadata"`
     Errors []BackendCronjobError `json:`
 }

@@ -32,8 +32,8 @@ func (client *ConsumerTag) Transaction() *ConsumerTransactionTag {
     return NewConsumerTransactionTag(client.internal.HttpClient, client.internal.Parser)
 }
 
-func (client *ConsumerTag) Subscription() *ConsumerSubscriptionTag {
-    return NewConsumerSubscriptionTag(client.internal.HttpClient, client.internal.Parser)
+func (client *ConsumerTag) Webhook() *ConsumerWebhookTag {
+    return NewConsumerWebhookTag(client.internal.HttpClient, client.internal.Parser)
 }
 
 func (client *ConsumerTag) Scope() *ConsumerScopeTag {

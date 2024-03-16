@@ -9,5 +9,5 @@ type BackendScopeCreate struct {
     Name string `json:"name"`
     Description string `json:"description"`
     Operations []BackendScopeOperation `json:"operations"`
-    Metadata CommonMetadata `json:"metadata"`
+    Metadata *CommonMetadata `json:"metadata"`
 }

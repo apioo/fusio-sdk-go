@@ -10,7 +10,7 @@ type ConsumerTransaction struct {
     Id int `json:"id"`
     UserId int `json:"userId"`
     PlanId int `json:"planId"`
-    Plan ConsumerPlan `json:"plan"`
+    Plan *ConsumerPlan `json:"plan"`
     TransactionId string `json:"transactionId"`
     Amount float64 `json:"amount"`
     Points float64 `json:"points"`

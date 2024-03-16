@@ -14,5 +14,5 @@ type ConsumerApp struct {
     AppSecret string `json:"appSecret"`
     Date string `json:"date"`
     Scopes []string `json:"scopes"`
-    Metadata CommonMetadata `json:"metadata"`
+    Metadata *CommonMetadata `json:"metadata"`
 }

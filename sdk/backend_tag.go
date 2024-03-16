@@ -20,6 +20,10 @@ type BackendTag struct {
     internal *sdkgen.TagAbstract
 }
 
+func (client *BackendTag) Webhook() *BackendWebhookTag {
+    return NewBackendWebhookTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *BackendTag) User() *BackendUserTag {
     return NewBackendUserTag(client.internal.HttpClient, client.internal.Parser)
 }

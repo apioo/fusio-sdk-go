@@ -8,11 +8,11 @@ package sdk
 import "time"
 type BackendAudit struct {
     Id int `json:"id"`
-    App BackendApp `json:"app"`
-    User BackendUser `json:"user"`
+    App *BackendApp `json:"app"`
+    User *BackendUser `json:"user"`
     Event string `json:"event"`
     Ip string `json:"ip"`
     Message string `json:"message"`
-    Content BackendAuditObject `json:"content"`
+    Content *BackendAuditObject `json:"content"`
     Date time.Time `json:"date"`
 }

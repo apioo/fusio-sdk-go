@@ -8,7 +8,7 @@ type BackendSchemaUpdate struct {
     Id int `json:"id"`
     Status int `json:"status"`
     Name string `json:"name"`
-    Source BackendSchemaSource `json:"source"`
-    Form BackendSchemaForm `json:"form"`
-    Metadata CommonMetadata `json:"metadata"`
+    Source *BackendSchemaSource `json:"source"`
+    Form *BackendSchemaForm `json:"form"`
+    Metadata *CommonMetadata `json:"metadata"`
 }

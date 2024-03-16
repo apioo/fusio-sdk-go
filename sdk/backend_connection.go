@@ -8,6 +8,6 @@ type BackendConnection struct {
     Id int `json:"id"`
     Name string `json:"name"`
     Class string `json:"class"`
-    Config BackendConnectionConfig `json:"config"`
-    Metadata CommonMetadata `json:"metadata"`
+    Config *BackendConnectionConfig `json:"config"`
+    Metadata *CommonMetadata `json:"metadata"`
 }

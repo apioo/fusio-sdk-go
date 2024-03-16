@@ -5,5 +5,5 @@
 
 package sdk
 type BackendSdkResponse struct {
-    Types BackendSdkTypes `json:"types"`
+    Types *BackendSdkTypes `json:"types"`
 }

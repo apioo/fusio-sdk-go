@@ -11,6 +11,6 @@ type BackendIdentityUpdate struct {
     Name string `json:"name"`
     Icon string `json:"icon"`
     Class string `json:"class"`
-    Config BackendIdentityConfig `json:"config"`
+    Config *BackendIdentityConfig `json:"config"`
     AllowCreate bool `json:"allowCreate"`
 }

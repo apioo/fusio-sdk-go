@@ -13,5 +13,5 @@ type BackendPlan struct {
     Period int `json:"period"`
     ExternalId string `json:"externalId"`
     Scopes []string `json:"scopes"`
-    Metadata CommonMetadata `json:"metadata"`
+    Metadata *CommonMetadata `json:"metadata"`
 }

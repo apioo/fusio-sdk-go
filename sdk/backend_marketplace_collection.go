@@ -5,5 +5,5 @@
 
 package sdk
 type BackendMarketplaceCollection struct {
-    Apps BackendMarketplaceCollectionApps `json:"apps"`
+    Apps *BackendMarketplaceCollectionApps `json:"apps"`
 }

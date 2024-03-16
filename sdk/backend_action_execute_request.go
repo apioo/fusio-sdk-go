@@ -9,5 +9,5 @@ type BackendActionExecuteRequest struct {
     UriFragments string `json:"uriFragments"`
     Parameters string `json:"parameters"`
     Headers string `json:"headers"`
-    Body BackendActionExecuteRequestBody `json:"body"`
+    Body *BackendActionExecuteRequestBody `json:"body"`
 }

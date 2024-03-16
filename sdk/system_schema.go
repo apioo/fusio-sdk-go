@@ -5,6 +5,6 @@
 
 package sdk
 type SystemSchema struct {
-    Schema SystemSchemaTypeSchema `json:"schema"`
-    Form SystemSchemaForm `json:"form"`
+    Schema *SystemSchemaTypeSchema `json:"schema"`
+    Form *SystemSchemaForm `json:"form"`
 }

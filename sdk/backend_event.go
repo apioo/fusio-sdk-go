@@ -9,5 +9,5 @@ type BackendEvent struct {
     Name string `json:"name"`
     Description string `json:"description"`
     Schema string `json:"schema"`
-    Metadata CommonMetadata `json:"metadata"`
+    Metadata *CommonMetadata `json:"metadata"`
 }

@@ -10,5 +10,5 @@ type BackendPage struct {
     Title string `json:"title"`
     Slug string `json:"slug"`
     Content string `json:"content"`
-    Metadata CommonMetadata `json:"metadata"`
+    Metadata *CommonMetadata `json:"metadata"`
 }

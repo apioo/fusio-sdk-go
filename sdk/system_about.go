@@ -17,6 +17,6 @@ type SystemAbout struct {
     PaymentCurrency string `json:"paymentCurrency"`
     Categories []string `json:"categories"`
     Scopes []string `json:"scopes"`
-    Apps SystemAboutApps `json:"apps"`
+    Apps *SystemAboutApps `json:"apps"`
     Links []SystemAboutLink `json:"links"`
 }

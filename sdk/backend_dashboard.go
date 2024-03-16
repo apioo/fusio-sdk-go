@@ -5,13 +5,13 @@
 
 package sdk
 type BackendDashboard struct {
-    ErrorsPerOperation BackendStatisticChart `json:"errorsPerOperation"`
-    IncomingRequests BackendStatisticChart `json:"incomingRequests"`
-    IncomingTransactions BackendStatisticChart `json:"incomingTransactions"`
-    MostUsedOperations BackendStatisticChart `json:"mostUsedOperations"`
-    TimePerOperation BackendStatisticChart `json:"timePerOperation"`
-    LatestApps BackendDashboardApps `json:"latestApps"`
-    LatestRequests BackendDashboardRequests `json:"latestRequests"`
-    LatestUsers BackendDashboardUsers `json:"latestUsers"`
-    LatestTransactions BackendDashboardTransactions `json:"latestTransactions"`
+    ErrorsPerOperation *BackendStatisticChart `json:"errorsPerOperation"`
+    IncomingRequests *BackendStatisticChart `json:"incomingRequests"`
+    IncomingTransactions *BackendStatisticChart `json:"incomingTransactions"`
+    MostUsedOperations *BackendStatisticChart `json:"mostUsedOperations"`
+    TimePerOperation *BackendStatisticChart `json:"timePerOperation"`
+    LatestApps *BackendDashboardApps `json:"latestApps"`
+    LatestRequests *BackendDashboardRequests `json:"latestRequests"`
+    LatestUsers *BackendDashboardUsers `json:"latestUsers"`
+    LatestTransactions *BackendDashboardTransactions `json:"latestTransactions"`
 }

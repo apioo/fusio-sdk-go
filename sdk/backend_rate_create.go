@@ -13,5 +13,5 @@ type BackendRateCreate struct {
     RateLimit int `json:"rateLimit"`
     Timespan time.Duration `json:"timespan"`
     Allocation []BackendRateAllocation `json:"allocation"`
-    Metadata CommonMetadata `json:"metadata"`
+    Metadata *CommonMetadata `json:"metadata"`
 }

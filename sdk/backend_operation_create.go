@@ -15,12 +15,12 @@ type BackendOperationCreate struct {
     HttpPath string `json:"httpPath"`
     HttpCode int `json:"httpCode"`
     Name string `json:"name"`
-    Parameters BackendOperationParameters `json:"parameters"`
+    Parameters *BackendOperationParameters `json:"parameters"`
     Incoming string `json:"incoming"`
     Outgoing string `json:"outgoing"`
-    Throws BackendOperationThrows `json:"throws"`
+    Throws *BackendOperationThrows `json:"throws"`
     Action string `json:"action"`
     Costs int `json:"costs"`
     Scopes []string `json:"scopes"`
-    Metadata CommonMetadata `json:"metadata"`
+    Metadata *CommonMetadata `json:"metadata"`
 }

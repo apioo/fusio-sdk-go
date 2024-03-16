@@ -10,6 +10,6 @@ type BackendActionUpdate struct {
     Name string `json:"name"`
     Class string `json:"class"`
     Async bool `json:"async"`
-    Config BackendActionConfig `json:"config"`
-    Metadata CommonMetadata `json:"metadata"`
+    Config *BackendActionConfig `json:"config"`
+    Metadata *CommonMetadata `json:"metadata"`
 }

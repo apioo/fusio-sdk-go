@@ -12,5 +12,5 @@ type BackendMarketplaceLocalApp struct {
     DownloadUrl string `json:"downloadUrl"`
     ShaHash string `json:"sha1Hash"`
     StartUrl string `json:"startUrl"`
-    Remote BackendMarketplaceApp `json:"remote"`
+    Remote *BackendMarketplaceApp `json:"remote"`
 }

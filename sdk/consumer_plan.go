@@ -10,5 +10,5 @@ type ConsumerPlan struct {
     Description string `json:"description"`
     Price float64 `json:"price"`
     Points int `json:"points"`
-    Metadata CommonMetadata `json:"metadata"`
+    Metadata *CommonMetadata `json:"metadata"`
 }

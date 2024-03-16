@@ -16,6 +16,6 @@ type BackendUserUpdate struct {
     Points int `json:"points"`
     Scopes []string `json:"scopes"`
     Apps []BackendApp `json:"apps"`
-    Metadata CommonMetadata `json:"metadata"`
+    Metadata *CommonMetadata `json:"metadata"`
     Date time.Time `json:"date"`
 }
