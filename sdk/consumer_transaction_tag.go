@@ -31,7 +31,7 @@ func (client *ConsumerTransactionTag) Get(transactionId string) (ConsumerTransac
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/consumer/transaction/$transaction_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/consumer/transaction/$transaction_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return ConsumerTransaction{}, err
     }

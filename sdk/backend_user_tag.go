@@ -31,7 +31,7 @@ func (client *BackendUserTag) Delete(userId string) (CommonMessage, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/user/$user_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/user/$user_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
@@ -122,7 +122,7 @@ func (client *BackendUserTag) Update(userId string, payload BackendUserUpdate) (
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/user/$user_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/user/$user_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
@@ -230,7 +230,7 @@ func (client *BackendUserTag) Get(userId string) (BackendUser, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/user/$user_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/user/$user_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return BackendUser{}, err
     }

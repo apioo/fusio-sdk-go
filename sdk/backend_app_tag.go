@@ -123,7 +123,7 @@ func (client *BackendAppTag) Delete(appId string) (CommonMessage, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
@@ -214,7 +214,7 @@ func (client *BackendAppTag) Update(appId string, payload BackendAppUpdate) (Com
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
@@ -322,7 +322,7 @@ func (client *BackendAppTag) Get(appId string) (BackendApp, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return BackendApp{}, err
     }

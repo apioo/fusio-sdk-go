@@ -31,7 +31,7 @@ func (client *ConsumerAppTag) Delete(appId string) (CommonMessage, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/consumer/app/$app_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/consumer/app/$app_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
@@ -122,7 +122,7 @@ func (client *ConsumerAppTag) Update(appId string, payload ConsumerAppUpdate) (C
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/consumer/app/$app_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/consumer/app/$app_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
@@ -230,7 +230,7 @@ func (client *ConsumerAppTag) Get(appId string) (ConsumerApp, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/consumer/app/$app_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/consumer/app/$app_id<[0-9]+|^~>", pathParams))
     if err != nil {
         return ConsumerApp{}, err
     }
