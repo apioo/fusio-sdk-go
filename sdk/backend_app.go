@@ -18,5 +18,5 @@ type BackendApp struct {
     Metadata *CommonMetadata `json:"metadata"`
     Date time.Time `json:"date"`
     Scopes []string `json:"scopes"`
-    Tokens []BackendAppToken `json:"tokens"`
+    Tokens []BackendToken `json:"tokens"`
 }

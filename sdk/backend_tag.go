@@ -36,6 +36,10 @@ func (client *BackendTag) Transaction() *BackendTransactionTag {
     return NewBackendTransactionTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *BackendTag) Token() *BackendTokenTag {
+    return NewBackendTokenTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *BackendTag) Tenant() *BackendTenantTag {
     return NewBackendTenantTag(client.internal.HttpClient, client.internal.Parser)
 }

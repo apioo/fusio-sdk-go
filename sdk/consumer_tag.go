@@ -36,6 +36,10 @@ func (client *ConsumerTag) Webhook() *ConsumerWebhookTag {
     return NewConsumerWebhookTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *ConsumerTag) Token() *ConsumerTokenTag {
+    return NewConsumerTokenTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *ConsumerTag) Scope() *ConsumerScopeTag {
     return NewConsumerScopeTag(client.internal.HttpClient, client.internal.Parser)
 }
