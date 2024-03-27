@@ -10,7 +10,7 @@ type ConsumerToken struct {
     Id int `json:"id"`
     Status int `json:"status"`
     Name string `json:"name"`
-    Scope []string `json:"scope"`
+    Scopes []string `json:"scopes"`
     Ip string `json:"ip"`
     Expire time.Time `json:"expire"`
     Date time.Time `json:"date"`
