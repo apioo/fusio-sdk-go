@@ -8,6 +8,6 @@ package sdk
 import "time"
 type ConsumerTokenCreate struct {
     Name string `json:"name"`
-    Scope []string `json:"scope"`
+    Scopes []string `json:"scopes"`
     Expire time.Time `json:"expire"`
 }
