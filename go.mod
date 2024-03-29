@@ -1,4 +1,4 @@
-module github.com/apioo/fusio-sdk-go
+module github.com/apioo/fusio-sdk-go/v5
 
 go 1.18
 
