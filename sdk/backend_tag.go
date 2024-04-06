@@ -96,6 +96,10 @@ func (client *BackendTag) Generator() *BackendGeneratorTag {
     return NewBackendGeneratorTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *BackendTag) Backup() *BackendBackupTag {
+    return NewBackendBackupTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *BackendTag) Event() *BackendEventTag {
     return NewBackendEventTag(client.internal.HttpClient, client.internal.Parser)
 }
