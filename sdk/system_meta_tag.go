@@ -153,6 +153,56 @@ func (client *SystemMetaTag) GetRoutes() (SystemRoute, error) {
     }
 }
 
+// GetOAuthConfiguration 
+func (client *SystemMetaTag) GetOAuthConfiguration() (SystemOAuthConfiguration, error) {
+    pathParams := make(map[string]interface{})
+
+    queryParams := make(map[string]interface{})
+
+    var queryStructNames []string
+
+    u, err := url.Parse(client.internal.Parser.Url("/system/oauth-authorization-server", pathParams))
+    if err != nil {
+        return SystemOAuthConfiguration{}, err
+    }
+
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
+
+
+    req, err := http.NewRequest("GET", u.String(), nil)
+    if err != nil {
+        return SystemOAuthConfiguration{}, err
+    }
+
+
+    resp, err := client.internal.HttpClient.Do(req)
+    if err != nil {
+        return SystemOAuthConfiguration{}, err
+    }
+
+    defer resp.Body.Close()
+
+    respBody, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return SystemOAuthConfiguration{}, err
+    }
+
+    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+        var response SystemOAuthConfiguration
+        err = json.Unmarshal(respBody, &response)
+        if err != nil {
+            return SystemOAuthConfiguration{}, err
+        }
+
+        return response, nil
+    }
+
+    switch resp.StatusCode {
+        default:
+            return SystemOAuthConfiguration{}, errors.New("the server returned an unknown status code")
+    }
+}
+
 // GetHealth 
 func (client *SystemMetaTag) GetHealth() (SystemHealthCheck, error) {
     pathParams := make(map[string]interface{})
