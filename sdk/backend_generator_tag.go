@@ -75,6 +75,16 @@ func (client *BackendGeneratorTag) GetChangelog(provider string, payload Backend
     }
 
     switch resp.StatusCode {
+        case 400:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return BackendGeneratorProviderChangelog{}, err
+            }
+
+            return BackendGeneratorProviderChangelog{}, &CommonMessageException{
+                Payload: response,
+            }
         case 401:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
@@ -153,6 +163,16 @@ func (client *BackendGeneratorTag) ExecuteProvider(provider string, payload Back
     }
 
     switch resp.StatusCode {
+        case 400:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return CommonMessage{}, err
+            }
+
+            return CommonMessage{}, &CommonMessageException{
+                Payload: response,
+            }
         case 401:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
@@ -224,6 +244,16 @@ func (client *BackendGeneratorTag) GetForm(provider string) (CommonFormContainer
     }
 
     switch resp.StatusCode {
+        case 400:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return CommonFormContainer{}, err
+            }
+
+            return CommonFormContainer{}, &CommonMessageException{
+                Payload: response,
+            }
         case 401:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
