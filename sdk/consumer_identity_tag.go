@@ -165,11 +165,12 @@ func (client *ConsumerIdentityTag) Exchange(identity string) (Passthru, error) {
 }
 
 // GetAll 
-func (client *ConsumerIdentityTag) GetAll(appId int) (ConsumerIdentityCollection, error) {
+func (client *ConsumerIdentityTag) GetAll(appId int, appKey string) (ConsumerIdentityCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
     queryParams["appId"] = appId
+    queryParams["appKey"] = appKey
 
     var queryStructNames []string
 
