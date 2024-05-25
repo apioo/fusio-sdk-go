@@ -186,7 +186,7 @@ func (client *BackendConnectionTag) GetIntrospection(connectionId string) (Backe
 }
 
 // GetRedirect 
-func (client *BackendConnectionTag) GetRedirect(connectionId string) (CommonMessage, error) {
+func (client *BackendConnectionTag) GetRedirect(connectionId string) (BackendConnectionRedirectResponse, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
 
@@ -196,7 +196,7 @@ func (client *BackendConnectionTag) GetRedirect(connectionId string) (CommonMess
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id<[0-9]+|^~>/redirect", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return BackendConnectionRedirectResponse{}, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -204,27 +204,27 @@ func (client *BackendConnectionTag) GetRedirect(connectionId string) (CommonMess
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return CommonMessage{}, err
+        return BackendConnectionRedirectResponse{}, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return BackendConnectionRedirectResponse{}, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return BackendConnectionRedirectResponse{}, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response CommonMessage
+        var response BackendConnectionRedirectResponse
         err = json.Unmarshal(respBody, &response)
         if err != nil {
-            return CommonMessage{}, err
+            return BackendConnectionRedirectResponse{}, err
         }
 
         return response, nil
@@ -235,24 +235,24 @@ func (client *BackendConnectionTag) GetRedirect(connectionId string) (CommonMess
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
             if err != nil {
-                return CommonMessage{}, err
+                return BackendConnectionRedirectResponse{}, err
             }
 
-            return CommonMessage{}, &CommonMessageException{
+            return BackendConnectionRedirectResponse{}, &CommonMessageException{
                 Payload: response,
             }
         case 500:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
             if err != nil {
-                return CommonMessage{}, err
+                return BackendConnectionRedirectResponse{}, err
             }
 
-            return CommonMessage{}, &CommonMessageException{
+            return BackendConnectionRedirectResponse{}, &CommonMessageException{
                 Payload: response,
             }
         default:
-            return CommonMessage{}, errors.New("the server returned an unknown status code")
+            return BackendConnectionRedirectResponse{}, errors.New("the server returned an unknown status code")
     }
 }
 
