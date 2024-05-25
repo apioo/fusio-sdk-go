@@ -8,6 +8,7 @@ type BackendConnectionUpdate struct {
     Id int `json:"id"`
     Name string `json:"name"`
     Class string `json:"class"`
+    Oauth bool `json:"oauth2"`
     Config *BackendConnectionConfig `json:"config"`
     Metadata *CommonMetadata `json:"metadata"`
 }
