@@ -104,6 +104,10 @@ func (client *BackendTag) Event() *BackendEventTag {
     return NewBackendEventTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *BackendTag) Database() *BackendDatabaseTag {
+    return NewBackendDatabaseTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *BackendTag) Dashboard() *BackendDashboardTag {
     return NewBackendDashboardTag(client.internal.HttpClient, client.internal.Parser)
 }
