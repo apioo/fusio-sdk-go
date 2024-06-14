@@ -328,12 +328,20 @@ func (client *BackendDatabaseTag) GetRow(connectionId string, tableName string, 
 }
 
 // GetRows 
-func (client *BackendDatabaseTag) GetRows(connectionId string, tableName string) (BackendDatabaseRows, error) {
+func (client *BackendDatabaseTag) GetRows(connectionId string, tableName string, startIndex int, count int, filterBy string, filterOp string, filterValue string, sortBy string, sortOrder string, columns string) (BackendDatabaseRows, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
     pathParams["table_name"] = tableName
 
     queryParams := make(map[string]interface{})
+    queryParams["startIndex"] = startIndex
+    queryParams["count"] = count
+    queryParams["filterBy"] = filterBy
+    queryParams["filterOp"] = filterOp
+    queryParams["filterValue"] = filterValue
+    queryParams["sortBy"] = sortBy
+    queryParams["sortOrder"] = sortOrder
+    queryParams["columns"] = columns
 
     var queryStructNames []string
 
