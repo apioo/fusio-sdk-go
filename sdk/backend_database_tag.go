@@ -70,7 +70,27 @@ func (client *BackendDatabaseTag) DeleteRow(connectionId string, tableName strin
     }
 
     switch resp.StatusCode {
+        case 400:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return CommonMessage{}, err
+            }
+
+            return CommonMessage{}, &CommonMessageException{
+                Payload: response,
+            }
         case 401:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return CommonMessage{}, err
+            }
+
+            return CommonMessage{}, &CommonMessageException{
+                Payload: response,
+            }
+        case 404:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
             if err != nil {
@@ -150,7 +170,27 @@ func (client *BackendDatabaseTag) UpdateRow(connectionId string, tableName strin
     }
 
     switch resp.StatusCode {
+        case 400:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return CommonMessage{}, err
+            }
+
+            return CommonMessage{}, &CommonMessageException{
+                Payload: response,
+            }
         case 401:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return CommonMessage{}, err
+            }
+
+            return CommonMessage{}, &CommonMessageException{
+                Payload: response,
+            }
+        case 404:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
             if err != nil {
@@ -229,7 +269,27 @@ func (client *BackendDatabaseTag) CreateRow(connectionId string, tableName strin
     }
 
     switch resp.StatusCode {
+        case 400:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return CommonMessage{}, err
+            }
+
+            return CommonMessage{}, &CommonMessageException{
+                Payload: response,
+            }
         case 401:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return CommonMessage{}, err
+            }
+
+            return CommonMessage{}, &CommonMessageException{
+                Payload: response,
+            }
+        case 404:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
             if err != nil {
@@ -303,6 +363,16 @@ func (client *BackendDatabaseTag) GetRow(connectionId string, tableName string, 
 
     switch resp.StatusCode {
         case 401:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return BackendDatabaseRow{}, err
+            }
+
+            return BackendDatabaseRow{}, &CommonMessageException{
+                Payload: response,
+            }
+        case 404:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
             if err != nil {
@@ -392,6 +462,16 @@ func (client *BackendDatabaseTag) GetRows(connectionId string, tableName string,
             return BackendDatabaseRows{}, &CommonMessageException{
                 Payload: response,
             }
+        case 404:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return BackendDatabaseRows{}, err
+            }
+
+            return BackendDatabaseRows{}, &CommonMessageException{
+                Payload: response,
+            }
         case 500:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
@@ -454,7 +534,27 @@ func (client *BackendDatabaseTag) DeleteTable(connectionId string, tableName str
     }
 
     switch resp.StatusCode {
+        case 400:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return CommonMessage{}, err
+            }
+
+            return CommonMessage{}, &CommonMessageException{
+                Payload: response,
+            }
         case 401:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return CommonMessage{}, err
+            }
+
+            return CommonMessage{}, &CommonMessageException{
+                Payload: response,
+            }
+        case 404:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
             if err != nil {
@@ -533,7 +633,27 @@ func (client *BackendDatabaseTag) UpdateTable(connectionId string, tableName str
     }
 
     switch resp.StatusCode {
+        case 400:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return CommonMessage{}, err
+            }
+
+            return CommonMessage{}, &CommonMessageException{
+                Payload: response,
+            }
         case 401:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return CommonMessage{}, err
+            }
+
+            return CommonMessage{}, &CommonMessageException{
+                Payload: response,
+            }
+        case 404:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
             if err != nil {
@@ -611,7 +731,27 @@ func (client *BackendDatabaseTag) CreateTable(connectionId string, payload Backe
     }
 
     switch resp.StatusCode {
+        case 400:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return CommonMessage{}, err
+            }
+
+            return CommonMessage{}, &CommonMessageException{
+                Payload: response,
+            }
         case 401:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return CommonMessage{}, err
+            }
+
+            return CommonMessage{}, &CommonMessageException{
+                Payload: response,
+            }
+        case 404:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
             if err != nil {
@@ -693,6 +833,16 @@ func (client *BackendDatabaseTag) GetTable(connectionId string, tableName string
             return BackendDatabaseTable{}, &CommonMessageException{
                 Payload: response,
             }
+        case 404:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return BackendDatabaseTable{}, err
+            }
+
+            return BackendDatabaseTable{}, &CommonMessageException{
+                Payload: response,
+            }
         case 500:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
@@ -755,6 +905,16 @@ func (client *BackendDatabaseTag) GetTables(connectionId string) (BackendDatabas
 
     switch resp.StatusCode {
         case 401:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return BackendDatabaseTables{}, err
+            }
+
+            return BackendDatabaseTables{}, &CommonMessageException{
+                Payload: response,
+            }
+        case 404:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
             if err != nil {
