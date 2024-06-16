@@ -23,7 +23,7 @@ type BackendSdkTag struct {
 
 
 // Generate 
-func (client *BackendSdkTag) Generate(payload BackendSdkGenerate) (CommonMessage, error) {
+func (client *BackendSdkTag) Generate(payload BackendSdkGenerate) (BackendSdkMessage, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -32,70 +32,80 @@ func (client *BackendSdkTag) Generate(payload BackendSdkGenerate) (CommonMessage
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/sdk", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return BackendSdkMessage{}, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
-        return CommonMessage{}, err
+        return BackendSdkMessage{}, err
     }
 
     var reqBody = bytes.NewReader(raw)
 
     req, err := http.NewRequest("POST", u.String(), reqBody)
     if err != nil {
-        return CommonMessage{}, err
+        return BackendSdkMessage{}, err
     }
 
     req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return BackendSdkMessage{}, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return BackendSdkMessage{}, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response CommonMessage
+        var response BackendSdkMessage
         err = json.Unmarshal(respBody, &response)
         if err != nil {
-            return CommonMessage{}, err
+            return BackendSdkMessage{}, err
         }
 
         return response, nil
     }
 
     switch resp.StatusCode {
+        case 400:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return BackendSdkMessage{}, err
+            }
+
+            return BackendSdkMessage{}, &CommonMessageException{
+                Payload: response,
+            }
         case 401:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
             if err != nil {
-                return CommonMessage{}, err
+                return BackendSdkMessage{}, err
             }
 
-            return CommonMessage{}, &CommonMessageException{
+            return BackendSdkMessage{}, &CommonMessageException{
                 Payload: response,
             }
         case 500:
             var response CommonMessage
             err = json.Unmarshal(respBody, &response)
             if err != nil {
-                return CommonMessage{}, err
+                return BackendSdkMessage{}, err
             }
 
-            return CommonMessage{}, &CommonMessageException{
+            return BackendSdkMessage{}, &CommonMessageException{
                 Payload: response,
             }
         default:
-            return CommonMessage{}, errors.New("the server returned an unknown status code")
+            return BackendSdkMessage{}, errors.New("the server returned an unknown status code")
     }
 }
 
