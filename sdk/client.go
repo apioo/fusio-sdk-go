@@ -50,9 +50,16 @@ func NewClient(baseUrl string, credentials sdkgen.CredentialsInterface) (*Client
 	}, nil
 }
 
-func Build() (*Client, error) {
-    var credentials = sdkgen.Anonymous{}
+func Build(clientId string, clientSecret string, tokenStore sdkgen.TokenStoreInterface, scopes []string) (*Client, error) {
+    var credentials = sdkgen.OAuth2{
+        ClientId: clientId,
+        ClientSecret: clientSecret,
+        TokenUrl: "http://127.0.0.1/authorization/token",
+        AuthorizationUrl: "",
+        TokenStore: tokenStore,
+        Scopes: scopes,
+    }
 
-    return NewClient("https://api.sdkgen.app/", credentials)
+    return NewClient("http://127.0.0.1/", credentials)
 }
 
