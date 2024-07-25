@@ -40,6 +40,10 @@ func (client *BackendTag) Token() *BackendTokenTag {
     return NewBackendTokenTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *BackendTag) Test() *BackendTestTag {
+    return NewBackendTestTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *BackendTag) Tenant() *BackendTenantTag {
     return NewBackendTenantTag(client.internal.HttpClient, client.internal.Parser)
 }
