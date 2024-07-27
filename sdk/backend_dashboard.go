@@ -10,8 +10,8 @@ type BackendDashboard struct {
     IncomingTransactions *BackendStatisticChart `json:"incomingTransactions"`
     MostUsedOperations *BackendStatisticChart `json:"mostUsedOperations"`
     TimePerOperation *BackendStatisticChart `json:"timePerOperation"`
+    TestCoverage *BackendStatisticChart `json:"testCoverage"`
     LatestApps *BackendDashboardApps `json:"latestApps"`
     LatestRequests *BackendDashboardRequests `json:"latestRequests"`
     LatestUsers *BackendDashboardUsers `json:"latestUsers"`
-    LatestTransactions *BackendDashboardTransactions `json:"latestTransactions"`
 }
