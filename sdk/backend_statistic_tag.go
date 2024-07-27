@@ -274,6 +274,76 @@ func (client *BackendStatisticTag) GetTimeAverage(startIndex int, count int, sea
     }
 }
 
+// GetTestCoverage 
+func (client *BackendStatisticTag) GetTestCoverage() (BackendStatisticChart, error) {
+    pathParams := make(map[string]interface{})
+
+    queryParams := make(map[string]interface{})
+
+    var queryStructNames []string
+
+    u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/test_coverage", pathParams))
+    if err != nil {
+        return BackendStatisticChart{}, err
+    }
+
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
+
+
+    req, err := http.NewRequest("GET", u.String(), nil)
+    if err != nil {
+        return BackendStatisticChart{}, err
+    }
+
+
+    resp, err := client.internal.HttpClient.Do(req)
+    if err != nil {
+        return BackendStatisticChart{}, err
+    }
+
+    defer resp.Body.Close()
+
+    respBody, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return BackendStatisticChart{}, err
+    }
+
+    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+        var response BackendStatisticChart
+        err = json.Unmarshal(respBody, &response)
+        if err != nil {
+            return BackendStatisticChart{}, err
+        }
+
+        return response, nil
+    }
+
+    switch resp.StatusCode {
+        case 401:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return BackendStatisticChart{}, err
+            }
+
+            return BackendStatisticChart{}, &CommonMessageException{
+                Payload: response,
+            }
+        case 500:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return BackendStatisticChart{}, err
+            }
+
+            return BackendStatisticChart{}, &CommonMessageException{
+                Payload: response,
+            }
+        default:
+            return BackendStatisticChart{}, errors.New("the server returned an unknown status code")
+    }
+}
+
 // GetMostUsedOperations 
 func (client *BackendStatisticTag) GetMostUsedOperations(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
