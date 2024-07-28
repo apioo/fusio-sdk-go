@@ -11,7 +11,7 @@ type BackendDashboard struct {
     MostUsedOperations *BackendStatisticChart `json:"mostUsedOperations"`
     TimePerOperation *BackendStatisticChart `json:"timePerOperation"`
     TestCoverage *BackendStatisticChart `json:"testCoverage"`
-    LatestApps *BackendDashboardApps `json:"latestApps"`
-    LatestRequests *BackendDashboardRequests `json:"latestRequests"`
-    LatestUsers *BackendDashboardUsers `json:"latestUsers"`
+    MostUsedActivities *BackendStatisticChart `json:"mostUsedActivities"`
+    ActivitiesPerUser *BackendStatisticChart `json:"activitiesPerUser"`
+    UserRegistrations *BackendStatisticChart `json:"userRegistrations"`
 }

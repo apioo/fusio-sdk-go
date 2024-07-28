@@ -22,6 +22,90 @@ type BackendStatisticTag struct {
 
 
 
+// GetUserRegistrations 
+func (client *BackendStatisticTag) GetUserRegistrations(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
+    pathParams := make(map[string]interface{})
+
+    queryParams := make(map[string]interface{})
+    queryParams["startIndex"] = startIndex
+    queryParams["count"] = count
+    queryParams["search"] = search
+    queryParams["from"] = from
+    queryParams["to"] = to
+    queryParams["operationId"] = operationId
+    queryParams["appId"] = appId
+    queryParams["userId"] = userId
+    queryParams["ip"] = ip
+    queryParams["userAgent"] = userAgent
+    queryParams["method"] = method
+    queryParams["path"] = path
+    queryParams["header"] = header
+    queryParams["body"] = body
+
+    var queryStructNames []string
+
+    u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/user_registrations", pathParams))
+    if err != nil {
+        return BackendStatisticChart{}, err
+    }
+
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
+
+
+    req, err := http.NewRequest("GET", u.String(), nil)
+    if err != nil {
+        return BackendStatisticChart{}, err
+    }
+
+
+    resp, err := client.internal.HttpClient.Do(req)
+    if err != nil {
+        return BackendStatisticChart{}, err
+    }
+
+    defer resp.Body.Close()
+
+    respBody, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return BackendStatisticChart{}, err
+    }
+
+    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+        var response BackendStatisticChart
+        err = json.Unmarshal(respBody, &response)
+        if err != nil {
+            return BackendStatisticChart{}, err
+        }
+
+        return response, nil
+    }
+
+    switch resp.StatusCode {
+        case 401:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return BackendStatisticChart{}, err
+            }
+
+            return BackendStatisticChart{}, &CommonMessageException{
+                Payload: response,
+            }
+        case 500:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return BackendStatisticChart{}, err
+            }
+
+            return BackendStatisticChart{}, &CommonMessageException{
+                Payload: response,
+            }
+        default:
+            return BackendStatisticChart{}, errors.New("the server returned an unknown status code")
+    }
+}
+
 // GetUsedPoints 
 func (client *BackendStatisticTag) GetUsedPoints(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
@@ -512,6 +596,90 @@ func (client *BackendStatisticTag) GetMostUsedApps(startIndex int, count int, se
     }
 }
 
+// GetMostUsedActivities 
+func (client *BackendStatisticTag) GetMostUsedActivities(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
+    pathParams := make(map[string]interface{})
+
+    queryParams := make(map[string]interface{})
+    queryParams["startIndex"] = startIndex
+    queryParams["count"] = count
+    queryParams["search"] = search
+    queryParams["from"] = from
+    queryParams["to"] = to
+    queryParams["operationId"] = operationId
+    queryParams["appId"] = appId
+    queryParams["userId"] = userId
+    queryParams["ip"] = ip
+    queryParams["userAgent"] = userAgent
+    queryParams["method"] = method
+    queryParams["path"] = path
+    queryParams["header"] = header
+    queryParams["body"] = body
+
+    var queryStructNames []string
+
+    u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/most_used_activities", pathParams))
+    if err != nil {
+        return BackendStatisticChart{}, err
+    }
+
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
+
+
+    req, err := http.NewRequest("GET", u.String(), nil)
+    if err != nil {
+        return BackendStatisticChart{}, err
+    }
+
+
+    resp, err := client.internal.HttpClient.Do(req)
+    if err != nil {
+        return BackendStatisticChart{}, err
+    }
+
+    defer resp.Body.Close()
+
+    respBody, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return BackendStatisticChart{}, err
+    }
+
+    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+        var response BackendStatisticChart
+        err = json.Unmarshal(respBody, &response)
+        if err != nil {
+            return BackendStatisticChart{}, err
+        }
+
+        return response, nil
+    }
+
+    switch resp.StatusCode {
+        case 401:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return BackendStatisticChart{}, err
+            }
+
+            return BackendStatisticChart{}, &CommonMessageException{
+                Payload: response,
+            }
+        case 500:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return BackendStatisticChart{}, err
+            }
+
+            return BackendStatisticChart{}, &CommonMessageException{
+                Payload: response,
+            }
+        default:
+            return BackendStatisticChart{}, errors.New("the server returned an unknown status code")
+    }
+}
+
 // GetIssuedTokens 
 func (client *BackendStatisticTag) GetIssuedTokens(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
@@ -871,6 +1039,90 @@ func (client *BackendStatisticTag) GetCountRequests(startIndex int, count int, s
     var queryStructNames []string
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/count_requests", pathParams))
+    if err != nil {
+        return BackendStatisticCount{}, err
+    }
+
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
+
+
+    req, err := http.NewRequest("GET", u.String(), nil)
+    if err != nil {
+        return BackendStatisticCount{}, err
+    }
+
+
+    resp, err := client.internal.HttpClient.Do(req)
+    if err != nil {
+        return BackendStatisticCount{}, err
+    }
+
+    defer resp.Body.Close()
+
+    respBody, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return BackendStatisticCount{}, err
+    }
+
+    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+        var response BackendStatisticCount
+        err = json.Unmarshal(respBody, &response)
+        if err != nil {
+            return BackendStatisticCount{}, err
+        }
+
+        return response, nil
+    }
+
+    switch resp.StatusCode {
+        case 401:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return BackendStatisticCount{}, err
+            }
+
+            return BackendStatisticCount{}, &CommonMessageException{
+                Payload: response,
+            }
+        case 500:
+            var response CommonMessage
+            err = json.Unmarshal(respBody, &response)
+            if err != nil {
+                return BackendStatisticCount{}, err
+            }
+
+            return BackendStatisticCount{}, &CommonMessageException{
+                Payload: response,
+            }
+        default:
+            return BackendStatisticCount{}, errors.New("the server returned an unknown status code")
+    }
+}
+
+// GetActivitiesPerUser 
+func (client *BackendStatisticTag) GetActivitiesPerUser(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticCount, error) {
+    pathParams := make(map[string]interface{})
+
+    queryParams := make(map[string]interface{})
+    queryParams["startIndex"] = startIndex
+    queryParams["count"] = count
+    queryParams["search"] = search
+    queryParams["from"] = from
+    queryParams["to"] = to
+    queryParams["operationId"] = operationId
+    queryParams["appId"] = appId
+    queryParams["userId"] = userId
+    queryParams["ip"] = ip
+    queryParams["userAgent"] = userAgent
+    queryParams["method"] = method
+    queryParams["path"] = path
+    queryParams["header"] = header
+    queryParams["body"] = body
+
+    var queryStructNames []string
+
+    u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/activities_per_user", pathParams))
     if err != nil {
         return BackendStatisticCount{}, err
     }
