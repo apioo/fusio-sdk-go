@@ -23,7 +23,7 @@ type BackendTestTag struct {
 
 
 // Update 
-func (client *BackendTestTag) Update(testId string, payload BackendTestConfig) (CommonMessage, error) {
+func (client *BackendTestTag) Update(testId string, payload BackendTest) (CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["test_id"] = testId
 
