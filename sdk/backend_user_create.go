@@ -5,7 +5,6 @@
 
 package sdk
 
-import "time"
 type BackendUserCreate struct {
     Id int `json:"id"`
     RoleId int `json:"roleId"`
@@ -17,6 +16,7 @@ type BackendUserCreate struct {
     Scopes []string `json:"scopes"`
     Apps []BackendApp `json:"apps"`
     Metadata *CommonMetadata `json:"metadata"`
-    Date time.Time `json:"date"`
+    Date string `json:"date"`
     Password string `json:"password"`
 }
+

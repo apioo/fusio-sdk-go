@@ -4,8 +4,10 @@
 
 
 package sdk
+
 type BackendStatisticChart struct {
     Labels []string `json:"labels"`
     Data []BackendStatisticChartData `json:"data"`
     Series []string `json:"series"`
 }
+

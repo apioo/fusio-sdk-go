@@ -4,9 +4,11 @@
 
 
 package sdk
+
 type ConsumerWebhookResponse struct {
     Status int `json:"status"`
     Code int `json:"code"`
     Attempts string `json:"attempts"`
     ExecuteDate string `json:"executeDate"`
 }
+

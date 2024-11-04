@@ -4,8 +4,10 @@
 
 
 package sdk
+
 type BackendAccountChangePassword struct {
     OldPassword string `json:"oldPassword"`
     NewPassword string `json:"newPassword"`
     VerifyPassword string `json:"verifyPassword"`
 }
+

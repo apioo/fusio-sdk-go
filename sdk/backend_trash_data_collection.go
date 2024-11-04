@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendTrashDataCollection = CommonCollection[BackendTrashData]
+
+type BackendTrashDataCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendTrashData `json:"entry"`
+}
+

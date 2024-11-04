@@ -4,8 +4,10 @@
 
 
 package sdk
+
 type BackendGeneratorProviderChangelog struct {
     Schemas []BackendSchema `json:"schemas"`
     Actions []BackendAction `json:"actions"`
     Operations []BackendOperation `json:"operations"`
 }
+

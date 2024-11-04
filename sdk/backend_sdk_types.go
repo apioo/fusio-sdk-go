@@ -4,4 +4,7 @@
 
 
 package sdk
-type BackendSdkTypes = map[string]string
+
+type BackendSdkTypes struct {
+}
+

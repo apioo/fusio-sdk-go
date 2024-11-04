@@ -9,7 +9,8 @@ import (
     
     
     
-    "github.com/apioo/sdkgen-go"
+    
+    
     
     "net/http"
     

@@ -4,4 +4,11 @@
 
 
 package sdk
-type ConsumerLogCollection = CommonCollection[ConsumerLog]
+
+type ConsumerLogCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []ConsumerLog `json:"entry"`
+}
+

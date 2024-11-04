@@ -4,4 +4,7 @@
 
 
 package sdk
-type BackendOperationThrows = map[string]string
+
+type BackendOperationThrows struct {
+}
+

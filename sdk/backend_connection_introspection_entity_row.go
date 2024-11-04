@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type BackendConnectionIntrospectionEntityRow struct {
     Values []string `json:"values"`
 }
+

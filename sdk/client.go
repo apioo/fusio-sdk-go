@@ -9,6 +9,7 @@ import (
     
     
     
+    
     "github.com/apioo/sdkgen-go"
     
     
@@ -50,9 +51,9 @@ func NewClient(baseUrl string, credentials sdkgen.CredentialsInterface) (*Client
 	}, nil
 }
 
-func Build(baseUrl string) (*Client, error) {
+
+func BuildAnonymous(baseUrl string) (*Client, error) {
     var credentials = sdkgen.Anonymous{}
 
     return NewClient(baseUrl, credentials)
 }
-

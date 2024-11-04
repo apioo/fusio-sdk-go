@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendTestCollection = CommonCollection[BackendTest]
+
+type BackendTestCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendTest `json:"entry"`
+}
+

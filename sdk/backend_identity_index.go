@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type BackendIdentityIndex struct {
     Providers []BackendIdentityIndexEntry `json:"providers"`
 }
+

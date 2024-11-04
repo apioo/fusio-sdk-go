@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendTest struct {
     Id int `json:"id"`
     Status int `json:"status"`
@@ -12,3 +13,4 @@ type BackendTest struct {
     Response string `json:"response"`
     Config *BackendTestConfig `json:"config"`
 }
+

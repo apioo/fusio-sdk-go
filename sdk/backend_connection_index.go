@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type BackendConnectionIndex struct {
     Connections []BackendConnectionIndexEntry `json:"connections"`
 }
+

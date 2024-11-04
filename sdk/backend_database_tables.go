@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type BackendDatabaseTables struct {
     Tables []string `json:"tables"`
 }
+

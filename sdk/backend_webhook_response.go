@@ -5,12 +5,12 @@
 
 package sdk
 
-import "time"
 type BackendWebhookResponse struct {
     Id int `json:"id"`
     Status int `json:"status"`
     Code int `json:"code"`
     Attempts int `json:"attempts"`
     Error string `json:"error"`
-    ExecuteDate time.Time `json:"executeDate"`
+    ExecuteDate string `json:"executeDate"`
 }
+

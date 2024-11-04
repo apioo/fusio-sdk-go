@@ -4,4 +4,7 @@
 
 
 package sdk
-type SystemRoutePath = map[string]SystemRouteMethod
+
+type SystemRoutePath struct {
+}
+

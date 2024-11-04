@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendLogErrorCollection = CommonCollection[BackendLogError]
+
+type BackendLogErrorCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendLogError `json:"entry"`
+}
+

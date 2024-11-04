@@ -4,7 +4,9 @@
 
 
 package sdk
+
 type BackendScopeOperation struct {
     OperationId int `json:"operationId"`
     Allow bool `json:"allow"`
 }
+

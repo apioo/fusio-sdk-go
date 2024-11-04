@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type ConsumerUserActivate struct {
     Token string `json:"token"`
 }
+

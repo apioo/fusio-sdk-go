@@ -5,9 +5,9 @@
 
 package sdk
 
-import "time"
 type ConsumerGrant struct {
     Id int `json:"id"`
     App *ConsumerApp `json:"app"`
-    CreateDate time.Time `json:"createDate"`
+    CreateDate string `json:"createDate"`
 }
+

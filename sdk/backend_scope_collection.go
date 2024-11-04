@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendScopeCollection = CommonCollection[BackendScope]
+
+type BackendScopeCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendScope `json:"entry"`
+}
+

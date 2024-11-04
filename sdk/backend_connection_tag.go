@@ -9,7 +9,8 @@ import (
     "bytes"
     "encoding/json"
     "errors"
-    "github.com/apioo/sdkgen-go"
+    "fmt"
+    
     "io"
     "net/http"
     "net/url"
@@ -59,49 +60,44 @@ func (client *BackendConnectionTag) GetIntrospectionForEntity(connectionId strin
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response BackendConnectionIntrospectionEntity
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return BackendConnectionIntrospectionEntity{}, err
+        var data BackendConnectionIntrospectionEntity
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendConnectionIntrospectionEntity{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnectionIntrospectionEntity{}, err
-            }
+    if statusCode == 404 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return BackendConnectionIntrospectionEntity{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 404:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnectionIntrospectionEntity{}, err
-            }
-
-            return BackendConnectionIntrospectionEntity{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnectionIntrospectionEntity{}, err
-            }
-
-            return BackendConnectionIntrospectionEntity{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return BackendConnectionIntrospectionEntity{}, errors.New("the server returned an unknown status code")
+        return BackendConnectionIntrospectionEntity{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendConnectionIntrospectionEntity{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return BackendConnectionIntrospectionEntity{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetIntrospection 
@@ -140,49 +136,44 @@ func (client *BackendConnectionTag) GetIntrospection(connectionId string) (Backe
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response BackendConnectionIntrospectionEntities
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return BackendConnectionIntrospectionEntities{}, err
+        var data BackendConnectionIntrospectionEntities
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendConnectionIntrospectionEntities{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnectionIntrospectionEntities{}, err
-            }
+    if statusCode == 404 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return BackendConnectionIntrospectionEntities{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 404:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnectionIntrospectionEntities{}, err
-            }
-
-            return BackendConnectionIntrospectionEntities{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnectionIntrospectionEntities{}, err
-            }
-
-            return BackendConnectionIntrospectionEntities{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return BackendConnectionIntrospectionEntities{}, errors.New("the server returned an unknown status code")
+        return BackendConnectionIntrospectionEntities{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendConnectionIntrospectionEntities{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return BackendConnectionIntrospectionEntities{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetRedirect 
@@ -221,39 +212,34 @@ func (client *BackendConnectionTag) GetRedirect(connectionId string) (BackendCon
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response BackendConnectionRedirectResponse
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return BackendConnectionRedirectResponse{}, err
+        var data BackendConnectionRedirectResponse
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendConnectionRedirectResponse{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnectionRedirectResponse{}, err
-            }
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return BackendConnectionRedirectResponse{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnectionRedirectResponse{}, err
-            }
-
-            return BackendConnectionRedirectResponse{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return BackendConnectionRedirectResponse{}, errors.New("the server returned an unknown status code")
+        return BackendConnectionRedirectResponse{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    return BackendConnectionRedirectResponse{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Delete 
@@ -292,59 +278,54 @@ func (client *BackendConnectionTag) Delete(connectionId string) (CommonMessage, 
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response CommonMessage
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return CommonMessage{}, err
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonMessage{}, err
-            }
+    if statusCode == 404 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return CommonMessage{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 404:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonMessage{}, err
-            }
-
-            return CommonMessage{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 410:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonMessage{}, err
-            }
-
-            return CommonMessage{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonMessage{}, err
-            }
-
-            return CommonMessage{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return CommonMessage{}, errors.New("the server returned an unknown status code")
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    if statusCode == 410 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Update 
@@ -390,69 +371,64 @@ func (client *BackendConnectionTag) Update(connectionId string, payload BackendC
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response CommonMessage
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return CommonMessage{}, err
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 400 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 400:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonMessage{}, err
-            }
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return CommonMessage{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonMessage{}, err
-            }
-
-            return CommonMessage{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 404:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonMessage{}, err
-            }
-
-            return CommonMessage{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 410:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonMessage{}, err
-            }
-
-            return CommonMessage{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonMessage{}, err
-            }
-
-            return CommonMessage{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return CommonMessage{}, errors.New("the server returned an unknown status code")
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    if statusCode == 404 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    if statusCode == 410 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Get 
@@ -491,59 +467,54 @@ func (client *BackendConnectionTag) Get(connectionId string) (BackendConnection,
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response BackendConnection
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return BackendConnection{}, err
+        var data BackendConnection
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 404 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendConnection{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 404:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnection{}, err
-            }
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return BackendConnection{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnection{}, err
-            }
-
-            return BackendConnection{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 410:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnection{}, err
-            }
-
-            return BackendConnection{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnection{}, err
-            }
-
-            return BackendConnection{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return BackendConnection{}, errors.New("the server returned an unknown status code")
+        return BackendConnection{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    if statusCode == 410 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendConnection{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendConnection{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return BackendConnection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetForm 
@@ -582,39 +553,34 @@ func (client *BackendConnectionTag) GetForm(class string) (CommonFormContainer, 
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response CommonFormContainer
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return CommonFormContainer{}, err
+        var data CommonFormContainer
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return CommonFormContainer{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonFormContainer{}, err
-            }
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return CommonFormContainer{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonFormContainer{}, err
-            }
-
-            return CommonFormContainer{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return CommonFormContainer{}, errors.New("the server returned an unknown status code")
+        return CommonFormContainer{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    return CommonFormContainer{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetClasses 
@@ -652,39 +618,34 @@ func (client *BackendConnectionTag) GetClasses() (BackendConnectionIndex, error)
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response BackendConnectionIndex
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return BackendConnectionIndex{}, err
+        var data BackendConnectionIndex
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendConnectionIndex{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnectionIndex{}, err
-            }
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return BackendConnectionIndex{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnectionIndex{}, err
-            }
-
-            return BackendConnectionIndex{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return BackendConnectionIndex{}, errors.New("the server returned an unknown status code")
+        return BackendConnectionIndex{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    return BackendConnectionIndex{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Create 
@@ -729,49 +690,44 @@ func (client *BackendConnectionTag) Create(payload BackendConnectionCreate) (Com
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response CommonMessage
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return CommonMessage{}, err
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 400 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 400:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonMessage{}, err
-            }
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return CommonMessage{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonMessage{}, err
-            }
-
-            return CommonMessage{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonMessage{}, err
-            }
-
-            return CommonMessage{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return CommonMessage{}, errors.New("the server returned an unknown status code")
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
@@ -812,40 +768,36 @@ func (client *BackendConnectionTag) GetAll(startIndex int, count int, search str
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response BackendConnectionCollection
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return BackendConnectionCollection{}, err
+        var data BackendConnectionCollection
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendConnectionCollection{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnectionCollection{}, err
-            }
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return BackendConnectionCollection{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendConnectionCollection{}, err
-            }
-
-            return BackendConnectionCollection{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return BackendConnectionCollection{}, errors.New("the server returned an unknown status code")
+        return BackendConnectionCollection{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    return BackendConnectionCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
+
 
 
 

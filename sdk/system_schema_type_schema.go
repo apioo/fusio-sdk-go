@@ -4,4 +4,7 @@
 
 
 package sdk
-type SystemSchemaTypeSchema = map[string]any
+
+type SystemSchemaTypeSchema struct {
+}
+

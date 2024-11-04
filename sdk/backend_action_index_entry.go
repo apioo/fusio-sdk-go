@@ -4,7 +4,9 @@
 
 
 package sdk
+
 type BackendActionIndexEntry struct {
     Name string `json:"name"`
     Class string `json:"class"`
 }
+

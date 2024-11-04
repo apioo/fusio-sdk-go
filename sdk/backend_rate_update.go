@@ -5,13 +5,13 @@
 
 package sdk
 
-import "time"
 type BackendRateUpdate struct {
     Id int `json:"id"`
     Priority int `json:"priority"`
     Name string `json:"name"`
     RateLimit int `json:"rateLimit"`
-    Timespan time.Duration `json:"timespan"`
+    Timespan string `json:"timespan"`
     Allocation []BackendRateAllocation `json:"allocation"`
     Metadata *CommonMetadata `json:"metadata"`
 }
+

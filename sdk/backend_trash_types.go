@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type BackendTrashTypes struct {
     Types []string `json:"types"`
 }
+

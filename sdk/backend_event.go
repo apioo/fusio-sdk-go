@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendEvent struct {
     Id int `json:"id"`
     Name string `json:"name"`
@@ -11,3 +12,4 @@ type BackendEvent struct {
     Schema string `json:"schema"`
     Metadata *CommonMetadata `json:"metadata"`
 }
+

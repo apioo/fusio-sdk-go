@@ -4,8 +4,10 @@
 
 
 package sdk
+
 type BackendConnectionIntrospectionEntity struct {
     Name string `json:"name"`
     Headers []string `json:"headers"`
     Rows []BackendConnectionIntrospectionEntityRow `json:"rows"`
 }
+

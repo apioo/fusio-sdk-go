@@ -9,7 +9,8 @@ import (
     
     "encoding/json"
     "errors"
-    "github.com/apioo/sdkgen-go"
+    "fmt"
+    
     "io"
     "net/http"
     "net/url"
@@ -60,40 +61,36 @@ func (client *ConsumerScopeTag) GetAll(startIndex int, count int, search string)
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response ConsumerScopeCollection
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return ConsumerScopeCollection{}, err
+        var data ConsumerScopeCollection
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return ConsumerScopeCollection{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return ConsumerScopeCollection{}, err
-            }
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return ConsumerScopeCollection{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return ConsumerScopeCollection{}, err
-            }
-
-            return ConsumerScopeCollection{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return ConsumerScopeCollection{}, errors.New("the server returned an unknown status code")
+        return ConsumerScopeCollection{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    return ConsumerScopeCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
+
 
 
 

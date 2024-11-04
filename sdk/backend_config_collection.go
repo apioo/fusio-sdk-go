@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendConfigCollection = CommonCollection[BackendConfig]
+
+type BackendConfigCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendConfig `json:"entry"`
+}
+

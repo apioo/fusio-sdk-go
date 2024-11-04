@@ -8,10 +8,13 @@ package sdk
 import (
     "encoding/json"
     "fmt"
+    
+    
 )
 
 type CommonMessageException struct {
     Payload CommonMessage
+    Previous error
 }
 
 func (e *CommonMessageException) Error() string {

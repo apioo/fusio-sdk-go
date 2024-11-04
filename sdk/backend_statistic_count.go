@@ -5,9 +5,9 @@
 
 package sdk
 
-import "time"
 type BackendStatisticCount struct {
     Count int `json:"count"`
-    From time.Time `json:"from"`
-    To time.Time `json:"to"`
+    From string `json:"from"`
+    To string `json:"to"`
 }
+

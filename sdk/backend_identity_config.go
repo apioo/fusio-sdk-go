@@ -4,4 +4,7 @@
 
 
 package sdk
-type BackendIdentityConfig = map[string]any
+
+type BackendIdentityConfig struct {
+}
+

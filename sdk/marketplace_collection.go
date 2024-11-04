@@ -4,9 +4,11 @@
 
 
 package sdk
+
 type MarketplaceCollection[T any] struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`
     ItemsPerPage int `json:"itemsPerPage"`
     Entry []T `json:"entry"`
 }
+

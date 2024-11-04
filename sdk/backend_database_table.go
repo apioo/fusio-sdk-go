@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendDatabaseTable struct {
     Name string `json:"name"`
     Columns []BackendDatabaseTableColumn `json:"columns"`
@@ -11,3 +12,4 @@ type BackendDatabaseTable struct {
     Indexes []BackendDatabaseTableIndex `json:"indexes"`
     ForeignKeys []BackendDatabaseTableForeignKeyConstraint `json:"foreignKeys"`
 }
+

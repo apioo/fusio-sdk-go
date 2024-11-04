@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type SystemAbout struct {
     ApiVersion string `json:"apiVersion"`
     Title string `json:"title"`
@@ -20,3 +21,4 @@ type SystemAbout struct {
     Apps *SystemAboutApps `json:"apps"`
     Links []SystemAboutLink `json:"links"`
 }
+

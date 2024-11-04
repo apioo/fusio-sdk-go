@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendDatabaseTableColumn struct {
     Name string `json:"name"`
     Type string `json:"type"`
@@ -17,3 +18,4 @@ type BackendDatabaseTableColumn struct {
     Default any `json:"default"`
     Comment string `json:"comment"`
 }
+

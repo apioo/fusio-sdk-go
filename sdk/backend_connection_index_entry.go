@@ -4,7 +4,9 @@
 
 
 package sdk
+
 type BackendConnectionIndexEntry struct {
     Name string `json:"name"`
     Class string `json:"class"`
 }
+

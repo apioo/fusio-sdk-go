@@ -9,7 +9,8 @@ import (
     "bytes"
     "encoding/json"
     "errors"
-    "github.com/apioo/sdkgen-go"
+    "fmt"
+    
     "io"
     "net/http"
     "net/url"
@@ -65,49 +66,44 @@ func (client *BackendGeneratorTag) GetChangelog(provider string, payload Backend
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response BackendGeneratorProviderChangelog
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return BackendGeneratorProviderChangelog{}, err
+        var data BackendGeneratorProviderChangelog
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 400 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendGeneratorProviderChangelog{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 400:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendGeneratorProviderChangelog{}, err
-            }
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return BackendGeneratorProviderChangelog{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendGeneratorProviderChangelog{}, err
-            }
-
-            return BackendGeneratorProviderChangelog{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendGeneratorProviderChangelog{}, err
-            }
-
-            return BackendGeneratorProviderChangelog{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return BackendGeneratorProviderChangelog{}, errors.New("the server returned an unknown status code")
+        return BackendGeneratorProviderChangelog{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendGeneratorProviderChangelog{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return BackendGeneratorProviderChangelog{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // ExecuteProvider 
@@ -153,49 +149,44 @@ func (client *BackendGeneratorTag) ExecuteProvider(provider string, payload Back
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response CommonMessage
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return CommonMessage{}, err
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 400 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 400:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonMessage{}, err
-            }
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return CommonMessage{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonMessage{}, err
-            }
-
-            return CommonMessage{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonMessage{}, err
-            }
-
-            return CommonMessage{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return CommonMessage{}, errors.New("the server returned an unknown status code")
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetForm 
@@ -234,49 +225,44 @@ func (client *BackendGeneratorTag) GetForm(provider string) (CommonFormContainer
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response CommonFormContainer
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return CommonFormContainer{}, err
+        var data CommonFormContainer
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 400 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return CommonFormContainer{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 400:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonFormContainer{}, err
-            }
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return CommonFormContainer{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonFormContainer{}, err
-            }
-
-            return CommonFormContainer{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return CommonFormContainer{}, err
-            }
-
-            return CommonFormContainer{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return CommonFormContainer{}, errors.New("the server returned an unknown status code")
+        return CommonFormContainer{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return CommonFormContainer{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return CommonFormContainer{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetClasses 
@@ -314,40 +300,36 @@ func (client *BackendGeneratorTag) GetClasses() (BackendGeneratorIndexProviders,
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response BackendGeneratorIndexProviders
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return BackendGeneratorIndexProviders{}, err
+        var data BackendGeneratorIndexProviders
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendGeneratorIndexProviders{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendGeneratorIndexProviders{}, err
-            }
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return BackendGeneratorIndexProviders{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendGeneratorIndexProviders{}, err
-            }
-
-            return BackendGeneratorIndexProviders{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return BackendGeneratorIndexProviders{}, errors.New("the server returned an unknown status code")
+        return BackendGeneratorIndexProviders{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    return BackendGeneratorIndexProviders{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
+
 
 
 

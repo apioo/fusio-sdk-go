@@ -4,9 +4,11 @@
 
 
 package sdk
+
 type BackendRoleUpdate struct {
     Id int `json:"id"`
     CategoryId int `json:"categoryId"`
     Name string `json:"name"`
     Scopes []string `json:"scopes"`
 }
+

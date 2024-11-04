@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type ConsumerUserRefresh struct {
     RefreshToken string `json:"refresh_token"`
 }
+

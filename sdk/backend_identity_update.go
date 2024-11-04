@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendIdentityUpdate struct {
     Id int `json:"id"`
     AppId int `json:"appId"`
@@ -14,3 +15,4 @@ type BackendIdentityUpdate struct {
     Config *BackendIdentityConfig `json:"config"`
     AllowCreate bool `json:"allowCreate"`
 }
+

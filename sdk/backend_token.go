@@ -5,13 +5,13 @@
 
 package sdk
 
-import "time"
 type BackendToken struct {
     Id int `json:"id"`
     Status int `json:"status"`
     Name string `json:"name"`
     Scopes []string `json:"scopes"`
     Ip string `json:"ip"`
-    Expire time.Time `json:"expire"`
-    Date time.Time `json:"date"`
+    Expire string `json:"expire"`
+    Date string `json:"date"`
 }
+

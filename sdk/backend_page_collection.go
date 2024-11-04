@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendPageCollection = CommonCollection[BackendPage]
+
+type BackendPageCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendPage `json:"entry"`
+}
+

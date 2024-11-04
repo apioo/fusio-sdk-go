@@ -4,7 +4,9 @@
 
 
 package sdk
+
 type ConsumerUserEmail struct {
     Email string `json:"email"`
     Captcha string `json:"captcha"`
 }
+

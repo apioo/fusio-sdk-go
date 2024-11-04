@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendRoleCollection = CommonCollection[BackendRole]
+
+type BackendRoleCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendRole `json:"entry"`
+}
+

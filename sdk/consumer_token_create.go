@@ -5,9 +5,9 @@
 
 package sdk
 
-import "time"
 type ConsumerTokenCreate struct {
     Name string `json:"name"`
     Scopes []string `json:"scopes"`
-    Expire time.Time `json:"expire"`
+    Expire string `json:"expire"`
 }
+

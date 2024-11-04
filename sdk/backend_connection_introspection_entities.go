@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type BackendConnectionIntrospectionEntities struct {
     Entities []string `json:"entities"`
 }
+

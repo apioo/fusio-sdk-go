@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type ConsumerPaymentCheckoutResponse struct {
     ApprovalUrl string `json:"approvalUrl"`
 }
+

@@ -9,7 +9,8 @@ import (
     "bytes"
     "encoding/json"
     "errors"
-    "github.com/apioo/sdkgen-go"
+    "fmt"
+    
     "io"
     "net/http"
     "net/url"
@@ -65,39 +66,34 @@ func (client *ConsumerPaymentTag) Checkout(provider string, payload ConsumerPaym
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response ConsumerPaymentCheckoutResponse
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return ConsumerPaymentCheckoutResponse{}, err
+        var data ConsumerPaymentCheckoutResponse
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return ConsumerPaymentCheckoutResponse{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return ConsumerPaymentCheckoutResponse{}, err
-            }
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return ConsumerPaymentCheckoutResponse{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return ConsumerPaymentCheckoutResponse{}, err
-            }
-
-            return ConsumerPaymentCheckoutResponse{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return ConsumerPaymentCheckoutResponse{}, errors.New("the server returned an unknown status code")
+        return ConsumerPaymentCheckoutResponse{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    return ConsumerPaymentCheckoutResponse{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Portal 
@@ -143,40 +139,36 @@ func (client *ConsumerPaymentTag) Portal(provider string, payload ConsumerPaymen
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response ConsumerPaymentPortalResponse
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return ConsumerPaymentPortalResponse{}, err
+        var data ConsumerPaymentPortalResponse
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return ConsumerPaymentPortalResponse{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return ConsumerPaymentPortalResponse{}, err
-            }
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return ConsumerPaymentPortalResponse{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return ConsumerPaymentPortalResponse{}, err
-            }
-
-            return ConsumerPaymentPortalResponse{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return ConsumerPaymentPortalResponse{}, errors.New("the server returned an unknown status code")
+        return ConsumerPaymentPortalResponse{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    return ConsumerPaymentPortalResponse{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
+
 
 
 

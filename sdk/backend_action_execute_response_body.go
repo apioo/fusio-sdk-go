@@ -4,4 +4,7 @@
 
 
 package sdk
-type BackendActionExecuteResponseBody = map[string]any
+
+type BackendActionExecuteResponseBody struct {
+}
+

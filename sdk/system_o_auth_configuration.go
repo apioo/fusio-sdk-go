@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type SystemOAuthConfiguration struct {
     Issuer string `json:"issuer"`
     TokenEndpoint string `json:"token_endpoint"`
@@ -12,3 +13,4 @@ type SystemOAuthConfiguration struct {
     ScopesSupported []string `json:"scopes_supported"`
     ClaimsSupported []string `json:"claims_supported"`
 }
+

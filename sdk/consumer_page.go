@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type ConsumerPage struct {
     Id int `json:"id"`
     Title string `json:"title"`
@@ -11,3 +12,4 @@ type ConsumerPage struct {
     Content string `json:"content"`
     Metadata *CommonMetadata `json:"metadata"`
 }
+

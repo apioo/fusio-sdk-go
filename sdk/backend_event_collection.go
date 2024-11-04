@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendEventCollection = CommonCollection[BackendEvent]
+
+type BackendEventCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendEvent `json:"entry"`
+}
+

@@ -4,8 +4,10 @@
 
 
 package sdk
+
 type BackendDatabaseTableIndex struct {
     Name string `json:"name"`
     Unique bool `json:"unique"`
     Columns []string `json:"columns"`
 }
+

@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendSchemaCollection = CommonCollection[BackendSchema]
+
+type BackendSchemaCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendSchema `json:"entry"`
+}
+

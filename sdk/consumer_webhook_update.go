@@ -4,8 +4,10 @@
 
 
 package sdk
+
 type ConsumerWebhookUpdate struct {
     Event string `json:"event"`
     Name string `json:"name"`
     Endpoint string `json:"endpoint"`
 }
+

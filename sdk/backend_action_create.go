@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendActionCreate struct {
     Id int `json:"id"`
     Status int `json:"status"`
@@ -13,3 +14,4 @@ type BackendActionCreate struct {
     Config *BackendActionConfig `json:"config"`
     Metadata *CommonMetadata `json:"metadata"`
 }
+

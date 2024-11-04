@@ -4,7 +4,9 @@
 
 
 package sdk
+
 type SystemHealthCheck struct {
     Healthy bool `json:"healthy"`
     Error string `json:"error"`
 }
+

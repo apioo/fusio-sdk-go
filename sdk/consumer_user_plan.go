@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type ConsumerUserPlan struct {
     Id int `json:"id"`
     Name string `json:"name"`
@@ -11,3 +12,4 @@ type ConsumerUserPlan struct {
     Points int `json:"points"`
     Period int `json:"period"`
 }
+

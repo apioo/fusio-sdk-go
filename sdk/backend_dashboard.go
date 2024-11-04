@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendDashboard struct {
     ErrorsPerOperation *BackendStatisticChart `json:"errorsPerOperation"`
     IncomingRequests *BackendStatisticChart `json:"incomingRequests"`
@@ -15,3 +16,4 @@ type BackendDashboard struct {
     ActivitiesPerUser *BackendStatisticChart `json:"activitiesPerUser"`
     UserRegistrations *BackendStatisticChart `json:"userRegistrations"`
 }
+

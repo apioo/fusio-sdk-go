@@ -5,8 +5,8 @@
 
 package sdk
 
-import "time"
 type ConsumerTokenUpdate struct {
     Name string `json:"name"`
-    Expire time.Time `json:"expire"`
+    Expire string `json:"expire"`
 }
+

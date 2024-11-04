@@ -9,7 +9,8 @@ import (
     
     "encoding/json"
     "errors"
-    "github.com/apioo/sdkgen-go"
+    "fmt"
+    
     "io"
     "net/http"
     "net/url"
@@ -58,59 +59,54 @@ func (client *ConsumerTransactionTag) Get(transactionId string) (ConsumerTransac
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response ConsumerTransaction
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return ConsumerTransaction{}, err
+        var data ConsumerTransaction
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return ConsumerTransaction{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return ConsumerTransaction{}, err
-            }
+    if statusCode == 404 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return ConsumerTransaction{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 404:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return ConsumerTransaction{}, err
-            }
-
-            return ConsumerTransaction{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 410:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return ConsumerTransaction{}, err
-            }
-
-            return ConsumerTransaction{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return ConsumerTransaction{}, err
-            }
-
-            return ConsumerTransaction{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return ConsumerTransaction{}, errors.New("the server returned an unknown status code")
+        return ConsumerTransaction{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    if statusCode == 410 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return ConsumerTransaction{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return ConsumerTransaction{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return ConsumerTransaction{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
@@ -151,40 +147,36 @@ func (client *ConsumerTransactionTag) GetAll(startIndex int, count int, search s
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response ConsumerTransactionCollection
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return ConsumerTransactionCollection{}, err
+        var data ConsumerTransactionCollection
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return ConsumerTransactionCollection{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return ConsumerTransactionCollection{}, err
-            }
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return ConsumerTransactionCollection{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return ConsumerTransactionCollection{}, err
-            }
-
-            return ConsumerTransactionCollection{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return ConsumerTransactionCollection{}, errors.New("the server returned an unknown status code")
+        return ConsumerTransactionCollection{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    return ConsumerTransactionCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
+
 
 
 

@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type BackendConnectionRedirectResponse struct {
     RedirectUri string `json:"redirectUri"`
 }
+

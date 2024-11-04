@@ -5,7 +5,6 @@
 
 package sdk
 
-import "time"
 type ConsumerLog struct {
     Id int `json:"id"`
     AppId int `json:"appId"`
@@ -15,5 +14,6 @@ type ConsumerLog struct {
     Path string `json:"path"`
     Header string `json:"header"`
     Body string `json:"body"`
-    Date time.Time `json:"date"`
+    Date string `json:"date"`
 }
+

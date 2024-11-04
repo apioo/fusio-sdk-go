@@ -9,7 +9,8 @@ import (
     
     "encoding/json"
     "errors"
-    "github.com/apioo/sdkgen-go"
+    "fmt"
+    
     "io"
     "net/http"
     "net/url"
@@ -58,59 +59,54 @@ func (client *BackendTransactionTag) Get(transactionId string) (BackendTransacti
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response BackendTransaction
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return BackendTransaction{}, err
+        var data BackendTransaction
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendTransaction{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendTransaction{}, err
-            }
+    if statusCode == 404 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return BackendTransaction{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 404:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendTransaction{}, err
-            }
-
-            return BackendTransaction{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 410:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendTransaction{}, err
-            }
-
-            return BackendTransaction{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendTransaction{}, err
-            }
-
-            return BackendTransaction{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return BackendTransaction{}, errors.New("the server returned an unknown status code")
+        return BackendTransaction{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    if statusCode == 410 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendTransaction{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendTransaction{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return BackendTransaction{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
@@ -158,40 +154,36 @@ func (client *BackendTransactionTag) GetAll(startIndex int, count int, search st
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response BackendTransactionCollection
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return BackendTransactionCollection{}, err
+        var data BackendTransactionCollection
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendTransactionCollection{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendTransactionCollection{}, err
-            }
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return BackendTransactionCollection{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendTransactionCollection{}, err
-            }
-
-            return BackendTransactionCollection{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return BackendTransactionCollection{}, errors.New("the server returned an unknown status code")
+        return BackendTransactionCollection{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    return BackendTransactionCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
+
 
 
 

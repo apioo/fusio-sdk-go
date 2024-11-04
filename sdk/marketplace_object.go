@@ -5,7 +5,7 @@
 
 package sdk
 
-import "time"
+// Base class of all objects on the marketplace
 type MarketplaceObject struct {
     Id int `json:"id"`
     Name string `json:"name"`
@@ -15,6 +15,7 @@ type MarketplaceObject struct {
     Summary string `json:"summary"`
     Description string `json:"description"`
     Cost int `json:"cost"`
-    UpdateDate time.Time `json:"updateDate"`
-    InsertDate time.Time `json:"insertDate"`
+    UpdateDate string `json:"updateDate"`
+    InsertDate string `json:"insertDate"`
 }
+

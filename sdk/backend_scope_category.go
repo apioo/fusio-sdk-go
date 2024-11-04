@@ -4,8 +4,10 @@
 
 
 package sdk
+
 type BackendScopeCategory struct {
     Id int `json:"id"`
     Name string `json:"name"`
     Scopes []BackendScopeCategoryScope `json:"scopes"`
 }
+

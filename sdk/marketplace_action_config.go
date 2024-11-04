@@ -4,4 +4,7 @@
 
 
 package sdk
-type MarketplaceActionConfig = map[string]any
+
+type MarketplaceActionConfig struct {
+}
+

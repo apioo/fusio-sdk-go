@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendPlanCreate struct {
     Id int `json:"id"`
     Name string `json:"name"`
@@ -15,3 +16,4 @@ type BackendPlanCreate struct {
     Scopes []string `json:"scopes"`
     Metadata *CommonMetadata `json:"metadata"`
 }
+

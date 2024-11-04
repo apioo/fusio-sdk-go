@@ -5,7 +5,6 @@
 
 package sdk
 
-import "time"
 type BackendAudit struct {
     Id int `json:"id"`
     App *BackendApp `json:"app"`
@@ -14,5 +13,6 @@ type BackendAudit struct {
     Ip string `json:"ip"`
     Message string `json:"message"`
     Content *BackendAuditObject `json:"content"`
-    Date time.Time `json:"date"`
+    Date string `json:"date"`
 }
+

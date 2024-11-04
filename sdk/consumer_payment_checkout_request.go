@@ -4,7 +4,9 @@
 
 
 package sdk
+
 type ConsumerPaymentCheckoutRequest struct {
     PlanId int `json:"planId"`
     ReturnUrl string `json:"returnUrl"`
 }
+

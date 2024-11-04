@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendSchema struct {
     Id int `json:"id"`
     Status int `json:"status"`
@@ -12,3 +13,4 @@ type BackendSchema struct {
     Form *BackendSchemaForm `json:"form"`
     Metadata *CommonMetadata `json:"metadata"`
 }
+

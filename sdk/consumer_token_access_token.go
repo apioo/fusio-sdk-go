@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type ConsumerTokenAccessToken struct {
     AccessToken string `json:"access_token"`
     TokenType string `json:"token_type"`
@@ -11,3 +12,4 @@ type ConsumerTokenAccessToken struct {
     RefreshToken string `json:"refresh_token"`
     Scope string `json:"scope"`
 }
+

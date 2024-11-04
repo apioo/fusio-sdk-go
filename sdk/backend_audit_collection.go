@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendAuditCollection = CommonCollection[BackendAudit]
+
+type BackendAuditCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendAudit `json:"entry"`
+}
+

@@ -5,7 +5,6 @@
 
 package sdk
 
-import "time"
 type MarketplaceAction struct {
     Id int `json:"id"`
     Name string `json:"name"`
@@ -15,8 +14,9 @@ type MarketplaceAction struct {
     Summary string `json:"summary"`
     Description string `json:"description"`
     Cost int `json:"cost"`
-    UpdateDate time.Time `json:"updateDate"`
-    InsertDate time.Time `json:"insertDate"`
+    UpdateDate string `json:"updateDate"`
+    InsertDate string `json:"insertDate"`
     Class string `json:"class"`
     Config *MarketplaceActionConfig `json:"config"`
 }
+

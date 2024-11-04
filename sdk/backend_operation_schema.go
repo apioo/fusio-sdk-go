@@ -4,9 +4,11 @@
 
 
 package sdk
+
 type BackendOperationSchema struct {
     Description string `json:"description"`
     Type string `json:"type"`
     Format string `json:"format"`
     Enum string `json:"enum"`
 }
+

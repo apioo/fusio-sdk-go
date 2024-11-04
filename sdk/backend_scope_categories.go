@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type BackendScopeCategories struct {
     Categories []BackendScopeCategory `json:"categories"`
 }
+

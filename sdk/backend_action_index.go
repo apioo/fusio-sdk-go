@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type BackendActionIndex struct {
     Actions []BackendActionIndexEntry `json:"actions"`
 }
+

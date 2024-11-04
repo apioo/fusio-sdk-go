@@ -4,4 +4,7 @@
 
 
 package sdk
-type SystemAboutApps = map[string]string
+
+type SystemAboutApps struct {
+}
+

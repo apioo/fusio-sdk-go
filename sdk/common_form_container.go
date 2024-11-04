@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type CommonFormContainer struct {
-    Element []any `json:"element"`
+    Element []CommonFormElement `json:"element"`
 }
+

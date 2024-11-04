@@ -4,7 +4,9 @@
 
 
 package sdk
+
 type BackendSdkGenerate struct {
     Format string `json:"format"`
     Config string `json:"config"`
 }
+

@@ -4,4 +4,7 @@
 
 
 package sdk
-type BackendGeneratorProviderConfig = map[string]any
+
+type BackendGeneratorProviderConfig struct {
+}
+

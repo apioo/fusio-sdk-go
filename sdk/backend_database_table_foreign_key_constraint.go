@@ -4,9 +4,11 @@
 
 
 package sdk
+
 type BackendDatabaseTableForeignKeyConstraint struct {
     Name string `json:"name"`
     ForeignTable string `json:"foreignTable"`
     LocalColumnNames []string `json:"localColumnNames"`
     ForeignColumnNames []string `json:"foreignColumnNames"`
 }
+

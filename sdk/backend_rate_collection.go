@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendRateCollection = CommonCollection[BackendRate]
+
+type BackendRateCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendRate `json:"entry"`
+}
+

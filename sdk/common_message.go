@@ -4,8 +4,10 @@
 
 
 package sdk
+
 type CommonMessage struct {
     Success bool `json:"success"`
     Message string `json:"message"`
     Id string `json:"id"`
 }
+

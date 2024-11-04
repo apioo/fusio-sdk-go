@@ -4,4 +4,11 @@
 
 
 package sdk
-type MarketplaceActionCollection = MarketplaceCollection[MarketplaceAction]
+
+type MarketplaceActionCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []MarketplaceAction `json:"entry"`
+}
+

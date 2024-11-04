@@ -4,8 +4,10 @@
 
 
 package sdk
+
 type ConsumerAppCreate struct {
     Name string `json:"name"`
     Url string `json:"url"`
     Scopes []string `json:"scopes"`
 }
+

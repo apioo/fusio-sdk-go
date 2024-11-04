@@ -4,8 +4,10 @@
 
 
 package sdk
+
 type ConsumerAuthorizeMeta struct {
     Name string `json:"name"`
     Url string `json:"url"`
     Scopes []ConsumerScope `json:"scopes"`
 }
+

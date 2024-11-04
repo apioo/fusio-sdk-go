@@ -4,4 +4,7 @@
 
 
 package sdk
-type BackendActionExecuteResponseHeaders = map[string]string
+
+type BackendActionExecuteResponseHeaders struct {
+}
+

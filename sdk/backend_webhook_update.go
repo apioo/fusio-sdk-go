@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendWebhookUpdate struct {
     Id int `json:"id"`
     EventId int `json:"eventId"`
@@ -12,3 +13,4 @@ type BackendWebhookUpdate struct {
     Endpoint string `json:"endpoint"`
     Responses []BackendWebhookResponse `json:"responses"`
 }
+

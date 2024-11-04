@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendWebhookCollection = CommonCollection[BackendWebhook]
+
+type BackendWebhookCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendWebhook `json:"entry"`
+}
+

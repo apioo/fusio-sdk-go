@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendLogError struct {
     Id int `json:"id"`
     Message int `json:"message"`
@@ -11,3 +12,4 @@ type BackendLogError struct {
     File string `json:"file"`
     Line int `json:"line"`
 }
+

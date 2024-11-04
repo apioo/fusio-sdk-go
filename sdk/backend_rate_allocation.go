@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendRateAllocation struct {
     Id int `json:"id"`
     OperationId int `json:"operationId"`
@@ -12,3 +13,4 @@ type BackendRateAllocation struct {
     AppId int `json:"appId"`
     Authenticated bool `json:"authenticated"`
 }
+

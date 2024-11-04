@@ -4,4 +4,7 @@
 
 
 package sdk
-type CommonMetadata = map[string]string
+
+type CommonMetadata struct {
+}
+

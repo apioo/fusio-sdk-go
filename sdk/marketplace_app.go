@@ -5,7 +5,6 @@
 
 package sdk
 
-import "time"
 type MarketplaceApp struct {
     Id int `json:"id"`
     Name string `json:"name"`
@@ -15,9 +14,10 @@ type MarketplaceApp struct {
     Summary string `json:"summary"`
     Description string `json:"description"`
     Cost int `json:"cost"`
-    UpdateDate time.Time `json:"updateDate"`
-    InsertDate time.Time `json:"insertDate"`
+    UpdateDate string `json:"updateDate"`
+    InsertDate string `json:"insertDate"`
     Scopes []string `json:"scopes"`
     DownloadUrl string `json:"downloadUrl"`
     Hash string `json:"hash"`
 }
+

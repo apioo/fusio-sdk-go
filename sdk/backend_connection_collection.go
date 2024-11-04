@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendConnectionCollection = CommonCollection[BackendConnection]
+
+type BackendConnectionCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendConnection `json:"entry"`
+}
+

@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type BackendDatabaseConnections struct {
     Connections []string `json:"connections"`
 }
+

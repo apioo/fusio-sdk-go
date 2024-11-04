@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type ConsumerAuthorizeRequest struct {
     ResponseType string `json:"responseType"`
     ClientId string `json:"clientId"`
@@ -12,3 +13,4 @@ type ConsumerAuthorizeRequest struct {
     State string `json:"state"`
     Allow bool `json:"allow"`
 }
+

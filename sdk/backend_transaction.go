@@ -5,7 +5,6 @@
 
 package sdk
 
-import "time"
 type BackendTransaction struct {
     Id int `json:"id"`
     UserId int `json:"userId"`
@@ -13,7 +12,8 @@ type BackendTransaction struct {
     TransactionId string `json:"transactionId"`
     Amount float64 `json:"amount"`
     Points float64 `json:"points"`
-    PeriodStart time.Time `json:"periodStart"`
-    PeriodEnd time.Time `json:"periodEnd"`
-    InsertDate time.Time `json:"insertDate"`
+    PeriodStart string `json:"periodStart"`
+    PeriodEnd string `json:"periodEnd"`
+    InsertDate string `json:"insertDate"`
 }
+

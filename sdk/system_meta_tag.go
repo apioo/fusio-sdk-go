@@ -9,7 +9,8 @@ import (
     "bytes"
     "encoding/json"
     "errors"
-    "github.com/apioo/sdkgen-go"
+    "fmt"
+    
     "io"
     "net/http"
     "net/url"
@@ -58,49 +59,44 @@ func (client *SystemMetaTag) GetSchema(name string) (SystemSchema, error) {
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response SystemSchema
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return SystemSchema{}, err
+        var data SystemSchema
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 404 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return SystemSchema{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 404:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return SystemSchema{}, err
-            }
+    if statusCode == 410 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return SystemSchema{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 410:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return SystemSchema{}, err
-            }
-
-            return SystemSchema{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return SystemSchema{}, err
-            }
-
-            return SystemSchema{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return SystemSchema{}, errors.New("the server returned an unknown status code")
+        return SystemSchema{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return SystemSchema{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return SystemSchema{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetRoutes 
@@ -138,19 +134,14 @@ func (client *SystemMetaTag) GetRoutes() (SystemRoute, error) {
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response SystemRoute
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return SystemRoute{}, err
-        }
+        var data SystemRoute
+        err := json.Unmarshal(respBody, &data)
 
-        return response, nil
+        return data, err
     }
 
-    switch resp.StatusCode {
-        default:
-            return SystemRoute{}, errors.New("the server returned an unknown status code")
-    }
+    var statusCode = resp.StatusCode
+    return SystemRoute{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetOAuthConfiguration 
@@ -188,19 +179,14 @@ func (client *SystemMetaTag) GetOAuthConfiguration() (SystemOAuthConfiguration, 
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response SystemOAuthConfiguration
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return SystemOAuthConfiguration{}, err
-        }
+        var data SystemOAuthConfiguration
+        err := json.Unmarshal(respBody, &data)
 
-        return response, nil
+        return data, err
     }
 
-    switch resp.StatusCode {
-        default:
-            return SystemOAuthConfiguration{}, errors.New("the server returned an unknown status code")
-    }
+    var statusCode = resp.StatusCode
+    return SystemOAuthConfiguration{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetHealth 
@@ -238,19 +224,14 @@ func (client *SystemMetaTag) GetHealth() (SystemHealthCheck, error) {
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response SystemHealthCheck
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return SystemHealthCheck{}, err
-        }
+        var data SystemHealthCheck
+        err := json.Unmarshal(respBody, &data)
 
-        return response, nil
+        return data, err
     }
 
-    switch resp.StatusCode {
-        default:
-            return SystemHealthCheck{}, errors.New("the server returned an unknown status code")
-    }
+    var statusCode = resp.StatusCode
+    return SystemHealthCheck{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetDebug 
@@ -295,19 +276,14 @@ func (client *SystemMetaTag) GetDebug(payload Passthru) (Passthru, error) {
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response Passthru
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return Passthru{}, err
-        }
+        var data Passthru
+        err := json.Unmarshal(respBody, &data)
 
-        return response, nil
+        return data, err
     }
 
-    switch resp.StatusCode {
-        default:
-            return Passthru{}, errors.New("the server returned an unknown status code")
-    }
+    var statusCode = resp.StatusCode
+    return Passthru{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAbout 
@@ -345,20 +321,16 @@ func (client *SystemMetaTag) GetAbout() (SystemAbout, error) {
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response SystemAbout
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return SystemAbout{}, err
-        }
+        var data SystemAbout
+        err := json.Unmarshal(respBody, &data)
 
-        return response, nil
+        return data, err
     }
 
-    switch resp.StatusCode {
-        default:
-            return SystemAbout{}, errors.New("the server returned an unknown status code")
-    }
+    var statusCode = resp.StatusCode
+    return SystemAbout{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
+
 
 
 

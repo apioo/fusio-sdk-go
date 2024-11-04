@@ -4,4 +4,11 @@
 
 
 package sdk
-type ConsumerWebhookCollection = CommonCollection[ConsumerWebhook]
+
+type ConsumerWebhookCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []ConsumerWebhook `json:"entry"`
+}
+

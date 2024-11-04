@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendActionExecuteRequest struct {
     Method string `json:"method"`
     UriFragments string `json:"uriFragments"`
@@ -11,3 +12,4 @@ type BackendActionExecuteRequest struct {
     Headers string `json:"headers"`
     Body *BackendActionExecuteRequestBody `json:"body"`
 }
+

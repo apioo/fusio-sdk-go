@@ -4,8 +4,10 @@
 
 
 package sdk
+
 type MarketplaceUser struct {
     Id int `json:"id"`
     Name string `json:"name"`
     Verified bool `json:"verified"`
 }
+

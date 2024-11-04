@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendPageCreate struct {
     Id int `json:"id"`
     Status int `json:"status"`
@@ -12,3 +13,4 @@ type BackendPageCreate struct {
     Content string `json:"content"`
     Metadata *CommonMetadata `json:"metadata"`
 }
+

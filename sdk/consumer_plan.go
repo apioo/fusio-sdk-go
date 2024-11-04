@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type ConsumerPlan struct {
     Id int `json:"id"`
     Name string `json:"name"`
@@ -13,3 +14,4 @@ type ConsumerPlan struct {
     Period int `json:"period"`
     Metadata *CommonMetadata `json:"metadata"`
 }
+

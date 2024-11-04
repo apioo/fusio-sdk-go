@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type ConsumerPaymentPortalResponse struct {
     RedirectUrl string `json:"redirectUrl"`
 }
+

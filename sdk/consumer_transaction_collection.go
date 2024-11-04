@@ -4,4 +4,11 @@
 
 
 package sdk
-type ConsumerTransactionCollection = CommonCollection[ConsumerTransaction]
+
+type ConsumerTransactionCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []ConsumerTransaction `json:"entry"`
+}
+

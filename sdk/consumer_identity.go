@@ -4,9 +4,11 @@
 
 
 package sdk
+
 type ConsumerIdentity struct {
     Id int `json:"id"`
     Name string `json:"name"`
     Icon string `json:"icon"`
     Redirect string `json:"redirect"`
 }
+

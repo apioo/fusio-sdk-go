@@ -4,9 +4,11 @@
 
 
 package sdk
+
 type ConsumerUserJWT struct {
     Token string `json:"token"`
     ExpiresIn int `json:"expires_in"`
     RefreshToken string `json:"refresh_token"`
     Scope string `json:"scope"`
 }
+

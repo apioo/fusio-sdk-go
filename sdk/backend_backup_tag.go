@@ -9,7 +9,8 @@ import (
     "bytes"
     "encoding/json"
     "errors"
-    "github.com/apioo/sdkgen-go"
+    "fmt"
+    
     "io"
     "net/http"
     "net/url"
@@ -64,39 +65,34 @@ func (client *BackendBackupTag) Import(payload BackendBackupImport) (BackendBack
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response BackendBackupImportResult
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return BackendBackupImportResult{}, err
+        var data BackendBackupImportResult
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendBackupImportResult{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendBackupImportResult{}, err
-            }
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return BackendBackupImportResult{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendBackupImportResult{}, err
-            }
-
-            return BackendBackupImportResult{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return BackendBackupImportResult{}, errors.New("the server returned an unknown status code")
+        return BackendBackupImportResult{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    return BackendBackupImportResult{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Export 
@@ -134,40 +130,36 @@ func (client *BackendBackupTag) Export() (BackendBackupExport, error) {
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response BackendBackupExport
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return BackendBackupExport{}, err
+        var data BackendBackupExport
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 401 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendBackupExport{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 401:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendBackupExport{}, err
-            }
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return BackendBackupExport{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return BackendBackupExport{}, err
-            }
-
-            return BackendBackupExport{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return BackendBackupExport{}, errors.New("the server returned an unknown status code")
+        return BackendBackupExport{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    return BackendBackupExport{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
+
 
 
 

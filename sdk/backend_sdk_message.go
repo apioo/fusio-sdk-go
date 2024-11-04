@@ -4,8 +4,10 @@
 
 
 package sdk
+
 type BackendSdkMessage struct {
     Success bool `json:"success"`
     Message string `json:"message"`
     Link string `json:"link"`
 }
+

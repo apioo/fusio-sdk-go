@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type BackendSchemaPreviewResponse struct {
     Preview string `json:"preview"`
 }
+

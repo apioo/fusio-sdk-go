@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type ConsumerWebhook struct {
     Id int `json:"id"`
     Status int `json:"status"`
@@ -12,3 +13,4 @@ type ConsumerWebhook struct {
     Endpoint string `json:"endpoint"`
     Responses []ConsumerWebhookResponse `json:"responses"`
 }
+

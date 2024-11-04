@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendPlanCollection = CommonCollection[BackendPlan]
+
+type BackendPlanCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendPlan `json:"entry"`
+}
+

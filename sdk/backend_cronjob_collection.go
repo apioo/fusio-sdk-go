@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendCronjobCollection = CommonCollection[BackendCronjob]
+
+type BackendCronjobCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendCronjob `json:"entry"`
+}
+

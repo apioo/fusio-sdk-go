@@ -4,9 +4,11 @@
 
 
 package sdk
+
 type BackendGeneratorProvider struct {
     Path string `json:"path"`
     Scopes []string `json:"scopes"`
     Public bool `json:"public"`
     Config *BackendGeneratorProviderConfig `json:"config"`
 }
+

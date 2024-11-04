@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type ConsumerPaymentPortalRequest struct {
     ReturnUrl string `json:"returnUrl"`
 }
+

@@ -4,4 +4,11 @@
 
 
 package sdk
-type ConsumerScopeCollection = CommonCollection[ConsumerScope]
+
+type ConsumerScopeCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []ConsumerScope `json:"entry"`
+}
+

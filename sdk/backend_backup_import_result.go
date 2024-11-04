@@ -4,8 +4,10 @@
 
 
 package sdk
+
 type BackendBackupImportResult struct {
     Success bool `json:"success"`
     Message string `json:"message"`
     Logs []string `json:"logs"`
 }
+

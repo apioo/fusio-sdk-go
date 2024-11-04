@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendAppCollection = CommonCollection[BackendApp]
+
+type BackendAppCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendApp `json:"entry"`
+}
+

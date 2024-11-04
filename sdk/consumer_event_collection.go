@@ -4,4 +4,11 @@
 
 
 package sdk
-type ConsumerEventCollection = CommonCollection[ConsumerEvent]
+
+type ConsumerEventCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []ConsumerEvent `json:"entry"`
+}
+

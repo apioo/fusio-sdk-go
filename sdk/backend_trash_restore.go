@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type BackendTrashRestore struct {
     Id int `json:"id"`
 }
+

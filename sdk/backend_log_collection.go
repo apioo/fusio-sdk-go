@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendLogCollection = CommonCollection[BackendLog]
+
+type BackendLogCollection struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendLog `json:"entry"`
+}
+

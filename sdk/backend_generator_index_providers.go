@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type BackendGeneratorIndexProviders struct {
     Providers []BackendGeneratorIndexProvider `json:"providers"`
 }
+

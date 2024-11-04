@@ -4,9 +4,11 @@
 
 
 package sdk
+
 type BackendCronjobError struct {
     Message string `json:"message"`
     Trace string `json:"trace"`
     File string `json:"file"`
     Line int `json:"line"`
 }
+

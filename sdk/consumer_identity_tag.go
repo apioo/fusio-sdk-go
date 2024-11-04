@@ -9,7 +9,8 @@ import (
     
     "encoding/json"
     "errors"
-    "github.com/apioo/sdkgen-go"
+    "fmt"
+    
     "io"
     "net/http"
     "net/url"
@@ -58,39 +59,34 @@ func (client *ConsumerIdentityTag) Redirect(identity string) (Passthru, error) {
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response Passthru
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return Passthru{}, err
+        var data Passthru
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 400 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return Passthru{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 400:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return Passthru{}, err
-            }
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return Passthru{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return Passthru{}, err
-            }
-
-            return Passthru{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return Passthru{}, errors.New("the server returned an unknown status code")
+        return Passthru{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    return Passthru{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Exchange 
@@ -129,39 +125,34 @@ func (client *ConsumerIdentityTag) Exchange(identity string) (Passthru, error) {
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response Passthru
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return Passthru{}, err
+        var data Passthru
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 400 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return Passthru{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 400:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return Passthru{}, err
-            }
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return Passthru{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return Passthru{}, err
-            }
-
-            return Passthru{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return Passthru{}, errors.New("the server returned an unknown status code")
+        return Passthru{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    return Passthru{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
@@ -201,40 +192,36 @@ func (client *ConsumerIdentityTag) GetAll(appId int, appKey string) (ConsumerIde
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var response ConsumerIdentityCollection
-        err = json.Unmarshal(respBody, &response)
-        if err != nil {
-            return ConsumerIdentityCollection{}, err
+        var data ConsumerIdentityCollection
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode == 400 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return ConsumerIdentityCollection{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
         }
-
-        return response, nil
     }
 
-    switch resp.StatusCode {
-        case 400:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return ConsumerIdentityCollection{}, err
-            }
+    if statusCode == 500 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
 
-            return ConsumerIdentityCollection{}, &CommonMessageException{
-                Payload: response,
-            }
-        case 500:
-            var response CommonMessage
-            err = json.Unmarshal(respBody, &response)
-            if err != nil {
-                return ConsumerIdentityCollection{}, err
-            }
-
-            return ConsumerIdentityCollection{}, &CommonMessageException{
-                Payload: response,
-            }
-        default:
-            return ConsumerIdentityCollection{}, errors.New("the server returned an unknown status code")
+        return ConsumerIdentityCollection{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
     }
+
+    return ConsumerIdentityCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
+
 
 
 

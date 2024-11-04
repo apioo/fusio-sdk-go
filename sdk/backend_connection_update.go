@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendConnectionUpdate struct {
     Id int `json:"id"`
     Name string `json:"name"`
@@ -12,3 +13,4 @@ type BackendConnectionUpdate struct {
     Config *BackendConnectionConfig `json:"config"`
     Metadata *CommonMetadata `json:"metadata"`
 }
+

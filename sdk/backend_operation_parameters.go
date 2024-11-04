@@ -4,4 +4,7 @@
 
 
 package sdk
-type BackendOperationParameters = map[string]BackendOperationSchema
+
+type BackendOperationParameters struct {
+}
+

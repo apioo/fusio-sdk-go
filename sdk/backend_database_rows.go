@@ -4,4 +4,11 @@
 
 
 package sdk
-type BackendDatabaseRows = CommonCollection[BackendDatabaseRow]
+
+type BackendDatabaseRows struct {
+    TotalResults int `json:"totalResults"`
+    StartIndex int `json:"startIndex"`
+    ItemsPerPage int `json:"itemsPerPage"`
+    Entry []BackendDatabaseRow `json:"entry"`
+}
+

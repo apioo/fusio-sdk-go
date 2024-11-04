@@ -4,6 +4,8 @@
 
 
 package sdk
+
 type SystemRoute struct {
     Routes *SystemRoutePath `json:"routes"`
 }
+

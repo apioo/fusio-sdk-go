@@ -5,7 +5,6 @@
 
 package sdk
 
-import "time"
 type BackendLog struct {
     Id int `json:"id"`
     Ip string `json:"ip"`
@@ -14,6 +13,7 @@ type BackendLog struct {
     Path string `json:"path"`
     Header string `json:"header"`
     Body string `json:"body"`
-    Date time.Time `json:"date"`
+    Date string `json:"date"`
     Errors []BackendLogError `json:`
 }
+

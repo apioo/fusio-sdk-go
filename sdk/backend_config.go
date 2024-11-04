@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendConfig struct {
     Id int `json:"id"`
     Type int `json:"type"`
@@ -11,3 +12,4 @@ type BackendConfig struct {
     Description string `json:"description"`
     Value any `json:"value"`
 }
+

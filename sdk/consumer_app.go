@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type ConsumerApp struct {
     Id int `json:"id"`
     UserId int `json:"userId"`
@@ -16,3 +17,4 @@ type ConsumerApp struct {
     Scopes []string `json:"scopes"`
     Metadata *CommonMetadata `json:"metadata"`
 }
+

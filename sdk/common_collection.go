@@ -4,9 +4,11 @@
 
 
 package sdk
+
 type CommonCollection[T any] struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`
     ItemsPerPage int `json:"itemsPerPage"`
     Entry []T `json:"entry"`
 }
+

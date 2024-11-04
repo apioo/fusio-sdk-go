@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendOperationCreate struct {
     Id int `json:"id"`
     Status int `json:"status"`
@@ -24,3 +25,4 @@ type BackendOperationCreate struct {
     Scopes []string `json:"scopes"`
     Metadata *CommonMetadata `json:"metadata"`
 }
+

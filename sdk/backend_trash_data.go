@@ -4,8 +4,10 @@
 
 
 package sdk
+
 type BackendTrashData struct {
     Id int `json:"id"`
     Status int `json:"status"`
     Name string `json:"name"`
 }
+

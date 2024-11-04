@@ -4,6 +4,7 @@
 
 
 package sdk
+
 type BackendPlanUpdate struct {
     Id int `json:"id"`
     Name string `json:"name"`
@@ -15,3 +16,4 @@ type BackendPlanUpdate struct {
     Scopes []string `json:"scopes"`
     Metadata *CommonMetadata `json:"metadata"`
 }
+

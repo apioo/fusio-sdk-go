@@ -4,7 +4,9 @@
 
 
 package sdk
+
 type SystemAboutLink struct {
     Rel string `json:"rel"`
     Href string `json:"href"`
 }
+

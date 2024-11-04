@@ -5,7 +5,6 @@
 
 package sdk
 
-import "time"
 type ConsumerUserAccount struct {
     Id int `json:"id"`
     PlanId int `json:"planId"`
@@ -16,5 +15,6 @@ type ConsumerUserAccount struct {
     Scopes []string `json:"scopes"`
     Plans []ConsumerUserPlan `json:"plans"`
     Metadata *CommonMetadata `json:"metadata"`
-    Date time.Time `json:"date"`
+    Date string `json:"date"`
 }
+

@@ -6,4 +6,6 @@
 package sdk
 
 // Contains a UI vocabulary to describe the UI of the schema
-type BackendSchemaForm = map[string]any
+type BackendSchemaForm struct {
+}
+

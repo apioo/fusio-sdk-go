@@ -8,10 +8,13 @@ package sdk
 import (
     "encoding/json"
     "fmt"
+    
+    
 )
 
 type MarketplaceMessageException struct {
     Payload MarketplaceMessage
+    Previous error
 }
 
 func (e *MarketplaceMessageException) Error() string {

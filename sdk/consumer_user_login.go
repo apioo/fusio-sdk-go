@@ -4,8 +4,10 @@
 
 
 package sdk
+
 type ConsumerUserLogin struct {
     Username string `json:"username"`
     Password string `json:"password"`
     Scopes []string `json:"scopes"`
 }
+
