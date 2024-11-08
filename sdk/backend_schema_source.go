@@ -6,6 +6,5 @@
 package sdk
 
 // Contains the TypeSchema specification
-type BackendSchemaSource struct {
-}
+type BackendSchemaSource = map[string]any
 

@@ -6,6 +6,5 @@
 package sdk
 
 // A key value object containing the changes
-type BackendAuditObject struct {
-}
+type BackendAuditObject = map[string]any
 

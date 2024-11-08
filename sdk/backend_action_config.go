@@ -5,6 +5,5 @@
 
 package sdk
 
-type BackendActionConfig struct {
-}
+type BackendActionConfig = map[string]any
 

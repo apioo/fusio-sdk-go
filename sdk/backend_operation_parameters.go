@@ -5,6 +5,5 @@
 
 package sdk
 
-type BackendOperationParameters struct {
-}
+type BackendOperationParameters = map[string]BackendOperationSchema
 

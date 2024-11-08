@@ -5,6 +5,5 @@
 
 package sdk
 
-type BackendConnectionConfig struct {
-}
+type BackendConnectionConfig = map[string]any
 

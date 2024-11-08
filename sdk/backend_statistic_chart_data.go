@@ -5,6 +5,5 @@
 
 package sdk
 
-type BackendStatisticChartData struct {
-}
+type BackendStatisticChartData = map[string]any
 

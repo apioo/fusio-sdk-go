@@ -5,6 +5,5 @@
 
 package sdk
 
-type BackendOperationThrows struct {
-}
+type BackendOperationThrows = map[string]string
 

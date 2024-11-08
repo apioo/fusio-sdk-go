@@ -6,6 +6,5 @@
 package sdk
 
 // No schema information available
-type Passthru struct {
-}
+type Passthru = map[string]any
 

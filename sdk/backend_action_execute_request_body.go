@@ -5,6 +5,5 @@
 
 package sdk
 
-type BackendActionExecuteRequestBody struct {
-}
+type BackendActionExecuteRequestBody = map[string]any
 

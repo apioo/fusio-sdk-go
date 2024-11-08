@@ -5,6 +5,5 @@
 
 package sdk
 
-type BackendDatabaseRow struct {
-}
+type BackendDatabaseRow = map[string]any
 

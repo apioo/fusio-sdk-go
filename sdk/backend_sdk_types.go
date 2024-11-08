@@ -5,6 +5,5 @@
 
 package sdk
 
-type BackendSdkTypes struct {
-}
+type BackendSdkTypes = map[string]string
 

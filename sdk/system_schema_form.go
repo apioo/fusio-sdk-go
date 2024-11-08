@@ -5,6 +5,5 @@
 
 package sdk
 
-type SystemSchemaForm struct {
-}
+type SystemSchemaForm = map[string]any
 

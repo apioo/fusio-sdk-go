@@ -5,6 +5,5 @@
 
 package sdk
 
-type SystemAboutApps struct {
-}
+type SystemAboutApps = map[string]string
 

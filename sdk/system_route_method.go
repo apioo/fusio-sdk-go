@@ -5,6 +5,5 @@
 
 package sdk
 
-type SystemRouteMethod struct {
-}
+type SystemRouteMethod = map[string]string
 
