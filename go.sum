@@ -1,6 +1,4 @@
-github.com/apioo/sdkgen-go v1.0.0 h1:B03lOUYmhYgIITbB1ry+4/DDTNf+cqSnyAR9/Tll9XY=
-github.com/apioo/sdkgen-go v1.0.0/go.mod h1:S0fw3foB73DKaffWRrhehaGaluMdl2RdQ03qI6shHJ4=
-github.com/apioo/sdkgen-go v1.0.2 h1:gfdabWfhBG1IYOyT7HU6Vv2ge9P16JKVjOYr6ArVjXs=
-github.com/apioo/sdkgen-go v1.0.2/go.mod h1:S0fw3foB73DKaffWRrhehaGaluMdl2RdQ03qI6shHJ4=
 github.com/apioo/sdkgen-go v1.0.3 h1:Ni5u7KOzkTpCyHVuA8wZr8uhriIgKukH0KOfKkFhc0o=
 github.com/apioo/sdkgen-go v1.0.3/go.mod h1:S0fw3foB73DKaffWRrhehaGaluMdl2RdQ03qI6shHJ4=
+github.com/apioo/sdkgen-go/v2 v2.0.2 h1:AdkPMvDleUHXesf8r4h0dmssBSR/S7P+ZB3ps7GbW0Q=
+github.com/apioo/sdkgen-go/v2 v2.0.2/go.mod h1:lYjGHtj+zeupXy3GqX9y1gj+YEGGbNOeIu1L1IO7Tm8=
