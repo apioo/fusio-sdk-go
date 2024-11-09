@@ -5,6 +5,7 @@
 
 package sdk
 
+// Base collection
 type CommonCollection[T any] struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

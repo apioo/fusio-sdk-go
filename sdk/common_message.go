@@ -5,6 +5,7 @@
 
 package sdk
 
+// Common error message
 type CommonMessage struct {
     Success bool `json:"success"`
     Message string `json:"message"`
