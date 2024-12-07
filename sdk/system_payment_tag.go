@@ -66,7 +66,7 @@ func (client *SystemPaymentTag) Webhook(provider string) (CommonMessage, error) 
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 

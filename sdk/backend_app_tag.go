@@ -23,29 +23,34 @@ type BackendAppTag struct {
 
 
 
-// DeleteToken 
-func (client *BackendAppTag) DeleteToken(appId string, tokenId string) (CommonMessage, error) {
+// Create 
+func (client *BackendAppTag) Create(payload BackendAppCreate) (CommonMessage, error) {
     pathParams := make(map[string]interface{})
-    pathParams["app_id"] = appId
-    pathParams["token_id"] = tokenId
 
     queryParams := make(map[string]interface{})
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+>/token/:token_id", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/app", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
-
-    req, err := http.NewRequest("DELETE", u.String(), nil)
+    raw, err := json.Marshal(payload)
     if err != nil {
         return CommonMessage{}, err
     }
 
+    var reqBody = bytes.NewReader(raw)
+
+    req, err := http.NewRequest("POST", u.String(), reqBody)
+    if err != nil {
+        return CommonMessage{}, err
+    }
+
+    req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
@@ -67,37 +72,7 @@ func (client *BackendAppTag) DeleteToken(appId string, tokenId string) (CommonMe
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 404 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 410 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
@@ -153,37 +128,7 @@ func (client *BackendAppTag) Delete(appId string) (CommonMessage, error) {
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 404 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 410 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
@@ -196,35 +141,29 @@ func (client *BackendAppTag) Delete(appId string) (CommonMessage, error) {
     return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
-func (client *BackendAppTag) Update(appId string, payload BackendAppUpdate) (CommonMessage, error) {
+// DeleteToken 
+func (client *BackendAppTag) DeleteToken(appId string, tokenId string) (CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["app_id"] = appId
+    pathParams["token_id"] = tokenId
 
     queryParams := make(map[string]interface{})
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+>/token/:token_id", pathParams))
     if err != nil {
         return CommonMessage{}, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
-    raw, err := json.Marshal(payload)
+
+    req, err := http.NewRequest("DELETE", u.String(), nil)
     if err != nil {
         return CommonMessage{}, err
     }
 
-    var reqBody = bytes.NewReader(raw)
-
-    req, err := http.NewRequest("PUT", u.String(), reqBody)
-    if err != nil {
-        return CommonMessage{}, err
-    }
-
-    req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
@@ -246,47 +185,7 @@ func (client *BackendAppTag) Update(appId string, payload BackendAppUpdate) (Com
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 400 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 404 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 410 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
@@ -342,37 +241,7 @@ func (client *BackendAppTag) Get(appId string) (BackendApp, error) {
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 404 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendApp{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendApp{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 410 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendApp{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
@@ -383,88 +252,6 @@ func (client *BackendAppTag) Get(appId string) (BackendApp, error) {
     }
 
     return BackendApp{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
-}
-
-// Create 
-func (client *BackendAppTag) Create(payload BackendAppCreate) (CommonMessage, error) {
-    pathParams := make(map[string]interface{})
-
-    queryParams := make(map[string]interface{})
-
-    var queryStructNames []string
-
-    u, err := url.Parse(client.internal.Parser.Url("/backend/app", pathParams))
-    if err != nil {
-        return CommonMessage{}, err
-    }
-
-    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
-
-    raw, err := json.Marshal(payload)
-    if err != nil {
-        return CommonMessage{}, err
-    }
-
-    var reqBody = bytes.NewReader(raw)
-
-    req, err := http.NewRequest("POST", u.String(), reqBody)
-    if err != nil {
-        return CommonMessage{}, err
-    }
-
-    req.Header.Set("Content-Type", "application/json")
-
-    resp, err := client.internal.HttpClient.Do(req)
-    if err != nil {
-        return CommonMessage{}, err
-    }
-
-    defer resp.Body.Close()
-
-    respBody, err := io.ReadAll(resp.Body)
-    if err != nil {
-        return CommonMessage{}, err
-    }
-
-    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return data, err
-    }
-
-    var statusCode = resp.StatusCode
-    if statusCode == 400 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
@@ -512,17 +299,7 @@ func (client *BackendAppTag) GetAll(startIndex int, count int, search string) (B
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendAppCollection{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
@@ -533,6 +310,69 @@ func (client *BackendAppTag) GetAll(startIndex int, count int, search string) (B
     }
 
     return BackendAppCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+}
+
+// Update 
+func (client *BackendAppTag) Update(appId string, payload BackendAppUpdate) (CommonMessage, error) {
+    pathParams := make(map[string]interface{})
+    pathParams["app_id"] = appId
+
+    queryParams := make(map[string]interface{})
+
+    var queryStructNames []string
+
+    u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+|^~>", pathParams))
+    if err != nil {
+        return CommonMessage{}, err
+    }
+
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
+
+    raw, err := json.Marshal(payload)
+    if err != nil {
+        return CommonMessage{}, err
+    }
+
+    var reqBody = bytes.NewReader(raw)
+
+    req, err := http.NewRequest("PUT", u.String(), reqBody)
+    if err != nil {
+        return CommonMessage{}, err
+    }
+
+    req.Header.Set("Content-Type", "application/json")
+
+    resp, err := client.internal.HttpClient.Do(req)
+    if err != nil {
+        return CommonMessage{}, err
+    }
+
+    defer resp.Body.Close()
+
+    respBody, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return CommonMessage{}, err
+    }
+
+    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode >= 0 && statusCode <= 999 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return CommonMessage{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

@@ -65,7 +65,7 @@ func (client *AuthorizationTag) GetWhoami() (BackendUser, error) {
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
@@ -120,17 +120,7 @@ func (client *AuthorizationTag) Revoke() (CommonMessage, error) {
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 400 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 

@@ -66,37 +66,7 @@ func (client *BackendTransactionTag) Get(transactionId string) (BackendTransacti
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendTransaction{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 404 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendTransaction{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 410 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendTransaction{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
@@ -161,17 +131,7 @@ func (client *BackendTransactionTag) GetAll(startIndex int, count int, search st
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendTransactionCollection{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 

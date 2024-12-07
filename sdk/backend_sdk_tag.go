@@ -72,27 +72,7 @@ func (client *BackendSdkTag) Generate(payload BackendSdkGenerate) (BackendSdkMes
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 400 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendSdkMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendSdkMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
@@ -147,17 +127,7 @@ func (client *BackendSdkTag) GetAll() (BackendSdkResponse, error) {
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendSdkResponse{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 

@@ -66,37 +66,7 @@ func (client *BackendLogTag) Get(logId string) (BackendLog, error) {
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendLog{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 404 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendLog{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 410 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendLog{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
@@ -165,17 +135,7 @@ func (client *BackendLogTag) GetAll(startIndex int, count int, search string, fr
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendLogCollection{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
@@ -186,72 +146,6 @@ func (client *BackendLogTag) GetAll(startIndex int, count int, search string, fr
     }
 
     return BackendLogCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
-}
-
-// GetError 
-func (client *BackendLogTag) GetError(errorId string) (BackendLogError, error) {
-    pathParams := make(map[string]interface{})
-    pathParams["error_id"] = errorId
-
-    queryParams := make(map[string]interface{})
-
-    var queryStructNames []string
-
-    u, err := url.Parse(client.internal.Parser.Url("/backend/log/error/$error_id<[0-9]+>", pathParams))
-    if err != nil {
-        return BackendLogError{}, err
-    }
-
-    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
-
-
-    req, err := http.NewRequest("GET", u.String(), nil)
-    if err != nil {
-        return BackendLogError{}, err
-    }
-
-
-    resp, err := client.internal.HttpClient.Do(req)
-    if err != nil {
-        return BackendLogError{}, err
-    }
-
-    defer resp.Body.Close()
-
-    respBody, err := io.ReadAll(resp.Body)
-    if err != nil {
-        return BackendLogError{}, err
-    }
-
-    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data BackendLogError
-        err := json.Unmarshal(respBody, &data)
-
-        return data, err
-    }
-
-    var statusCode = resp.StatusCode
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendLogError{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendLogError{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    return BackendLogError{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAllErrors 
@@ -299,17 +193,7 @@ func (client *BackendLogTag) GetAllErrors(startIndex int, count int, search stri
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendLogErrorCollection{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
@@ -320,6 +204,62 @@ func (client *BackendLogTag) GetAllErrors(startIndex int, count int, search stri
     }
 
     return BackendLogErrorCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+}
+
+// GetError 
+func (client *BackendLogTag) GetError(errorId string) (BackendLogError, error) {
+    pathParams := make(map[string]interface{})
+    pathParams["error_id"] = errorId
+
+    queryParams := make(map[string]interface{})
+
+    var queryStructNames []string
+
+    u, err := url.Parse(client.internal.Parser.Url("/backend/log/error/$error_id<[0-9]+>", pathParams))
+    if err != nil {
+        return BackendLogError{}, err
+    }
+
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
+
+
+    req, err := http.NewRequest("GET", u.String(), nil)
+    if err != nil {
+        return BackendLogError{}, err
+    }
+
+
+    resp, err := client.internal.HttpClient.Do(req)
+    if err != nil {
+        return BackendLogError{}, err
+    }
+
+    defer resp.Body.Close()
+
+    respBody, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return BackendLogError{}, err
+    }
+
+    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+        var data BackendLogError
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode >= 0 && statusCode <= 999 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendLogError{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return BackendLogError{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

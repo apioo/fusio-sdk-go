@@ -21,16 +21,16 @@ type SystemTag struct {
     internal *sdkgen.TagAbstract
 }
 
-func (client *SystemTag) Payment() *SystemPaymentTag {
-    return NewSystemPaymentTag(client.internal.HttpClient, client.internal.Parser)
+func (client *SystemTag) Connection() *SystemConnectionTag {
+    return NewSystemConnectionTag(client.internal.HttpClient, client.internal.Parser)
 }
 
 func (client *SystemTag) Meta() *SystemMetaTag {
     return NewSystemMetaTag(client.internal.HttpClient, client.internal.Parser)
 }
 
-func (client *SystemTag) Connection() *SystemConnectionTag {
-    return NewSystemConnectionTag(client.internal.HttpClient, client.internal.Parser)
+func (client *SystemTag) Payment() *SystemPaymentTag {
+    return NewSystemPaymentTag(client.internal.HttpClient, client.internal.Parser)
 }
 
 

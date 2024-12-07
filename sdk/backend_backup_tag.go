@@ -23,6 +23,61 @@ type BackendBackupTag struct {
 
 
 
+// Export 
+func (client *BackendBackupTag) Export() (BackendBackupExport, error) {
+    pathParams := make(map[string]interface{})
+
+    queryParams := make(map[string]interface{})
+
+    var queryStructNames []string
+
+    u, err := url.Parse(client.internal.Parser.Url("/backend/backup/export", pathParams))
+    if err != nil {
+        return BackendBackupExport{}, err
+    }
+
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
+
+
+    req, err := http.NewRequest("POST", u.String(), nil)
+    if err != nil {
+        return BackendBackupExport{}, err
+    }
+
+
+    resp, err := client.internal.HttpClient.Do(req)
+    if err != nil {
+        return BackendBackupExport{}, err
+    }
+
+    defer resp.Body.Close()
+
+    respBody, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return BackendBackupExport{}, err
+    }
+
+    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+        var data BackendBackupExport
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode >= 0 && statusCode <= 999 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return BackendBackupExport{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return BackendBackupExport{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+}
+
 // Import 
 func (client *BackendBackupTag) Import(payload BackendBackupImport) (BackendBackupImportResult, error) {
     pathParams := make(map[string]interface{})
@@ -72,17 +127,7 @@ func (client *BackendBackupTag) Import(payload BackendBackupImport) (BackendBack
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendBackupImportResult{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
+    if statusCode >= 0 && statusCode <= 999 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
@@ -93,71 +138,6 @@ func (client *BackendBackupTag) Import(payload BackendBackupImport) (BackendBack
     }
 
     return BackendBackupImportResult{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
-}
-
-// Export 
-func (client *BackendBackupTag) Export() (BackendBackupExport, error) {
-    pathParams := make(map[string]interface{})
-
-    queryParams := make(map[string]interface{})
-
-    var queryStructNames []string
-
-    u, err := url.Parse(client.internal.Parser.Url("/backend/backup/export", pathParams))
-    if err != nil {
-        return BackendBackupExport{}, err
-    }
-
-    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
-
-
-    req, err := http.NewRequest("POST", u.String(), nil)
-    if err != nil {
-        return BackendBackupExport{}, err
-    }
-
-
-    resp, err := client.internal.HttpClient.Do(req)
-    if err != nil {
-        return BackendBackupExport{}, err
-    }
-
-    defer resp.Body.Close()
-
-    respBody, err := io.ReadAll(resp.Body)
-    if err != nil {
-        return BackendBackupExport{}, err
-    }
-
-    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data BackendBackupExport
-        err := json.Unmarshal(respBody, &data)
-
-        return data, err
-    }
-
-    var statusCode = resp.StatusCode
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendBackupExport{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendBackupExport{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    return BackendBackupExport{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

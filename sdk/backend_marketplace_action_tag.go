@@ -23,103 +23,6 @@ type BackendMarketplaceActionTag struct {
 
 
 
-// Upgrade 
-func (client *BackendMarketplaceActionTag) Upgrade(user string, name string) (CommonMessage, error) {
-    pathParams := make(map[string]interface{})
-    pathParams["user"] = user
-    pathParams["name"] = name
-
-    queryParams := make(map[string]interface{})
-
-    var queryStructNames []string
-
-    u, err := url.Parse(client.internal.Parser.Url("/backend/marketplace/action/:user/:name", pathParams))
-    if err != nil {
-        return CommonMessage{}, err
-    }
-
-    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
-
-
-    req, err := http.NewRequest("PUT", u.String(), nil)
-    if err != nil {
-        return CommonMessage{}, err
-    }
-
-
-    resp, err := client.internal.HttpClient.Do(req)
-    if err != nil {
-        return CommonMessage{}, err
-    }
-
-    defer resp.Body.Close()
-
-    respBody, err := io.ReadAll(resp.Body)
-    if err != nil {
-        return CommonMessage{}, err
-    }
-
-    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return data, err
-    }
-
-    var statusCode = resp.StatusCode
-    if statusCode == 400 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 401 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 404 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 410 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return CommonMessage{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
-}
-
 // Get 
 func (client *BackendMarketplaceActionTag) Get(user string, name string) (MarketplaceAction, error) {
     pathParams := make(map[string]interface{})
@@ -164,47 +67,74 @@ func (client *BackendMarketplaceActionTag) Get(user string, name string) (Market
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 401 {
-        var data MarketplaceMessage
+    if statusCode >= 0 && statusCode <= 999 {
+        var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return MarketplaceAction{}, &MarketplaceMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 404 {
-        var data MarketplaceMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return MarketplaceAction{}, &MarketplaceMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 410 {
-        var data MarketplaceMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return MarketplaceAction{}, &MarketplaceMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
-        var data MarketplaceMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return MarketplaceAction{}, &MarketplaceMessageException{
+        return MarketplaceAction{}, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
     return MarketplaceAction{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+}
+
+// GetAll 
+func (client *BackendMarketplaceActionTag) GetAll(startIndex int, query string) (MarketplaceActionCollection, error) {
+    pathParams := make(map[string]interface{})
+
+    queryParams := make(map[string]interface{})
+    queryParams["startIndex"] = startIndex
+    queryParams["query"] = query
+
+    var queryStructNames []string
+
+    u, err := url.Parse(client.internal.Parser.Url("/backend/marketplace/action", pathParams))
+    if err != nil {
+        return MarketplaceActionCollection{}, err
+    }
+
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
+
+
+    req, err := http.NewRequest("GET", u.String(), nil)
+    if err != nil {
+        return MarketplaceActionCollection{}, err
+    }
+
+
+    resp, err := client.internal.HttpClient.Do(req)
+    if err != nil {
+        return MarketplaceActionCollection{}, err
+    }
+
+    defer resp.Body.Close()
+
+    respBody, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return MarketplaceActionCollection{}, err
+    }
+
+    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+        var data MarketplaceActionCollection
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode >= 0 && statusCode <= 999 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return MarketplaceActionCollection{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return MarketplaceActionCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Install 
@@ -256,31 +186,11 @@ func (client *BackendMarketplaceActionTag) Install(payload MarketplaceInstall) (
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 400 {
-        var data MarketplaceMessage
+    if statusCode >= 0 && statusCode <= 999 {
+        var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return MarketplaceMessage{}, &MarketplaceMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 401 {
-        var data MarketplaceMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return MarketplaceMessage{}, &MarketplaceMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    if statusCode == 500 {
-        var data MarketplaceMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return MarketplaceMessage{}, &MarketplaceMessageException{
+        return MarketplaceMessage{}, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
@@ -289,71 +199,61 @@ func (client *BackendMarketplaceActionTag) Install(payload MarketplaceInstall) (
     return MarketplaceMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
-func (client *BackendMarketplaceActionTag) GetAll(startIndex int, query string) (MarketplaceActionCollection, error) {
+// Upgrade 
+func (client *BackendMarketplaceActionTag) Upgrade(user string, name string) (CommonMessage, error) {
     pathParams := make(map[string]interface{})
+    pathParams["user"] = user
+    pathParams["name"] = name
 
     queryParams := make(map[string]interface{})
-    queryParams["startIndex"] = startIndex
-    queryParams["query"] = query
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/marketplace/action", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/marketplace/action/:user/:name", pathParams))
     if err != nil {
-        return MarketplaceActionCollection{}, err
+        return CommonMessage{}, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
 
-    req, err := http.NewRequest("GET", u.String(), nil)
+    req, err := http.NewRequest("PUT", u.String(), nil)
     if err != nil {
-        return MarketplaceActionCollection{}, err
+        return CommonMessage{}, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return MarketplaceActionCollection{}, err
+        return CommonMessage{}, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return MarketplaceActionCollection{}, err
+        return CommonMessage{}, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data MarketplaceActionCollection
+        var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
         return data, err
     }
 
     var statusCode = resp.StatusCode
-    if statusCode == 401 {
-        var data MarketplaceMessage
+    if statusCode >= 0 && statusCode <= 999 {
+        var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return MarketplaceActionCollection{}, &MarketplaceMessageException{
+        return CommonMessage{}, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    if statusCode == 500 {
-        var data MarketplaceMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return MarketplaceActionCollection{}, &MarketplaceMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    return MarketplaceActionCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

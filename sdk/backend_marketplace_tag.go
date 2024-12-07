@@ -21,12 +21,12 @@ type BackendMarketplaceTag struct {
     internal *sdkgen.TagAbstract
 }
 
-func (client *BackendMarketplaceTag) App() *BackendMarketplaceAppTag {
-    return NewBackendMarketplaceAppTag(client.internal.HttpClient, client.internal.Parser)
-}
-
 func (client *BackendMarketplaceTag) Action() *BackendMarketplaceActionTag {
     return NewBackendMarketplaceActionTag(client.internal.HttpClient, client.internal.Parser)
+}
+
+func (client *BackendMarketplaceTag) App() *BackendMarketplaceAppTag {
+    return NewBackendMarketplaceAppTag(client.internal.HttpClient, client.internal.Parser)
 }
 
 
