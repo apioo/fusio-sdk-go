@@ -23,6 +23,62 @@ type ConsumerEventTag struct {
 
 
 
+// Get 
+func (client *ConsumerEventTag) Get(eventId string) (ConsumerEvent, error) {
+    pathParams := make(map[string]interface{})
+    pathParams["event_id"] = eventId
+
+    queryParams := make(map[string]interface{})
+
+    var queryStructNames []string
+
+    u, err := url.Parse(client.internal.Parser.Url("/consumer/event/$event_id<[0-9]+|^~>", pathParams))
+    if err != nil {
+        return ConsumerEvent{}, err
+    }
+
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
+
+
+    req, err := http.NewRequest("GET", u.String(), nil)
+    if err != nil {
+        return ConsumerEvent{}, err
+    }
+
+
+    resp, err := client.internal.HttpClient.Do(req)
+    if err != nil {
+        return ConsumerEvent{}, err
+    }
+
+    defer resp.Body.Close()
+
+    respBody, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return ConsumerEvent{}, err
+    }
+
+    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+        var data ConsumerEvent
+        err := json.Unmarshal(respBody, &data)
+
+        return data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode >= 0 && statusCode <= 999 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return ConsumerEvent{}, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return ConsumerEvent{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+}
+
 // GetAll 
 func (client *ConsumerEventTag) GetAll(startIndex int, count int, search string) (ConsumerEventCollection, error) {
     pathParams := make(map[string]interface{})
