@@ -11,6 +11,7 @@ type BackendSchemaCreate struct {
     Name string `json:"name"`
     Source *BackendSchemaSource `json:"source"`
     Form *BackendSchemaForm `json:"form"`
+    Readonly bool `json:"readonly"`
     Metadata *CommonMetadata `json:"metadata"`
 }
 
