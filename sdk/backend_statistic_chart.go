@@ -7,7 +7,6 @@ package sdk
 
 type BackendStatisticChart struct {
     Labels []string `json:"labels"`
-    Data []Array `json:"data"`
-    Series []string `json:"series"`
+    Series []BackendStatisticChartSeries `json:"series"`
 }
 
