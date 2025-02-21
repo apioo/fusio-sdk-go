@@ -265,61 +265,6 @@ func (client *BackendDatabaseTag) DeleteTable(connectionId string, tableName str
     return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetConnections 
-func (client *BackendDatabaseTag) GetConnections() (BackendDatabaseConnections, error) {
-    pathParams := make(map[string]interface{})
-
-    queryParams := make(map[string]interface{})
-
-    var queryStructNames []string
-
-    u, err := url.Parse(client.internal.Parser.Url("/backend/database", pathParams))
-    if err != nil {
-        return BackendDatabaseConnections{}, err
-    }
-
-    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
-
-
-    req, err := http.NewRequest("GET", u.String(), nil)
-    if err != nil {
-        return BackendDatabaseConnections{}, err
-    }
-
-
-    resp, err := client.internal.HttpClient.Do(req)
-    if err != nil {
-        return BackendDatabaseConnections{}, err
-    }
-
-    defer resp.Body.Close()
-
-    respBody, err := io.ReadAll(resp.Body)
-    if err != nil {
-        return BackendDatabaseConnections{}, err
-    }
-
-    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data BackendDatabaseConnections
-        err := json.Unmarshal(respBody, &data)
-
-        return data, err
-    }
-
-    var statusCode = resp.StatusCode
-    if statusCode >= 0 && statusCode <= 999 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return BackendDatabaseConnections{}, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    return BackendDatabaseConnections{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
-}
-
 // GetRow 
 func (client *BackendDatabaseTag) GetRow(connectionId string, tableName string, id string) (BackendDatabaseRow, error) {
     pathParams := make(map[string]interface{})
@@ -379,7 +324,7 @@ func (client *BackendDatabaseTag) GetRow(connectionId string, tableName string, 
 }
 
 // GetRows 
-func (client *BackendDatabaseTag) GetRows(connectionId string, tableName string, startIndex int, count int, filterBy string, filterOp string, filterValue string, sortBy string, sortOrder string, columns string) (BackendDatabaseRows, error) {
+func (client *BackendDatabaseTag) GetRows(connectionId string, tableName string, startIndex int, count int, filterBy string, filterOp string, filterValue string, sortBy string, sortOrder string, columns string) (BackendDatabaseRowCollection, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
     pathParams["table_name"] = tableName
@@ -398,7 +343,7 @@ func (client *BackendDatabaseTag) GetRows(connectionId string, tableName string,
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/database/:connection_id/:table_name/rows", pathParams))
     if err != nil {
-        return BackendDatabaseRows{}, err
+        return BackendDatabaseRowCollection{}, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -406,24 +351,24 @@ func (client *BackendDatabaseTag) GetRows(connectionId string, tableName string,
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendDatabaseRows{}, err
+        return BackendDatabaseRowCollection{}, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendDatabaseRows{}, err
+        return BackendDatabaseRowCollection{}, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendDatabaseRows{}, err
+        return BackendDatabaseRowCollection{}, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data BackendDatabaseRows
+        var data BackendDatabaseRowCollection
         err := json.Unmarshal(respBody, &data)
 
         return data, err
@@ -434,13 +379,13 @@ func (client *BackendDatabaseTag) GetRows(connectionId string, tableName string,
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendDatabaseRows{}, &CommonMessageException{
+        return BackendDatabaseRowCollection{}, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendDatabaseRows{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return BackendDatabaseRowCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetTable 
@@ -501,7 +446,7 @@ func (client *BackendDatabaseTag) GetTable(connectionId string, tableName string
 }
 
 // GetTables 
-func (client *BackendDatabaseTag) GetTables(connectionId string) (BackendDatabaseTables, error) {
+func (client *BackendDatabaseTag) GetTables(connectionId string) (BackendDatabaseTableCollection, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
 
@@ -511,7 +456,7 @@ func (client *BackendDatabaseTag) GetTables(connectionId string) (BackendDatabas
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/database/:connection_id", pathParams))
     if err != nil {
-        return BackendDatabaseTables{}, err
+        return BackendDatabaseTableCollection{}, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -519,24 +464,24 @@ func (client *BackendDatabaseTag) GetTables(connectionId string) (BackendDatabas
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendDatabaseTables{}, err
+        return BackendDatabaseTableCollection{}, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendDatabaseTables{}, err
+        return BackendDatabaseTableCollection{}, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendDatabaseTables{}, err
+        return BackendDatabaseTableCollection{}, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data BackendDatabaseTables
+        var data BackendDatabaseTableCollection
         err := json.Unmarshal(respBody, &data)
 
         return data, err
@@ -547,13 +492,13 @@ func (client *BackendDatabaseTag) GetTables(connectionId string) (BackendDatabas
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendDatabaseTables{}, &CommonMessageException{
+        return BackendDatabaseTableCollection{}, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendDatabaseTables{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return BackendDatabaseTableCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // UpdateRow 
