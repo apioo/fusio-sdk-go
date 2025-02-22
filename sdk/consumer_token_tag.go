@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type ConsumerTokenTag struct {
 
 
 // Create 
-func (client *ConsumerTokenTag) Create(payload ConsumerTokenCreate) (ConsumerTokenAccessToken, error) {
+func (client *ConsumerTokenTag) Create(payload ConsumerTokenCreate) (*ConsumerTokenAccessToken, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -33,42 +33,42 @@ func (client *ConsumerTokenTag) Create(payload ConsumerTokenCreate) (ConsumerTok
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/token", pathParams))
     if err != nil {
-        return ConsumerTokenAccessToken{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
-        return ConsumerTokenAccessToken{}, err
+        return nil, err
     }
 
     var reqBody = bytes.NewReader(raw)
 
     req, err := http.NewRequest("POST", u.String(), reqBody)
     if err != nil {
-        return ConsumerTokenAccessToken{}, err
+        return nil, err
     }
 
     req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerTokenAccessToken{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerTokenAccessToken{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerTokenAccessToken
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -76,17 +76,17 @@ func (client *ConsumerTokenTag) Create(payload ConsumerTokenCreate) (ConsumerTok
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerTokenAccessToken{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerTokenAccessToken{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Delete 
-func (client *ConsumerTokenTag) Delete(tokenId string) (CommonMessage, error) {
+func (client *ConsumerTokenTag) Delete(tokenId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["token_id"] = tokenId
 
@@ -96,7 +96,7 @@ func (client *ConsumerTokenTag) Delete(tokenId string) (CommonMessage, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/token/$token_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -104,27 +104,27 @@ func (client *ConsumerTokenTag) Delete(tokenId string) (CommonMessage, error) {
 
     req, err := http.NewRequest("DELETE", u.String(), nil)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -132,17 +132,17 @@ func (client *ConsumerTokenTag) Delete(tokenId string) (CommonMessage, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Get 
-func (client *ConsumerTokenTag) Get(tokenId string) (ConsumerToken, error) {
+func (client *ConsumerTokenTag) Get(tokenId string) (*ConsumerToken, error) {
     pathParams := make(map[string]interface{})
     pathParams["token_id"] = tokenId
 
@@ -152,7 +152,7 @@ func (client *ConsumerTokenTag) Get(tokenId string) (ConsumerToken, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/token/$token_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return ConsumerToken{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -160,27 +160,27 @@ func (client *ConsumerTokenTag) Get(tokenId string) (ConsumerToken, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerToken{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerToken{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerToken{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerToken
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -188,17 +188,17 @@ func (client *ConsumerTokenTag) Get(tokenId string) (ConsumerToken, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerToken{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerToken{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
-func (client *ConsumerTokenTag) GetAll(startIndex int, count int, search string) (ConsumerTokenCollection, error) {
+func (client *ConsumerTokenTag) GetAll(startIndex int, count int, search string) (*ConsumerTokenCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -210,7 +210,7 @@ func (client *ConsumerTokenTag) GetAll(startIndex int, count int, search string)
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/token", pathParams))
     if err != nil {
-        return ConsumerTokenCollection{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -218,27 +218,27 @@ func (client *ConsumerTokenTag) GetAll(startIndex int, count int, search string)
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerTokenCollection{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerTokenCollection{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerTokenCollection{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerTokenCollection
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -246,17 +246,17 @@ func (client *ConsumerTokenTag) GetAll(startIndex int, count int, search string)
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerTokenCollection{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerTokenCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Update 
-func (client *ConsumerTokenTag) Update(tokenId string, payload ConsumerTokenUpdate) (ConsumerTokenAccessToken, error) {
+func (client *ConsumerTokenTag) Update(tokenId string, payload ConsumerTokenUpdate) (*ConsumerTokenAccessToken, error) {
     pathParams := make(map[string]interface{})
     pathParams["token_id"] = tokenId
 
@@ -266,42 +266,42 @@ func (client *ConsumerTokenTag) Update(tokenId string, payload ConsumerTokenUpda
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/token/$token_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return ConsumerTokenAccessToken{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
-        return ConsumerTokenAccessToken{}, err
+        return nil, err
     }
 
     var reqBody = bytes.NewReader(raw)
 
     req, err := http.NewRequest("PUT", u.String(), reqBody)
     if err != nil {
-        return ConsumerTokenAccessToken{}, err
+        return nil, err
     }
 
     req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerTokenAccessToken{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerTokenAccessToken{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerTokenAccessToken
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -309,13 +309,13 @@ func (client *ConsumerTokenTag) Update(tokenId string, payload ConsumerTokenUpda
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerTokenAccessToken{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerTokenAccessToken{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

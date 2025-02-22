@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type BackendCategoryTag struct {
 
 
 // Create 
-func (client *BackendCategoryTag) Create(payload BackendCategoryCreate) (CommonMessage, error) {
+func (client *BackendCategoryTag) Create(payload BackendCategoryCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -33,42 +33,42 @@ func (client *BackendCategoryTag) Create(payload BackendCategoryCreate) (CommonM
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/category", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     var reqBody = bytes.NewReader(raw)
 
     req, err := http.NewRequest("POST", u.String(), reqBody)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -76,17 +76,17 @@ func (client *BackendCategoryTag) Create(payload BackendCategoryCreate) (CommonM
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Delete 
-func (client *BackendCategoryTag) Delete(categoryId string) (CommonMessage, error) {
+func (client *BackendCategoryTag) Delete(categoryId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["category_id"] = categoryId
 
@@ -96,7 +96,7 @@ func (client *BackendCategoryTag) Delete(categoryId string) (CommonMessage, erro
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/category/$category_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -104,27 +104,27 @@ func (client *BackendCategoryTag) Delete(categoryId string) (CommonMessage, erro
 
     req, err := http.NewRequest("DELETE", u.String(), nil)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -132,17 +132,17 @@ func (client *BackendCategoryTag) Delete(categoryId string) (CommonMessage, erro
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Get 
-func (client *BackendCategoryTag) Get(categoryId string) (BackendCategory, error) {
+func (client *BackendCategoryTag) Get(categoryId string) (*BackendCategory, error) {
     pathParams := make(map[string]interface{})
     pathParams["category_id"] = categoryId
 
@@ -152,7 +152,7 @@ func (client *BackendCategoryTag) Get(categoryId string) (BackendCategory, error
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/category/$category_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return BackendCategory{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -160,27 +160,27 @@ func (client *BackendCategoryTag) Get(categoryId string) (BackendCategory, error
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendCategory{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendCategory{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendCategory{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendCategory
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -188,17 +188,17 @@ func (client *BackendCategoryTag) Get(categoryId string) (BackendCategory, error
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendCategory{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendCategory{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
-func (client *BackendCategoryTag) GetAll(startIndex int, count int, search string) (BackendCategoryCollection, error) {
+func (client *BackendCategoryTag) GetAll(startIndex int, count int, search string) (*BackendCategoryCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -210,7 +210,7 @@ func (client *BackendCategoryTag) GetAll(startIndex int, count int, search strin
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/category", pathParams))
     if err != nil {
-        return BackendCategoryCollection{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -218,27 +218,27 @@ func (client *BackendCategoryTag) GetAll(startIndex int, count int, search strin
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendCategoryCollection{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendCategoryCollection{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendCategoryCollection{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendCategoryCollection
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -246,17 +246,17 @@ func (client *BackendCategoryTag) GetAll(startIndex int, count int, search strin
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendCategoryCollection{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendCategoryCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Update 
-func (client *BackendCategoryTag) Update(categoryId string, payload BackendCategoryUpdate) (CommonMessage, error) {
+func (client *BackendCategoryTag) Update(categoryId string, payload BackendCategoryUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["category_id"] = categoryId
 
@@ -266,42 +266,42 @@ func (client *BackendCategoryTag) Update(categoryId string, payload BackendCateg
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/category/$category_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     var reqBody = bytes.NewReader(raw)
 
     req, err := http.NewRequest("PUT", u.String(), reqBody)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -309,13 +309,13 @@ func (client *BackendCategoryTag) Update(categoryId string, payload BackendCateg
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

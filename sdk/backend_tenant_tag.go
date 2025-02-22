@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type BackendTenantTag struct {
 
 
 // Remove 
-func (client *BackendTenantTag) Remove(tenantId string) (CommonMessage, error) {
+func (client *BackendTenantTag) Remove(tenantId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["tenant_id"] = tenantId
 
@@ -34,7 +34,7 @@ func (client *BackendTenantTag) Remove(tenantId string) (CommonMessage, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/tenant/:tenant_id", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -42,27 +42,27 @@ func (client *BackendTenantTag) Remove(tenantId string) (CommonMessage, error) {
 
     req, err := http.NewRequest("DELETE", u.String(), nil)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -70,17 +70,17 @@ func (client *BackendTenantTag) Remove(tenantId string) (CommonMessage, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Setup 
-func (client *BackendTenantTag) Setup(tenantId string) (CommonMessage, error) {
+func (client *BackendTenantTag) Setup(tenantId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["tenant_id"] = tenantId
 
@@ -90,7 +90,7 @@ func (client *BackendTenantTag) Setup(tenantId string) (CommonMessage, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/tenant/:tenant_id", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -98,27 +98,27 @@ func (client *BackendTenantTag) Setup(tenantId string) (CommonMessage, error) {
 
     req, err := http.NewRequest("PUT", u.String(), nil)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -126,13 +126,13 @@ func (client *BackendTenantTag) Setup(tenantId string) (CommonMessage, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

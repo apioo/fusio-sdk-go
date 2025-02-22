@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type BackendDashboardTag struct {
 
 
 // GetAll 
-func (client *BackendDashboardTag) GetAll() (BackendDashboard, error) {
+func (client *BackendDashboardTag) GetAll() (*BackendDashboard, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -33,7 +33,7 @@ func (client *BackendDashboardTag) GetAll() (BackendDashboard, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/dashboard", pathParams))
     if err != nil {
-        return BackendDashboard{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -41,27 +41,27 @@ func (client *BackendDashboardTag) GetAll() (BackendDashboard, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendDashboard{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendDashboard{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendDashboard{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendDashboard
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -69,13 +69,13 @@ func (client *BackendDashboardTag) GetAll() (BackendDashboard, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendDashboard{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendDashboard{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

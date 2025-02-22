@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type ConsumerIdentityTag struct {
 
 
 // Exchange 
-func (client *ConsumerIdentityTag) Exchange(identity string) (Passthru, error) {
+func (client *ConsumerIdentityTag) Exchange(identity string) (*Passthru, error) {
     pathParams := make(map[string]interface{})
     pathParams["identity"] = identity
 
@@ -34,7 +34,7 @@ func (client *ConsumerIdentityTag) Exchange(identity string) (Passthru, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/identity/:identity/exchange", pathParams))
     if err != nil {
-        return Passthru{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -42,27 +42,27 @@ func (client *ConsumerIdentityTag) Exchange(identity string) (Passthru, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return Passthru{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return Passthru{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return Passthru{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data Passthru
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -70,17 +70,17 @@ func (client *ConsumerIdentityTag) Exchange(identity string) (Passthru, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return Passthru{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return Passthru{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
-func (client *ConsumerIdentityTag) GetAll(appId int, appKey string) (ConsumerIdentityCollection, error) {
+func (client *ConsumerIdentityTag) GetAll(appId int, appKey string) (*ConsumerIdentityCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -91,7 +91,7 @@ func (client *ConsumerIdentityTag) GetAll(appId int, appKey string) (ConsumerIde
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/identity", pathParams))
     if err != nil {
-        return ConsumerIdentityCollection{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -99,27 +99,27 @@ func (client *ConsumerIdentityTag) GetAll(appId int, appKey string) (ConsumerIde
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerIdentityCollection{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerIdentityCollection{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerIdentityCollection{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerIdentityCollection
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -127,17 +127,17 @@ func (client *ConsumerIdentityTag) GetAll(appId int, appKey string) (ConsumerIde
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerIdentityCollection{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerIdentityCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Redirect 
-func (client *ConsumerIdentityTag) Redirect(identity string) (Passthru, error) {
+func (client *ConsumerIdentityTag) Redirect(identity string) (*Passthru, error) {
     pathParams := make(map[string]interface{})
     pathParams["identity"] = identity
 
@@ -147,7 +147,7 @@ func (client *ConsumerIdentityTag) Redirect(identity string) (Passthru, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/identity/:identity/redirect", pathParams))
     if err != nil {
-        return Passthru{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -155,27 +155,27 @@ func (client *ConsumerIdentityTag) Redirect(identity string) (Passthru, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return Passthru{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return Passthru{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return Passthru{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data Passthru
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -183,13 +183,13 @@ func (client *ConsumerIdentityTag) Redirect(identity string) (Passthru, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return Passthru{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return Passthru{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

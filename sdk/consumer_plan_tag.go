@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type ConsumerPlanTag struct {
 
 
 // Get 
-func (client *ConsumerPlanTag) Get(planId string) (ConsumerPlan, error) {
+func (client *ConsumerPlanTag) Get(planId string) (*ConsumerPlan, error) {
     pathParams := make(map[string]interface{})
     pathParams["plan_id"] = planId
 
@@ -34,7 +34,7 @@ func (client *ConsumerPlanTag) Get(planId string) (ConsumerPlan, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/plan/$plan_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return ConsumerPlan{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -42,27 +42,27 @@ func (client *ConsumerPlanTag) Get(planId string) (ConsumerPlan, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerPlan{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerPlan{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerPlan{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerPlan
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -70,17 +70,17 @@ func (client *ConsumerPlanTag) Get(planId string) (ConsumerPlan, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerPlan{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerPlan{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
-func (client *ConsumerPlanTag) GetAll(startIndex int, count int, search string) (ConsumerPlanCollection, error) {
+func (client *ConsumerPlanTag) GetAll(startIndex int, count int, search string) (*ConsumerPlanCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -92,7 +92,7 @@ func (client *ConsumerPlanTag) GetAll(startIndex int, count int, search string) 
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/plan", pathParams))
     if err != nil {
-        return ConsumerPlanCollection{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -100,27 +100,27 @@ func (client *ConsumerPlanTag) GetAll(startIndex int, count int, search string) 
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerPlanCollection{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerPlanCollection{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerPlanCollection{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerPlanCollection
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -128,13 +128,13 @@ func (client *ConsumerPlanTag) GetAll(startIndex int, count int, search string) 
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerPlanCollection{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerPlanCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

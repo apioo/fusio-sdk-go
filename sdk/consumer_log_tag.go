@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type ConsumerLogTag struct {
 
 
 // Get 
-func (client *ConsumerLogTag) Get(logId string) (ConsumerLog, error) {
+func (client *ConsumerLogTag) Get(logId string) (*ConsumerLog, error) {
     pathParams := make(map[string]interface{})
     pathParams["log_id"] = logId
 
@@ -34,7 +34,7 @@ func (client *ConsumerLogTag) Get(logId string) (ConsumerLog, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/log/$log_id<[0-9]+>", pathParams))
     if err != nil {
-        return ConsumerLog{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -42,27 +42,27 @@ func (client *ConsumerLogTag) Get(logId string) (ConsumerLog, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerLog{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerLog{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerLog{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerLog
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -70,17 +70,17 @@ func (client *ConsumerLogTag) Get(logId string) (ConsumerLog, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerLog{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerLog{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
-func (client *ConsumerLogTag) GetAll(startIndex int, count int, search string) (ConsumerLogCollection, error) {
+func (client *ConsumerLogTag) GetAll(startIndex int, count int, search string) (*ConsumerLogCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -92,7 +92,7 @@ func (client *ConsumerLogTag) GetAll(startIndex int, count int, search string) (
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/log", pathParams))
     if err != nil {
-        return ConsumerLogCollection{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -100,27 +100,27 @@ func (client *ConsumerLogTag) GetAll(startIndex int, count int, search string) (
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerLogCollection{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerLogCollection{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerLogCollection{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerLogCollection
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -128,13 +128,13 @@ func (client *ConsumerLogTag) GetAll(startIndex int, count int, search string) (
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerLogCollection{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerLogCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

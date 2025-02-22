@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type BackendScopeTag struct {
 
 
 // Create 
-func (client *BackendScopeTag) Create(payload BackendScopeCreate) (CommonMessage, error) {
+func (client *BackendScopeTag) Create(payload BackendScopeCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -33,42 +33,42 @@ func (client *BackendScopeTag) Create(payload BackendScopeCreate) (CommonMessage
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/scope", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     var reqBody = bytes.NewReader(raw)
 
     req, err := http.NewRequest("POST", u.String(), reqBody)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -76,17 +76,17 @@ func (client *BackendScopeTag) Create(payload BackendScopeCreate) (CommonMessage
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Delete 
-func (client *BackendScopeTag) Delete(scopeId string) (CommonMessage, error) {
+func (client *BackendScopeTag) Delete(scopeId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["scope_id"] = scopeId
 
@@ -96,7 +96,7 @@ func (client *BackendScopeTag) Delete(scopeId string) (CommonMessage, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/scope/$scope_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -104,27 +104,27 @@ func (client *BackendScopeTag) Delete(scopeId string) (CommonMessage, error) {
 
     req, err := http.NewRequest("DELETE", u.String(), nil)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -132,17 +132,17 @@ func (client *BackendScopeTag) Delete(scopeId string) (CommonMessage, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Get 
-func (client *BackendScopeTag) Get(scopeId string) (BackendScope, error) {
+func (client *BackendScopeTag) Get(scopeId string) (*BackendScope, error) {
     pathParams := make(map[string]interface{})
     pathParams["scope_id"] = scopeId
 
@@ -152,7 +152,7 @@ func (client *BackendScopeTag) Get(scopeId string) (BackendScope, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/scope/$scope_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return BackendScope{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -160,27 +160,27 @@ func (client *BackendScopeTag) Get(scopeId string) (BackendScope, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendScope{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendScope{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendScope{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendScope
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -188,17 +188,17 @@ func (client *BackendScopeTag) Get(scopeId string) (BackendScope, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendScope{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendScope{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
-func (client *BackendScopeTag) GetAll(startIndex int, count int, search string) (BackendScopeCollection, error) {
+func (client *BackendScopeTag) GetAll(startIndex int, count int, search string) (*BackendScopeCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -210,7 +210,7 @@ func (client *BackendScopeTag) GetAll(startIndex int, count int, search string) 
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/scope", pathParams))
     if err != nil {
-        return BackendScopeCollection{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -218,27 +218,27 @@ func (client *BackendScopeTag) GetAll(startIndex int, count int, search string) 
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendScopeCollection{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendScopeCollection{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendScopeCollection{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendScopeCollection
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -246,17 +246,17 @@ func (client *BackendScopeTag) GetAll(startIndex int, count int, search string) 
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendScopeCollection{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendScopeCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetCategories 
-func (client *BackendScopeTag) GetCategories() (BackendScopeCategories, error) {
+func (client *BackendScopeTag) GetCategories() (*BackendScopeCategories, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -265,7 +265,7 @@ func (client *BackendScopeTag) GetCategories() (BackendScopeCategories, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/scope/categories", pathParams))
     if err != nil {
-        return BackendScopeCategories{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -273,27 +273,27 @@ func (client *BackendScopeTag) GetCategories() (BackendScopeCategories, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendScopeCategories{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendScopeCategories{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendScopeCategories{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendScopeCategories
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -301,17 +301,17 @@ func (client *BackendScopeTag) GetCategories() (BackendScopeCategories, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendScopeCategories{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendScopeCategories{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Update 
-func (client *BackendScopeTag) Update(scopeId string, payload BackendScopeUpdate) (CommonMessage, error) {
+func (client *BackendScopeTag) Update(scopeId string, payload BackendScopeUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["scope_id"] = scopeId
 
@@ -321,42 +321,42 @@ func (client *BackendScopeTag) Update(scopeId string, payload BackendScopeUpdate
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/scope/$scope_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     var reqBody = bytes.NewReader(raw)
 
     req, err := http.NewRequest("PUT", u.String(), reqBody)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -364,13 +364,13 @@ func (client *BackendScopeTag) Update(scopeId string, payload BackendScopeUpdate
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

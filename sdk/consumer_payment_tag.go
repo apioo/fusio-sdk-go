@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type ConsumerPaymentTag struct {
 
 
 // Checkout 
-func (client *ConsumerPaymentTag) Checkout(provider string, payload ConsumerPaymentCheckoutRequest) (ConsumerPaymentCheckoutResponse, error) {
+func (client *ConsumerPaymentTag) Checkout(provider string, payload ConsumerPaymentCheckoutRequest) (*ConsumerPaymentCheckoutResponse, error) {
     pathParams := make(map[string]interface{})
     pathParams["provider"] = provider
 
@@ -34,42 +34,42 @@ func (client *ConsumerPaymentTag) Checkout(provider string, payload ConsumerPaym
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/payment/:provider/checkout", pathParams))
     if err != nil {
-        return ConsumerPaymentCheckoutResponse{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
-        return ConsumerPaymentCheckoutResponse{}, err
+        return nil, err
     }
 
     var reqBody = bytes.NewReader(raw)
 
     req, err := http.NewRequest("POST", u.String(), reqBody)
     if err != nil {
-        return ConsumerPaymentCheckoutResponse{}, err
+        return nil, err
     }
 
     req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerPaymentCheckoutResponse{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerPaymentCheckoutResponse{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerPaymentCheckoutResponse
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -77,17 +77,17 @@ func (client *ConsumerPaymentTag) Checkout(provider string, payload ConsumerPaym
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerPaymentCheckoutResponse{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerPaymentCheckoutResponse{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Portal 
-func (client *ConsumerPaymentTag) Portal(provider string, payload ConsumerPaymentPortalRequest) (ConsumerPaymentPortalResponse, error) {
+func (client *ConsumerPaymentTag) Portal(provider string, payload ConsumerPaymentPortalRequest) (*ConsumerPaymentPortalResponse, error) {
     pathParams := make(map[string]interface{})
     pathParams["provider"] = provider
 
@@ -97,42 +97,42 @@ func (client *ConsumerPaymentTag) Portal(provider string, payload ConsumerPaymen
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/payment/:provider/portal", pathParams))
     if err != nil {
-        return ConsumerPaymentPortalResponse{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
-        return ConsumerPaymentPortalResponse{}, err
+        return nil, err
     }
 
     var reqBody = bytes.NewReader(raw)
 
     req, err := http.NewRequest("POST", u.String(), reqBody)
     if err != nil {
-        return ConsumerPaymentPortalResponse{}, err
+        return nil, err
     }
 
     req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerPaymentPortalResponse{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerPaymentPortalResponse{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerPaymentPortalResponse
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -140,13 +140,13 @@ func (client *ConsumerPaymentTag) Portal(provider string, payload ConsumerPaymen
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerPaymentPortalResponse{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerPaymentPortalResponse{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

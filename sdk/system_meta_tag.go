@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type SystemMetaTag struct {
 
 
 // GetAbout 
-func (client *SystemMetaTag) GetAbout() (SystemAbout, error) {
+func (client *SystemMetaTag) GetAbout() (*SystemAbout, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -33,7 +33,7 @@ func (client *SystemMetaTag) GetAbout() (SystemAbout, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/system/about", pathParams))
     if err != nil {
-        return SystemAbout{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -41,27 +41,27 @@ func (client *SystemMetaTag) GetAbout() (SystemAbout, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return SystemAbout{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return SystemAbout{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return SystemAbout{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data SystemAbout
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -69,17 +69,17 @@ func (client *SystemMetaTag) GetAbout() (SystemAbout, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return SystemAbout{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return SystemAbout{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetDebug 
-func (client *SystemMetaTag) GetDebug(payload Passthru) (Passthru, error) {
+func (client *SystemMetaTag) GetDebug(payload Passthru) (*Passthru, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -88,42 +88,42 @@ func (client *SystemMetaTag) GetDebug(payload Passthru) (Passthru, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/system/debug", pathParams))
     if err != nil {
-        return Passthru{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
-        return Passthru{}, err
+        return nil, err
     }
 
     var reqBody = bytes.NewReader(raw)
 
     req, err := http.NewRequest("POST", u.String(), reqBody)
     if err != nil {
-        return Passthru{}, err
+        return nil, err
     }
 
     req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return Passthru{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return Passthru{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data Passthru
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -131,17 +131,17 @@ func (client *SystemMetaTag) GetDebug(payload Passthru) (Passthru, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return Passthru{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return Passthru{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetHealth 
-func (client *SystemMetaTag) GetHealth() (SystemHealthCheck, error) {
+func (client *SystemMetaTag) GetHealth() (*SystemHealthCheck, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -150,7 +150,7 @@ func (client *SystemMetaTag) GetHealth() (SystemHealthCheck, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/system/health", pathParams))
     if err != nil {
-        return SystemHealthCheck{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -158,27 +158,27 @@ func (client *SystemMetaTag) GetHealth() (SystemHealthCheck, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return SystemHealthCheck{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return SystemHealthCheck{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return SystemHealthCheck{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data SystemHealthCheck
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -186,17 +186,17 @@ func (client *SystemMetaTag) GetHealth() (SystemHealthCheck, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return SystemHealthCheck{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return SystemHealthCheck{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetOAuthConfiguration 
-func (client *SystemMetaTag) GetOAuthConfiguration() (SystemOAuthConfiguration, error) {
+func (client *SystemMetaTag) GetOAuthConfiguration() (*SystemOAuthConfiguration, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -205,7 +205,7 @@ func (client *SystemMetaTag) GetOAuthConfiguration() (SystemOAuthConfiguration, 
 
     u, err := url.Parse(client.internal.Parser.Url("/system/oauth-authorization-server", pathParams))
     if err != nil {
-        return SystemOAuthConfiguration{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -213,27 +213,27 @@ func (client *SystemMetaTag) GetOAuthConfiguration() (SystemOAuthConfiguration, 
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return SystemOAuthConfiguration{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return SystemOAuthConfiguration{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return SystemOAuthConfiguration{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data SystemOAuthConfiguration
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -241,17 +241,17 @@ func (client *SystemMetaTag) GetOAuthConfiguration() (SystemOAuthConfiguration, 
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return SystemOAuthConfiguration{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return SystemOAuthConfiguration{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetRoutes 
-func (client *SystemMetaTag) GetRoutes() (SystemRoute, error) {
+func (client *SystemMetaTag) GetRoutes() (*SystemRoute, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -260,7 +260,7 @@ func (client *SystemMetaTag) GetRoutes() (SystemRoute, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/system/route", pathParams))
     if err != nil {
-        return SystemRoute{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -268,27 +268,27 @@ func (client *SystemMetaTag) GetRoutes() (SystemRoute, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return SystemRoute{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return SystemRoute{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return SystemRoute{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data SystemRoute
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -296,17 +296,17 @@ func (client *SystemMetaTag) GetRoutes() (SystemRoute, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return SystemRoute{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return SystemRoute{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetSchema 
-func (client *SystemMetaTag) GetSchema(name string) (SystemSchema, error) {
+func (client *SystemMetaTag) GetSchema(name string) (*SystemSchema, error) {
     pathParams := make(map[string]interface{})
     pathParams["name"] = name
 
@@ -316,7 +316,7 @@ func (client *SystemMetaTag) GetSchema(name string) (SystemSchema, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/system/schema/:name", pathParams))
     if err != nil {
-        return SystemSchema{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -324,27 +324,27 @@ func (client *SystemMetaTag) GetSchema(name string) (SystemSchema, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return SystemSchema{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return SystemSchema{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return SystemSchema{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data SystemSchema
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -352,13 +352,13 @@ func (client *SystemMetaTag) GetSchema(name string) (SystemSchema, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return SystemSchema{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return SystemSchema{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

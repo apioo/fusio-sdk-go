@@ -10,7 +10,7 @@ import (
     
     
     
-    
+    "github.com/apioo/sdkgen-go/v2"
     
     "net/http"
     

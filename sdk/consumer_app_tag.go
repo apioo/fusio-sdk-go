@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type ConsumerAppTag struct {
 
 
 // Create 
-func (client *ConsumerAppTag) Create(payload ConsumerAppCreate) (CommonMessage, error) {
+func (client *ConsumerAppTag) Create(payload ConsumerAppCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -33,42 +33,42 @@ func (client *ConsumerAppTag) Create(payload ConsumerAppCreate) (CommonMessage, 
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/app", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     var reqBody = bytes.NewReader(raw)
 
     req, err := http.NewRequest("POST", u.String(), reqBody)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -76,17 +76,17 @@ func (client *ConsumerAppTag) Create(payload ConsumerAppCreate) (CommonMessage, 
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Delete 
-func (client *ConsumerAppTag) Delete(appId string) (CommonMessage, error) {
+func (client *ConsumerAppTag) Delete(appId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["app_id"] = appId
 
@@ -96,7 +96,7 @@ func (client *ConsumerAppTag) Delete(appId string) (CommonMessage, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/app/$app_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -104,27 +104,27 @@ func (client *ConsumerAppTag) Delete(appId string) (CommonMessage, error) {
 
     req, err := http.NewRequest("DELETE", u.String(), nil)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -132,17 +132,17 @@ func (client *ConsumerAppTag) Delete(appId string) (CommonMessage, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Get 
-func (client *ConsumerAppTag) Get(appId string) (ConsumerApp, error) {
+func (client *ConsumerAppTag) Get(appId string) (*ConsumerApp, error) {
     pathParams := make(map[string]interface{})
     pathParams["app_id"] = appId
 
@@ -152,7 +152,7 @@ func (client *ConsumerAppTag) Get(appId string) (ConsumerApp, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/app/$app_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return ConsumerApp{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -160,27 +160,27 @@ func (client *ConsumerAppTag) Get(appId string) (ConsumerApp, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerApp{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerApp{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerApp{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerApp
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -188,17 +188,17 @@ func (client *ConsumerAppTag) Get(appId string) (ConsumerApp, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerApp{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerApp{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
-func (client *ConsumerAppTag) GetAll(startIndex int, count int, search string) (ConsumerAppCollection, error) {
+func (client *ConsumerAppTag) GetAll(startIndex int, count int, search string) (*ConsumerAppCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -210,7 +210,7 @@ func (client *ConsumerAppTag) GetAll(startIndex int, count int, search string) (
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/app", pathParams))
     if err != nil {
-        return ConsumerAppCollection{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -218,27 +218,27 @@ func (client *ConsumerAppTag) GetAll(startIndex int, count int, search string) (
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerAppCollection{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerAppCollection{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerAppCollection{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerAppCollection
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -246,17 +246,17 @@ func (client *ConsumerAppTag) GetAll(startIndex int, count int, search string) (
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerAppCollection{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerAppCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Update 
-func (client *ConsumerAppTag) Update(appId string, payload ConsumerAppUpdate) (CommonMessage, error) {
+func (client *ConsumerAppTag) Update(appId string, payload ConsumerAppUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["app_id"] = appId
 
@@ -266,42 +266,42 @@ func (client *ConsumerAppTag) Update(appId string, payload ConsumerAppUpdate) (C
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/app/$app_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     var reqBody = bytes.NewReader(raw)
 
     req, err := http.NewRequest("PUT", u.String(), reqBody)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -309,13 +309,13 @@ func (client *ConsumerAppTag) Update(appId string, payload ConsumerAppUpdate) (C
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

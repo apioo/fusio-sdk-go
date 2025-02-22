@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type BackendStatisticTag struct {
 
 
 // GetActivitiesPerUser 
-func (client *BackendStatisticTag) GetActivitiesPerUser(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
+func (client *BackendStatisticTag) GetActivitiesPerUser(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -47,7 +47,7 @@ func (client *BackendStatisticTag) GetActivitiesPerUser(startIndex int, count in
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/activities_per_user", pathParams))
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -55,27 +55,27 @@ func (client *BackendStatisticTag) GetActivitiesPerUser(startIndex int, count in
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendStatisticChart
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -83,17 +83,17 @@ func (client *BackendStatisticTag) GetActivitiesPerUser(startIndex int, count in
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendStatisticChart{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendStatisticChart{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetCountRequests 
-func (client *BackendStatisticTag) GetCountRequests(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticCount, error) {
+func (client *BackendStatisticTag) GetCountRequests(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticCount, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -116,7 +116,7 @@ func (client *BackendStatisticTag) GetCountRequests(startIndex int, count int, s
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/count_requests", pathParams))
     if err != nil {
-        return BackendStatisticCount{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -124,27 +124,27 @@ func (client *BackendStatisticTag) GetCountRequests(startIndex int, count int, s
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendStatisticCount{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendStatisticCount{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendStatisticCount{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendStatisticCount
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -152,17 +152,17 @@ func (client *BackendStatisticTag) GetCountRequests(startIndex int, count int, s
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendStatisticCount{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendStatisticCount{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetErrorsPerOperation 
-func (client *BackendStatisticTag) GetErrorsPerOperation(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
+func (client *BackendStatisticTag) GetErrorsPerOperation(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -185,7 +185,7 @@ func (client *BackendStatisticTag) GetErrorsPerOperation(startIndex int, count i
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/errors_per_operation", pathParams))
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -193,27 +193,27 @@ func (client *BackendStatisticTag) GetErrorsPerOperation(startIndex int, count i
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendStatisticChart
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -221,17 +221,17 @@ func (client *BackendStatisticTag) GetErrorsPerOperation(startIndex int, count i
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendStatisticChart{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendStatisticChart{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetIncomingRequests 
-func (client *BackendStatisticTag) GetIncomingRequests(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
+func (client *BackendStatisticTag) GetIncomingRequests(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -254,7 +254,7 @@ func (client *BackendStatisticTag) GetIncomingRequests(startIndex int, count int
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/incoming_requests", pathParams))
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -262,27 +262,27 @@ func (client *BackendStatisticTag) GetIncomingRequests(startIndex int, count int
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendStatisticChart
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -290,17 +290,17 @@ func (client *BackendStatisticTag) GetIncomingRequests(startIndex int, count int
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendStatisticChart{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendStatisticChart{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetIncomingTransactions 
-func (client *BackendStatisticTag) GetIncomingTransactions(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
+func (client *BackendStatisticTag) GetIncomingTransactions(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -323,7 +323,7 @@ func (client *BackendStatisticTag) GetIncomingTransactions(startIndex int, count
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/incoming_transactions", pathParams))
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -331,27 +331,27 @@ func (client *BackendStatisticTag) GetIncomingTransactions(startIndex int, count
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendStatisticChart
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -359,17 +359,17 @@ func (client *BackendStatisticTag) GetIncomingTransactions(startIndex int, count
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendStatisticChart{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendStatisticChart{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetIssuedTokens 
-func (client *BackendStatisticTag) GetIssuedTokens(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
+func (client *BackendStatisticTag) GetIssuedTokens(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -392,7 +392,7 @@ func (client *BackendStatisticTag) GetIssuedTokens(startIndex int, count int, se
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/issued_tokens", pathParams))
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -400,27 +400,27 @@ func (client *BackendStatisticTag) GetIssuedTokens(startIndex int, count int, se
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendStatisticChart
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -428,17 +428,17 @@ func (client *BackendStatisticTag) GetIssuedTokens(startIndex int, count int, se
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendStatisticChart{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendStatisticChart{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetMostUsedActivities 
-func (client *BackendStatisticTag) GetMostUsedActivities(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
+func (client *BackendStatisticTag) GetMostUsedActivities(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -461,7 +461,7 @@ func (client *BackendStatisticTag) GetMostUsedActivities(startIndex int, count i
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/most_used_activities", pathParams))
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -469,27 +469,27 @@ func (client *BackendStatisticTag) GetMostUsedActivities(startIndex int, count i
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendStatisticChart
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -497,17 +497,17 @@ func (client *BackendStatisticTag) GetMostUsedActivities(startIndex int, count i
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendStatisticChart{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendStatisticChart{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetMostUsedApps 
-func (client *BackendStatisticTag) GetMostUsedApps(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
+func (client *BackendStatisticTag) GetMostUsedApps(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -530,7 +530,7 @@ func (client *BackendStatisticTag) GetMostUsedApps(startIndex int, count int, se
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/most_used_apps", pathParams))
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -538,27 +538,27 @@ func (client *BackendStatisticTag) GetMostUsedApps(startIndex int, count int, se
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendStatisticChart
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -566,17 +566,17 @@ func (client *BackendStatisticTag) GetMostUsedApps(startIndex int, count int, se
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendStatisticChart{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendStatisticChart{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetMostUsedOperations 
-func (client *BackendStatisticTag) GetMostUsedOperations(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
+func (client *BackendStatisticTag) GetMostUsedOperations(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -599,7 +599,7 @@ func (client *BackendStatisticTag) GetMostUsedOperations(startIndex int, count i
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/most_used_operations", pathParams))
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -607,27 +607,27 @@ func (client *BackendStatisticTag) GetMostUsedOperations(startIndex int, count i
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendStatisticChart
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -635,17 +635,17 @@ func (client *BackendStatisticTag) GetMostUsedOperations(startIndex int, count i
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendStatisticChart{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendStatisticChart{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetTestCoverage 
-func (client *BackendStatisticTag) GetTestCoverage() (BackendStatisticChart, error) {
+func (client *BackendStatisticTag) GetTestCoverage() (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -654,7 +654,7 @@ func (client *BackendStatisticTag) GetTestCoverage() (BackendStatisticChart, err
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/test_coverage", pathParams))
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -662,27 +662,27 @@ func (client *BackendStatisticTag) GetTestCoverage() (BackendStatisticChart, err
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendStatisticChart
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -690,17 +690,17 @@ func (client *BackendStatisticTag) GetTestCoverage() (BackendStatisticChart, err
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendStatisticChart{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendStatisticChart{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetTimeAverage 
-func (client *BackendStatisticTag) GetTimeAverage(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
+func (client *BackendStatisticTag) GetTimeAverage(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -723,7 +723,7 @@ func (client *BackendStatisticTag) GetTimeAverage(startIndex int, count int, sea
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/time_average", pathParams))
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -731,27 +731,27 @@ func (client *BackendStatisticTag) GetTimeAverage(startIndex int, count int, sea
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendStatisticChart
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -759,17 +759,17 @@ func (client *BackendStatisticTag) GetTimeAverage(startIndex int, count int, sea
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendStatisticChart{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendStatisticChart{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetTimePerOperation 
-func (client *BackendStatisticTag) GetTimePerOperation(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
+func (client *BackendStatisticTag) GetTimePerOperation(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -792,7 +792,7 @@ func (client *BackendStatisticTag) GetTimePerOperation(startIndex int, count int
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/time_per_operation", pathParams))
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -800,27 +800,27 @@ func (client *BackendStatisticTag) GetTimePerOperation(startIndex int, count int
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendStatisticChart
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -828,17 +828,17 @@ func (client *BackendStatisticTag) GetTimePerOperation(startIndex int, count int
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendStatisticChart{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendStatisticChart{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetUsedPoints 
-func (client *BackendStatisticTag) GetUsedPoints(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
+func (client *BackendStatisticTag) GetUsedPoints(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -861,7 +861,7 @@ func (client *BackendStatisticTag) GetUsedPoints(startIndex int, count int, sear
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/used_points", pathParams))
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -869,27 +869,27 @@ func (client *BackendStatisticTag) GetUsedPoints(startIndex int, count int, sear
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendStatisticChart
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -897,17 +897,17 @@ func (client *BackendStatisticTag) GetUsedPoints(startIndex int, count int, sear
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendStatisticChart{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendStatisticChart{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetUserRegistrations 
-func (client *BackendStatisticTag) GetUserRegistrations(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (BackendStatisticChart, error) {
+func (client *BackendStatisticTag) GetUserRegistrations(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -930,7 +930,7 @@ func (client *BackendStatisticTag) GetUserRegistrations(startIndex int, count in
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/statistic/user_registrations", pathParams))
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -938,27 +938,27 @@ func (client *BackendStatisticTag) GetUserRegistrations(startIndex int, count in
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendStatisticChart{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendStatisticChart
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -966,13 +966,13 @@ func (client *BackendStatisticTag) GetUserRegistrations(startIndex int, count in
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendStatisticChart{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendStatisticChart{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

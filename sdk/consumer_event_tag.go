@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type ConsumerEventTag struct {
 
 
 // Get 
-func (client *ConsumerEventTag) Get(eventId string) (ConsumerEvent, error) {
+func (client *ConsumerEventTag) Get(eventId string) (*ConsumerEvent, error) {
     pathParams := make(map[string]interface{})
     pathParams["event_id"] = eventId
 
@@ -34,7 +34,7 @@ func (client *ConsumerEventTag) Get(eventId string) (ConsumerEvent, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/event/$event_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return ConsumerEvent{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -42,27 +42,27 @@ func (client *ConsumerEventTag) Get(eventId string) (ConsumerEvent, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerEvent{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerEvent{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerEvent{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerEvent
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -70,17 +70,17 @@ func (client *ConsumerEventTag) Get(eventId string) (ConsumerEvent, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerEvent{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerEvent{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
-func (client *ConsumerEventTag) GetAll(startIndex int, count int, search string) (ConsumerEventCollection, error) {
+func (client *ConsumerEventTag) GetAll(startIndex int, count int, search string) (*ConsumerEventCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -92,7 +92,7 @@ func (client *ConsumerEventTag) GetAll(startIndex int, count int, search string)
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/event", pathParams))
     if err != nil {
-        return ConsumerEventCollection{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -100,27 +100,27 @@ func (client *ConsumerEventTag) GetAll(startIndex int, count int, search string)
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerEventCollection{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerEventCollection{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerEventCollection{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerEventCollection
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -128,13 +128,13 @@ func (client *ConsumerEventTag) GetAll(startIndex int, count int, search string)
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerEventCollection{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerEventCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

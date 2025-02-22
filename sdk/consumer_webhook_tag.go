@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type ConsumerWebhookTag struct {
 
 
 // Create 
-func (client *ConsumerWebhookTag) Create(payload ConsumerWebhookCreate) (CommonMessage, error) {
+func (client *ConsumerWebhookTag) Create(payload ConsumerWebhookCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -33,42 +33,42 @@ func (client *ConsumerWebhookTag) Create(payload ConsumerWebhookCreate) (CommonM
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/webhook", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     var reqBody = bytes.NewReader(raw)
 
     req, err := http.NewRequest("POST", u.String(), reqBody)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -76,17 +76,17 @@ func (client *ConsumerWebhookTag) Create(payload ConsumerWebhookCreate) (CommonM
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Delete 
-func (client *ConsumerWebhookTag) Delete(webhookId string) (CommonMessage, error) {
+func (client *ConsumerWebhookTag) Delete(webhookId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["webhook_id"] = webhookId
 
@@ -96,7 +96,7 @@ func (client *ConsumerWebhookTag) Delete(webhookId string) (CommonMessage, error
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/webhook/$webhook_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -104,27 +104,27 @@ func (client *ConsumerWebhookTag) Delete(webhookId string) (CommonMessage, error
 
     req, err := http.NewRequest("DELETE", u.String(), nil)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -132,17 +132,17 @@ func (client *ConsumerWebhookTag) Delete(webhookId string) (CommonMessage, error
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Get 
-func (client *ConsumerWebhookTag) Get(webhookId string) (ConsumerWebhook, error) {
+func (client *ConsumerWebhookTag) Get(webhookId string) (*ConsumerWebhook, error) {
     pathParams := make(map[string]interface{})
     pathParams["webhook_id"] = webhookId
 
@@ -152,7 +152,7 @@ func (client *ConsumerWebhookTag) Get(webhookId string) (ConsumerWebhook, error)
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/webhook/$webhook_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return ConsumerWebhook{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -160,27 +160,27 @@ func (client *ConsumerWebhookTag) Get(webhookId string) (ConsumerWebhook, error)
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerWebhook{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerWebhook{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerWebhook{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerWebhook
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -188,17 +188,17 @@ func (client *ConsumerWebhookTag) Get(webhookId string) (ConsumerWebhook, error)
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerWebhook{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerWebhook{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
-func (client *ConsumerWebhookTag) GetAll(startIndex int, count int, search string) (ConsumerWebhookCollection, error) {
+func (client *ConsumerWebhookTag) GetAll(startIndex int, count int, search string) (*ConsumerWebhookCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -210,7 +210,7 @@ func (client *ConsumerWebhookTag) GetAll(startIndex int, count int, search strin
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/webhook", pathParams))
     if err != nil {
-        return ConsumerWebhookCollection{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -218,27 +218,27 @@ func (client *ConsumerWebhookTag) GetAll(startIndex int, count int, search strin
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerWebhookCollection{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerWebhookCollection{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerWebhookCollection{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerWebhookCollection
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -246,17 +246,17 @@ func (client *ConsumerWebhookTag) GetAll(startIndex int, count int, search strin
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerWebhookCollection{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerWebhookCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Update 
-func (client *ConsumerWebhookTag) Update(webhookId string, payload ConsumerWebhookUpdate) (CommonMessage, error) {
+func (client *ConsumerWebhookTag) Update(webhookId string, payload ConsumerWebhookUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["webhook_id"] = webhookId
 
@@ -266,42 +266,42 @@ func (client *ConsumerWebhookTag) Update(webhookId string, payload ConsumerWebho
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/webhook/$webhook_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     var reqBody = bytes.NewReader(raw)
 
     req, err := http.NewRequest("PUT", u.String(), reqBody)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -309,13 +309,13 @@ func (client *ConsumerWebhookTag) Update(webhookId string, payload ConsumerWebho
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type ConsumerTransactionTag struct {
 
 
 // Get 
-func (client *ConsumerTransactionTag) Get(transactionId string) (ConsumerTransaction, error) {
+func (client *ConsumerTransactionTag) Get(transactionId string) (*ConsumerTransaction, error) {
     pathParams := make(map[string]interface{})
     pathParams["transaction_id"] = transactionId
 
@@ -34,7 +34,7 @@ func (client *ConsumerTransactionTag) Get(transactionId string) (ConsumerTransac
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/transaction/$transaction_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return ConsumerTransaction{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -42,27 +42,27 @@ func (client *ConsumerTransactionTag) Get(transactionId string) (ConsumerTransac
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerTransaction{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerTransaction{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerTransaction{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerTransaction
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -70,17 +70,17 @@ func (client *ConsumerTransactionTag) Get(transactionId string) (ConsumerTransac
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerTransaction{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerTransaction{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
-func (client *ConsumerTransactionTag) GetAll(startIndex int, count int, search string) (ConsumerTransactionCollection, error) {
+func (client *ConsumerTransactionTag) GetAll(startIndex int, count int, search string) (*ConsumerTransactionCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -92,7 +92,7 @@ func (client *ConsumerTransactionTag) GetAll(startIndex int, count int, search s
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/transaction", pathParams))
     if err != nil {
-        return ConsumerTransactionCollection{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -100,27 +100,27 @@ func (client *ConsumerTransactionTag) GetAll(startIndex int, count int, search s
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerTransactionCollection{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerTransactionCollection{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerTransactionCollection{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerTransactionCollection
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -128,13 +128,13 @@ func (client *ConsumerTransactionTag) GetAll(startIndex int, count int, search s
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerTransactionCollection{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerTransactionCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

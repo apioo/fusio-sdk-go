@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type BackendAuditTag struct {
 
 
 // Get 
-func (client *BackendAuditTag) Get(auditId string) (BackendAudit, error) {
+func (client *BackendAuditTag) Get(auditId string) (*BackendAudit, error) {
     pathParams := make(map[string]interface{})
     pathParams["audit_id"] = auditId
 
@@ -34,7 +34,7 @@ func (client *BackendAuditTag) Get(auditId string) (BackendAudit, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/audit/$audit_id<[0-9]+>", pathParams))
     if err != nil {
-        return BackendAudit{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -42,27 +42,27 @@ func (client *BackendAuditTag) Get(auditId string) (BackendAudit, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendAudit{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendAudit{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendAudit{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendAudit
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -70,17 +70,17 @@ func (client *BackendAuditTag) Get(auditId string) (BackendAudit, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendAudit{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendAudit{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
-func (client *BackendAuditTag) GetAll(startIndex int, count int, search string, from string, to string, appId int, userId int, event string, ip string, message string) (BackendAuditCollection, error) {
+func (client *BackendAuditTag) GetAll(startIndex int, count int, search string, from string, to string, appId int, userId int, event string, ip string, message string) (*BackendAuditCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -99,7 +99,7 @@ func (client *BackendAuditTag) GetAll(startIndex int, count int, search string, 
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/audit", pathParams))
     if err != nil {
-        return BackendAuditCollection{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -107,27 +107,27 @@ func (client *BackendAuditTag) GetAll(startIndex int, count int, search string, 
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendAuditCollection{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendAuditCollection{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendAuditCollection{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendAuditCollection
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -135,13 +135,13 @@ func (client *BackendAuditTag) GetAll(startIndex int, count int, search string, 
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendAuditCollection{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendAuditCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

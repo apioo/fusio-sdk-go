@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type ConsumerPageTag struct {
 
 
 // Get 
-func (client *ConsumerPageTag) Get(pageId string) (ConsumerPage, error) {
+func (client *ConsumerPageTag) Get(pageId string) (*ConsumerPage, error) {
     pathParams := make(map[string]interface{})
     pathParams["page_id"] = pageId
 
@@ -34,7 +34,7 @@ func (client *ConsumerPageTag) Get(pageId string) (ConsumerPage, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/page/:page_id", pathParams))
     if err != nil {
-        return ConsumerPage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -42,27 +42,27 @@ func (client *ConsumerPageTag) Get(pageId string) (ConsumerPage, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerPage{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerPage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerPage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerPage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -70,17 +70,17 @@ func (client *ConsumerPageTag) Get(pageId string) (ConsumerPage, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerPage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerPage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
-func (client *ConsumerPageTag) GetAll(startIndex int, count int, search string) (ConsumerPageCollection, error) {
+func (client *ConsumerPageTag) GetAll(startIndex int, count int, search string) (*ConsumerPageCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -92,7 +92,7 @@ func (client *ConsumerPageTag) GetAll(startIndex int, count int, search string) 
 
     u, err := url.Parse(client.internal.Parser.Url("/consumer/page", pathParams))
     if err != nil {
-        return ConsumerPageCollection{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -100,27 +100,27 @@ func (client *ConsumerPageTag) GetAll(startIndex int, count int, search string) 
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return ConsumerPageCollection{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return ConsumerPageCollection{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return ConsumerPageCollection{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data ConsumerPageCollection
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -128,13 +128,13 @@ func (client *ConsumerPageTag) GetAll(startIndex int, count int, search string) 
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return ConsumerPageCollection{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return ConsumerPageCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 

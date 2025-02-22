@@ -10,7 +10,7 @@ import (
     "encoding/json"
     "errors"
     "fmt"
-    
+    "github.com/apioo/sdkgen-go/v2"
     "io"
     "net/http"
     "net/url"
@@ -24,7 +24,7 @@ type BackendConfigTag struct {
 
 
 // Get 
-func (client *BackendConfigTag) Get(configId string) (BackendConfig, error) {
+func (client *BackendConfigTag) Get(configId string) (*BackendConfig, error) {
     pathParams := make(map[string]interface{})
     pathParams["config_id"] = configId
 
@@ -34,7 +34,7 @@ func (client *BackendConfigTag) Get(configId string) (BackendConfig, error) {
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/config/$config_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return BackendConfig{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -42,27 +42,27 @@ func (client *BackendConfigTag) Get(configId string) (BackendConfig, error) {
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendConfig{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendConfig{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendConfig{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendConfig
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -70,17 +70,17 @@ func (client *BackendConfigTag) Get(configId string) (BackendConfig, error) {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendConfig{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendConfig{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll 
-func (client *BackendConfigTag) GetAll(startIndex int, count int, search string) (BackendConfigCollection, error) {
+func (client *BackendConfigTag) GetAll(startIndex int, count int, search string) (*BackendConfigCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -92,7 +92,7 @@ func (client *BackendConfigTag) GetAll(startIndex int, count int, search string)
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/config", pathParams))
     if err != nil {
-        return BackendConfigCollection{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -100,27 +100,27 @@ func (client *BackendConfigTag) GetAll(startIndex int, count int, search string)
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return BackendConfigCollection{}, err
+        return nil, err
     }
 
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return BackendConfigCollection{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return BackendConfigCollection{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data BackendConfigCollection
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -128,17 +128,17 @@ func (client *BackendConfigTag) GetAll(startIndex int, count int, search string)
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return BackendConfigCollection{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return BackendConfigCollection{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // Update 
-func (client *BackendConfigTag) Update(configId string, payload BackendConfigUpdate) (CommonMessage, error) {
+func (client *BackendConfigTag) Update(configId string, payload BackendConfigUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["config_id"] = configId
 
@@ -148,42 +148,42 @@ func (client *BackendConfigTag) Update(configId string, payload BackendConfigUpd
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/config/$config_id<[0-9]+|^~>", pathParams))
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
 
     raw, err := json.Marshal(payload)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     var reqBody = bytes.NewReader(raw)
 
     req, err := http.NewRequest("PUT", u.String(), reqBody)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     req.Header.Set("Content-Type", "application/json")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return CommonMessage{}, err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return data, err
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -191,13 +191,13 @@ func (client *BackendConfigTag) Update(configId string, payload BackendConfigUpd
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return CommonMessage{}, &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return CommonMessage{}, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 
