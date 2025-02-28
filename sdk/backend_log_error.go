@@ -7,9 +7,11 @@ package sdk
 
 type BackendLogError struct {
     Id int `json:"id"`
-    Message int `json:"message"`
+    LogId int `json:"logId"`
+    Message string `json:"message"`
     Trace string `json:"trace"`
     File string `json:"file"`
     Line int `json:"line"`
+    InsertDate string `json:"insertDate"`
 }
 
