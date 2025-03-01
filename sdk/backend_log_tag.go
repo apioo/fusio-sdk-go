@@ -80,7 +80,7 @@ func (client *BackendLogTag) Get(logId string) (*BackendLog, error) {
 }
 
 // GetAll 
-func (client *BackendLogTag) GetAll(startIndex int, count int, search string, from string, to string, routeId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendLogCollection, error) {
+func (client *BackendLogTag) GetAll(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendLogCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -89,7 +89,7 @@ func (client *BackendLogTag) GetAll(startIndex int, count int, search string, fr
     queryParams["search"] = search
     queryParams["from"] = from
     queryParams["to"] = to
-    queryParams["routeId"] = routeId
+    queryParams["operationId"] = operationId
     queryParams["appId"] = appId
     queryParams["userId"] = userId
     queryParams["ip"] = ip
