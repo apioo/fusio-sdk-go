@@ -2,3 +2,5 @@ github.com/apioo/sdkgen-go v1.0.3 h1:Ni5u7KOzkTpCyHVuA8wZr8uhriIgKukH0KOfKkFhc0o
 github.com/apioo/sdkgen-go v1.0.3/go.mod h1:S0fw3foB73DKaffWRrhehaGaluMdl2RdQ03qI6shHJ4=
 github.com/apioo/sdkgen-go/v2 v2.0.2 h1:AdkPMvDleUHXesf8r4h0dmssBSR/S7P+ZB3ps7GbW0Q=
 github.com/apioo/sdkgen-go/v2 v2.0.2/go.mod h1:lYjGHtj+zeupXy3GqX9y1gj+YEGGbNOeIu1L1IO7Tm8=
+github.com/apioo/sdkgen-go/v2 v2.0.3 h1:LzyzHlFiOih9ElJ6KyBJYHdAPqJcrAv+gq+zPCJEoaw=
+github.com/apioo/sdkgen-go/v2 v2.0.3/go.mod h1:lYjGHtj+zeupXy3GqX9y1gj+YEGGbNOeIu1L1IO7Tm8=
