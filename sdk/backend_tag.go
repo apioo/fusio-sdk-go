@@ -69,6 +69,10 @@ func (client *BackendTag) Event() *BackendEventTag {
     return NewBackendEventTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *BackendTag) Form() *BackendFormTag {
+    return NewBackendFormTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *BackendTag) Generator() *BackendGeneratorTag {
     return NewBackendGeneratorTag(client.internal.HttpClient, client.internal.Parser)
 }
