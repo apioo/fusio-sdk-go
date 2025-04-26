@@ -10,7 +10,6 @@ type BackendFirewallCreate struct {
     Name string `json:"name"`
     Type int `json:"type"`
     Ip string `json:"ip"`
-    Mask int `json:"mask"`
     Expire string `json:"expire"`
     Metadata *CommonMetadata `json:"metadata"`
 }
