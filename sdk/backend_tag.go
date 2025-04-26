@@ -69,6 +69,10 @@ func (client *BackendTag) Event() *BackendEventTag {
     return NewBackendEventTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *BackendTag) Firewall() *BackendFirewallTag {
+    return NewBackendFirewallTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *BackendTag) Form() *BackendFormTag {
     return NewBackendFormTag(client.internal.HttpClient, client.internal.Parser)
 }
