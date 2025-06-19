@@ -446,11 +446,13 @@ func (client *BackendDatabaseTag) GetTable(connectionId string, tableName string
 }
 
 // GetTables 
-func (client *BackendDatabaseTag) GetTables(connectionId string) (*BackendDatabaseTableCollection, error) {
+func (client *BackendDatabaseTag) GetTables(connectionId string, startIndex int, count int) (*BackendDatabaseTableCollection, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
 
     queryParams := make(map[string]interface{})
+    queryParams["startIndex"] = startIndex
+    queryParams["count"] = count
 
     var queryStructNames []string
 
