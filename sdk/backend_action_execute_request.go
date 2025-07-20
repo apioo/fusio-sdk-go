@@ -5,6 +5,7 @@
 
 package sdk
 
+// Represents a request to execute an action
 type BackendActionExecuteRequest struct {
     Method string `json:"method"`
     UriFragments string `json:"uriFragments"`

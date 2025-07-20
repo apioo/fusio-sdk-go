@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents a foreign key constraint on a relational database
 type BackendDatabaseTableForeignKeyConstraint struct {
     Name string `json:"name"`
     ForeignTable string `json:"foreignTable"`

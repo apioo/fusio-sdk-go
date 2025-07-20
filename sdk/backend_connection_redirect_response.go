@@ -5,6 +5,7 @@
 
 package sdk
 
+// Redirect response to initiate an OAuth2 flow
 type BackendConnectionRedirectResponse struct {
     RedirectUri string `json:"redirectUri"`
 }

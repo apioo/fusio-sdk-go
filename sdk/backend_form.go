@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents a form which helps to dynamically generate a form at a frontend app
 type BackendForm struct {
     Id int `json:"id"`
     Status int `json:"status"`

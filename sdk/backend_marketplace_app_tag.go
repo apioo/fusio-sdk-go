@@ -23,7 +23,7 @@ type BackendMarketplaceAppTag struct {
 
 
 
-// Get 
+// Get Returns a specific marketplace app
 func (client *BackendMarketplaceAppTag) Get(user string, name string) (*MarketplaceApp, error) {
     pathParams := make(map[string]interface{})
     pathParams["user"] = user
@@ -80,7 +80,7 @@ func (client *BackendMarketplaceAppTag) Get(user string, name string) (*Marketpl
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of marketplace apps
 func (client *BackendMarketplaceAppTag) GetAll(startIndex int, query string) (*MarketplaceAppCollection, error) {
     pathParams := make(map[string]interface{})
 

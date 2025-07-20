@@ -23,7 +23,7 @@ type BackendConfigTag struct {
 
 
 
-// Get 
+// Get Returns a specific config
 func (client *BackendConfigTag) Get(configId string) (*BackendConfig, error) {
     pathParams := make(map[string]interface{})
     pathParams["config_id"] = configId
@@ -79,7 +79,7 @@ func (client *BackendConfigTag) Get(configId string) (*BackendConfig, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of configuration values
 func (client *BackendConfigTag) GetAll(startIndex int, count int, search string) (*BackendConfigCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -137,7 +137,7 @@ func (client *BackendConfigTag) GetAll(startIndex int, count int, search string)
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing config value
 func (client *BackendConfigTag) Update(configId string, payload BackendConfigUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["config_id"] = configId

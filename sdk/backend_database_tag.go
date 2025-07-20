@@ -23,7 +23,7 @@ type BackendDatabaseTag struct {
 
 
 
-// CreateRow 
+// CreateRow Creates a new row at a table on a database
 func (client *BackendDatabaseTag) CreateRow(connectionId string, tableName string, payload BackendDatabaseRow) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
@@ -87,7 +87,7 @@ func (client *BackendDatabaseTag) CreateRow(connectionId string, tableName strin
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// CreateTable 
+// CreateTable Creates a new table on a database
 func (client *BackendDatabaseTag) CreateTable(connectionId string, payload BackendDatabaseTable) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
@@ -150,7 +150,7 @@ func (client *BackendDatabaseTag) CreateTable(connectionId string, payload Backe
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// DeleteRow 
+// DeleteRow Deletes an existing row at a table on a database
 func (client *BackendDatabaseTag) DeleteRow(connectionId string, tableName string, id string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
@@ -208,7 +208,7 @@ func (client *BackendDatabaseTag) DeleteRow(connectionId string, tableName strin
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// DeleteTable 
+// DeleteTable Deletes an existing table on a database
 func (client *BackendDatabaseTag) DeleteTable(connectionId string, tableName string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
@@ -265,7 +265,7 @@ func (client *BackendDatabaseTag) DeleteTable(connectionId string, tableName str
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetRow 
+// GetRow Returns a specific row at a table on a database
 func (client *BackendDatabaseTag) GetRow(connectionId string, tableName string, id string) (*BackendDatabaseRow, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
@@ -323,7 +323,7 @@ func (client *BackendDatabaseTag) GetRow(connectionId string, tableName string, 
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetRows 
+// GetRows Returns paginated rows at a table on a database
 func (client *BackendDatabaseTag) GetRows(connectionId string, tableName string, startIndex int, count int, filterBy string, filterOp string, filterValue string, sortBy string, sortOrder string, columns string) (*BackendDatabaseRowCollection, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
@@ -388,7 +388,7 @@ func (client *BackendDatabaseTag) GetRows(connectionId string, tableName string,
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetTable 
+// GetTable Returns the schema of a specific table on a database
 func (client *BackendDatabaseTag) GetTable(connectionId string, tableName string) (*BackendDatabaseTable, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
@@ -445,7 +445,7 @@ func (client *BackendDatabaseTag) GetTable(connectionId string, tableName string
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetTables 
+// GetTables Returns all available tables on a database
 func (client *BackendDatabaseTag) GetTables(connectionId string, startIndex int, count int) (*BackendDatabaseTableCollection, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
@@ -503,7 +503,7 @@ func (client *BackendDatabaseTag) GetTables(connectionId string, startIndex int,
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// UpdateRow 
+// UpdateRow Updates an existing row at a table on a database
 func (client *BackendDatabaseTag) UpdateRow(connectionId string, tableName string, id string, payload BackendDatabaseRow) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
@@ -568,7 +568,7 @@ func (client *BackendDatabaseTag) UpdateRow(connectionId string, tableName strin
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// UpdateTable 
+// UpdateTable Updates an existing table on a database
 func (client *BackendDatabaseTag) UpdateTable(connectionId string, tableName string, payload BackendDatabaseTable) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId

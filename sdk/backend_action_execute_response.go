@@ -5,6 +5,7 @@
 
 package sdk
 
+// Represents an action execution response
 type BackendActionExecuteResponse struct {
     StatusCode int `json:"statusCode"`
     Headers *BackendActionExecuteResponseHeaders `json:"headers"`

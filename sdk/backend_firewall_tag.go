@@ -23,7 +23,7 @@ type BackendFirewallTag struct {
 
 
 
-// Create 
+// Create Creates a new firewall rule
 func (client *BackendFirewallTag) Create(payload BackendFirewallCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendFirewallTag) Create(payload BackendFirewallCreate) (*Common
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing firewall rule
 func (client *BackendFirewallTag) Delete(firewallId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["firewall_id"] = firewallId
@@ -141,7 +141,7 @@ func (client *BackendFirewallTag) Delete(firewallId string) (*CommonMessage, err
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific firewall rule
 func (client *BackendFirewallTag) Get(firewallId string) (*BackendFirewall, error) {
     pathParams := make(map[string]interface{})
     pathParams["firewall_id"] = firewallId
@@ -197,7 +197,7 @@ func (client *BackendFirewallTag) Get(firewallId string) (*BackendFirewall, erro
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of firewall rules
 func (client *BackendFirewallTag) GetAll(startIndex int, count int, search string) (*BackendFirewallCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *BackendFirewallTag) GetAll(startIndex int, count int, search strin
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing firewall rule
 func (client *BackendFirewallTag) Update(firewallId string, payload BackendFirewallUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["firewall_id"] = firewallId

@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents a table index on a relational database
 type BackendDatabaseTableIndex struct {
     Name string `json:"name"`
     Unique bool `json:"unique"`

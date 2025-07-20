@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of database rows
 type BackendDatabaseRowCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

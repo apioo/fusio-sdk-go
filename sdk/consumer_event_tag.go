@@ -23,7 +23,7 @@ type ConsumerEventTag struct {
 
 
 
-// Get 
+// Get Returns a specific event for the authenticated user
 func (client *ConsumerEventTag) Get(eventId string) (*ConsumerEvent, error) {
     pathParams := make(map[string]interface{})
     pathParams["event_id"] = eventId
@@ -79,7 +79,7 @@ func (client *ConsumerEventTag) Get(eventId string) (*ConsumerEvent, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of apps which are assigned to the authenticated user
 func (client *ConsumerEventTag) GetAll(startIndex int, count int, search string) (*ConsumerEventCollection, error) {
     pathParams := make(map[string]interface{})
 

@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents an audit which is created every time something was changed at the system
 type BackendAudit struct {
     Id int `json:"id"`
     App *BackendApp `json:"app"`

@@ -23,7 +23,7 @@ type ConsumerGrantTag struct {
 
 
 
-// Delete 
+// Delete Deletes an existing grant for an app which was created by the authenticated user
 func (client *ConsumerGrantTag) Delete(grantId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["grant_id"] = grantId
@@ -79,7 +79,7 @@ func (client *ConsumerGrantTag) Delete(grantId string) (*CommonMessage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of grants which are assigned to the authenticated user
 func (client *ConsumerGrantTag) GetAll(startIndex int, count int, search string) (*ConsumerGrantCollection, error) {
     pathParams := make(map[string]interface{})
 

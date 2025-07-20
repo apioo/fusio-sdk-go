@@ -23,7 +23,7 @@ type BackendWebhookTag struct {
 
 
 
-// Create 
+// Create Creates a new webhook
 func (client *BackendWebhookTag) Create(payload BackendWebhookCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendWebhookTag) Create(payload BackendWebhookCreate) (*CommonMe
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing webhook
 func (client *BackendWebhookTag) Delete(webhookId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["webhook_id"] = webhookId
@@ -141,7 +141,7 @@ func (client *BackendWebhookTag) Delete(webhookId string) (*CommonMessage, error
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific webhook
 func (client *BackendWebhookTag) Get(webhookId string) (*BackendWebhook, error) {
     pathParams := make(map[string]interface{})
     pathParams["webhook_id"] = webhookId
@@ -197,7 +197,7 @@ func (client *BackendWebhookTag) Get(webhookId string) (*BackendWebhook, error) 
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of webhooks
 func (client *BackendWebhookTag) GetAll(startIndex int, count int, search string) (*BackendWebhookCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *BackendWebhookTag) GetAll(startIndex int, count int, search string
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing webhook
 func (client *BackendWebhookTag) Update(webhookId string, payload BackendWebhookUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["webhook_id"] = webhookId

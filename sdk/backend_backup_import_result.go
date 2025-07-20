@@ -5,6 +5,7 @@
 
 package sdk
 
+// Result of a backup import operation
 type BackendBackupImportResult struct {
     Success bool `json:"success"`
     Message string `json:"message"`

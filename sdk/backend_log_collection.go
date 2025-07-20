@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of log objects
 type BackendLogCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

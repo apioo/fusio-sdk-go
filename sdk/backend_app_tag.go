@@ -23,7 +23,7 @@ type BackendAppTag struct {
 
 
 
-// Create 
+// Create Creates a new app
 func (client *BackendAppTag) Create(payload BackendAppCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendAppTag) Create(payload BackendAppCreate) (*CommonMessage, e
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing app
 func (client *BackendAppTag) Delete(appId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["app_id"] = appId
@@ -141,7 +141,7 @@ func (client *BackendAppTag) Delete(appId string) (*CommonMessage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// DeleteToken 
+// DeleteToken Deletes an existing token from an app
 func (client *BackendAppTag) DeleteToken(appId string, tokenId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["app_id"] = appId
@@ -198,7 +198,7 @@ func (client *BackendAppTag) DeleteToken(appId string, tokenId string) (*CommonM
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific app
 func (client *BackendAppTag) Get(appId string) (*BackendApp, error) {
     pathParams := make(map[string]interface{})
     pathParams["app_id"] = appId
@@ -254,7 +254,7 @@ func (client *BackendAppTag) Get(appId string) (*BackendApp, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of apps
 func (client *BackendAppTag) GetAll(startIndex int, count int, search string) (*BackendAppCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -312,7 +312,7 @@ func (client *BackendAppTag) GetAll(startIndex int, count int, search string) (*
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing app
 func (client *BackendAppTag) Update(appId string, payload BackendAppUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["app_id"] = appId

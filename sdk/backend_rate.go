@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents a rate limitation, which allows to limit the requests which a user can send
 type BackendRate struct {
     Id int `json:"id"`
     Priority int `json:"priority"`

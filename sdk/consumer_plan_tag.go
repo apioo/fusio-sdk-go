@@ -23,7 +23,7 @@ type ConsumerPlanTag struct {
 
 
 
-// Get 
+// Get Returns a specific plan for the authenticated user
 func (client *ConsumerPlanTag) Get(planId string) (*ConsumerPlan, error) {
     pathParams := make(map[string]interface{})
     pathParams["plan_id"] = planId
@@ -79,7 +79,7 @@ func (client *ConsumerPlanTag) Get(planId string) (*ConsumerPlan, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of plans which are relevant to the authenticated user
 func (client *ConsumerPlanTag) GetAll(startIndex int, count int, search string) (*ConsumerPlanCollection, error) {
     pathParams := make(map[string]interface{})
 

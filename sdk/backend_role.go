@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents a role, every user is assigned to a role and all scopes of the role are automatically attached to the user
 type BackendRole struct {
     Id int `json:"id"`
     CategoryId int `json:"categoryId"`

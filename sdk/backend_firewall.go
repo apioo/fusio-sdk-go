@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents a firewall rule which blocks specific IP addresses
 type BackendFirewall struct {
     Id int `json:"id"`
     Name string `json:"name"`

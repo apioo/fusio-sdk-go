@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of page objects
 type BackendPageCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

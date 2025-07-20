@@ -23,7 +23,7 @@ type BackendUserTag struct {
 
 
 
-// Create 
+// Create Creates a new user
 func (client *BackendUserTag) Create(payload BackendUserCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendUserTag) Create(payload BackendUserCreate) (*CommonMessage,
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing user
 func (client *BackendUserTag) Delete(userId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["user_id"] = userId
@@ -141,7 +141,7 @@ func (client *BackendUserTag) Delete(userId string) (*CommonMessage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific user
 func (client *BackendUserTag) Get(userId string) (*BackendUser, error) {
     pathParams := make(map[string]interface{})
     pathParams["user_id"] = userId
@@ -197,7 +197,7 @@ func (client *BackendUserTag) Get(userId string) (*BackendUser, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of users
 func (client *BackendUserTag) GetAll(startIndex int, count int, search string) (*BackendUserCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *BackendUserTag) GetAll(startIndex int, count int, search string) (
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing user
 func (client *BackendUserTag) Update(userId string, payload BackendUserUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["user_id"] = userId

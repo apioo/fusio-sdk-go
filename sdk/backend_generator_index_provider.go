@@ -5,6 +5,7 @@
 
 package sdk
 
+// Represents a concrete generator class
 type BackendGeneratorIndexProvider struct {
     Name string `json:"name"`
     Class string `json:"class"`

@@ -23,7 +23,7 @@ type BackendTokenTag struct {
 
 
 
-// Get 
+// Get Returns a specific token
 func (client *BackendTokenTag) Get(tokenId string) (*BackendToken, error) {
     pathParams := make(map[string]interface{})
     pathParams["token_id"] = tokenId
@@ -79,7 +79,7 @@ func (client *BackendTokenTag) Get(tokenId string) (*BackendToken, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of tokens
 func (client *BackendTokenTag) GetAll(startIndex int, count int, search string, from string, to string, appId int, userId int, status int, scope string, ip string) (*BackendTokenCollection, error) {
     pathParams := make(map[string]interface{})
 

@@ -23,7 +23,7 @@ type BackendSdkTag struct {
 
 
 
-// Generate 
+// Generate Generates a specific SDK
 func (client *BackendSdkTag) Generate(payload BackendSdkGenerate) (*BackendSdkMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendSdkTag) Generate(payload BackendSdkGenerate) (*BackendSdkMe
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of SDKs
 func (client *BackendSdkTag) GetAll() (*BackendSdkResponse, error) {
     pathParams := make(map[string]interface{})
 

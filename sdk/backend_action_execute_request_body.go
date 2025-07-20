@@ -5,5 +5,6 @@
 
 package sdk
 
+// Represents a request body
 type BackendActionExecuteRequestBody = map[string]any
 

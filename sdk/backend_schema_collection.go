@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of schema objects
 type BackendSchemaCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

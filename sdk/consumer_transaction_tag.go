@@ -23,7 +23,7 @@ type ConsumerTransactionTag struct {
 
 
 
-// Get 
+// Get Returns a specific transaction for the authenticated user
 func (client *ConsumerTransactionTag) Get(transactionId string) (*ConsumerTransaction, error) {
     pathParams := make(map[string]interface{})
     pathParams["transaction_id"] = transactionId
@@ -79,7 +79,7 @@ func (client *ConsumerTransactionTag) Get(transactionId string) (*ConsumerTransa
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of transactions which are assigned to the authenticated user
 func (client *ConsumerTransactionTag) GetAll(startIndex int, count int, search string) (*ConsumerTransactionCollection, error) {
     pathParams := make(map[string]interface{})
 

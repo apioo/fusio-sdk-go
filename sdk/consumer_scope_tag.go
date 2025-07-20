@@ -23,7 +23,7 @@ type ConsumerScopeTag struct {
 
 
 
-// GetAll 
+// GetAll Returns a paginated list of scopes which are assigned to the authenticated user
 func (client *ConsumerScopeTag) GetAll(startIndex int, count int, search string) (*ConsumerScopeCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -81,7 +81,7 @@ func (client *ConsumerScopeTag) GetAll(startIndex int, count int, search string)
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetCategories 
+// GetCategories Returns all scopes by category
 func (client *ConsumerScopeTag) GetCategories() (*ConsumerScopeCategories, error) {
     pathParams := make(map[string]interface{})
 

@@ -5,6 +5,7 @@
 
 package sdk
 
+// Contains all possible classes which can be used at an identity as class
 type BackendIdentityIndex struct {
     Providers []BackendIdentityIndexEntry `json:"providers"`
 }

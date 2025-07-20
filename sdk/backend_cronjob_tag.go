@@ -23,7 +23,7 @@ type BackendCronjobTag struct {
 
 
 
-// Create 
+// Create Creates a new cronjob
 func (client *BackendCronjobTag) Create(payload BackendCronjobCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendCronjobTag) Create(payload BackendCronjobCreate) (*CommonMe
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing cronjob
 func (client *BackendCronjobTag) Delete(cronjobId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["cronjob_id"] = cronjobId
@@ -141,7 +141,7 @@ func (client *BackendCronjobTag) Delete(cronjobId string) (*CommonMessage, error
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific cronjob
 func (client *BackendCronjobTag) Get(cronjobId string) (*BackendCronjob, error) {
     pathParams := make(map[string]interface{})
     pathParams["cronjob_id"] = cronjobId
@@ -197,7 +197,7 @@ func (client *BackendCronjobTag) Get(cronjobId string) (*BackendCronjob, error) 
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of cronjobs
 func (client *BackendCronjobTag) GetAll(startIndex int, count int, search string) (*BackendCronjobCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *BackendCronjobTag) GetAll(startIndex int, count int, search string
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing cronjob
 func (client *BackendCronjobTag) Update(cronjobId string, payload BackendCronjobUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["cronjob_id"] = cronjobId

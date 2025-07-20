@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents a category. Every user is assigned to a category and can only view objects which are also assigned to the same category, through this it is possible to build separate areas for external developers
 type BackendCategory struct {
     Id int `json:"id"`
     Name string `json:"name"`

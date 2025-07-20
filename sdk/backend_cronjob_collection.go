@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of cronjob objects
 type BackendCronjobCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

@@ -23,7 +23,7 @@ type SystemPaymentTag struct {
 
 
 
-// Webhook 
+// Webhook Payment webhook endpoint after successful purchase of a plan
 func (client *SystemPaymentTag) Webhook(provider string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["provider"] = provider

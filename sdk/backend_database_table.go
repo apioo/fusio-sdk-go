@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents a relational table on a database connection
 type BackendDatabaseTable struct {
     Name string `json:"name"`
     Columns []BackendDatabaseTableColumn `json:"columns"`

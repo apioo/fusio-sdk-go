@@ -149,7 +149,7 @@ func (client *BackendGeneratorTag) GetChangelog(provider string, payload Backend
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetClasses 
+// GetClasses Returns all available generator classes
 func (client *BackendGeneratorTag) GetClasses() (*BackendGeneratorIndexProviders, error) {
     pathParams := make(map[string]interface{})
 
@@ -204,7 +204,7 @@ func (client *BackendGeneratorTag) GetClasses() (*BackendGeneratorIndexProviders
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetForm 
+// GetForm Returns the generator config form
 func (client *BackendGeneratorTag) GetForm(provider string) (*CommonFormContainer, error) {
     pathParams := make(map[string]interface{})
     pathParams["provider"] = provider

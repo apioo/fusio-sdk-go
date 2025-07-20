@@ -23,7 +23,7 @@ type BackendPageTag struct {
 
 
 
-// Create 
+// Create Creates a new page
 func (client *BackendPageTag) Create(payload BackendPageCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendPageTag) Create(payload BackendPageCreate) (*CommonMessage,
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing page
 func (client *BackendPageTag) Delete(pageId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["page_id"] = pageId
@@ -141,7 +141,7 @@ func (client *BackendPageTag) Delete(pageId string) (*CommonMessage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific page
 func (client *BackendPageTag) Get(pageId string) (*BackendPage, error) {
     pathParams := make(map[string]interface{})
     pathParams["page_id"] = pageId
@@ -197,7 +197,7 @@ func (client *BackendPageTag) Get(pageId string) (*BackendPage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of pages
 func (client *BackendPageTag) GetAll(startIndex int, count int, search string) (*BackendPageCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *BackendPageTag) GetAll(startIndex int, count int, search string) (
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing page
 func (client *BackendPageTag) Update(pageId string, payload BackendPageUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["page_id"] = pageId

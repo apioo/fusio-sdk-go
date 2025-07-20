@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents the business logic which can be executed either through an operation or cronjob
 type BackendAction struct {
     Id int `json:"id"`
     Status int `json:"status"`

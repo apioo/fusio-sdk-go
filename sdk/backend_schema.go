@@ -5,13 +5,12 @@
 
 package sdk
 
+// This object represents a schema to describe a JSON payload
 type BackendSchema struct {
     Id int `json:"id"`
     Status int `json:"status"`
     Name string `json:"name"`
     Source *BackendSchemaSource `json:"source"`
-    Form *BackendSchemaForm `json:"form"`
-    Readonly bool `json:"readonly"`
     Metadata *CommonMetadata `json:"metadata"`
 }
 

@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of firewall objects
 type BackendFirewallCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

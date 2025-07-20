@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents an identity which allows to authenticate with a remote identity provider
 type BackendIdentity struct {
     Id int `json:"id"`
     AppId int `json:"appId"`

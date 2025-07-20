@@ -23,7 +23,7 @@ type BackendOperationTag struct {
 
 
 
-// Create 
+// Create Creates a new operation
 func (client *BackendOperationTag) Create(payload BackendOperationCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendOperationTag) Create(payload BackendOperationCreate) (*Comm
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing operation
 func (client *BackendOperationTag) Delete(operationId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["operation_id"] = operationId
@@ -141,7 +141,7 @@ func (client *BackendOperationTag) Delete(operationId string) (*CommonMessage, e
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific operation
 func (client *BackendOperationTag) Get(operationId string) (*BackendOperation, error) {
     pathParams := make(map[string]interface{})
     pathParams["operation_id"] = operationId
@@ -197,7 +197,7 @@ func (client *BackendOperationTag) Get(operationId string) (*BackendOperation, e
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of operations
 func (client *BackendOperationTag) GetAll(startIndex int, count int, search string) (*BackendOperationCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *BackendOperationTag) GetAll(startIndex int, count int, search stri
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing operation
 func (client *BackendOperationTag) Update(operationId string, payload BackendOperationUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["operation_id"] = operationId

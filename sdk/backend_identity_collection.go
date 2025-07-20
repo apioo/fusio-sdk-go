@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of identity objects
 type BackendIdentityCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

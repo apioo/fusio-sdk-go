@@ -23,7 +23,7 @@ type BackendFormTag struct {
 
 
 
-// Create 
+// Create Creates a new form
 func (client *BackendFormTag) Create(payload BackendFormCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendFormTag) Create(payload BackendFormCreate) (*CommonMessage,
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing form
 func (client *BackendFormTag) Delete(formId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["form_id"] = formId
@@ -141,7 +141,7 @@ func (client *BackendFormTag) Delete(formId string) (*CommonMessage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific form
 func (client *BackendFormTag) Get(formId string) (*BackendForm, error) {
     pathParams := make(map[string]interface{})
     pathParams["form_id"] = formId
@@ -197,7 +197,7 @@ func (client *BackendFormTag) Get(formId string) (*BackendForm, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of forms
 func (client *BackendFormTag) GetAll(startIndex int, count int, search string) (*BackendFormCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *BackendFormTag) GetAll(startIndex int, count int, search string) (
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing form
 func (client *BackendFormTag) Update(formId string, payload BackendFormUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["form_id"] = formId

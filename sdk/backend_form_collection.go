@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of form objects
 type BackendFormCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

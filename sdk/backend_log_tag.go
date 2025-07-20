@@ -23,7 +23,7 @@ type BackendLogTag struct {
 
 
 
-// Get 
+// Get Returns a specific log
 func (client *BackendLogTag) Get(logId string) (*BackendLog, error) {
     pathParams := make(map[string]interface{})
     pathParams["log_id"] = logId
@@ -79,7 +79,7 @@ func (client *BackendLogTag) Get(logId string) (*BackendLog, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of logs
 func (client *BackendLogTag) GetAll(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendLogCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -148,7 +148,7 @@ func (client *BackendLogTag) GetAll(startIndex int, count int, search string, fr
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAllErrors 
+// GetAllErrors Returns a paginated list of log errors
 func (client *BackendLogTag) GetAllErrors(startIndex int, count int, search string) (*BackendLogErrorCollection, error) {
     pathParams := make(map[string]interface{})
 

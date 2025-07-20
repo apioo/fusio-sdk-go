@@ -5,6 +5,7 @@
 
 package sdk
 
+// Import a previously exported system configuration
 type BackendBackupImport struct {
     Import string `json:"import"`
 }
