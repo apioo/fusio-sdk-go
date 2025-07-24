@@ -137,7 +137,7 @@ func (client *BackendMarketplaceActionTag) GetAll(startIndex int, query string) 
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Install 
+// Install Installs an action from the marketplace
 func (client *BackendMarketplaceActionTag) Install(payload MarketplaceInstall) (*MarketplaceMessage, error) {
     pathParams := make(map[string]interface{})
 
