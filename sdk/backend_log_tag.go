@@ -206,7 +206,7 @@ func (client *BackendLogTag) GetAllErrors(startIndex int, count int, search stri
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetError 
+// GetError Returns a specific error
 func (client *BackendLogTag) GetError(errorId string) (*BackendLogError, error) {
     pathParams := make(map[string]interface{})
     pathParams["error_id"] = errorId

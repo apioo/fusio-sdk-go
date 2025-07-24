@@ -199,7 +199,7 @@ func (client *BackendMarketplaceAppTag) Install(payload MarketplaceInstall) (*Ma
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Upgrade 
+// Upgrade Upgrades an app from the marketplace
 func (client *BackendMarketplaceAppTag) Upgrade(user string, name string) (*MarketplaceMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["user"] = user

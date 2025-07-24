@@ -255,7 +255,7 @@ func (client *BackendSchemaTag) GetAll(startIndex int, count int, search string)
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetPreview 
+// GetPreview Returns a HTML preview of the provided schema
 func (client *BackendSchemaTag) GetPreview(schemaId string) (*BackendSchemaPreviewResponse, error) {
     pathParams := make(map[string]interface{})
     pathParams["schema_id"] = schemaId

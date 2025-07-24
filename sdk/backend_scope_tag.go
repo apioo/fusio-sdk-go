@@ -255,7 +255,7 @@ func (client *BackendScopeTag) GetAll(startIndex int, count int, search string) 
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetCategories 
+// GetCategories Returns all available scopes grouped by category
 func (client *BackendScopeTag) GetCategories() (*BackendScopeCategories, error) {
     pathParams := make(map[string]interface{})
 
