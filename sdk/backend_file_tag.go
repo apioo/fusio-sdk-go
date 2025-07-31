@@ -91,7 +91,7 @@ func (client *BackendFileTag) Delete(connectionId string, fileId string) (*Commo
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/filesystem/:connection_id/:file_id", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/file/:connection_id/:file_id", pathParams))
     if err != nil {
         return nil, err
     }
