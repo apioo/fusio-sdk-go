@@ -23,7 +23,7 @@ type BackendScopeTag struct {
 
 
 
-// Create 
+// Create Creates a new scope
 func (client *BackendScopeTag) Create(payload BackendScopeCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendScopeTag) Create(payload BackendScopeCreate) (*CommonMessag
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing scope
 func (client *BackendScopeTag) Delete(scopeId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["scope_id"] = scopeId
@@ -141,7 +141,7 @@ func (client *BackendScopeTag) Delete(scopeId string) (*CommonMessage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific scope
 func (client *BackendScopeTag) Get(scopeId string) (*BackendScope, error) {
     pathParams := make(map[string]interface{})
     pathParams["scope_id"] = scopeId
@@ -197,7 +197,7 @@ func (client *BackendScopeTag) Get(scopeId string) (*BackendScope, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of scopes
 func (client *BackendScopeTag) GetAll(startIndex int, count int, search string) (*BackendScopeCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *BackendScopeTag) GetAll(startIndex int, count int, search string) 
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetCategories 
+// GetCategories Returns all available scopes grouped by category
 func (client *BackendScopeTag) GetCategories() (*BackendScopeCategories, error) {
     pathParams := make(map[string]interface{})
 
@@ -310,7 +310,7 @@ func (client *BackendScopeTag) GetCategories() (*BackendScopeCategories, error) 
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing scope
 func (client *BackendScopeTag) Update(scopeId string, payload BackendScopeUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["scope_id"] = scopeId

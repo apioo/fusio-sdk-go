@@ -61,12 +61,16 @@ func (client *BackendTag) Dashboard() *BackendDashboardTag {
     return NewBackendDashboardTag(client.internal.HttpClient, client.internal.Parser)
 }
 
-func (client *BackendTag) Database() *BackendDatabaseTag {
-    return NewBackendDatabaseTag(client.internal.HttpClient, client.internal.Parser)
-}
-
 func (client *BackendTag) Event() *BackendEventTag {
     return NewBackendEventTag(client.internal.HttpClient, client.internal.Parser)
+}
+
+func (client *BackendTag) Firewall() *BackendFirewallTag {
+    return NewBackendFirewallTag(client.internal.HttpClient, client.internal.Parser)
+}
+
+func (client *BackendTag) Form() *BackendFormTag {
+    return NewBackendFormTag(client.internal.HttpClient, client.internal.Parser)
 }
 
 func (client *BackendTag) Generator() *BackendGeneratorTag {

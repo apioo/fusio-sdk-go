@@ -23,7 +23,7 @@ type SystemConnectionTag struct {
 
 
 
-// Callback 
+// Callback Connection OAuth2 callback to authorize a connection
 func (client *SystemConnectionTag) Callback(name string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["name"] = name

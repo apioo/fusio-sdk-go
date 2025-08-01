@@ -23,7 +23,7 @@ type BackendBackupTag struct {
 
 
 
-// Export 
+// Export Generates an backup of the current system
 func (client *BackendBackupTag) Export() (*BackendBackupExport, error) {
     pathParams := make(map[string]interface{})
 
@@ -78,7 +78,7 @@ func (client *BackendBackupTag) Export() (*BackendBackupExport, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Import 
+// Import Imports an backup to the current system
 func (client *BackendBackupTag) Import(payload BackendBackupImport) (*BackendBackupImportResult, error) {
     pathParams := make(map[string]interface{})
 

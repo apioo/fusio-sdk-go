@@ -23,7 +23,7 @@ type BackendMarketplaceActionTag struct {
 
 
 
-// Get 
+// Get Returns a specific marketplace action
 func (client *BackendMarketplaceActionTag) Get(user string, name string) (*MarketplaceAction, error) {
     pathParams := make(map[string]interface{})
     pathParams["user"] = user
@@ -80,7 +80,7 @@ func (client *BackendMarketplaceActionTag) Get(user string, name string) (*Marke
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of marketplace actions
 func (client *BackendMarketplaceActionTag) GetAll(startIndex int, query string) (*MarketplaceActionCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -137,7 +137,7 @@ func (client *BackendMarketplaceActionTag) GetAll(startIndex int, query string) 
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Install 
+// Install Installs an action from the marketplace
 func (client *BackendMarketplaceActionTag) Install(payload MarketplaceInstall) (*MarketplaceMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -199,7 +199,7 @@ func (client *BackendMarketplaceActionTag) Install(payload MarketplaceInstall) (
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Upgrade 
+// Upgrade Upgrades an action from the marketplace
 func (client *BackendMarketplaceActionTag) Upgrade(user string, name string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["user"] = user

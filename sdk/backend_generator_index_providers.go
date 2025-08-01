@@ -5,6 +5,7 @@
 
 package sdk
 
+// Contains all possible classes which can be used at an generator as class
 type BackendGeneratorIndexProviders struct {
     Providers []BackendGeneratorIndexProvider `json:"providers"`
 }

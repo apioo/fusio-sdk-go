@@ -23,7 +23,7 @@ type ConsumerAppTag struct {
 
 
 
-// Create 
+// Create Creates a new app for the authenticated user
 func (client *ConsumerAppTag) Create(payload ConsumerAppCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *ConsumerAppTag) Create(payload ConsumerAppCreate) (*CommonMessage,
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing app for the authenticated user
 func (client *ConsumerAppTag) Delete(appId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["app_id"] = appId
@@ -141,7 +141,7 @@ func (client *ConsumerAppTag) Delete(appId string) (*CommonMessage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific app for the authenticated user
 func (client *ConsumerAppTag) Get(appId string) (*ConsumerApp, error) {
     pathParams := make(map[string]interface{})
     pathParams["app_id"] = appId
@@ -197,7 +197,7 @@ func (client *ConsumerAppTag) Get(appId string) (*ConsumerApp, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of apps which are assigned to the authenticated user
 func (client *ConsumerAppTag) GetAll(startIndex int, count int, search string) (*ConsumerAppCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *ConsumerAppTag) GetAll(startIndex int, count int, search string) (
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing app for the authenticated user
 func (client *ConsumerAppTag) Update(appId string, payload ConsumerAppUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["app_id"] = appId

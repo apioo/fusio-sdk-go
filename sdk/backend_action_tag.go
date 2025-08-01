@@ -23,7 +23,7 @@ type BackendActionTag struct {
 
 
 
-// Create 
+// Create Creates a new action
 func (client *BackendActionTag) Create(payload BackendActionCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendActionTag) Create(payload BackendActionCreate) (*CommonMess
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing action
 func (client *BackendActionTag) Delete(actionId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["action_id"] = actionId
@@ -141,7 +141,7 @@ func (client *BackendActionTag) Delete(actionId string) (*CommonMessage, error) 
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Execute 
+// Execute Executes a specific action
 func (client *BackendActionTag) Execute(actionId string, payload BackendActionExecuteRequest) (*BackendActionExecuteResponse, error) {
     pathParams := make(map[string]interface{})
     pathParams["action_id"] = actionId
@@ -204,7 +204,7 @@ func (client *BackendActionTag) Execute(actionId string, payload BackendActionEx
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific action
 func (client *BackendActionTag) Get(actionId string) (*BackendAction, error) {
     pathParams := make(map[string]interface{})
     pathParams["action_id"] = actionId
@@ -260,7 +260,7 @@ func (client *BackendActionTag) Get(actionId string) (*BackendAction, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of actions
 func (client *BackendActionTag) GetAll(startIndex int, count int, search string) (*BackendActionCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -318,7 +318,7 @@ func (client *BackendActionTag) GetAll(startIndex int, count int, search string)
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetClasses 
+// GetClasses Returns all available action classes
 func (client *BackendActionTag) GetClasses() (*BackendActionIndex, error) {
     pathParams := make(map[string]interface{})
 
@@ -373,7 +373,7 @@ func (client *BackendActionTag) GetClasses() (*BackendActionIndex, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetForm 
+// GetForm Returns the action config form
 func (client *BackendActionTag) GetForm(class string) (*CommonFormContainer, error) {
     pathParams := make(map[string]interface{})
 
@@ -429,7 +429,7 @@ func (client *BackendActionTag) GetForm(class string) (*CommonFormContainer, err
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing action
 func (client *BackendActionTag) Update(actionId string, payload BackendActionUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["action_id"] = actionId

@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents a test. A test helps to verify that all operations work as expected
 type BackendTest struct {
     Id int `json:"id"`
     Status int `json:"status"`

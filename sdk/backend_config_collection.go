@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of config objects
 type BackendConfigCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

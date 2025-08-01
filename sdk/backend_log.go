@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents a log entry. Every HTTP requests to the system generates such a log entry.
 type BackendLog struct {
     Id int `json:"id"`
     Ip string `json:"ip"`

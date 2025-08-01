@@ -21,9 +21,25 @@ type BackendConnectionTag struct {
     internal *sdkgen.TagAbstract
 }
 
+func (client *BackendConnectionTag) Database() *BackendConnectionDatabaseTag {
+    return NewBackendConnectionDatabaseTag(client.internal.HttpClient, client.internal.Parser)
+}
+
+func (client *BackendConnectionTag) Filesystem() *BackendConnectionFilesystemTag {
+    return NewBackendConnectionFilesystemTag(client.internal.HttpClient, client.internal.Parser)
+}
+
+func (client *BackendConnectionTag) Http() *BackendConnectionHttpTag {
+    return NewBackendConnectionHttpTag(client.internal.HttpClient, client.internal.Parser)
+}
+
+func (client *BackendConnectionTag) Sdk() *BackendConnectionSdkTag {
+    return NewBackendConnectionSdkTag(client.internal.HttpClient, client.internal.Parser)
+}
 
 
-// Create 
+
+// Create Creates a new connection
 func (client *BackendConnectionTag) Create(payload BackendConnectionCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +101,7 @@ func (client *BackendConnectionTag) Create(payload BackendConnectionCreate) (*Co
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing connection
 func (client *BackendConnectionTag) Delete(connectionId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
@@ -141,7 +157,7 @@ func (client *BackendConnectionTag) Delete(connectionId string) (*CommonMessage,
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific connection
 func (client *BackendConnectionTag) Get(connectionId string) (*BackendConnection, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
@@ -197,7 +213,7 @@ func (client *BackendConnectionTag) Get(connectionId string) (*BackendConnection
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of connections
 func (client *BackendConnectionTag) GetAll(startIndex int, count int, search string, class string) (*BackendConnectionCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -256,7 +272,7 @@ func (client *BackendConnectionTag) GetAll(startIndex int, count int, search str
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetClasses 
+// GetClasses Returns all available connection classes
 func (client *BackendConnectionTag) GetClasses() (*BackendConnectionIndex, error) {
     pathParams := make(map[string]interface{})
 
@@ -311,7 +327,7 @@ func (client *BackendConnectionTag) GetClasses() (*BackendConnectionIndex, error
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetForm 
+// GetForm Returns the connection config form
 func (client *BackendConnectionTag) GetForm(class string) (*CommonFormContainer, error) {
     pathParams := make(map[string]interface{})
 
@@ -367,7 +383,7 @@ func (client *BackendConnectionTag) GetForm(class string) (*CommonFormContainer,
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetRedirect 
+// GetRedirect Returns a redirect url to start the OAuth2 authorization flow for the given connection
 func (client *BackendConnectionTag) GetRedirect(connectionId string) (*BackendConnectionRedirectResponse, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
@@ -376,7 +392,7 @@ func (client *BackendConnectionTag) GetRedirect(connectionId string) (*BackendCo
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id<[0-9]+|^~>/redirect", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/connection/:connection_id/redirect", pathParams))
     if err != nil {
         return nil, err
     }
@@ -423,7 +439,7 @@ func (client *BackendConnectionTag) GetRedirect(connectionId string) (*BackendCo
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing connection
 func (client *BackendConnectionTag) Update(connectionId string, payload BackendConnectionUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId

@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of event objects
 type BackendEventCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

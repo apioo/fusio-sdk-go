@@ -23,7 +23,7 @@ type BackendIdentityTag struct {
 
 
 
-// Create 
+// Create Creates a new identity
 func (client *BackendIdentityTag) Create(payload BackendIdentityCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendIdentityTag) Create(payload BackendIdentityCreate) (*Common
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing identity
 func (client *BackendIdentityTag) Delete(identityId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["identity_id"] = identityId
@@ -141,7 +141,7 @@ func (client *BackendIdentityTag) Delete(identityId string) (*CommonMessage, err
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific identity
 func (client *BackendIdentityTag) Get(identityId string) (*BackendIdentity, error) {
     pathParams := make(map[string]interface{})
     pathParams["identity_id"] = identityId
@@ -197,7 +197,7 @@ func (client *BackendIdentityTag) Get(identityId string) (*BackendIdentity, erro
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of identities
 func (client *BackendIdentityTag) GetAll(startIndex int, count int, search string) (*BackendIdentityCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *BackendIdentityTag) GetAll(startIndex int, count int, search strin
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetClasses 
+// GetClasses Returns all available identity classes
 func (client *BackendIdentityTag) GetClasses() (*BackendIdentityIndex, error) {
     pathParams := make(map[string]interface{})
 
@@ -310,7 +310,7 @@ func (client *BackendIdentityTag) GetClasses() (*BackendIdentityIndex, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetForm 
+// GetForm Returns the identity config form
 func (client *BackendIdentityTag) GetForm(class string) (*CommonFormContainer, error) {
     pathParams := make(map[string]interface{})
 
@@ -366,7 +366,7 @@ func (client *BackendIdentityTag) GetForm(class string) (*CommonFormContainer, e
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing identity
 func (client *BackendIdentityTag) Update(identityId string, payload BackendIdentityUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["identity_id"] = identityId

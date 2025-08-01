@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents a column at a relation table
 type BackendDatabaseTableColumn struct {
     Name string `json:"name"`
     Type string `json:"type"`

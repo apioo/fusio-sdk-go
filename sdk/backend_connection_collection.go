@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of connection objects
 type BackendConnectionCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

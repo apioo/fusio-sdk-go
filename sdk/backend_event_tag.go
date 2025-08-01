@@ -23,7 +23,7 @@ type BackendEventTag struct {
 
 
 
-// Create 
+// Create Creates a new event
 func (client *BackendEventTag) Create(payload BackendEventCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendEventTag) Create(payload BackendEventCreate) (*CommonMessag
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing event
 func (client *BackendEventTag) Delete(eventId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["event_id"] = eventId
@@ -141,7 +141,7 @@ func (client *BackendEventTag) Delete(eventId string) (*CommonMessage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific event
 func (client *BackendEventTag) Get(eventId string) (*BackendEvent, error) {
     pathParams := make(map[string]interface{})
     pathParams["event_id"] = eventId
@@ -197,7 +197,7 @@ func (client *BackendEventTag) Get(eventId string) (*BackendEvent, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of events
 func (client *BackendEventTag) GetAll(startIndex int, count int, search string) (*BackendEventCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *BackendEventTag) GetAll(startIndex int, count int, search string) 
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing event
 func (client *BackendEventTag) Update(eventId string, payload BackendEventUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["event_id"] = eventId

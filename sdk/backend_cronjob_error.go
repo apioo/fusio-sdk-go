@@ -5,6 +5,7 @@
 
 package sdk
 
+// Represents an error which occurred on cronjob execution
 type BackendCronjobError struct {
     Message string `json:"message"`
     Trace string `json:"trace"`

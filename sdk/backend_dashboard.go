@@ -5,6 +5,7 @@
 
 package sdk
 
+// Represents an object containing all widget data for the dashboard
 type BackendDashboard struct {
     ErrorsPerOperation *BackendStatisticChart `json:"errorsPerOperation"`
     IncomingRequests *BackendStatisticChart `json:"incomingRequests"`

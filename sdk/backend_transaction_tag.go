@@ -23,7 +23,7 @@ type BackendTransactionTag struct {
 
 
 
-// Get 
+// Get Returns a specific transaction
 func (client *BackendTransactionTag) Get(transactionId string) (*BackendTransaction, error) {
     pathParams := make(map[string]interface{})
     pathParams["transaction_id"] = transactionId
@@ -79,7 +79,7 @@ func (client *BackendTransactionTag) Get(transactionId string) (*BackendTransact
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of transactions
 func (client *BackendTransactionTag) GetAll(startIndex int, count int, search string, from string, to string, planId int, userId int, appId int, status string, provider string) (*BackendTransactionCollection, error) {
     pathParams := make(map[string]interface{})
 

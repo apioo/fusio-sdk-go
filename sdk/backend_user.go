@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents a user
 type BackendUser struct {
     Id int `json:"id"`
     RoleId int `json:"roleId"`

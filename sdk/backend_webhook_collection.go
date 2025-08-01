@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of webhook objects
 type BackendWebhookCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

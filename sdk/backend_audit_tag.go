@@ -23,7 +23,7 @@ type BackendAuditTag struct {
 
 
 
-// Get 
+// Get Returns a specific audit
 func (client *BackendAuditTag) Get(auditId string) (*BackendAudit, error) {
     pathParams := make(map[string]interface{})
     pathParams["audit_id"] = auditId
@@ -79,7 +79,7 @@ func (client *BackendAuditTag) Get(auditId string) (*BackendAudit, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of audits
 func (client *BackendAuditTag) GetAll(startIndex int, count int, search string, from string, to string, appId int, userId int, event string, ip string, message string) (*BackendAuditCollection, error) {
     pathParams := make(map[string]interface{})
 

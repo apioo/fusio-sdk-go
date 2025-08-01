@@ -33,6 +33,10 @@ func (client *ConsumerTag) Event() *ConsumerEventTag {
     return NewConsumerEventTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *ConsumerTag) Form() *ConsumerFormTag {
+    return NewConsumerFormTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *ConsumerTag) Grant() *ConsumerGrantTag {
     return NewConsumerGrantTag(client.internal.HttpClient, client.internal.Parser)
 }

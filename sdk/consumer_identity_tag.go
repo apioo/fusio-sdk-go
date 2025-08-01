@@ -23,7 +23,7 @@ type ConsumerIdentityTag struct {
 
 
 
-// Exchange 
+// Exchange Identity callback endpoint to exchange an access token
 func (client *ConsumerIdentityTag) Exchange(identity string) (*Passthru, error) {
     pathParams := make(map[string]interface{})
     pathParams["identity"] = identity
@@ -79,7 +79,7 @@ func (client *ConsumerIdentityTag) Exchange(identity string) (*Passthru, error) 
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of identities which are relevant to the authenticated user
 func (client *ConsumerIdentityTag) GetAll(appId int, appKey string) (*ConsumerIdentityCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -136,7 +136,7 @@ func (client *ConsumerIdentityTag) GetAll(appId int, appKey string) (*ConsumerId
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Redirect 
+// Redirect Redirect the user to the configured identity provider
 func (client *ConsumerIdentityTag) Redirect(identity string) (*Passthru, error) {
     pathParams := make(map[string]interface{})
     pathParams["identity"] = identity

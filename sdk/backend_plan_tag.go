@@ -23,7 +23,7 @@ type BackendPlanTag struct {
 
 
 
-// Create 
+// Create Creates a new plan
 func (client *BackendPlanTag) Create(payload BackendPlanCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendPlanTag) Create(payload BackendPlanCreate) (*CommonMessage,
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing plan
 func (client *BackendPlanTag) Delete(planId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["plan_id"] = planId
@@ -141,7 +141,7 @@ func (client *BackendPlanTag) Delete(planId string) (*CommonMessage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific plan
 func (client *BackendPlanTag) Get(planId string) (*BackendPlan, error) {
     pathParams := make(map[string]interface{})
     pathParams["plan_id"] = planId
@@ -197,7 +197,7 @@ func (client *BackendPlanTag) Get(planId string) (*BackendPlan, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of plans
 func (client *BackendPlanTag) GetAll(startIndex int, count int, search string) (*BackendPlanCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *BackendPlanTag) GetAll(startIndex int, count int, search string) (
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing plan
 func (client *BackendPlanTag) Update(planId string, payload BackendPlanUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["plan_id"] = planId

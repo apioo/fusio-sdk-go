@@ -23,7 +23,7 @@ type ConsumerPaymentTag struct {
 
 
 
-// Checkout 
+// Checkout Start the checkout process for a specific plan
 func (client *ConsumerPaymentTag) Checkout(provider string, payload ConsumerPaymentCheckoutRequest) (*ConsumerPaymentCheckoutResponse, error) {
     pathParams := make(map[string]interface{})
     pathParams["provider"] = provider
@@ -86,7 +86,7 @@ func (client *ConsumerPaymentTag) Checkout(provider string, payload ConsumerPaym
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Portal 
+// Portal Generates a payment portal link for the authenticated user
 func (client *ConsumerPaymentTag) Portal(provider string, payload ConsumerPaymentPortalRequest) (*ConsumerPaymentPortalResponse, error) {
     pathParams := make(map[string]interface{})
     pathParams["provider"] = provider

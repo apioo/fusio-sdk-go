@@ -23,7 +23,7 @@ type ConsumerTokenTag struct {
 
 
 
-// Create 
+// Create Creates a new token for the authenticated user
 func (client *ConsumerTokenTag) Create(payload ConsumerTokenCreate) (*ConsumerTokenAccessToken, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *ConsumerTokenTag) Create(payload ConsumerTokenCreate) (*ConsumerTo
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing token for the authenticated user
 func (client *ConsumerTokenTag) Delete(tokenId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["token_id"] = tokenId
@@ -141,7 +141,7 @@ func (client *ConsumerTokenTag) Delete(tokenId string) (*CommonMessage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific token for the authenticated user
 func (client *ConsumerTokenTag) Get(tokenId string) (*ConsumerToken, error) {
     pathParams := make(map[string]interface{})
     pathParams["token_id"] = tokenId
@@ -197,7 +197,7 @@ func (client *ConsumerTokenTag) Get(tokenId string) (*ConsumerToken, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of tokens which are assigned to the authenticated user
 func (client *ConsumerTokenTag) GetAll(startIndex int, count int, search string) (*ConsumerTokenCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *ConsumerTokenTag) GetAll(startIndex int, count int, search string)
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing token for the authenticated user
 func (client *ConsumerTokenTag) Update(tokenId string, payload ConsumerTokenUpdate) (*ConsumerTokenAccessToken, error) {
     pathParams := make(map[string]interface{})
     pathParams["token_id"] = tokenId

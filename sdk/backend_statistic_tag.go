@@ -23,7 +23,7 @@ type BackendStatisticTag struct {
 
 
 
-// GetActivitiesPerUser 
+// GetActivitiesPerUser Returns a statistic containing the activities per user
 func (client *BackendStatisticTag) GetActivitiesPerUser(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
@@ -92,7 +92,7 @@ func (client *BackendStatisticTag) GetActivitiesPerUser(startIndex int, count in
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetCountRequests 
+// GetCountRequests Returns a statistic containing the request count
 func (client *BackendStatisticTag) GetCountRequests(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticCount, error) {
     pathParams := make(map[string]interface{})
 
@@ -161,7 +161,7 @@ func (client *BackendStatisticTag) GetCountRequests(startIndex int, count int, s
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetErrorsPerOperation 
+// GetErrorsPerOperation Returns a statistic containing the errors per operation
 func (client *BackendStatisticTag) GetErrorsPerOperation(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
@@ -230,7 +230,7 @@ func (client *BackendStatisticTag) GetErrorsPerOperation(startIndex int, count i
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetIncomingRequests 
+// GetIncomingRequests Returns a statistic containing the incoming requests
 func (client *BackendStatisticTag) GetIncomingRequests(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
@@ -299,7 +299,7 @@ func (client *BackendStatisticTag) GetIncomingRequests(startIndex int, count int
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetIncomingTransactions 
+// GetIncomingTransactions Returns a statistic containing the incoming transactions
 func (client *BackendStatisticTag) GetIncomingTransactions(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
@@ -368,7 +368,7 @@ func (client *BackendStatisticTag) GetIncomingTransactions(startIndex int, count
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetIssuedTokens 
+// GetIssuedTokens Returns a statistic containing the issues tokens
 func (client *BackendStatisticTag) GetIssuedTokens(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
@@ -437,7 +437,7 @@ func (client *BackendStatisticTag) GetIssuedTokens(startIndex int, count int, se
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetMostUsedActivities 
+// GetMostUsedActivities Returns a statistic containing the most used activities
 func (client *BackendStatisticTag) GetMostUsedActivities(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
@@ -506,7 +506,7 @@ func (client *BackendStatisticTag) GetMostUsedActivities(startIndex int, count i
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetMostUsedApps 
+// GetMostUsedApps Returns a statistic containing the most used apps
 func (client *BackendStatisticTag) GetMostUsedApps(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
@@ -575,7 +575,7 @@ func (client *BackendStatisticTag) GetMostUsedApps(startIndex int, count int, se
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetMostUsedOperations 
+// GetMostUsedOperations Returns a statistic containing the most used operations
 func (client *BackendStatisticTag) GetMostUsedOperations(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
@@ -644,7 +644,7 @@ func (client *BackendStatisticTag) GetMostUsedOperations(startIndex int, count i
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetTestCoverage 
+// GetTestCoverage Returns a statistic containing the test coverage
 func (client *BackendStatisticTag) GetTestCoverage() (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
@@ -699,7 +699,7 @@ func (client *BackendStatisticTag) GetTestCoverage() (*BackendStatisticChart, er
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetTimeAverage 
+// GetTimeAverage Returns a statistic containing the time average
 func (client *BackendStatisticTag) GetTimeAverage(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
@@ -768,7 +768,7 @@ func (client *BackendStatisticTag) GetTimeAverage(startIndex int, count int, sea
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetTimePerOperation 
+// GetTimePerOperation Returns a statistic containing the time per operation
 func (client *BackendStatisticTag) GetTimePerOperation(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
@@ -837,7 +837,7 @@ func (client *BackendStatisticTag) GetTimePerOperation(startIndex int, count int
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetUsedPoints 
+// GetUsedPoints Returns a statistic containing the used points
 func (client *BackendStatisticTag) GetUsedPoints(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 
@@ -906,7 +906,7 @@ func (client *BackendStatisticTag) GetUsedPoints(startIndex int, count int, sear
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetUserRegistrations 
+// GetUserRegistrations Returns a statistic containing the user registrations
 func (client *BackendStatisticTag) GetUserRegistrations(startIndex int, count int, search string, from string, to string, operationId int, appId int, userId int, ip string, userAgent string, method string, path string, header string, body string) (*BackendStatisticChart, error) {
     pathParams := make(map[string]interface{})
 

@@ -23,7 +23,7 @@ type BackendDashboardTag struct {
 
 
 
-// GetAll 
+// GetAll Returns all available dashboard widgets
 func (client *BackendDashboardTag) GetAll() (*BackendDashboard, error) {
     pathParams := make(map[string]interface{})
 

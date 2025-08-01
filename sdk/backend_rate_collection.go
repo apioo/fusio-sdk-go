@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of rate objects
 type BackendRateCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

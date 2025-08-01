@@ -23,7 +23,7 @@ type ConsumerLogTag struct {
 
 
 
-// Get 
+// Get Returns a specific log for the authenticated user
 func (client *ConsumerLogTag) Get(logId string) (*ConsumerLog, error) {
     pathParams := make(map[string]interface{})
     pathParams["log_id"] = logId
@@ -79,7 +79,7 @@ func (client *ConsumerLogTag) Get(logId string) (*ConsumerLog, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of logs which are assigned to the authenticated user
 func (client *ConsumerLogTag) GetAll(startIndex int, count int, search string) (*ConsumerLogCollection, error) {
     pathParams := make(map[string]interface{})
 

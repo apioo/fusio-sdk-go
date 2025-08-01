@@ -23,7 +23,7 @@ type BackendAccountTag struct {
 
 
 
-// ChangePassword 
+// ChangePassword Changes the password of the authenticated user
 func (client *BackendAccountTag) ChangePassword(payload BackendAccountChangePassword) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendAccountTag) ChangePassword(payload BackendAccountChangePass
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns user data of the authenticated user
 func (client *BackendAccountTag) Get() (*BackendUser, error) {
     pathParams := make(map[string]interface{})
 
@@ -140,7 +140,7 @@ func (client *BackendAccountTag) Get() (*BackendUser, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates user data of the authenticated user
 func (client *BackendAccountTag) Update(payload BackendUserUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 

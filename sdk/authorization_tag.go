@@ -23,7 +23,7 @@ type AuthorizationTag struct {
 
 
 
-// GetWhoami 
+// GetWhoami Returns user data of the current authenticated user
 func (client *AuthorizationTag) GetWhoami() (*BackendUser, error) {
     pathParams := make(map[string]interface{})
 
@@ -78,7 +78,7 @@ func (client *AuthorizationTag) GetWhoami() (*BackendUser, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Revoke 
+// Revoke Revoke the access token of the current authenticated user
 func (client *AuthorizationTag) Revoke() (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 

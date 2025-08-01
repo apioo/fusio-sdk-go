@@ -23,7 +23,7 @@ type BackendRateTag struct {
 
 
 
-// Create 
+// Create Creates a new rate limitation
 func (client *BackendRateTag) Create(payload BackendRateCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendRateTag) Create(payload BackendRateCreate) (*CommonMessage,
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing rate
 func (client *BackendRateTag) Delete(rateId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["rate_id"] = rateId
@@ -141,7 +141,7 @@ func (client *BackendRateTag) Delete(rateId string) (*CommonMessage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific rate
 func (client *BackendRateTag) Get(rateId string) (*BackendRate, error) {
     pathParams := make(map[string]interface{})
     pathParams["rate_id"] = rateId
@@ -197,7 +197,7 @@ func (client *BackendRateTag) Get(rateId string) (*BackendRate, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of rate limitations
 func (client *BackendRateTag) GetAll(startIndex int, count int, search string) (*BackendRateCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *BackendRateTag) GetAll(startIndex int, count int, search string) (
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing rate
 func (client *BackendRateTag) Update(rateId string, payload BackendRateUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["rate_id"] = rateId

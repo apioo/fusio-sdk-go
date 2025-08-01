@@ -5,5 +5,6 @@
 
 package sdk
 
+// Represents a map of headers
 type BackendActionExecuteResponseHeaders = map[string]string
 

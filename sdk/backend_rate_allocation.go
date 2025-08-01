@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents a rate allocation, in case a request matches it gets assigned to the attached rate
 type BackendRateAllocation struct {
     Id int `json:"id"`
     OperationId int `json:"operationId"`

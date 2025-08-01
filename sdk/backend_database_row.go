@@ -5,5 +5,6 @@
 
 package sdk
 
+// This object represents a row on a relational table
 type BackendDatabaseRow = map[string]any
 

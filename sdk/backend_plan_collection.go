@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of plan objects
 type BackendPlanCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

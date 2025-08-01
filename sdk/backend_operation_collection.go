@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of operation objects
 type BackendOperationCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

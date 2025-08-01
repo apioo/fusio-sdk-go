@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of role objects
 type BackendRoleCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

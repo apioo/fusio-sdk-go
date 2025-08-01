@@ -5,6 +5,7 @@
 
 package sdk
 
+// A paginated collection of log error objects
 type BackendLogErrorCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

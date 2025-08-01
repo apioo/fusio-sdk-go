@@ -23,7 +23,7 @@ type BackendTestTag struct {
 
 
 
-// Get 
+// Get Returns a specific test
 func (client *BackendTestTag) Get(testId string) (*BackendTest, error) {
     pathParams := make(map[string]interface{})
     pathParams["test_id"] = testId
@@ -79,7 +79,7 @@ func (client *BackendTestTag) Get(testId string) (*BackendTest, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of tests
 func (client *BackendTestTag) GetAll(startIndex int, count int, search string) (*BackendTestCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -137,7 +137,7 @@ func (client *BackendTestTag) GetAll(startIndex int, count int, search string) (
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Refresh 
+// Refresh Refresh all tests
 func (client *BackendTestTag) Refresh() (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -192,7 +192,7 @@ func (client *BackendTestTag) Refresh() (*CommonMessage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Run 
+// Run Run all tests
 func (client *BackendTestTag) Run() (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -247,7 +247,7 @@ func (client *BackendTestTag) Run() (*CommonMessage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing test
 func (client *BackendTestTag) Update(testId string, payload BackendTest) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["test_id"] = testId

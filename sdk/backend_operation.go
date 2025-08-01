@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents an operation, an operation invokes an action in case a specific HTTP method and path was requested. It defines also schema information about the request and response payload
 type BackendOperation struct {
     Id int `json:"id"`
     Status int `json:"status"`

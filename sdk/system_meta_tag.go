@@ -23,7 +23,7 @@ type SystemMetaTag struct {
 
 
 
-// GetAbout 
+// GetAbout Returns meta information and links about the current installed Fusio version
 func (client *SystemMetaTag) GetAbout() (*SystemAbout, error) {
     pathParams := make(map[string]interface{})
 
@@ -78,7 +78,7 @@ func (client *SystemMetaTag) GetAbout() (*SystemAbout, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetDebug 
+// GetDebug Debug endpoint which returns the provided data
 func (client *SystemMetaTag) GetDebug(payload Passthru) (*Passthru, error) {
     pathParams := make(map[string]interface{})
 
@@ -140,7 +140,7 @@ func (client *SystemMetaTag) GetDebug(payload Passthru) (*Passthru, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetHealth 
+// GetHealth Health check endpoint which returns information about the health status of the system
 func (client *SystemMetaTag) GetHealth() (*SystemHealthCheck, error) {
     pathParams := make(map[string]interface{})
 
@@ -195,62 +195,7 @@ func (client *SystemMetaTag) GetHealth() (*SystemHealthCheck, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetOAuthConfiguration 
-func (client *SystemMetaTag) GetOAuthConfiguration() (*SystemOAuthConfiguration, error) {
-    pathParams := make(map[string]interface{})
-
-    queryParams := make(map[string]interface{})
-
-    var queryStructNames []string
-
-    u, err := url.Parse(client.internal.Parser.Url("/system/oauth-authorization-server", pathParams))
-    if err != nil {
-        return nil, err
-    }
-
-    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
-
-
-    req, err := http.NewRequest("GET", u.String(), nil)
-    if err != nil {
-        return nil, err
-    }
-
-
-    resp, err := client.internal.HttpClient.Do(req)
-    if err != nil {
-        return nil, err
-    }
-
-    defer resp.Body.Close()
-
-    respBody, err := io.ReadAll(resp.Body)
-    if err != nil {
-        return nil, err
-    }
-
-    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data SystemOAuthConfiguration
-        err := json.Unmarshal(respBody, &data)
-
-        return &data, err
-    }
-
-    var statusCode = resp.StatusCode
-    if statusCode >= 0 && statusCode <= 999 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return nil, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
-}
-
-// GetRoutes 
+// GetRoutes Returns all available routes
 func (client *SystemMetaTag) GetRoutes() (*SystemRoute, error) {
     pathParams := make(map[string]interface{})
 
@@ -305,7 +250,7 @@ func (client *SystemMetaTag) GetRoutes() (*SystemRoute, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetSchema 
+// GetSchema Returns details of a specific schema
 func (client *SystemMetaTag) GetSchema(name string) (*SystemSchema, error) {
     pathParams := make(map[string]interface{})
     pathParams["name"] = name

@@ -23,7 +23,7 @@ type BackendSchemaTag struct {
 
 
 
-// Create 
+// Create Creates a new schema
 func (client *BackendSchemaTag) Create(payload BackendSchemaCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendSchemaTag) Create(payload BackendSchemaCreate) (*CommonMess
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing schema
 func (client *BackendSchemaTag) Delete(schemaId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["schema_id"] = schemaId
@@ -141,7 +141,7 @@ func (client *BackendSchemaTag) Delete(schemaId string) (*CommonMessage, error) 
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific schema
 func (client *BackendSchemaTag) Get(schemaId string) (*BackendSchema, error) {
     pathParams := make(map[string]interface{})
     pathParams["schema_id"] = schemaId
@@ -197,7 +197,7 @@ func (client *BackendSchemaTag) Get(schemaId string) (*BackendSchema, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of schemas
 func (client *BackendSchemaTag) GetAll(startIndex int, count int, search string) (*BackendSchemaCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *BackendSchemaTag) GetAll(startIndex int, count int, search string)
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetPreview 
+// GetPreview Returns a HTML preview of the provided schema
 func (client *BackendSchemaTag) GetPreview(schemaId string) (*BackendSchemaPreviewResponse, error) {
     pathParams := make(map[string]interface{})
     pathParams["schema_id"] = schemaId
@@ -311,7 +311,7 @@ func (client *BackendSchemaTag) GetPreview(schemaId string) (*BackendSchemaPrevi
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing schema
 func (client *BackendSchemaTag) Update(schemaId string, payload BackendSchemaUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["schema_id"] = schemaId
@@ -321,69 +321,6 @@ func (client *BackendSchemaTag) Update(schemaId string, payload BackendSchemaUpd
     var queryStructNames []string
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/schema/$schema_id<[0-9]+|^~>", pathParams))
-    if err != nil {
-        return nil, err
-    }
-
-    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
-
-    raw, err := json.Marshal(payload)
-    if err != nil {
-        return nil, err
-    }
-
-    var reqBody = bytes.NewReader(raw)
-
-    req, err := http.NewRequest("PUT", u.String(), reqBody)
-    if err != nil {
-        return nil, err
-    }
-
-    req.Header.Set("Content-Type", "application/json")
-
-    resp, err := client.internal.HttpClient.Do(req)
-    if err != nil {
-        return nil, err
-    }
-
-    defer resp.Body.Close()
-
-    respBody, err := io.ReadAll(resp.Body)
-    if err != nil {
-        return nil, err
-    }
-
-    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return &data, err
-    }
-
-    var statusCode = resp.StatusCode
-    if statusCode >= 0 && statusCode <= 999 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return nil, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
-}
-
-// UpdateForm 
-func (client *BackendSchemaTag) UpdateForm(schemaId string, payload BackendSchemaForm) (*CommonMessage, error) {
-    pathParams := make(map[string]interface{})
-    pathParams["schema_id"] = schemaId
-
-    queryParams := make(map[string]interface{})
-
-    var queryStructNames []string
-
-    u, err := url.Parse(client.internal.Parser.Url("/backend/schema/form/$schema_id<[0-9]+>", pathParams))
     if err != nil {
         return nil, err
     }

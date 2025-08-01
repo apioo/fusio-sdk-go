@@ -5,6 +5,7 @@
 
 package sdk
 
+// Contains all possible classes which can be used at an connection as class
 type BackendConnectionIndex struct {
     Connections []BackendConnectionIndexEntry `json:"connections"`
 }

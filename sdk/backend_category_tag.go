@@ -23,7 +23,7 @@ type BackendCategoryTag struct {
 
 
 
-// Create 
+// Create Creates a new category
 func (client *BackendCategoryTag) Create(payload BackendCategoryCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendCategoryTag) Create(payload BackendCategoryCreate) (*Common
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing category
 func (client *BackendCategoryTag) Delete(categoryId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["category_id"] = categoryId
@@ -141,7 +141,7 @@ func (client *BackendCategoryTag) Delete(categoryId string) (*CommonMessage, err
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific category
 func (client *BackendCategoryTag) Get(categoryId string) (*BackendCategory, error) {
     pathParams := make(map[string]interface{})
     pathParams["category_id"] = categoryId
@@ -197,7 +197,7 @@ func (client *BackendCategoryTag) Get(categoryId string) (*BackendCategory, erro
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of categories
 func (client *BackendCategoryTag) GetAll(startIndex int, count int, search string) (*BackendCategoryCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *BackendCategoryTag) GetAll(startIndex int, count int, search strin
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing category
 func (client *BackendCategoryTag) Update(categoryId string, payload BackendCategoryUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["category_id"] = categoryId

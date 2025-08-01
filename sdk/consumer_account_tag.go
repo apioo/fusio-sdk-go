@@ -23,7 +23,7 @@ type ConsumerAccountTag struct {
 
 
 
-// Activate 
+// Activate Activates an previously registered account through a token which was provided to the user via email
 func (client *ConsumerAccountTag) Activate(payload ConsumerUserActivate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *ConsumerAccountTag) Activate(payload ConsumerUserActivate) (*Commo
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Authorize 
+// Authorize Authorizes the access of a specific app for the authenticated user
 func (client *ConsumerAccountTag) Authorize(payload ConsumerAuthorizeRequest) (*ConsumerAuthorizeResponse, error) {
     pathParams := make(map[string]interface{})
 
@@ -147,7 +147,7 @@ func (client *ConsumerAccountTag) Authorize(payload ConsumerAuthorizeRequest) (*
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// ChangePassword 
+// ChangePassword Change the password for the authenticated user
 func (client *ConsumerAccountTag) ChangePassword(payload BackendAccountChangePassword) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -209,7 +209,7 @@ func (client *ConsumerAccountTag) ChangePassword(payload BackendAccountChangePas
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// ExecutePasswordReset 
+// ExecutePasswordReset Change the password after the password reset flow was started
 func (client *ConsumerAccountTag) ExecutePasswordReset(payload ConsumerUserPasswordReset) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -271,7 +271,7 @@ func (client *ConsumerAccountTag) ExecutePasswordReset(payload ConsumerUserPassw
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a user data for the authenticated user
 func (client *ConsumerAccountTag) Get() (*ConsumerUserAccount, error) {
     pathParams := make(map[string]interface{})
 
@@ -326,11 +326,13 @@ func (client *ConsumerAccountTag) Get() (*ConsumerUserAccount, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetApp 
-func (client *ConsumerAccountTag) GetApp() (*ConsumerAuthorizeMeta, error) {
+// GetApp Returns information about a specific app to start the OAuth2 authorization code flow
+func (client *ConsumerAccountTag) GetApp(clientId string, scope string) (*ConsumerAuthorizeMeta, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
+    queryParams["client_id"] = clientId
+    queryParams["scope"] = scope
 
     var queryStructNames []string
 
@@ -381,7 +383,7 @@ func (client *ConsumerAccountTag) GetApp() (*ConsumerAuthorizeMeta, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Login 
+// Login User login by providing a username and password
 func (client *ConsumerAccountTag) Login(payload ConsumerUserLogin) (*ConsumerUserJWT, error) {
     pathParams := make(map[string]interface{})
 
@@ -443,7 +445,7 @@ func (client *ConsumerAccountTag) Login(payload ConsumerUserLogin) (*ConsumerUse
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Refresh 
+// Refresh Refresh a previously obtained access token
 func (client *ConsumerAccountTag) Refresh(payload ConsumerUserRefresh) (*ConsumerUserJWT, error) {
     pathParams := make(map[string]interface{})
 
@@ -505,7 +507,7 @@ func (client *ConsumerAccountTag) Refresh(payload ConsumerUserRefresh) (*Consume
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Register 
+// Register Register a new user account
 func (client *ConsumerAccountTag) Register(payload ConsumerUserRegister) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -567,7 +569,7 @@ func (client *ConsumerAccountTag) Register(payload ConsumerUserRegister) (*Commo
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// RequestPasswordReset 
+// RequestPasswordReset Start the password reset flow
 func (client *ConsumerAccountTag) RequestPasswordReset(payload ConsumerUserEmail) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -629,7 +631,7 @@ func (client *ConsumerAccountTag) RequestPasswordReset(payload ConsumerUserEmail
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates user data for the authenticated user
 func (client *ConsumerAccountTag) Update(payload ConsumerUserAccount) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 

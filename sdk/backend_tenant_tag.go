@@ -23,7 +23,7 @@ type BackendTenantTag struct {
 
 
 
-// Remove 
+// Remove Removes an existing tenant
 func (client *BackendTenantTag) Remove(tenantId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["tenant_id"] = tenantId
@@ -79,7 +79,7 @@ func (client *BackendTenantTag) Remove(tenantId string) (*CommonMessage, error) 
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Setup 
+// Setup Setup a new tenant
 func (client *BackendTenantTag) Setup(tenantId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["tenant_id"] = tenantId

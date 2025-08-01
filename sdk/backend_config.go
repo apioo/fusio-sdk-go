@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents a system configuration
 type BackendConfig struct {
     Id int `json:"id"`
     Type int `json:"type"`

@@ -23,7 +23,7 @@ type BackendGeneratorTag struct {
 
 
 
-// ExecuteProvider 
+// ExecuteProvider Executes a generator with the provided config
 func (client *BackendGeneratorTag) ExecuteProvider(provider string, payload BackendGeneratorProvider) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["provider"] = provider
@@ -86,7 +86,7 @@ func (client *BackendGeneratorTag) ExecuteProvider(provider string, payload Back
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetChangelog 
+// GetChangelog Generates a changelog of all potential changes if you execute this generator with the provided config
 func (client *BackendGeneratorTag) GetChangelog(provider string, payload BackendGeneratorProviderConfig) (*BackendGeneratorProviderChangelog, error) {
     pathParams := make(map[string]interface{})
     pathParams["provider"] = provider
@@ -149,7 +149,7 @@ func (client *BackendGeneratorTag) GetChangelog(provider string, payload Backend
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetClasses 
+// GetClasses Returns all available generator classes
 func (client *BackendGeneratorTag) GetClasses() (*BackendGeneratorIndexProviders, error) {
     pathParams := make(map[string]interface{})
 
@@ -204,7 +204,7 @@ func (client *BackendGeneratorTag) GetClasses() (*BackendGeneratorIndexProviders
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetForm 
+// GetForm Returns the generator config form
 func (client *BackendGeneratorTag) GetForm(provider string) (*CommonFormContainer, error) {
     pathParams := make(map[string]interface{})
     pathParams["provider"] = provider

@@ -23,7 +23,7 @@ type ConsumerPageTag struct {
 
 
 
-// Get 
+// Get Returns a specific page for the authenticated user
 func (client *ConsumerPageTag) Get(pageId string) (*ConsumerPage, error) {
     pathParams := make(map[string]interface{})
     pathParams["page_id"] = pageId
@@ -79,7 +79,7 @@ func (client *ConsumerPageTag) Get(pageId string) (*ConsumerPage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of pages which are relevant to the authenticated user
 func (client *ConsumerPageTag) GetAll(startIndex int, count int, search string) (*ConsumerPageCollection, error) {
     pathParams := make(map[string]interface{})
 

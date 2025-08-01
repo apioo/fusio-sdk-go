@@ -23,7 +23,7 @@ type BackendRoleTag struct {
 
 
 
-// Create 
+// Create Creates a new role
 func (client *BackendRoleTag) Create(payload BackendRoleCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *BackendRoleTag) Create(payload BackendRoleCreate) (*CommonMessage,
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing role
 func (client *BackendRoleTag) Delete(roleId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["role_id"] = roleId
@@ -141,7 +141,7 @@ func (client *BackendRoleTag) Delete(roleId string) (*CommonMessage, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific role
 func (client *BackendRoleTag) Get(roleId string) (*BackendRole, error) {
     pathParams := make(map[string]interface{})
     pathParams["role_id"] = roleId
@@ -197,7 +197,7 @@ func (client *BackendRoleTag) Get(roleId string) (*BackendRole, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of roles
 func (client *BackendRoleTag) GetAll(startIndex int, count int, search string) (*BackendRoleCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *BackendRoleTag) GetAll(startIndex int, count int, search string) (
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing role
 func (client *BackendRoleTag) Update(roleId string, payload BackendRoleUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["role_id"] = roleId

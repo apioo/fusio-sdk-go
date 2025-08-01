@@ -23,7 +23,7 @@ type ConsumerWebhookTag struct {
 
 
 
-// Create 
+// Create Creates a new webhook for the authenticated user
 func (client *ConsumerWebhookTag) Create(payload ConsumerWebhookCreate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (client *ConsumerWebhookTag) Create(payload ConsumerWebhookCreate) (*Common
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Delete 
+// Delete Deletes an existing webhook for the authenticated user
 func (client *ConsumerWebhookTag) Delete(webhookId string) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["webhook_id"] = webhookId
@@ -141,7 +141,7 @@ func (client *ConsumerWebhookTag) Delete(webhookId string) (*CommonMessage, erro
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Get 
+// Get Returns a specific webhook for the authenticated user
 func (client *ConsumerWebhookTag) Get(webhookId string) (*ConsumerWebhook, error) {
     pathParams := make(map[string]interface{})
     pathParams["webhook_id"] = webhookId
@@ -197,7 +197,7 @@ func (client *ConsumerWebhookTag) Get(webhookId string) (*ConsumerWebhook, error
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetAll 
+// GetAll Returns a paginated list of webhooks which are assigned to the authenticated user
 func (client *ConsumerWebhookTag) GetAll(startIndex int, count int, search string) (*ConsumerWebhookCollection, error) {
     pathParams := make(map[string]interface{})
 
@@ -255,7 +255,7 @@ func (client *ConsumerWebhookTag) GetAll(startIndex int, count int, search strin
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Update 
+// Update Updates an existing webhook for the authenticated user
 func (client *ConsumerWebhookTag) Update(webhookId string, payload ConsumerWebhookUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["webhook_id"] = webhookId

@@ -5,6 +5,7 @@
 
 package sdk
 
+// This object represents a page at the developer portal
 type BackendPage struct {
     Id int `json:"id"`
     Status int `json:"status"`

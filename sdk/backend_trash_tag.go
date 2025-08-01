@@ -23,7 +23,7 @@ type BackendTrashTag struct {
 
 
 
-// GetAllByType 
+// GetAllByType Returns all deleted records by trash type
 func (client *BackendTrashTag) GetAllByType(_type string, startIndex int, count int, search string) (*BackendTrashDataCollection, error) {
     pathParams := make(map[string]interface{})
     pathParams["type"] = _type
@@ -82,7 +82,7 @@ func (client *BackendTrashTag) GetAllByType(_type string, startIndex int, count 
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// GetTypes 
+// GetTypes Returns all trash types
 func (client *BackendTrashTag) GetTypes() (*BackendTrashTypes, error) {
     pathParams := make(map[string]interface{})
 
@@ -137,7 +137,7 @@ func (client *BackendTrashTag) GetTypes() (*BackendTrashTypes, error) {
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Restore 
+// Restore Restores a previously deleted record
 func (client *BackendTrashTag) Restore(_type string, payload BackendTrashRestore) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["type"] = _type
