@@ -139,7 +139,7 @@ func (client *BackendConnectionFilesystemTag) Delete(connectionId string, fileId
 }
 
 // Get Returns the content of the provided file id on the filesystem connection
-func (client *BackendConnectionFilesystemTag) Get(connectionId string, fileId string) (error) {
+func (client *BackendConnectionFilesystemTag) Get(connectionId string, fileId string) (*[]byte, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
     pathParams["file_id"] = fileId
@@ -150,7 +150,7 @@ func (client *BackendConnectionFilesystemTag) Get(connectionId string, fileId st
 
     u, err := url.Parse(client.internal.Parser.Url("/backend/connection/:connection_id/filesystem/:file_id", pathParams))
     if err != nil {
-        return err
+        return nil, err
     }
 
     u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
@@ -158,24 +158,28 @@ func (client *BackendConnectionFilesystemTag) Get(connectionId string, fileId st
 
     req, err := http.NewRequest("GET", u.String(), nil)
     if err != nil {
-        return err
+        return nil, err
     }
 
+    req.Header.Set("Accept", "application/octet-stream")
 
     resp, err := client.internal.HttpClient.Do(req)
     if err != nil {
-        return err
+        return nil, err
     }
 
     defer resp.Body.Close()
 
     respBody, err := io.ReadAll(resp.Body)
     if err != nil {
-        return err
+        return nil, err
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        return nil
+        var data = respBody
+        err = nil
+
+        return &data, err
     }
 
     var statusCode = resp.StatusCode
@@ -183,13 +187,13 @@ func (client *BackendConnectionFilesystemTag) Get(connectionId string, fileId st
         var data CommonMessage
         err := json.Unmarshal(respBody, &data)
 
-        return &CommonMessageException{
+        return nil, &CommonMessageException{
             Payload: data,
             Previous: err,
         }
     }
 
-    return errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
 // GetAll Returns all available files on the filesystem connection
