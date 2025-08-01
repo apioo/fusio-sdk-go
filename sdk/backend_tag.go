@@ -61,16 +61,8 @@ func (client *BackendTag) Dashboard() *BackendDashboardTag {
     return NewBackendDashboardTag(client.internal.HttpClient, client.internal.Parser)
 }
 
-func (client *BackendTag) Database() *BackendDatabaseTag {
-    return NewBackendDatabaseTag(client.internal.HttpClient, client.internal.Parser)
-}
-
 func (client *BackendTag) Event() *BackendEventTag {
     return NewBackendEventTag(client.internal.HttpClient, client.internal.Parser)
-}
-
-func (client *BackendTag) File() *BackendFileTag {
-    return NewBackendFileTag(client.internal.HttpClient, client.internal.Parser)
 }
 
 func (client *BackendTag) Firewall() *BackendFirewallTag {

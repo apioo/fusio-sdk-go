@@ -21,6 +21,22 @@ type BackendConnectionTag struct {
     internal *sdkgen.TagAbstract
 }
 
+func (client *BackendConnectionTag) Database() *BackendConnectionDatabaseTag {
+    return NewBackendConnectionDatabaseTag(client.internal.HttpClient, client.internal.Parser)
+}
+
+func (client *BackendConnectionTag) Filesystem() *BackendConnectionFilesystemTag {
+    return NewBackendConnectionFilesystemTag(client.internal.HttpClient, client.internal.Parser)
+}
+
+func (client *BackendConnectionTag) Http() *BackendConnectionHttpTag {
+    return NewBackendConnectionHttpTag(client.internal.HttpClient, client.internal.Parser)
+}
+
+func (client *BackendConnectionTag) Sdk() *BackendConnectionSdkTag {
+    return NewBackendConnectionSdkTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 
 
 // Create Creates a new connection
@@ -376,7 +392,7 @@ func (client *BackendConnectionTag) GetRedirect(connectionId string) (*BackendCo
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id<[0-9]+|^~>/redirect", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/connection/:connection_id/redirect", pathParams))
     if err != nil {
         return nil, err
     }
