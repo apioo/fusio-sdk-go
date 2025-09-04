@@ -255,6 +255,69 @@ func (client *BackendUserTag) GetAll(startIndex int, count int, search string) (
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
+// Resend Resend the activation mail to the provided user
+func (client *BackendUserTag) Resend(userId string, payload Passthru) (*CommonMessage, error) {
+    pathParams := make(map[string]interface{})
+    pathParams["user_id"] = userId
+
+    queryParams := make(map[string]interface{})
+
+    var queryStructNames []string
+
+    u, err := url.Parse(client.internal.Parser.Url("/backend/user/$user_id<[0-9]+|^~>/resend", pathParams))
+    if err != nil {
+        return nil, err
+    }
+
+    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
+
+    raw, err := json.Marshal(payload)
+    if err != nil {
+        return nil, err
+    }
+
+    var reqBody = bytes.NewReader(raw)
+
+    req, err := http.NewRequest("POST", u.String(), reqBody)
+    if err != nil {
+        return nil, err
+    }
+
+    req.Header.Set("Content-Type", "application/json")
+
+    resp, err := client.internal.HttpClient.Do(req)
+    if err != nil {
+        return nil, err
+    }
+
+    defer resp.Body.Close()
+
+    respBody, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return nil, err
+    }
+
+    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return &data, err
+    }
+
+    var statusCode = resp.StatusCode
+    if statusCode >= 0 && statusCode <= 999 {
+        var data CommonMessage
+        err := json.Unmarshal(respBody, &data)
+
+        return nil, &CommonMessageException{
+            Payload: data,
+            Previous: err,
+        }
+    }
+
+    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
+}
+
 // Update Updates an existing user
 func (client *BackendUserTag) Update(userId string, payload BackendUserUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
