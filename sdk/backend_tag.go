@@ -145,6 +145,10 @@ func (client *BackendTag) Trash() *BackendTrashTag {
     return NewBackendTrashTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *BackendTag) Trigger() *BackendTriggerTag {
+    return NewBackendTriggerTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *BackendTag) User() *BackendUserTag {
     return NewBackendUserTag(client.internal.HttpClient, client.internal.Parser)
 }
