@@ -29,6 +29,10 @@ func (client *BackendMarketplaceTag) App() *BackendMarketplaceAppTag {
     return NewBackendMarketplaceAppTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *BackendMarketplaceTag) Bundle() *BackendMarketplaceBundleTag {
+    return NewBackendMarketplaceBundleTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 
 
 
