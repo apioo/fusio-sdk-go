@@ -256,7 +256,7 @@ func (client *BackendBundleTag) GetAll(startIndex int, count int, search string)
 }
 
 // Update Updates an existing bundle
-func (client *BackendBundleTag) Update(bundleId string, payload BackendEventUpdate) (*CommonMessage, error) {
+func (client *BackendBundleTag) Update(bundleId string, payload BackendBundleUpdate) (*CommonMessage, error) {
     pathParams := make(map[string]interface{})
     pathParams["bundle_id"] = bundleId
 
