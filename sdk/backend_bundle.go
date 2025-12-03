@@ -5,7 +5,7 @@
 
 package sdk
 
-// This object represents a bundle which allows you to submit action, schema, event, cronjob and trigger configuration from you local instance to the Fusio marketplace
+// This object represents a bundle which contains action, schema, event, cronjob and trigger configurations from you local instance
 type BackendBundle struct {
     Id int `json:"id"`
     Name string `json:"name"`
