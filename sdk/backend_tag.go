@@ -41,6 +41,10 @@ func (client *BackendTag) Backup() *BackendBackupTag {
     return NewBackendBackupTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *BackendTag) Bundle() *BackendBundleTag {
+    return NewBackendBundleTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *BackendTag) Category() *BackendCategoryTag {
     return NewBackendCategoryTag(client.internal.HttpClient, client.internal.Parser)
 }
