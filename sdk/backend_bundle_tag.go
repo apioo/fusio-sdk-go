@@ -142,7 +142,7 @@ func (client *BackendBundleTag) Delete(bundleId string) (*CommonMessage, error) 
 }
 
 // Get Returns a specific bundle
-func (client *BackendBundleTag) Get(bundleId string) (*BackendEvent, error) {
+func (client *BackendBundleTag) Get(bundleId string) (*BackendBundle, error) {
     pathParams := make(map[string]interface{})
     pathParams["bundle_id"] = bundleId
 
@@ -177,7 +177,7 @@ func (client *BackendBundleTag) Get(bundleId string) (*BackendEvent, error) {
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data BackendEvent
+        var data BackendBundle
         err := json.Unmarshal(respBody, &data)
 
         return &data, err
