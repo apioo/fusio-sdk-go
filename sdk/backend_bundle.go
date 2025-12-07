@@ -9,6 +9,11 @@ package sdk
 type BackendBundle struct {
     Id int `json:"id"`
     Name string `json:"name"`
+    Version string `json:"version"`
+    Icon string `json:"icon"`
+    Summary string `json:"summary"`
+    Description string `json:"description"`
+    Cost int `json:"cost"`
     Config *BackendBundleConfig `json:"config"`
 }
 
