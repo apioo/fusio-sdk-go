@@ -8,5 +8,6 @@ package sdk
 type MarketplaceMessage struct {
     Success bool `json:"success"`
     Message string `json:"message"`
+    Id string `json:"id"`
 }
 
