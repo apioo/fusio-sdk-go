@@ -5,8 +5,8 @@
 
 package sdk
 
+// Form element which represents a select element
 type CommonFormElementSelect struct {
-    Type string `json:"type"`
     Element string `json:"element"`
     Name string `json:"name"`
     Title string `json:"title"`

@@ -5,6 +5,7 @@
 
 package sdk
 
+// Represents a concrete option entry
 type CommonFormElementSelectOption struct {
     Key string `json:"key"`
     Value string `json:"value"`

@@ -5,8 +5,8 @@
 
 package sdk
 
+// Form element which represents an input tag editor to enter comma-separated values
 type CommonFormElementTag struct {
-    Type string `json:"type"`
     Element string `json:"element"`
     Name string `json:"name"`
     Title string `json:"title"`

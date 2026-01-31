@@ -141,7 +141,7 @@ func (client *BackendActionTag) Delete(actionId string) (*CommonMessage, error) 
     return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
 }
 
-// Execute Executes a specific action
+// Execute Executes a specific action. This method should be used to test an action configuration
 func (client *BackendActionTag) Execute(actionId string, payload BackendActionExecuteRequest) (*BackendActionExecuteResponse, error) {
     pathParams := make(map[string]interface{})
     pathParams["action_id"] = actionId

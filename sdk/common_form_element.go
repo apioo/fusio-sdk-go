@@ -5,8 +5,8 @@
 
 package sdk
 
+// Form base element
 type CommonFormElement struct {
-    Type string `json:"type"`
     Element string `json:"element"`
     Name string `json:"name"`
     Title string `json:"title"`

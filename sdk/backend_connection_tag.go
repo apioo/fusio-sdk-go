@@ -21,6 +21,10 @@ type BackendConnectionTag struct {
     internal *sdkgen.TagAbstract
 }
 
+func (client *BackendConnectionTag) Agent() *BackendConnectionAgentTag {
+    return NewBackendConnectionAgentTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *BackendConnectionTag) Database() *BackendConnectionDatabaseTag {
     return NewBackendConnectionDatabaseTag(client.internal.HttpClient, client.internal.Parser)
 }
