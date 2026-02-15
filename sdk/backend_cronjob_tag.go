@@ -198,13 +198,14 @@ func (client *BackendCronjobTag) Get(cronjobId string) (*BackendCronjob, error) 
 }
 
 // GetAll Returns a paginated list of cronjobs
-func (client *BackendCronjobTag) GetAll(startIndex int, count int, search string) (*BackendCronjobCollection, error) {
+func (client *BackendCronjobTag) GetAll(startIndex int, count int, search string, taxonomy int) (*BackendCronjobCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
     queryParams["startIndex"] = startIndex
     queryParams["count"] = count
     queryParams["search"] = search
+    queryParams["taxonomy"] = taxonomy
 
     var queryStructNames []string
 

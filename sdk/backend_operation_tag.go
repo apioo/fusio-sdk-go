@@ -198,13 +198,14 @@ func (client *BackendOperationTag) Get(operationId string) (*BackendOperation, e
 }
 
 // GetAll Returns a paginated list of operations
-func (client *BackendOperationTag) GetAll(startIndex int, count int, search string) (*BackendOperationCollection, error) {
+func (client *BackendOperationTag) GetAll(startIndex int, count int, search string, taxonomy int) (*BackendOperationCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
     queryParams["startIndex"] = startIndex
     queryParams["count"] = count
     queryParams["search"] = search
+    queryParams["taxonomy"] = taxonomy
 
     var queryStructNames []string
 

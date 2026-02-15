@@ -80,13 +80,14 @@ func (client *ConsumerEventTag) Get(eventId string) (*ConsumerEvent, error) {
 }
 
 // GetAll Returns a paginated list of apps which are assigned to the authenticated user
-func (client *ConsumerEventTag) GetAll(startIndex int, count int, search string) (*ConsumerEventCollection, error) {
+func (client *ConsumerEventTag) GetAll(startIndex int, count int, search string, taxonomy int) (*ConsumerEventCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
     queryParams["startIndex"] = startIndex
     queryParams["count"] = count
     queryParams["search"] = search
+    queryParams["taxonomy"] = taxonomy
 
     var queryStructNames []string
 

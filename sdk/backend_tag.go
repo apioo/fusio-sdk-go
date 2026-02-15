@@ -129,6 +129,10 @@ func (client *BackendTag) Statistic() *BackendStatisticTag {
     return NewBackendStatisticTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *BackendTag) Taxonomy() *BackendTaxonomyTag {
+    return NewBackendTaxonomyTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *BackendTag) Tenant() *BackendTenantTag {
     return NewBackendTenantTag(client.internal.HttpClient, client.internal.Parser)
 }

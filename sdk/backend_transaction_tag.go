@@ -80,7 +80,7 @@ func (client *BackendTransactionTag) Get(transactionId string) (*BackendTransact
 }
 
 // GetAll Returns a paginated list of transactions
-func (client *BackendTransactionTag) GetAll(startIndex int, count int, search string, from string, to string, planId int, userId int, appId int, status string, provider string) (*BackendTransactionCollection, error) {
+func (client *BackendTransactionTag) GetAll(startIndex int, count int, search string, from string, to string, planId int, userId int, appId int, status string, provider string, taxonomy int) (*BackendTransactionCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
@@ -94,6 +94,7 @@ func (client *BackendTransactionTag) GetAll(startIndex int, count int, search st
     queryParams["appId"] = appId
     queryParams["status"] = status
     queryParams["provider"] = provider
+    queryParams["taxonomy"] = taxonomy
 
     var queryStructNames []string
 

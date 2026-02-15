@@ -198,13 +198,14 @@ func (client *BackendSchemaTag) Get(schemaId string) (*BackendSchema, error) {
 }
 
 // GetAll Returns a paginated list of schemas
-func (client *BackendSchemaTag) GetAll(startIndex int, count int, search string) (*BackendSchemaCollection, error) {
+func (client *BackendSchemaTag) GetAll(startIndex int, count int, search string, taxonomy int) (*BackendSchemaCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
     queryParams["startIndex"] = startIndex
     queryParams["count"] = count
     queryParams["search"] = search
+    queryParams["taxonomy"] = taxonomy
 
     var queryStructNames []string
 
