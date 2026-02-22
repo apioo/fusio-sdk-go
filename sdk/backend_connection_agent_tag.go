@@ -23,121 +23,8 @@ type BackendConnectionAgentTag struct {
 
 
 
-// Get Returns all previous sent messages
-func (client *BackendConnectionAgentTag) Get(connectionId string, intent string) (*BackendAgentCollection, error) {
-    pathParams := make(map[string]interface{})
-    pathParams["connection_id"] = connectionId
-
-    queryParams := make(map[string]interface{})
-    queryParams["intent"] = intent
-
-    var queryStructNames []string
-
-    u, err := url.Parse(client.internal.Parser.Url("/backend/connection/:connection_id/agent", pathParams))
-    if err != nil {
-        return nil, err
-    }
-
-    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
-
-
-    req, err := http.NewRequest("GET", u.String(), nil)
-    if err != nil {
-        return nil, err
-    }
-
-
-    resp, err := client.internal.HttpClient.Do(req)
-    if err != nil {
-        return nil, err
-    }
-
-    defer resp.Body.Close()
-
-    respBody, err := io.ReadAll(resp.Body)
-    if err != nil {
-        return nil, err
-    }
-
-    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data BackendAgentCollection
-        err := json.Unmarshal(respBody, &data)
-
-        return &data, err
-    }
-
-    var statusCode = resp.StatusCode
-    if statusCode >= 0 && statusCode <= 999 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return nil, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
-}
-
-// Reset Resets all agent messages
-func (client *BackendConnectionAgentTag) Reset(connectionId string) (*CommonMessage, error) {
-    pathParams := make(map[string]interface{})
-    pathParams["connection_id"] = connectionId
-
-    queryParams := make(map[string]interface{})
-
-    var queryStructNames []string
-
-    u, err := url.Parse(client.internal.Parser.Url("/backend/connection/:connection_id/agent", pathParams))
-    if err != nil {
-        return nil, err
-    }
-
-    u.RawQuery = client.internal.Parser.QueryWithStruct(queryParams, queryStructNames).Encode()
-
-
-    req, err := http.NewRequest("DELETE", u.String(), nil)
-    if err != nil {
-        return nil, err
-    }
-
-
-    resp, err := client.internal.HttpClient.Do(req)
-    if err != nil {
-        return nil, err
-    }
-
-    defer resp.Body.Close()
-
-    respBody, err := io.ReadAll(resp.Body)
-    if err != nil {
-        return nil, err
-    }
-
-    if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return &data, err
-    }
-
-    var statusCode = resp.StatusCode
-    if statusCode >= 0 && statusCode <= 999 {
-        var data CommonMessage
-        err := json.Unmarshal(respBody, &data)
-
-        return nil, &CommonMessageException{
-            Payload: data,
-            Previous: err,
-        }
-    }
-
-    return nil, errors.New(fmt.Sprint("The server returned an unknown status code: ", statusCode))
-}
-
 // Send Sends a message to an agent
-func (client *BackendConnectionAgentTag) Send(connectionId string, payload BackendAgentRequest) (*BackendAgentResponse, error) {
+func (client *BackendConnectionAgentTag) Send(connectionId string, payload BackendAgentContent) (*BackendAgentContent, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
 
@@ -179,7 +66,7 @@ func (client *BackendConnectionAgentTag) Send(connectionId string, payload Backe
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data BackendAgentResponse
+        var data BackendAgentContent
         err := json.Unmarshal(respBody, &data)
 
         return &data, err

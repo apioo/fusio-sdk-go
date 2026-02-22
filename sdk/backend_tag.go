@@ -29,6 +29,10 @@ func (client *BackendTag) Action() *BackendActionTag {
     return NewBackendActionTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *BackendTag) Agent() *BackendAgentTag {
+    return NewBackendAgentTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *BackendTag) App() *BackendAppTag {
     return NewBackendAppTag(client.internal.HttpClient, client.internal.Parser)
 }

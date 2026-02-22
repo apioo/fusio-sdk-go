@@ -5,9 +5,11 @@
 
 package sdk
 
-// Agent call result
+// This object represents an agent message
 type BackendAgentMessage struct {
-    Type string `json:"type"`
-    Metadata map[string]any `json:"metadata"`
+    Id int `json:"id"`
+    Role string `json:"role"`
+    Content *BackendAgentContent `json:"content"`
+    InsertDate string `json:"insertDate"`
 }
 
