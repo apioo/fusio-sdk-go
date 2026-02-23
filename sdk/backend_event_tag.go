@@ -198,13 +198,14 @@ func (client *BackendEventTag) Get(eventId string) (*BackendEvent, error) {
 }
 
 // GetAll Returns a paginated list of events
-func (client *BackendEventTag) GetAll(startIndex int, count int, search string) (*BackendEventCollection, error) {
+func (client *BackendEventTag) GetAll(startIndex int, count int, search string, taxonomy int) (*BackendEventCollection, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
     queryParams["startIndex"] = startIndex
     queryParams["count"] = count
     queryParams["search"] = search
+    queryParams["taxonomy"] = taxonomy
 
     var queryStructNames []string
 
