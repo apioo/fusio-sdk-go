@@ -7,6 +7,7 @@ package sdk
 
 // This object represents an agent output
 type BackendAgentOutput struct {
+    Id string `json:"id"`
     Output *BackendAgentContent `json:"output"`
 }
 
