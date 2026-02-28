@@ -24,7 +24,7 @@ type BackendConnectionAgentTag struct {
 
 
 // Send Sends a message to an agent
-func (client *BackendConnectionAgentTag) Send(connectionId string, payload BackendAgentContent) (*BackendAgentContent, error) {
+func (client *BackendConnectionAgentTag) Send(connectionId string, payload BackendAgentInput) (*BackendAgentOutput, error) {
     pathParams := make(map[string]interface{})
     pathParams["connection_id"] = connectionId
 
@@ -66,7 +66,7 @@ func (client *BackendConnectionAgentTag) Send(connectionId string, payload Backe
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data BackendAgentContent
+        var data BackendAgentOutput
         err := json.Unmarshal(respBody, &data)
 
         return &data, err
