@@ -9,6 +9,7 @@ package sdk
 type BackendTaxonomyMove struct {
     Operations []int `json:"operations"`
     Actions []int `json:"actions"`
+    Schemas []int `json:"schemas"`
     Events []int `json:"events"`
     Cronjobs []int `json:"cronjobs"`
     Triggers []int `json:"triggers"`
