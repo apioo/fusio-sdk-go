@@ -81,11 +81,12 @@ func (client *BackendAgentMessageTag) GetAll(agentId string, parent int) (*Backe
 }
 
 // Submit Submits a new agent message
-func (client *BackendAgentMessageTag) Submit(agentId string, payload BackendAgentInput) (*BackendAgentOutput, error) {
+func (client *BackendAgentMessageTag) Submit(agentId string, payload BackendAgentInput, parent int) (*BackendAgentOutput, error) {
     pathParams := make(map[string]interface{})
     pathParams["agent_id"] = agentId
 
     queryParams := make(map[string]interface{})
+    queryParams["parent"] = parent
 
     var queryStructNames []string
 
