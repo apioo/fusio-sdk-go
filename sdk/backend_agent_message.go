@@ -9,7 +9,7 @@ package sdk
 type BackendAgentMessage struct {
     Id int `json:"id"`
     Role string `json:"role"`
-    Content *BackendAgentContent `json:"content"`
+    Content *CommonAgentContent `json:"content"`
     InsertDate string `json:"insertDate"`
 }
 
