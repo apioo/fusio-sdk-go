@@ -24,12 +24,12 @@ type BackendAgentMessageTag struct {
 
 
 // GetAll Returns a paginated list of agent messages
-func (client *BackendAgentMessageTag) GetAll(agentId string, parent int) (*BackendAgentMessageCollection, error) {
+func (client *BackendAgentMessageTag) GetAll(agentId string, chatId string) (*BackendAgentMessageCollection, error) {
     pathParams := make(map[string]interface{})
     pathParams["agent_id"] = agentId
 
     queryParams := make(map[string]interface{})
-    queryParams["parent"] = parent
+    queryParams["chat_id"] = chatId
 
     var queryStructNames []string
 
@@ -81,12 +81,11 @@ func (client *BackendAgentMessageTag) GetAll(agentId string, parent int) (*Backe
 }
 
 // Submit Submits a new agent message
-func (client *BackendAgentMessageTag) Submit(agentId string, payload CommonAgentInput, parent int) (*CommonAgentOutput, error) {
+func (client *BackendAgentMessageTag) Submit(agentId string, payload CommonAgentInput) (*CommonAgentOutput, error) {
     pathParams := make(map[string]interface{})
     pathParams["agent_id"] = agentId
 
     queryParams := make(map[string]interface{})
-    queryParams["parent"] = parent
 
     var queryStructNames []string
 
