@@ -8,8 +8,9 @@ package sdk
 // This object represents an agent message
 type BackendAgentMessage struct {
     Id int `json:"id"`
+    ChatId string `json:"chatId"`
     Role string `json:"role"`
-    Content *CommonAgentContent `json:"content"`
+    Item *AgentItem `json:"item"`
     InsertDate string `json:"insertDate"`
 }
 

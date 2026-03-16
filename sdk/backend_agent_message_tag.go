@@ -81,7 +81,7 @@ func (client *BackendAgentMessageTag) GetAll(agentId string, chatId string) (*Ba
 }
 
 // Submit Submits a new agent message
-func (client *BackendAgentMessageTag) Submit(agentId string, payload CommonAgentInput) (*CommonAgentOutput, error) {
+func (client *BackendAgentMessageTag) Submit(agentId string, payload AgentInput) (*AgentOutput, error) {
     pathParams := make(map[string]interface{})
     pathParams["agent_id"] = agentId
 
@@ -123,7 +123,7 @@ func (client *BackendAgentMessageTag) Submit(agentId string, payload CommonAgent
     }
 
     if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-        var data CommonAgentOutput
+        var data AgentOutput
         err := json.Unmarshal(respBody, &data)
 
         return &data, err
