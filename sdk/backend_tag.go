@@ -129,6 +129,10 @@ func (client *BackendTag) Sdk() *BackendSdkTag {
     return NewBackendSdkTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *BackendTag) Specification() *BackendSpecificationTag {
+    return NewBackendSpecificationTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *BackendTag) Statistic() *BackendStatisticTag {
     return NewBackendStatisticTag(client.internal.HttpClient, client.internal.Parser)
 }
