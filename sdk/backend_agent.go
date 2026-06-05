@@ -10,6 +10,7 @@ type BackendAgent struct {
     Id int `json:"id"`
     Connection int `json:"connection"`
     Type int `json:"type"`
+    Public bool `json:"public"`
     Name string `json:"name"`
     Description string `json:"description"`
     Introduction string `json:"introduction"`

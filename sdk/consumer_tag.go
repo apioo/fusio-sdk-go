@@ -25,6 +25,10 @@ func (client *ConsumerTag) Account() *ConsumerAccountTag {
     return NewConsumerAccountTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *ConsumerTag) Agent() *ConsumerAgentTag {
+    return NewConsumerAgentTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 func (client *ConsumerTag) App() *ConsumerAppTag {
     return NewConsumerAppTag(client.internal.HttpClient, client.internal.Parser)
 }
