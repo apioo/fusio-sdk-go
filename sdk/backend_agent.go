@@ -15,6 +15,7 @@ type BackendAgent struct {
     Description string `json:"description"`
     Introduction string `json:"introduction"`
     Temperature float64 `json:"temperature"`
+    Costs int `json:"costs"`
     Tools []string `json:"tools"`
     Outgoing string `json:"outgoing"`
     Action string `json:"action"`
