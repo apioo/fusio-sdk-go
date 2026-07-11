@@ -9,6 +9,6 @@ type BackendSpecificationChangelog struct {
     Master any `json:"master"`
     Tag any `json:"tag"`
     Version string `json:"version"`
-    Changelog []string `json:"changelog"`
+    Changelog string `json:"changelog"`
 }
 
