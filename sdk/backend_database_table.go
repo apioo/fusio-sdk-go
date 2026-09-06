@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a relational table on a database connection
 type BackendDatabaseTable struct {

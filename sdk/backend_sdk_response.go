@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Container listing target SDK languages or formats available for generator execution
 type BackendSdkResponse struct {
+    Kind string `json:"kind"`
     Types *BackendSdkTypes `json:"types"`
 }
 

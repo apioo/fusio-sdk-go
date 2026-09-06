@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // A schema commit which represents a change in the schema source
 type BackendSchemaCommit struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     User *BackendUser `json:"user"`
     CommitHash string `json:"commitHash"`

@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for creating a new rate limit policy
 type BackendRateCreate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Priority int `json:"priority"`
     Name string `json:"name"`

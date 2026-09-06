@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for creating a new action entity
 type BackendActionCreate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Status int `json:"status"`
     Name string `json:"name"`

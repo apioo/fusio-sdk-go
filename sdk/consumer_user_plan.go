@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Active plan summary associated with a user
 type ConsumerUserPlan struct {
     Id int `json:"id"`
     Name string `json:"name"`

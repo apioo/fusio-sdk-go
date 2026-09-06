@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a scope. A scope is assigned to a user and is required to access operations
 type BackendScope struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Name string `json:"name"`
     Description string `json:"description"`

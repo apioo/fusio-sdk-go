@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents an audit which is created every time something was changed at the system
 type BackendAudit struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     App *BackendApp `json:"app"`
     User *BackendUser `json:"user"`

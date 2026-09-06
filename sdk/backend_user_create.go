@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Request payload to register or create a new user account
 type BackendUserCreate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     RoleId int `json:"roleId"`
     PlanId int `json:"planId"`

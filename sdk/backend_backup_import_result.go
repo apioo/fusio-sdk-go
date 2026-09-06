@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Result of a backup import operation
 type BackendBackupImportResult struct {

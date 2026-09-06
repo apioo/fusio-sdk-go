@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Request payload to update existing user account information
 type BackendUserUpdate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     RoleId int `json:"roleId"`
     PlanId int `json:"planId"`

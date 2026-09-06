@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Identity provider configuration for single sign-on
 type ConsumerIdentity struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Name string `json:"name"`
     Icon string `json:"icon"`

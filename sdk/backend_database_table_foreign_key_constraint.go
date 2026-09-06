@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a foreign key constraint on a relational database
 type BackendDatabaseTableForeignKeyConstraint struct {

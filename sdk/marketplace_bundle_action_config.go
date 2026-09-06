@@ -3,7 +3,5 @@
 // @see https://sdkgen.app
 
 
-package sdk
-
 type MarketplaceBundleActionConfig = map[string]any
 

@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Response container for a generated schema code preview
 type BackendSchemaPreviewResponse struct {
     Preview string `json:"preview"`
 }

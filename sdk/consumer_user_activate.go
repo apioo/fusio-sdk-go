@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload used to activate a user account via token
 type ConsumerUserActivate struct {
     Token string `json:"token"`
 }

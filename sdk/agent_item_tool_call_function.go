@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Concrete values for a function tool call
 type AgentItemToolCallFunction struct {

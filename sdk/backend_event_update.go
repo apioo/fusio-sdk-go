@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for updating an existing event entity
 type BackendEventUpdate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Name string `json:"name"`
     Description string `json:"description"`

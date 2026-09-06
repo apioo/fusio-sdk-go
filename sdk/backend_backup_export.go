@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Export of the complete system configuration
 type BackendBackupExport struct {

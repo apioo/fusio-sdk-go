@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for issuing a new personal access token
 type ConsumerTokenCreate struct {
     Name string `json:"name"`
     Scopes []string `json:"scopes"`

@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a bundle which contains action, schema, event, cronjob and trigger configurations from you local instance
 type BackendBundle struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Name string `json:"name"`
     Version string `json:"version"`

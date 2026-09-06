@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for updating an existing action entity
 type BackendActionUpdate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Status int `json:"status"`
     Name string `json:"name"`

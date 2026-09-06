@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload to request a refreshed authentication token
 type ConsumerUserRefresh struct {
     RefreshToken string `json:"refresh_token"`
 }

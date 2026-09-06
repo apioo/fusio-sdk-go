@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Container for grouping available scopes into logical categories
 type BackendScopeCategories struct {
     Categories []BackendScopeCategory `json:"categories"`
 }

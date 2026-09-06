@@ -3,7 +3,5 @@
 // @see https://sdkgen.app
 
 
-package sdk
-
 type SystemSchemaForm = map[string]any
 

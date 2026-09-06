@@ -3,8 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
-
 type MarketplaceBundleAction struct {
     Name string `json:"name"`
     Class string `json:"class"`

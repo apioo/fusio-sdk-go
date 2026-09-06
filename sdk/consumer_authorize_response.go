@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Result of an OAuth authorization decision
 type ConsumerAuthorizeResponse struct {
     Type string `json:"type"`
     Code string `json:"code"`

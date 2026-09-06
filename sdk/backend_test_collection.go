@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // A paginated collection of test objects
 type BackendTestCollection struct {
+    Kind string `json:"kind"`
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`
     ItemsPerPage int `json:"itemsPerPage"`

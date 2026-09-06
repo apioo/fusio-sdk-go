@@ -3,9 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
-
 type SystemHealthCheck struct {
+    Kind string `json:"kind"`
     Healthy bool `json:"healthy"`
     Error string `json:"error"`
 }

@@ -3,8 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
-
 type MarketplaceBundleSchema struct {
     Name string `json:"name"`
     Source *MarketplaceBundleSchemaSource `json:"source"`

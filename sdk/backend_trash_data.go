@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// This object represents a deleted item stored in the trash bin
 type BackendTrashData struct {
     Id int `json:"id"`
     Status int `json:"status"`

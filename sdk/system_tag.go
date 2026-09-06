@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 import (
     
@@ -19,6 +18,10 @@ import (
 
 type SystemTag struct {
     internal *sdkgen.TagAbstract
+}
+
+func (client *SystemTag) Captcha() *SystemCaptchaTag {
+    return NewSystemCaptchaTag(client.internal.HttpClient, client.internal.Parser)
 }
 
 func (client *SystemTag) Connection() *SystemConnectionTag {

@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Configuration object used to invoke a schema/operation generator
 type BackendGeneratorProvider struct {
     Path string `json:"path"`
     Scopes []string `json:"scopes"`

@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Represents structural changelog differences between specification versions
 type BackendSpecificationChangelog struct {
     Master any `json:"master"`
     Tag any `json:"tag"`

@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // A key value object containing the changes
 type BackendAuditObject = map[string]any

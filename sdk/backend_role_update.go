@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for updating an existing user role entity
 type BackendRoleUpdate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     CategoryId int `json:"categoryId"`
     Name string `json:"name"`

@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a connection to an external system like i.e. a database, message-queue or client-sdk
 type BackendConnection struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Name string `json:"name"`
     Class string `json:"class"`

@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents an agent input
 type AgentInput struct {

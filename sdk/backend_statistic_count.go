@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Represents an aggregated count metric over a specific timeframe
 type BackendStatisticCount struct {
     Count int `json:"count"`
     From string `json:"from"`

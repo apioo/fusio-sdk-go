@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// OAuth 2.0 access token response object
 type ConsumerTokenAccessToken struct {
     AccessToken string `json:"access_token"`
     TokenType string `json:"token_type"`

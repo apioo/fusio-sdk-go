@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Binary agent message
 type AgentItemBinary struct {

@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // The connection configuration which contains arbitrary key-value entries
 type BackendConnectionConfig = map[string]any

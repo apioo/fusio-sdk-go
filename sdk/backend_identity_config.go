@@ -3,7 +3,7 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Identity provider configuration containing key-value parameters
 type BackendIdentityConfig = map[string]any
 

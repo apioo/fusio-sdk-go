@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for updating an existing category
 type BackendCategoryUpdate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Name string `json:"name"`
 }

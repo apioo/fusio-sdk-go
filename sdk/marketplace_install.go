@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Installs an object from the marketplace
 type MarketplaceInstall struct {

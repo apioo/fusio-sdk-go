@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a taxonomy. A taxonomy helps to internally organize operations, actions and other entities
 type BackendTaxonomy struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     ParentId int `json:"parentId"`
     Name string `json:"name"`

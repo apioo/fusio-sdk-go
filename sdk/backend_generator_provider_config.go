@@ -3,7 +3,7 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Arbitrary configuration map for the generator provider
 type BackendGeneratorProviderConfig = map[string]any
 

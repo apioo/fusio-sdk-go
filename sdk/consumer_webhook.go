@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Webhook endpoint subscription definition
 type ConsumerWebhook struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Status int `json:"status"`
     Event string `json:"event"`

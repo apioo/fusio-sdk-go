@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Response payload containing the payment provider checkout URI
 type ConsumerPaymentCheckoutResponse struct {
     ApprovalUrl string `json:"approvalUrl"`
 }

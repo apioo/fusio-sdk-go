@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// User profile and subscription status details
 type ConsumerUserAccount struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     PlanId int `json:"planId"`
     Status int `json:"status"`

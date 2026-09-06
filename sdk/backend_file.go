@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a file on the filesystem
 type BackendFile struct {

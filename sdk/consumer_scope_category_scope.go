@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Scope entry within a specific category group
 type ConsumerScopeCategoryScope struct {
     Id int `json:"id"`
     Name string `json:"name"`

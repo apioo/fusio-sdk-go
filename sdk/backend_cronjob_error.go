@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Represents an error which occurred on cronjob execution
 type BackendCronjobError struct {

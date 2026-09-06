@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Choice agent message
 type AgentItemChoice struct {

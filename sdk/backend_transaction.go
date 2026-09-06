@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a transaction. The system generates a transaction in case a payment was successfully executed
 type BackendTransaction struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     UserId int `json:"userId"`
     PlanId int `json:"planId"`

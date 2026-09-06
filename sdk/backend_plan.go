@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a plan, a plan allows users to obtain points or in general subscribe to your app
 type BackendPlan struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Name string `json:"name"`
     Description string `json:"description"`

@@ -3,8 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
-
 type SystemAboutLink struct {
     Rel string `json:"rel"`
     Href string `json:"href"`

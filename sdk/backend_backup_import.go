@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Import a previously exported system configuration
 type BackendBackupImport struct {

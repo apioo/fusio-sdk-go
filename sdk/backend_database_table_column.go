@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a column at a relation table
 type BackendDatabaseTableColumn struct {

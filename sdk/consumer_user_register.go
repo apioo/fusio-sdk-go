@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for registering a new user account
 type ConsumerUserRegister struct {
     Name string `json:"name"`
     Email string `json:"email"`

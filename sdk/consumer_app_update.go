@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for updating an existing consumer application
 type ConsumerAppUpdate struct {
     Name string `json:"name"`
     Url string `json:"url"`

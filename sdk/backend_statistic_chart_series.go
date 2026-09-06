@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// A single data line or bar series for a statistic chart
 type BackendStatisticChartSeries struct {
     Name string `json:"name"`
     Data []float64 `json:"data"`

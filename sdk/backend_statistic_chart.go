@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Represents dataset structures formatted for rendering statistic charts
 type BackendStatisticChart struct {
     Labels []string `json:"labels"`
     Series []BackendStatisticChartSeries `json:"series"`

@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents an agent
 type BackendAgent struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Connection int `json:"connection"`
     Type int `json:"type"`

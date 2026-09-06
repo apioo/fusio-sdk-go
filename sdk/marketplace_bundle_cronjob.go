@@ -3,8 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
-
 type MarketplaceBundleCronjob struct {
     Name string `json:"name"`
     Cron string `json:"cron"`

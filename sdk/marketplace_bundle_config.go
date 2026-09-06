@@ -3,8 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
-
 type MarketplaceBundleConfig struct {
     Actions []MarketplaceBundleAction `json:"actions"`
     Schemas []MarketplaceBundleSchema `json:"schemas"`

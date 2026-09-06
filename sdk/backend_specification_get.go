@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Container delivering the compiled API specification schema object
 type BackendSpecificationGet struct {
     Spec any `json:"spec"`
 }

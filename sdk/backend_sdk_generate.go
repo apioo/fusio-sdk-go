@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload defining target format and configuration for triggering an SDK generation run
 type BackendSdkGenerate struct {
     Format string `json:"format"`
     Config string `json:"config"`

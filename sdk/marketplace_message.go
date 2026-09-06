@@ -3,8 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
-
 type MarketplaceMessage struct {
     Success bool `json:"success"`
     Message string `json:"message"`

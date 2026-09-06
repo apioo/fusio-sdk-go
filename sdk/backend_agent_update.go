@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for updating an existing AI agent
 type BackendAgentUpdate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Connection int `json:"connection"`
     Type int `json:"type"`

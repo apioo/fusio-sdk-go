@@ -3,9 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
-
 type SystemRoute struct {
+    Kind string `json:"kind"`
     Routes *SystemRoutePath `json:"routes"`
 }
 

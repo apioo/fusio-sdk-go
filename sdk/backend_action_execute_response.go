@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Represents an action execution response
 type BackendActionExecuteResponse struct {
+    Kind string `json:"kind"`
     StatusCode int `json:"statusCode"`
     Headers *BackendActionExecuteResponseHeaders `json:"headers"`
     Body *BackendActionExecuteResponseBody `json:"body"`

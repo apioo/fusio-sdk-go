@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a webhook, a webhook is called in case a specific event was triggered
 type BackendWebhook struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     EventId int `json:"eventId"`
     UserId int `json:"userId"`

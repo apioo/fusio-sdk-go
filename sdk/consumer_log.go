@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Access log entry recording an incoming HTTP request
 type ConsumerLog struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     AppId int `json:"appId"`
     Ip string `json:"ip"`

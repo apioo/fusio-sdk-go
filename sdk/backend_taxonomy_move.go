@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Moves the provided objects to a taxonomy
 type BackendTaxonomyMove struct {

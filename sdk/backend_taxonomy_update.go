@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for updating an existing taxonomy node
 type BackendTaxonomyUpdate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     ParentId int `json:"parentId"`
     Name string `json:"name"`

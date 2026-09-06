@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Represents a collection of available tools
 type BackendAgentTools struct {
+    Kind string `json:"kind"`
     Tools []BackendAgentTool `json:"tools"`
 }
 

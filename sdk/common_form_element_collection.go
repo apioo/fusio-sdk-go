@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Form element which represents a collection element
 type CommonFormElementCollection struct {

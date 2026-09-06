@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Configuration parameters for executing a test run
 type BackendTestConfig struct {
     Method string `json:"method"`
     UriFragments string `json:"uriFragments"`

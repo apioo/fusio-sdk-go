@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Represents available SDK type which can be generated
 type BackendSdkTypes = map[string]string

@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Parameters sent to initiate an OAuth authorization decision
 type ConsumerAuthorizeRequest struct {
     ResponseType string `json:"responseType"`
     ClientId string `json:"clientId"`

@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Request payload to restore an item from the trash bin
 type BackendTrashRestore struct {
     Id int `json:"id"`
 }

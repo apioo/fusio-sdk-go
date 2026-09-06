@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Collection of third-party identity providers
 type ConsumerIdentityCollection struct {
+    Kind string `json:"kind"`
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`
     ItemsPerPage int `json:"itemsPerPage"`

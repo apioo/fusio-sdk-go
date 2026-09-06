@@ -3,8 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
-
 type MarketplaceBundleTrigger struct {
     Name string `json:"name"`
     Event string `json:"event"`

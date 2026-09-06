@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Metadata for an OAuth authorization request screen
 type ConsumerAuthorizeMeta struct {
     Name string `json:"name"`
     Url string `json:"url"`

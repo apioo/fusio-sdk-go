@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a page at the developer portal
 type BackendPage struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Status int `json:"status"`
     Title string `json:"title"`

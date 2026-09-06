@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Recorded delivery log response for a webhook dispatch
 type ConsumerWebhookResponse struct {
     Status int `json:"status"`
     Code int `json:"code"`

@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Billing transaction record for quota or subscription purchases
 type ConsumerTransaction struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     UserId int `json:"userId"`
     PlanId int `json:"planId"`

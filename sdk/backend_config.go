@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a system configuration
 type BackendConfig struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Type int `json:"type"`
     Name string `json:"name"`

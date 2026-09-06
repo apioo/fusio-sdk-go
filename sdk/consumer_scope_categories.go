@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Grouped list of scope categories for user authorization forms
 type ConsumerScopeCategories struct {
+    Kind string `json:"kind"`
     Categories []ConsumerScopeCategory `json:"categories"`
 }
 

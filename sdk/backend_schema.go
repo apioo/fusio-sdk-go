@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a schema to describe a JSON payload
 type BackendSchema struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Status int `json:"status"`
     Name string `json:"name"`

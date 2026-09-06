@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Response structure detailing the outcome of an SDK generation job
 type BackendSdkMessage struct {
+    Kind string `json:"kind"`
     Success bool `json:"success"`
     Message string `json:"message"`
     Link string `json:"link"`

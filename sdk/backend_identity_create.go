@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for creating a new identity provider entity
 type BackendIdentityCreate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     AppId int `json:"appId"`
     RoleId int `json:"roleId"`

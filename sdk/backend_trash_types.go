@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// List of available entity types that can be restored from the trash
 type BackendTrashTypes struct {
     Types []string `json:"types"`
 }

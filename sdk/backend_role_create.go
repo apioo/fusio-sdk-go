@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for creating a new user role entity
 type BackendRoleCreate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     CategoryId int `json:"categoryId"`
     Name string `json:"name"`

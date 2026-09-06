@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for updating an existing personal access token
 type ConsumerTokenUpdate struct {
     Name string `json:"name"`
     Expire string `json:"expire"`

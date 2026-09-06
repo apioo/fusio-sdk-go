@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload defining configuration parameters for publishing an API specification export
 type BackendSpecificationPublish struct {
     Name string `json:"name"`
     FilterName string `json:"filterName"`

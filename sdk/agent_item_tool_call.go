@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Tool call agent message
 type AgentItemToolCall struct {

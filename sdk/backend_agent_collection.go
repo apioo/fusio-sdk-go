@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Represents a collection of agent messages
 type BackendAgentCollection struct {
+    Kind string `json:"kind"`
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`
     ItemsPerPage int `json:"itemsPerPage"`

@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents an agent message
 type BackendAgentMessage struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     ChatId string `json:"chatId"`
     Role string `json:"role"`

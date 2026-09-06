@@ -3,7 +3,7 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Configuration settings and resource specs exported within the bundle
 type BackendBundleConfig = map[string]any
 

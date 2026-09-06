@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for creating a new AI agent
 type BackendAgentCreate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Connection int `json:"connection"`
     Type int `json:"type"`

@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a rate limitation, which allows to limit the requests which a user can send
 type BackendRate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Priority int `json:"priority"`
     Name string `json:"name"`

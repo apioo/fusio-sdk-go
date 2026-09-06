@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // The action configuration which contains arbitrary key-value entries
 type BackendActionConfig = map[string]any

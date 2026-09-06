@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Form element which represents a TypeAPI editor
 type CommonFormElementTypeAPI struct {

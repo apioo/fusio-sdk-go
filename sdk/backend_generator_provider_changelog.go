@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Represents a preview changelog of entities created or updated by a generator run
 type BackendGeneratorProviderChangelog struct {
     Schemas []BackendSchema `json:"schemas"`
     Actions []BackendAction `json:"actions"`

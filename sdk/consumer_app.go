@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Represents a consumer application registered by a user
 type ConsumerApp struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     UserId int `json:"userId"`
     Status int `json:"status"`

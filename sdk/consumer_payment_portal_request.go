@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Request payload to launch the billing management portal
 type ConsumerPaymentPortalRequest struct {
     ReturnUrl string `json:"returnUrl"`
 }

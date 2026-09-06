@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Content page definition for developer portal documentation
 type ConsumerPage struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Title string `json:"title"`
     Slug string `json:"slug"`

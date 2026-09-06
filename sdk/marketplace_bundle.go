@@ -3,8 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
-
 type MarketplaceBundle struct {
     Id int `json:"id"`
     Name string `json:"name"`

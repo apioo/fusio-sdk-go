@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Credentials payload for user login
 type ConsumerUserLogin struct {
     Username string `json:"username"`
     Password string `json:"password"`

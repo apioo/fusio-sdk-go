@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Contains all possible classes which can be used at an action as class
 type BackendActionIndex struct {
+    Kind string `json:"kind"`
     Actions []BackendActionIndexEntry `json:"actions"`
 }
 

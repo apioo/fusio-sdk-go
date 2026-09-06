@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Represents user authorization granted to a consumer application
 type ConsumerGrant struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     App *ConsumerApp `json:"app"`
     CreateDate string `json:"createDate"`

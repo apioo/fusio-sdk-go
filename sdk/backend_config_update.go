@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for updating a system configuration entry
 type BackendConfigUpdate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Type int `json:"type"`
     Name string `json:"name"`

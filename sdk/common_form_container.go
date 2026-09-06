@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Represents a config form with a list of elements
 type CommonFormContainer struct {

@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Base class of all objects on the marketplace
 type MarketplaceObject struct {

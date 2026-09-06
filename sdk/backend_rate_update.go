@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for updating an existing rate limit policy
 type BackendRateUpdate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Priority int `json:"priority"`
     Name string `json:"name"`

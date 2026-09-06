@@ -3,7 +3,7 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Map of HTTP error status codes to target schema names
 type BackendOperationThrows = map[string]string
 

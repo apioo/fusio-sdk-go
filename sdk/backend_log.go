@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a log entry. Every HTTP requests to the system generates such a log entry.
 type BackendLog struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     Ip string `json:"ip"`
     UserAgent string `json:"userAgent"`

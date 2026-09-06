@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Represents a concrete identity class
 type BackendIdentityIndexEntry struct {

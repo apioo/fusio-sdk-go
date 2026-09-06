@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// JWT authentication response containing access credentials
 type ConsumerUserJWT struct {
     Token string `json:"token"`
     ExpiresIn int `json:"expires_in"`

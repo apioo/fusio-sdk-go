@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Response payload containing the customer portal portal link
 type ConsumerPaymentPortalResponse struct {
     RedirectUrl string `json:"redirectUrl"`
 }

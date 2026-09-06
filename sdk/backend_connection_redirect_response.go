@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Redirect response to initiate an OAuth2 flow
 type BackendConnectionRedirectResponse struct {

@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // An action commit which represents a change in the action configuration
 type BackendActionCommit struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     User *BackendUser `json:"user"`
     CommitHash string `json:"commitHash"`

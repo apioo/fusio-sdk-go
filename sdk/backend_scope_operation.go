@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Mapping defining access permissions for a specific operation within a scope
 type BackendScopeOperation struct {
     OperationId int `json:"operationId"`
     Allow bool `json:"allow"`

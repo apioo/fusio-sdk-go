@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a table index on a relational database
 type BackendDatabaseTableIndex struct {

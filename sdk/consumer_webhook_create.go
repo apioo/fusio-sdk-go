@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for registering a new webhook subscription
 type ConsumerWebhookCreate struct {
     Event string `json:"event"`
     Name string `json:"name"`

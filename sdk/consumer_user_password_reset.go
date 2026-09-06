@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for completing a password reset
 type ConsumerUserPasswordReset struct {
     Token string `json:"token"`
     NewPassword string `json:"newPassword"`

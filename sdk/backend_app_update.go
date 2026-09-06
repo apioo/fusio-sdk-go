@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for updating an existing consumer application
 type BackendAppUpdate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     UserId int `json:"userId"`
     Status int `json:"status"`

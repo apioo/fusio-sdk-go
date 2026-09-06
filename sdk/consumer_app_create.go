@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload for creating a new consumer application
 type ConsumerAppCreate struct {
     Name string `json:"name"`
     Url string `json:"url"`

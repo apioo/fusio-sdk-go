@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Represents a request to execute an action
 type BackendActionExecuteRequest struct {

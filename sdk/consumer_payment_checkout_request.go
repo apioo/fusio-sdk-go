@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Request payload to initiate a checkout flow for a plan
 type ConsumerPaymentCheckoutRequest struct {
     PlanId int `json:"planId"`
     ReturnUrl string `json:"returnUrl"`

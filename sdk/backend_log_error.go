@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Represents an error logged during a specific HTTP request
 type BackendLogError struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     LogId int `json:"logId"`
     Message string `json:"message"`

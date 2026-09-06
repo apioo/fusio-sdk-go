@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Log record representing an execution attempt and delivery response for a webhook target
 type BackendWebhookResponse struct {
     Id int `json:"id"`
     Status int `json:"status"`

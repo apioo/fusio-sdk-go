@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Contains the TypeSchema specification
 type BackendSchemaSource = map[string]any

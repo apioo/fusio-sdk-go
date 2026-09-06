@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload used to initiate account recovery or email requests
 type ConsumerUserEmail struct {
     Email string `json:"email"`
     Captcha string `json:"captcha"`

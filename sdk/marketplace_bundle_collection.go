@@ -3,8 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
-
 type MarketplaceBundleCollection struct {
     TotalResults int `json:"totalResults"`
     StartIndex int `json:"startIndex"`

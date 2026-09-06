@@ -3,9 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
-
 type SystemSchema struct {
+    Kind string `json:"kind"`
     Schema *SystemSchemaTypeSchema `json:"schema"`
     Form *SystemSchemaForm `json:"form"`
 }

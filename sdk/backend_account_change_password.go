@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Payload required to update the current user's password
 type BackendAccountChangePassword struct {
     OldPassword string `json:"oldPassword"`
     NewPassword string `json:"newPassword"`

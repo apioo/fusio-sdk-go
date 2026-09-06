@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Simplified scope representation within a category view
 type BackendScopeCategoryScope struct {
     Id int `json:"id"`
     Name string `json:"name"`

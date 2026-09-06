@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Contains all possible classes which can be used at an identity as class
 type BackendIdentityIndex struct {
+    Kind string `json:"kind"`
     Providers []BackendIdentityIndexEntry `json:"providers"`
 }
 

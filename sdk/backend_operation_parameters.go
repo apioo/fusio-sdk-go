@@ -3,7 +3,7 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Map of path or query parameters accepted by the operation
 type BackendOperationParameters = map[string]BackendOperationSchema
 

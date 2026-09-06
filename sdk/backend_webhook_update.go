@@ -3,9 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Request payload to update an existing webhook subscription
 type BackendWebhookUpdate struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     EventId int `json:"eventId"`
     UserId int `json:"userId"`

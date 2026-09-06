@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Defines primitive type constraints for parameter schema definitions
 type BackendOperationSchema struct {
     Description string `json:"description"`
     Type string `json:"type"`

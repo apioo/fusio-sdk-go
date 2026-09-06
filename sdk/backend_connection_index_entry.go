@@ -3,7 +3,6 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // Represents a concrete connection class
 type BackendConnectionIndexEntry struct {

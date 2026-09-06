@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Represents a functional grouping of scopes
 type BackendScopeCategory struct {
     Id int `json:"id"`
     Name string `json:"name"`

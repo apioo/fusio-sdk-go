@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents an identity which allows to authenticate with a remote identity provider
 type BackendIdentity struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     AppId int `json:"appId"`
     RoleId int `json:"roleId"`

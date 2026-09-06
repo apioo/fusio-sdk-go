@@ -3,10 +3,10 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
 // This object represents a user
 type BackendUser struct {
+    Kind string `json:"kind"`
     Id int `json:"id"`
     RoleId int `json:"roleId"`
     PlanId int `json:"planId"`

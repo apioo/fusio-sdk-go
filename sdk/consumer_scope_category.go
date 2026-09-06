@@ -3,8 +3,8 @@
 // @see https://sdkgen.app
 
 
-package sdk
 
+// Category grouping related API scopes together
 type ConsumerScopeCategory struct {
     Id int `json:"id"`
     Name string `json:"name"`
