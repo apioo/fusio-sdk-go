@@ -820,6 +820,9 @@ response, err := client.Consumer().Webhook().getAll(1, 1, "search")
 // Updates an existing webhook for the authenticated user.
 response, err := client.Consumer().Webhook().update("webhook_id", Consumer_WebhookUpdate{})
 
+// Endpoint to generate a captcha challenge.
+response, err := client.System().Captcha().challenge()
+
 // Connection OAuth2 callback to authorize a connection.
 response, err := client.System().Connection().callback("name")
 
