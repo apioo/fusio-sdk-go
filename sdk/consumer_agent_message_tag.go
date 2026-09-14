@@ -23,11 +23,12 @@ type ConsumerAgentMessageTag struct {
 
 
 // GetAll Returns a paginated list of agent messages
-func (client *ConsumerAgentMessageTag) GetAll(agentId string, chatId string) (*ConsumerAgentMessageCollection, error) {
+func (client *ConsumerAgentMessageTag) GetAll(agentId string, refId int, chatId string) (*ConsumerAgentMessageCollection, error) {
     pathParams := make(map[string]interface{})
     pathParams["agent_id"] = agentId
 
     queryParams := make(map[string]interface{})
+    queryParams["ref_id"] = refId
     queryParams["chat_id"] = chatId
 
     var queryStructNames []string
@@ -80,11 +81,12 @@ func (client *ConsumerAgentMessageTag) GetAll(agentId string, chatId string) (*C
 }
 
 // Submit Submits a new agent message
-func (client *ConsumerAgentMessageTag) Submit(agentId string, payload AgentInput) (*AgentOutput, error) {
+func (client *ConsumerAgentMessageTag) Submit(agentId string, payload AgentInput, refId int) (*AgentOutput, error) {
     pathParams := make(map[string]interface{})
     pathParams["agent_id"] = agentId
 
     queryParams := make(map[string]interface{})
+    queryParams["ref_id"] = refId
 
     var queryStructNames []string
 

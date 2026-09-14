@@ -23,11 +23,12 @@ type BackendAgentMessageTag struct {
 
 
 // GetAll Returns a paginated list of agent messages
-func (client *BackendAgentMessageTag) GetAll(agentId string, chatId string) (*BackendAgentMessageCollection, error) {
+func (client *BackendAgentMessageTag) GetAll(agentId string, refId int, chatId string) (*BackendAgentMessageCollection, error) {
     pathParams := make(map[string]interface{})
     pathParams["agent_id"] = agentId
 
     queryParams := make(map[string]interface{})
+    queryParams["ref_id"] = refId
     queryParams["chat_id"] = chatId
 
     var queryStructNames []string
@@ -80,11 +81,12 @@ func (client *BackendAgentMessageTag) GetAll(agentId string, chatId string) (*Ba
 }
 
 // Submit Submits a new agent message
-func (client *BackendAgentMessageTag) Submit(agentId string, payload AgentInput) (*AgentOutput, error) {
+func (client *BackendAgentMessageTag) Submit(agentId string, payload AgentInput, refId int) (*AgentOutput, error) {
     pathParams := make(map[string]interface{})
     pathParams["agent_id"] = agentId
 
     queryParams := make(map[string]interface{})
+    queryParams["ref_id"] = refId
 
     var queryStructNames []string
 
