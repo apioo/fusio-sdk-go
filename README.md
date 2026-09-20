@@ -74,10 +74,10 @@ response, err := client.Backend().Agent().getAll(1, 1, "search")
 response, err := client.Backend().Agent().getTools()
 
 // Returns a paginated list of agent messages.
-response, err := client.Backend().Agent().Message().getAll("agent_id", "chat_id")
+response, err := client.Backend().Agent().Message().getAll("agent_id", 1, "chat_id")
 
 // Submits a new agent message.
-response, err := client.Backend().Agent().Message().submit("agent_id", Agent_Input{})
+response, err := client.Backend().Agent().Message().submit("agent_id", 1, Agent_Input{})
 
 // Updates an existing agent.
 response, err := client.Backend().Agent().update("agent_id", Backend_AgentUpdate{})
@@ -707,10 +707,10 @@ response, err := client.Consumer().Agent().get("agent_id")
 response, err := client.Consumer().Agent().getAll(1, 1, "search")
 
 // Returns a paginated list of agent messages.
-response, err := client.Consumer().Agent().Message().getAll("agent_id", "chat_id")
+response, err := client.Consumer().Agent().Message().getAll("agent_id", 1, "chat_id")
 
 // Submits a new agent message.
-response, err := client.Consumer().Agent().Message().submit("agent_id", Agent_Input{})
+response, err := client.Consumer().Agent().Message().submit("agent_id", 1, Agent_Input{})
 
 // Creates a new app for the authenticated user.
 response, err := client.Consumer().App().create(Consumer_AppCreate{})
