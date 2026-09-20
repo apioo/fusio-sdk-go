@@ -8,6 +8,7 @@
 type ConsumerAgent struct {
     Kind string `json:"kind"`
     Id int `json:"id"`
+    Type int `json:"type"`
     Name string `json:"name"`
     Description string `json:"description"`
 }
