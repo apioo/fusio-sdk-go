@@ -318,10 +318,13 @@ func (client *BackendActionTag) GetAll(startIndex int, count int, search string)
 }
 
 // GetClasses Returns all available action classes
-func (client *BackendActionTag) GetClasses() (*BackendActionIndex, error) {
+func (client *BackendActionTag) GetClasses(marketplace bool, startIndex int, search string) (*BackendActionIndex, error) {
     pathParams := make(map[string]interface{})
 
     queryParams := make(map[string]interface{})
+    queryParams["marketplace"] = marketplace
+    queryParams["startIndex"] = startIndex
+    queryParams["search"] = search
 
     var queryStructNames []string
 
