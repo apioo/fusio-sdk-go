@@ -7,6 +7,7 @@
 // Represents a concrete action class
 type BackendActionIndexEntry struct {
     Name string `json:"name"`
+    Description string `json:"description"`
     Class string `json:"class"`
 }
 

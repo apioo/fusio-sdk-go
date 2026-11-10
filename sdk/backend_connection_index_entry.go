@@ -7,6 +7,7 @@
 // Represents a concrete connection class
 type BackendConnectionIndexEntry struct {
     Name string `json:"name"`
+    Description string `json:"description"`
     Class string `json:"class"`
 }
 

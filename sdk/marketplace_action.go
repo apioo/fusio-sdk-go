@@ -5,6 +5,7 @@
 
 type MarketplaceAction struct {
     Id int `json:"id"`
+    Visibility int `json:"visibility"`
     Name string `json:"name"`
     Author *MarketplaceUser `json:"author"`
     Version string `json:"version"`
@@ -15,6 +16,7 @@ type MarketplaceAction struct {
     UpdateDate string `json:"updateDate"`
     InsertDate string `json:"insertDate"`
     Class string `json:"class"`
+    Form []FormElement `json:"form"`
     Config *MarketplaceActionConfig `json:"config"`
 }
 

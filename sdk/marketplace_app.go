@@ -5,6 +5,7 @@
 
 type MarketplaceApp struct {
     Id int `json:"id"`
+    Visibility int `json:"visibility"`
     Name string `json:"name"`
     Author *MarketplaceUser `json:"author"`
     Version string `json:"version"`
