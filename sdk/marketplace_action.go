@@ -16,7 +16,7 @@ type MarketplaceAction struct {
     UpdateDate string `json:"updateDate"`
     InsertDate string `json:"insertDate"`
     Class string `json:"class"`
-    Form []FormElement `json:"form"`
+    Form any `json:"form"`
     Config *MarketplaceActionConfig `json:"config"`
 }
 
