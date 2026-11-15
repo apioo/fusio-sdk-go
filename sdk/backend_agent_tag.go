@@ -24,6 +24,10 @@ func (client *BackendAgentTag) Message() *BackendAgentMessageTag {
     return NewBackendAgentMessageTag(client.internal.HttpClient, client.internal.Parser)
 }
 
+func (client *BackendAgentTag) Task() *BackendAgentTaskTag {
+    return NewBackendAgentTaskTag(client.internal.HttpClient, client.internal.Parser)
+}
+
 
 
 // Create Creates a new agent
