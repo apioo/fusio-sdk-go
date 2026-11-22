@@ -79,6 +79,18 @@ response, err := client.Backend().Agent().Message().getAll("agent_id", 1, "chat_
 // Submits a new agent message.
 response, err := client.Backend().Agent().Message().submit("agent_id", 1, Agent_Input{})
 
+// Cancels a pending or running agent task.
+response, err := client.Backend().Agent().Task().cancel("agent_id", "task_id")
+
+// Creates a new agent task which executes the action of the agent in the background, the optional connection is passed to the action i.
+response, err := client.Backend().Agent().Task().create("agent_id", "connection", Backend_AgentTaskCreate{})
+
+// Returns a specific agent task including all executed steps.
+response, err := client.Backend().Agent().Task().get("agent_id", "task_id")
+
+// Returns a paginated list of agent tasks of the current user.
+response, err := client.Backend().Agent().Task().getAll("agent_id", 1, 1)
+
 // Updates an existing agent.
 response, err := client.Backend().Agent().update("agent_id", Backend_AgentUpdate{})
 
