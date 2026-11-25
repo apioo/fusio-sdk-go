@@ -113,7 +113,7 @@ func (client *BackendConnectionTag) Delete(connectionId string) (*CommonMessage,
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/connection/:connection_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -169,7 +169,7 @@ func (client *BackendConnectionTag) Get(connectionId string) (*BackendConnection
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/connection/:connection_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -283,7 +283,7 @@ func (client *BackendConnectionTag) GetClasses() (*BackendConnectionIndex, error
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/connection/list", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/capability/connection/list", pathParams))
     if err != nil {
         return nil, err
     }
@@ -339,7 +339,7 @@ func (client *BackendConnectionTag) GetForm(class string) (*CommonFormContainer,
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/connection/form", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/capability/connection/form", pathParams))
     if err != nil {
         return nil, err
     }
@@ -451,7 +451,7 @@ func (client *BackendConnectionTag) Update(connectionId string, payload BackendC
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/connection/$connection_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/connection/:connection_id", pathParams))
     if err != nil {
         return nil, err
     }

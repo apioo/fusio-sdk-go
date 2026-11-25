@@ -93,7 +93,7 @@ func (client *BackendIdentityTag) Delete(identityId string) (*CommonMessage, err
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/identity/$identity_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/identity/:identity_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendIdentityTag) Get(identityId string) (*BackendIdentity, erro
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/identity/$identity_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/identity/:identity_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -262,7 +262,7 @@ func (client *BackendIdentityTag) GetClasses() (*BackendIdentityIndex, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/identity/list", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/capability/identity/list", pathParams))
     if err != nil {
         return nil, err
     }
@@ -318,7 +318,7 @@ func (client *BackendIdentityTag) GetForm(class string) (*CommonFormContainer, e
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/identity/form", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/capability/identity/form", pathParams))
     if err != nil {
         return nil, err
     }
@@ -374,7 +374,7 @@ func (client *BackendIdentityTag) Update(identityId string, payload BackendIdent
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/identity/$identity_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/identity/:identity_id", pathParams))
     if err != nil {
         return nil, err
     }

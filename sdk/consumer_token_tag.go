@@ -93,7 +93,7 @@ func (client *ConsumerTokenTag) Delete(tokenId string) (*CommonMessage, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/consumer/token/$token_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/consumer/token/:token_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *ConsumerTokenTag) Get(tokenId string) (*ConsumerToken, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/consumer/token/$token_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/consumer/token/:token_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -263,7 +263,7 @@ func (client *ConsumerTokenTag) Update(tokenId string, payload ConsumerTokenUpda
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/consumer/token/$token_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/consumer/token/:token_id", pathParams))
     if err != nil {
         return nil, err
     }

@@ -93,7 +93,7 @@ func (client *ConsumerWebhookTag) Delete(webhookId string) (*CommonMessage, erro
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/consumer/webhook/$webhook_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/consumer/webhook/:webhook_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *ConsumerWebhookTag) Get(webhookId string) (*ConsumerWebhook, error
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/consumer/webhook/$webhook_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/consumer/webhook/:webhook_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -263,7 +263,7 @@ func (client *ConsumerWebhookTag) Update(webhookId string, payload ConsumerWebho
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/consumer/webhook/$webhook_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/consumer/webhook/:webhook_id", pathParams))
     if err != nil {
         return nil, err
     }

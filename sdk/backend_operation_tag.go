@@ -93,7 +93,7 @@ func (client *BackendOperationTag) Delete(operationId string) (*CommonMessage, e
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/operation/$operation_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/operation/:operation_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendOperationTag) Get(operationId string) (*BackendOperation, e
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/operation/$operation_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/operation/:operation_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -264,7 +264,7 @@ func (client *BackendOperationTag) Update(operationId string, payload BackendOpe
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/operation/$operation_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/operation/:operation_id", pathParams))
     if err != nil {
         return nil, err
     }

@@ -93,7 +93,7 @@ func (client *BackendFirewallTag) Delete(firewallId string) (*CommonMessage, err
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/firewall/$firewall_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/firewall/:firewall_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendFirewallTag) Get(firewallId string) (*BackendFirewall, erro
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/firewall/$firewall_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/firewall/:firewall_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -263,7 +263,7 @@ func (client *BackendFirewallTag) Update(firewallId string, payload BackendFirew
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/firewall/$firewall_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/firewall/:firewall_id", pathParams))
     if err != nil {
         return nil, err
     }

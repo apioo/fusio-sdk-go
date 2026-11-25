@@ -93,7 +93,7 @@ func (client *BackendCategoryTag) Delete(categoryId string) (*CommonMessage, err
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/category/$category_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/category/:category_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendCategoryTag) Get(categoryId string) (*BackendCategory, erro
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/category/$category_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/category/:category_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -263,7 +263,7 @@ func (client *BackendCategoryTag) Update(categoryId string, payload BackendCateg
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/category/$category_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/category/:category_id", pathParams))
     if err != nil {
         return nil, err
     }

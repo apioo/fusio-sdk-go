@@ -31,7 +31,7 @@ func (client *BackendTestTag) Get(testId string) (*BackendTest, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/test/$test_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/test/:test_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -255,7 +255,7 @@ func (client *BackendTestTag) Update(testId string, payload BackendTest) (*Commo
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/test/$test_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/test/:test_id", pathParams))
     if err != nil {
         return nil, err
     }

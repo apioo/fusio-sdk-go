@@ -93,7 +93,7 @@ func (client *BackendAppTag) Delete(appId string) (*CommonMessage, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/app/:app_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -150,7 +150,7 @@ func (client *BackendAppTag) DeleteToken(appId string, tokenId string) (*CommonM
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+>/token/:token_id", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/app/:app_id/token/:token_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -206,7 +206,7 @@ func (client *BackendAppTag) Get(appId string) (*BackendApp, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/app/:app_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -320,7 +320,7 @@ func (client *BackendAppTag) Update(appId string, payload BackendAppUpdate) (*Co
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/app/$app_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/app/:app_id", pathParams))
     if err != nil {
         return nil, err
     }

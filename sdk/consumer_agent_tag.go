@@ -35,7 +35,7 @@ func (client *ConsumerAgentTag) Get(agentId string) (*ConsumerAgent, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/consumer/agent/$agent_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/consumer/agent/:agent_id", pathParams))
     if err != nil {
         return nil, err
     }

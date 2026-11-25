@@ -93,7 +93,7 @@ func (client *BackendRoleTag) Delete(roleId string) (*CommonMessage, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/role/$role_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/role/:role_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendRoleTag) Get(roleId string) (*BackendRole, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/role/$role_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/role/:role_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -263,7 +263,7 @@ func (client *BackendRoleTag) Update(roleId string, payload BackendRoleUpdate) (
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/role/$role_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/role/:role_id", pathParams))
     if err != nil {
         return nil, err
     }

@@ -31,7 +31,7 @@ func (client *ConsumerLogTag) Get(logId string) (*ConsumerLog, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/consumer/log/$log_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/consumer/log/:log_id", pathParams))
     if err != nil {
         return nil, err
     }

@@ -31,7 +31,7 @@ func (client *BackendConfigTag) Get(configId string) (*BackendConfig, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/config/$config_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/config/:config_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -145,7 +145,7 @@ func (client *BackendConfigTag) Update(configId string, payload BackendConfigUpd
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/config/$config_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/config/:config_id", pathParams))
     if err != nil {
         return nil, err
     }

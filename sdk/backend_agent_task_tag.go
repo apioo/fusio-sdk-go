@@ -32,7 +32,7 @@ func (client *BackendAgentTaskTag) Cancel(agentId string, taskId string) (*Commo
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/$agent_id<[0-9]+|^~>/task/:task_id", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/:agent_id/task/:task_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -89,7 +89,7 @@ func (client *BackendAgentTaskTag) Create(agentId string, payload BackendAgentTa
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/$agent_id<[0-9]+|^~>/task", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/:agent_id/task", pathParams))
     if err != nil {
         return nil, err
     }
@@ -153,7 +153,7 @@ func (client *BackendAgentTaskTag) Get(agentId string, taskId string) (*BackendA
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/$agent_id<[0-9]+|^~>/task/:task_id", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/:agent_id/task/:task_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -211,7 +211,7 @@ func (client *BackendAgentTaskTag) GetAll(agentId string, startIndex int, count 
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/$agent_id<[0-9]+|^~>/task", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/:agent_id/task", pathParams))
     if err != nil {
         return nil, err
     }

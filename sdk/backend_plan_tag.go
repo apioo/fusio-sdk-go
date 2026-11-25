@@ -93,7 +93,7 @@ func (client *BackendPlanTag) Delete(planId string) (*CommonMessage, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/plan/$plan_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/plan/:plan_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendPlanTag) Get(planId string) (*BackendPlan, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/plan/$plan_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/plan/:plan_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -263,7 +263,7 @@ func (client *BackendPlanTag) Update(planId string, payload BackendPlanUpdate) (
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/plan/$plan_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/plan/:plan_id", pathParams))
     if err != nil {
         return nil, err
     }

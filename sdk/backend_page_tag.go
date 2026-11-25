@@ -93,7 +93,7 @@ func (client *BackendPageTag) Delete(pageId string) (*CommonMessage, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/page/$page_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/page/:page_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendPageTag) Get(pageId string) (*BackendPage, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/page/$page_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/page/:page_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -263,7 +263,7 @@ func (client *BackendPageTag) Update(pageId string, payload BackendPageUpdate) (
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/page/$page_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/page/:page_id", pathParams))
     if err != nil {
         return nil, err
     }

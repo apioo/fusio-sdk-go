@@ -93,7 +93,7 @@ func (client *BackendScopeTag) Delete(scopeId string) (*CommonMessage, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/scope/$scope_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/scope/:scope_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendScopeTag) Get(scopeId string) (*BackendScope, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/scope/$scope_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/scope/:scope_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -262,7 +262,7 @@ func (client *BackendScopeTag) GetCategories() (*BackendScopeCategories, error) 
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/scope/categories", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/capability/scope/categories", pathParams))
     if err != nil {
         return nil, err
     }
@@ -318,7 +318,7 @@ func (client *BackendScopeTag) Update(scopeId string, payload BackendScopeUpdate
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/scope/$scope_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/scope/:scope_id", pathParams))
     if err != nil {
         return nil, err
     }

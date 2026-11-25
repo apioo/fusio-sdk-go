@@ -31,7 +31,7 @@ func (client *ConsumerEventTag) Get(eventId string) (*ConsumerEvent, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/consumer/event/$event_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/consumer/event/:event_id", pathParams))
     if err != nil {
         return nil, err
     }

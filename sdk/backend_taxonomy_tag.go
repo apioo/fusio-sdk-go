@@ -93,7 +93,7 @@ func (client *BackendTaxonomyTag) Delete(taxonomyId string) (*CommonMessage, err
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/taxonomy/$taxonomy_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/taxonomy/:taxonomy_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendTaxonomyTag) Get(taxonomyId string) (*BackendTaxonomy, erro
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/taxonomy/$taxonomy_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/taxonomy/:taxonomy_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -263,7 +263,7 @@ func (client *BackendTaxonomyTag) Move(taxonomyId string, payload BackendTaxonom
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/taxonomy/$taxonomy_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/taxonomy/:taxonomy_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -326,7 +326,7 @@ func (client *BackendTaxonomyTag) Update(taxonomyId string, payload BackendTaxon
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/taxonomy/$taxonomy_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/taxonomy/:taxonomy_id", pathParams))
     if err != nil {
         return nil, err
     }

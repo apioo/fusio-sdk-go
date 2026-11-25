@@ -93,7 +93,7 @@ func (client *BackendSchemaTag) Delete(schemaId string) (*CommonMessage, error) 
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/schema/$schema_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/schema/:schema_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendSchemaTag) Get(schemaId string) (*BackendSchema, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/schema/$schema_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/schema/:schema_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -267,7 +267,7 @@ func (client *BackendSchemaTag) GetCommits(schemaId string, startIndex int, coun
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/schema/$schema_id<[0-9]+|^~>/commit", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/schema/:schema_id/commit", pathParams))
     if err != nil {
         return nil, err
     }
@@ -323,7 +323,7 @@ func (client *BackendSchemaTag) GetPreview(schemaId string) (*BackendSchemaPrevi
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/schema/preview/:schema_id", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/schema/:schema_id/preview", pathParams))
     if err != nil {
         return nil, err
     }
@@ -379,7 +379,7 @@ func (client *BackendSchemaTag) Update(schemaId string, payload BackendSchemaUpd
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/schema/$schema_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/schema/:schema_id", pathParams))
     if err != nil {
         return nil, err
     }

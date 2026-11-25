@@ -31,7 +31,7 @@ func (client *BackendTransactionTag) Get(transactionId string) (*BackendTransact
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/transaction/$transaction_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/transaction/:transaction_id", pathParams))
     if err != nil {
         return nil, err
     }

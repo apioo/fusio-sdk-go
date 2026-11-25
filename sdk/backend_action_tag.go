@@ -93,7 +93,7 @@ func (client *BackendActionTag) Delete(actionId string) (*CommonMessage, error) 
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/action/$action_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/action/:action_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendActionTag) Execute(actionId string, payload BackendActionEx
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/action/execute/:action_id", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/action/:action_id/execute", pathParams))
     if err != nil {
         return nil, err
     }
@@ -212,7 +212,7 @@ func (client *BackendActionTag) Get(actionId string) (*BackendAction, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/action/$action_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/action/:action_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -328,7 +328,7 @@ func (client *BackendActionTag) GetClasses(marketplace bool, startIndex int, sea
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/action/list", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/capability/action/list", pathParams))
     if err != nil {
         return nil, err
     }
@@ -387,7 +387,7 @@ func (client *BackendActionTag) GetCommits(actionId string, startIndex int, coun
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/action/$action_id<[0-9]+|^~>/commit", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/action/:action_id/commit", pathParams))
     if err != nil {
         return nil, err
     }
@@ -443,7 +443,7 @@ func (client *BackendActionTag) GetForm(class string) (*CommonFormContainer, err
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/action/form", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/capability/action/form", pathParams))
     if err != nil {
         return nil, err
     }
@@ -499,7 +499,7 @@ func (client *BackendActionTag) Update(actionId string, payload BackendActionUpd
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/action/$action_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/action/:action_id", pathParams))
     if err != nil {
         return nil, err
     }

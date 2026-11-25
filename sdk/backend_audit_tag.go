@@ -31,7 +31,7 @@ func (client *BackendAuditTag) Get(auditId string) (*BackendAudit, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/audit/$audit_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/audit/:audit_id", pathParams))
     if err != nil {
         return nil, err
     }

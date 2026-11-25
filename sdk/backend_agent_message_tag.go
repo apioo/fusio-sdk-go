@@ -33,7 +33,7 @@ func (client *BackendAgentMessageTag) GetAll(agentId string, refId int, chatId s
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/$agent_id<[0-9]+|^~>/message", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/:agent_id/message", pathParams))
     if err != nil {
         return nil, err
     }
@@ -90,7 +90,7 @@ func (client *BackendAgentMessageTag) Submit(agentId string, payload AgentInput,
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/$agent_id<[0-9]+|^~>/message", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/:agent_id/message", pathParams))
     if err != nil {
         return nil, err
     }

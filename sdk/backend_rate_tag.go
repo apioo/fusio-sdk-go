@@ -93,7 +93,7 @@ func (client *BackendRateTag) Delete(rateId string) (*CommonMessage, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/rate/$rate_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/rate/:rate_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendRateTag) Get(rateId string) (*BackendRate, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/rate/$rate_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/rate/:rate_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -263,7 +263,7 @@ func (client *BackendRateTag) Update(rateId string, payload BackendRateUpdate) (
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/rate/$rate_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/rate/:rate_id", pathParams))
     if err != nil {
         return nil, err
     }

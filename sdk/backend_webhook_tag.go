@@ -93,7 +93,7 @@ func (client *BackendWebhookTag) Delete(webhookId string) (*CommonMessage, error
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/webhook/$webhook_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/webhook/:webhook_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendWebhookTag) Get(webhookId string) (*BackendWebhook, error) 
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/webhook/$webhook_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/webhook/:webhook_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -263,7 +263,7 @@ func (client *BackendWebhookTag) Update(webhookId string, payload BackendWebhook
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/webhook/$webhook_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/webhook/:webhook_id", pathParams))
     if err != nil {
         return nil, err
     }

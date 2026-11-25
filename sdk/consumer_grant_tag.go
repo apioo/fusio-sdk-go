@@ -31,7 +31,7 @@ func (client *ConsumerGrantTag) Delete(grantId string) (*CommonMessage, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/consumer/grant/$grant_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/consumer/grant/:grant_id", pathParams))
     if err != nil {
         return nil, err
     }

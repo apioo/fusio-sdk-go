@@ -31,7 +31,7 @@ func (client *BackendTokenTag) Get(tokenId string) (*BackendToken, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/token/$token_id<[0-9]+>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/token/:token_id", pathParams))
     if err != nil {
         return nil, err
     }

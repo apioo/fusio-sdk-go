@@ -93,7 +93,7 @@ func (client *BackendTriggerTag) Delete(triggerId string) (*CommonMessage, error
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/trigger/$trigger_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/trigger/:trigger_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendTriggerTag) Get(triggerId string) (*BackendTrigger, error) 
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/trigger/$trigger_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/trigger/:trigger_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -264,7 +264,7 @@ func (client *BackendTriggerTag) Update(triggerId string, payload BackendTrigger
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/trigger/$trigger_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/trigger/:trigger_id", pathParams))
     if err != nil {
         return nil, err
     }

@@ -101,7 +101,7 @@ func (client *BackendAgentTag) Delete(agentId string) (*CommonMessage, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/$agent_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/:agent_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -157,7 +157,7 @@ func (client *BackendAgentTag) Get(agentId string) (*BackendAgent, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/$agent_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/:agent_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -270,7 +270,7 @@ func (client *BackendAgentTag) GetTools() (*BackendAgentTools, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/tools", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/capability/agent/tools", pathParams))
     if err != nil {
         return nil, err
     }
@@ -326,7 +326,7 @@ func (client *BackendAgentTag) Update(agentId string, payload BackendAgentUpdate
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/$agent_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/agent/:agent_id", pathParams))
     if err != nil {
         return nil, err
     }

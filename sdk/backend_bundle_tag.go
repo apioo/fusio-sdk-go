@@ -93,7 +93,7 @@ func (client *BackendBundleTag) Delete(bundleId string) (*CommonMessage, error) 
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/bundle/$bundle_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/bundle/:bundle_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendBundleTag) Get(bundleId string) (*BackendBundle, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/bundle/$bundle_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/bundle/:bundle_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -263,7 +263,7 @@ func (client *BackendBundleTag) Publish(bundleId string) (*CommonMessage, error)
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/bundle/$bundle_id<[0-9]+|^~>/publish", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/bundle/:bundle_id/publish", pathParams))
     if err != nil {
         return nil, err
     }
@@ -319,7 +319,7 @@ func (client *BackendBundleTag) Update(bundleId string, payload BackendBundleUpd
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/bundle/$bundle_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/bundle/:bundle_id", pathParams))
     if err != nil {
         return nil, err
     }

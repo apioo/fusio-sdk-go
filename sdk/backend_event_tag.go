@@ -93,7 +93,7 @@ func (client *BackendEventTag) Delete(eventId string) (*CommonMessage, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/event/$event_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/event/:event_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendEventTag) Get(eventId string) (*BackendEvent, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/event/$event_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/event/:event_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -264,7 +264,7 @@ func (client *BackendEventTag) Update(eventId string, payload BackendEventUpdate
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/event/$event_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/event/:event_id", pathParams))
     if err != nil {
         return nil, err
     }

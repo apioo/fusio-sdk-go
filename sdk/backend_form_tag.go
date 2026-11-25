@@ -93,7 +93,7 @@ func (client *BackendFormTag) Delete(formId string) (*CommonMessage, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/form/$form_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/form/:form_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendFormTag) Get(formId string) (*BackendForm, error) {
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/form/$form_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/form/:form_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -263,7 +263,7 @@ func (client *BackendFormTag) Update(formId string, payload BackendFormUpdate) (
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/form/$form_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/form/:form_id", pathParams))
     if err != nil {
         return nil, err
     }

@@ -93,7 +93,7 @@ func (client *BackendCronjobTag) Delete(cronjobId string) (*CommonMessage, error
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/cronjob/$cronjob_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/cronjob/:cronjob_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -149,7 +149,7 @@ func (client *BackendCronjobTag) Get(cronjobId string) (*BackendCronjob, error) 
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/cronjob/$cronjob_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/cronjob/:cronjob_id", pathParams))
     if err != nil {
         return nil, err
     }
@@ -264,7 +264,7 @@ func (client *BackendCronjobTag) Update(cronjobId string, payload BackendCronjob
 
     var queryStructNames []string
 
-    u, err := url.Parse(client.internal.Parser.Url("/backend/cronjob/$cronjob_id<[0-9]+|^~>", pathParams))
+    u, err := url.Parse(client.internal.Parser.Url("/backend/cronjob/:cronjob_id", pathParams))
     if err != nil {
         return nil, err
     }
